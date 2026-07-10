@@ -49,9 +49,50 @@ export default async function CaseStudyPage({
           <h1 className="font-serif text-5xl lg:text-8xl font-bold text-white leading-none tracking-tight mb-6">
             {project.title}
           </h1>
-          <p className="text-white/80 text-lg lg:text-xl max-w-xl leading-relaxed">
+          <p className="text-white/80 text-lg lg:text-xl max-w-xl leading-relaxed mb-8">
             {project.subtitle}
           </p>
+          {project.prototypeUrl && (
+            <a
+              href={project.prototypeUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-3 text-sm uppercase tracking-widest font-medium text-white border border-white/40 rounded-full px-6 py-3 hover:bg-white hover:text-ink transition-colors"
+            >
+              View Live Prototype
+              <span aria-hidden>↗</span>
+            </a>
+          )}
+        </div>
+      </section>
+
+      {/* Meta strip — role, team, research methods, platform, duration */}
+      <section className="px-8 lg:px-20 py-16 border-b border-ink/10 bg-ink/[0.02]">
+        <div className="max-w-5xl mx-auto grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-8">
+          <div>
+            <p className="text-xs uppercase tracking-widest text-ink-muted mb-2">Role</p>
+            <p className="text-ink text-sm leading-relaxed">{project.role}</p>
+          </div>
+          <div>
+            <p className="text-xs uppercase tracking-widest text-ink-muted mb-2">Team</p>
+            <p className="text-ink text-sm leading-relaxed">{project.meta.team}</p>
+          </div>
+          <div>
+            <p className="text-xs uppercase tracking-widest text-ink-muted mb-2">
+              Research Methods
+            </p>
+            <p className="text-ink text-sm leading-relaxed">
+              {project.meta.researchMethods.join(", ")}
+            </p>
+          </div>
+          <div>
+            <p className="text-xs uppercase tracking-widest text-ink-muted mb-2">Platform</p>
+            <p className="text-ink text-sm leading-relaxed">{project.meta.platform}</p>
+          </div>
+          <div>
+            <p className="text-xs uppercase tracking-widest text-ink-muted mb-2">Duration</p>
+            <p className="text-ink text-sm leading-relaxed">{project.meta.duration}</p>
+          </div>
         </div>
       </section>
 
@@ -60,7 +101,7 @@ export default async function CaseStudyPage({
         <div className="max-w-4xl mx-auto grid grid-cols-1 lg:grid-cols-3 gap-12">
           <div className="lg:col-span-2">
             <p className="text-xs uppercase tracking-widest text-ink-muted mb-4">
-              The Problem
+              Overview
             </p>
             <p className="text-ink text-lg leading-relaxed">
               {project.overview.problem}
@@ -69,17 +110,11 @@ export default async function CaseStudyPage({
           <div className="flex flex-col gap-8">
             <div>
               <p className="text-xs uppercase tracking-widest text-ink-muted mb-2">
-                Role
+                My Role
               </p>
               <p className="text-ink text-sm leading-relaxed">
                 {project.overview.role}
               </p>
-            </div>
-            <div>
-              <p className="text-xs uppercase tracking-widest text-ink-muted mb-2">
-                Timeline
-              </p>
-              <p className="text-ink text-sm">{project.overview.timeline}</p>
             </div>
             <div>
               <p className="text-xs uppercase tracking-widest text-ink-muted mb-3">
@@ -97,8 +132,58 @@ export default async function CaseStudyPage({
         </div>
       </section>
 
-      {/* Sections */}
-      <div className="max-w-4xl mx-auto px-8 lg:px-0 lg:mx-auto" style={{ maxWidth: "56rem", padding: "0 2rem" }}>
+      {/* Objectives */}
+      {project.objectives.length > 0 && (
+        <section className="px-8 lg:px-20 py-20 border-b border-ink/10 bg-ink/[0.02]">
+          <div className="max-w-5xl mx-auto">
+            <p className="text-xs uppercase tracking-widest text-ink-muted mb-10">
+              Objectives
+            </p>
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-10">
+              {project.objectives.map((o, i) => (
+                <div key={i}>
+                  <h3 className="font-serif text-xl font-bold text-ink mb-3">
+                    {o.title}
+                  </h3>
+                  <p className="text-ink-muted text-sm leading-relaxed">{o.body}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
+
+      {/* Live prototype embed */}
+      {project.prototypeUrl && (
+        <section className="px-8 lg:px-20 py-20 border-b border-ink/10">
+          <div className="max-w-5xl mx-auto">
+            <p className="text-xs uppercase tracking-widest text-ink-muted mb-6">
+              Live Prototype
+            </p>
+            <div className="rounded-2xl overflow-hidden border border-ink/10 shadow-sm">
+              <iframe
+                src={project.prototypeUrl}
+                title={`${project.title} live prototype`}
+                className="w-full"
+                style={{ height: "70vh", border: "none" }}
+                loading="lazy"
+              />
+            </div>
+            <a
+              href={project.prototypeUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 text-xs uppercase tracking-widest text-ink-muted hover:text-ink transition-colors mt-4"
+            >
+              Open full prototype
+              <span aria-hidden>↗</span>
+            </a>
+          </div>
+        </section>
+      )}
+
+      {/* Flowing sections — research, stats, highlights, solution */}
+      <div style={{ maxWidth: "56rem", padding: "0 2rem" }} className="mx-auto">
         {project.sections.map((section, i) => {
           if (section.type === "text") {
             return (
@@ -115,10 +200,7 @@ export default async function CaseStudyPage({
 
           if (section.type === "highlight") {
             return (
-              <section
-                key={i}
-                className="py-16 border-b border-ink/10"
-              >
+              <section key={i} className="py-16 border-b border-ink/10">
                 <div className="bg-ink text-cream rounded-2xl p-10 lg:p-14">
                   <p className="text-xs uppercase tracking-widest text-cream/50 mb-6">
                     {section.heading}
@@ -160,10 +242,7 @@ export default async function CaseStudyPage({
                 </p>
                 <div className="grid grid-cols-2 lg:grid-cols-4 gap-px bg-ink/10">
                   {section.metrics?.map((m, j) => (
-                    <div
-                      key={j}
-                      className="bg-cream p-8 flex flex-col gap-2"
-                    >
+                    <div key={j} className="bg-cream p-8 flex flex-col gap-2">
                       <span className="font-serif text-4xl lg:text-5xl font-bold text-ink">
                         {m.value}
                       </span>
@@ -180,6 +259,107 @@ export default async function CaseStudyPage({
           return null;
         })}
       </div>
+
+      {/* Design Solutions — Insight / Recommendation pairs */}
+      {project.insights.length > 0 && (
+        <section className="bg-ink/[0.03] py-24 px-8 lg:px-20 border-b border-ink/10">
+          <div className="max-w-4xl mx-auto">
+            <p className="text-xs uppercase tracking-widest text-ink-muted mb-16">
+              Design Solutions
+            </p>
+            <div className="flex flex-col gap-16">
+              {project.insights.map((ins, i) => (
+                <div
+                  key={i}
+                  className="grid grid-cols-1 lg:grid-cols-[1fr_2px_1fr] gap-8 lg:gap-12"
+                >
+                  <div>
+                    <p
+                      className="text-xs uppercase tracking-widest mb-3 font-medium"
+                      style={{ color: project.color }}
+                    >
+                      Insight {i + 1}
+                    </p>
+                    <p className="text-ink-muted leading-relaxed">{ins.insight}</p>
+                  </div>
+                  <div
+                    className="hidden lg:block w-px"
+                    style={{ backgroundColor: `${project.color}30` }}
+                  />
+                  <div>
+                    <p className="text-xs uppercase tracking-widest text-ink-muted mb-3 font-medium">
+                      Recommendation {i + 1}
+                    </p>
+                    <p className="text-ink leading-relaxed font-medium">
+                      {ins.recommendation}
+                    </p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
+
+      {/* Outcomes — positive + growth */}
+      {(project.outcomePositive.length > 0 || project.outcomeGrowth.length > 0) && (
+        <section className="px-8 lg:px-20 py-24 border-b border-ink/10">
+          <div className="max-w-4xl mx-auto">
+            <p className="text-xs uppercase tracking-widest text-ink-muted mb-16">
+              Outcomes
+            </p>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-12">
+              <div>
+                <h3 className="font-serif text-xl font-bold text-ink mb-6">
+                  What Worked
+                </h3>
+                <ul className="flex flex-col gap-4">
+                  {project.outcomePositive.map((item, i) => (
+                    <li key={i} className="flex gap-4 items-start">
+                      <span className="w-1.5 h-1.5 rounded-full mt-2 shrink-0 bg-ink" />
+                      <p className="text-ink-muted text-sm leading-relaxed">{item}</p>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              <div>
+                <h3 className="font-serif text-xl font-bold text-ink mb-6">
+                  Areas for Growth
+                </h3>
+                <ul className="flex flex-col gap-4">
+                  {project.outcomeGrowth.map((item, i) => (
+                    <li key={i} className="flex gap-4 items-start">
+                      <span className="w-1.5 h-1.5 rounded-full mt-2 shrink-0 bg-ink/30" />
+                      <p className="text-ink-muted text-sm leading-relaxed">{item}</p>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+          </div>
+        </section>
+      )}
+
+      {/* Learnings */}
+      {project.learnings.length > 0 && (
+        <section className="px-8 lg:px-20 py-24 border-b border-ink/10 bg-ink/[0.02]">
+          <div className="max-w-4xl mx-auto">
+            <p className="text-xs uppercase tracking-widest text-ink-muted mb-10">
+              Learnings
+            </p>
+            <div className="flex flex-col gap-10">
+              {project.learnings.map((l, i) => (
+                <div key={i}>
+                  <h3 className="font-serif text-2xl font-bold text-ink mb-3">
+                    {l.title}
+                  </h3>
+                  <p className="text-ink-muted leading-relaxed max-w-2xl">{l.body}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
 
       {/* Next Project */}
       {nextProject && (
