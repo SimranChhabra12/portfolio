@@ -11,23 +11,21 @@ export default function Home() {
       {/* Hero */}
       <section className="min-h-screen flex flex-col lg:flex-row">
         {/* Left — text */}
-        <div className="flex-1 flex flex-col justify-end pb-16 px-8 lg:px-20 pt-32 lg:pt-0">
+        <div className="flex-1 flex flex-col justify-end pb-16 px-8 lg:px-16 pt-32 lg:pt-0">
           <div className="max-w-lg">
-            <p className="text-xs uppercase tracking-widest text-ink-muted mb-6 font-medium">
-              Product Designer
-            </p>
-            <h1 className="font-serif text-6xl lg:text-8xl font-bold leading-none tracking-tight text-ink mb-8">
+            <p className="label text-mauve mb-6">Product Designer</p>
+            <h1 className="t-display font-bold text-ink mb-8 !text-[39px] lg:!text-[56px]">
               Simran
               <br />
               Chhabra
             </h1>
-            <p className="text-ink-muted text-lg leading-relaxed mb-12 max-w-sm">
+            <p className="t-body text-mauve mb-12 max-w-[65ch]">
               I design products rooted in research — turning complex human
               problems into clear, considered experiences.
             </p>
             <Link
               href="/work"
-              className="inline-flex items-center gap-3 text-sm uppercase tracking-widest font-medium text-ink border-b border-ink pb-1 hover:text-ink-muted hover:border-ink-muted transition-colors"
+              className="inline-flex items-center gap-3 label text-ink border-b border-ink pb-1 hover:text-accent hover:border-accent transition-colors"
             >
               View work
               <span aria-hidden>→</span>
@@ -49,33 +47,29 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Selected Work preview */}
-      <section className="bg-dark-bg py-24 px-8 lg:px-20">
+      {/* Selected Work */}
+      <section className="bg-dark-bg py-24 px-8 lg:px-16">
         <div className="max-w-6xl mx-auto">
-          <p className="text-ink-subtle text-xs uppercase tracking-widest mb-16">
-            Selected Work
-          </p>
+          <p className="label text-mauve mb-16">Selected Work</p>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-px bg-white/5">
             {projects.map((project) => (
               <Link
                 key={project.slug}
                 href={`/work/${project.slug}`}
-                className="group relative bg-dark-bg p-10 lg:p-14 hover:bg-dark-surface transition-colors duration-300"
+                className="group relative bg-dark-bg p-8 lg:p-12 hover:bg-dark-surface transition-colors duration-300"
               >
                 <div
                   className="w-2 h-2 rounded-full mb-8"
                   style={{ backgroundColor: project.color }}
                 />
-                <p className="text-ink-subtle text-xs uppercase tracking-widest mb-3">
+                <p className="label text-mauve mb-3">
                   {project.year} · {project.disciplines[0]}
                 </p>
-                <h2 className="font-serif text-3xl lg:text-4xl font-bold text-dark-text mb-4 group-hover:text-white transition-colors">
+                <h2 className="font-serif text-[25px] lg:text-[31px] font-bold text-surface leading-[1.2] mb-4 group-hover:text-white transition-colors">
                   {project.title}
                 </h2>
-                <p className="text-ink-subtle leading-relaxed text-sm mb-8">
-                  {project.tagline}
-                </p>
-                <span className="text-xs uppercase tracking-widest text-ink-subtle group-hover:text-dark-text transition-colors">
+                <p className="t-body text-mauve mb-8 !max-w-none">{project.tagline}</p>
+                <span className="label text-mauve group-hover:text-surface transition-colors">
                   View case study →
                 </span>
               </Link>
@@ -85,23 +79,18 @@ export default function Home() {
       </section>
 
       {/* Footer */}
-      <footer className="bg-dark-bg border-t border-white/5 py-10 px-8 lg:px-20">
+      <footer className="bg-dark-bg border-t border-white/5 py-8 px-8 lg:px-16">
         <div className="max-w-6xl mx-auto flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
-          <span className="font-serif text-sm text-ink-subtle">
-            Simran Chhabra
-          </span>
-          <div className="flex gap-6 text-xs uppercase tracking-widest text-ink-subtle">
-            <a
-              href="mailto:simranchhabra@example.com"
-              className="hover:text-dark-text transition-colors"
-            >
+          <span className="font-serif text-[16px] text-mauve">Simran Chhabra</span>
+          <div className="flex gap-6">
+            <a href="mailto:skc9841@nyu.edu" className="label text-mauve hover:text-surface transition-colors">
               Email
             </a>
             <a
               href="https://linkedin.com/in/simranchhabra"
               target="_blank"
               rel="noopener noreferrer"
-              className="hover:text-dark-text transition-colors"
+              className="label text-mauve hover:text-surface transition-colors"
             >
               LinkedIn
             </a>
@@ -109,7 +98,7 @@ export default function Home() {
               href="/resume.pdf"
               target="_blank"
               rel="noopener noreferrer"
-              className="hover:text-dark-text transition-colors"
+              className="label text-mauve hover:text-surface transition-colors"
             >
               Résumé
             </a>

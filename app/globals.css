@@ -1,25 +1,36 @@
 @import "tailwindcss";
 
 :root {
-  --cream: #faf8f5;
-  --ink: #1a1a1a;
-  --ink-muted: #6b6b6b;
-  --ink-subtle: #b5b0a8;
+  /* Palette */
+  --cream: #FAF8F5;
+  --surface: #F0ECE6;
+  --ink: #3A2A38;
+  --accent: #7A3F5D;
+  --mauve: #C99BA9;
+  --blush: #E7C9C6;
+
+  /* Dark-section tokens */
   --dark-bg: #111111;
-  --dark-surface: #1c1c1c;
-  --dark-text: #f0ece6;
+  --dark-surface: #1C1C1C;
 }
 
 @theme inline {
   --color-cream: var(--cream);
+  --color-surface: var(--surface);
   --color-ink: var(--ink);
-  --color-ink-muted: var(--ink-muted);
-  --color-ink-subtle: var(--ink-subtle);
+  --color-accent: var(--accent);
+  --color-mauve: var(--mauve);
+  --color-blush: var(--blush);
   --color-dark-bg: var(--dark-bg);
   --color-dark-surface: var(--dark-surface);
-  --color-dark-text: var(--dark-text);
-  --font-serif: var(--font-playfair);
-  --font-sans: var(--font-inter);
+
+  /* Aliases so old class names don't hard-break during transition */
+  --color-ink-muted: var(--mauve);
+  --color-ink-subtle: var(--mauve);
+  --color-dark-text: var(--surface);
+
+  --font-serif: var(--font-fraunces);
+  --font-sans: var(--font-albert);
 }
 
 html {
@@ -29,11 +40,68 @@ html {
 body {
   background: var(--cream);
   color: var(--ink);
-  font-family: var(--font-inter), "Helvetica Neue", Arial, sans-serif;
+  font-family: var(--font-albert), "Helvetica Neue", Arial, sans-serif;
+  font-size: 16px;
+  line-height: 1.5;
   -webkit-font-smoothing: antialiased;
 }
 
 ::selection {
-  background: var(--ink);
+  background: var(--accent);
   color: var(--cream);
+}
+
+/* ─── Type scale ─────────────────────────────────────────────────────────── */
+
+/* Caption / label — 13px / 150% */
+.t-caption {
+  font-size: 13px;
+  line-height: 1.5;
+  font-family: var(--font-albert), sans-serif;
+}
+
+/* Body — 16px / 150% */
+.t-body {
+  font-size: 16px;
+  line-height: 1.5;
+  max-width: 65ch;
+  font-family: var(--font-albert), sans-serif;
+}
+
+/* Subheading — 20px / 150% */
+.t-sub {
+  font-size: 20px;
+  line-height: 1.5;
+  font-family: var(--font-albert), sans-serif;
+}
+
+/* Section title — 25px / 120% */
+.t-section {
+  font-size: 25px;
+  line-height: 1.2;
+  font-family: var(--font-fraunces), serif;
+}
+
+/* Page heading — 31px / 120% */
+.t-heading {
+  font-size: 31px;
+  line-height: 1.2;
+  font-family: var(--font-fraunces), serif;
+}
+
+/* Hero / display — 39px / 120% / -2% tracking */
+.t-display {
+  font-size: 39px;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  font-family: var(--font-fraunces), serif;
+}
+
+/* All-caps label utility */
+.label {
+  font-size: 13px;
+  line-height: 1.5;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-family: var(--font-albert), sans-serif;
 }

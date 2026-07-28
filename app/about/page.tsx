@@ -24,29 +24,27 @@ export default function AboutPage() {
     <main className="min-h-screen bg-cream">
       <Nav />
 
-      <section className="pt-40 pb-20 px-8 lg:px-20 border-b border-ink/10">
+      <section className="pt-40 pb-16 px-8 lg:px-16 border-b border-ink/10">
         <div className="max-w-5xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24">
           <div>
-            <p className="text-xs uppercase tracking-widest text-ink-muted mb-8">
-              About
-            </p>
-            <h1 className="font-serif text-5xl lg:text-6xl font-bold text-ink leading-tight mb-10">
+            <p className="label text-mauve mb-8">About</p>
+            <h1 className="font-serif text-[39px] font-bold text-ink leading-[1.2] mb-8">
               Hi, I&apos;m Simran.
             </h1>
-            <div className="flex flex-col gap-5 text-ink-muted leading-relaxed">
-              <p>
+            <div className="flex flex-col gap-6 max-w-[65ch]">
+              <p className="t-body text-ink">
                 I&apos;m a product designer who leads with research. I care
                 about understanding people — not just their workflows, but the
                 emotional and behavioral patterns that shape how they interact
                 with the world.
               </p>
-              <p>
+              <p className="t-body text-mauve">
                 My work spans health tech, consumer apps, and civic tools. From
                 designing a circadian rhythm system for women with PCOS to
                 building gender-aware safety intelligence for urban spaces, I
                 gravitate toward problems where the stakes are personal.
               </p>
-              <p>
+              <p className="t-body text-mauve">
                 I&apos;m comfortable moving between research, product strategy,
                 and implementation — which means I can close the gap between
                 insight and shipped product.
@@ -69,16 +67,14 @@ export default function AboutPage() {
       </section>
 
       {/* Skills */}
-      <section className="px-8 lg:px-20 py-20 border-b border-ink/10">
+      <section className="px-8 lg:px-16 py-16 border-b border-ink/10">
         <div className="max-w-5xl mx-auto">
-          <p className="text-xs uppercase tracking-widest text-ink-muted mb-10">
-            Skills
-          </p>
+          <p className="label text-mauve mb-8">Skills</p>
           <div className="flex flex-wrap gap-3">
             {skills.map((skill) => (
               <span
                 key={skill}
-                className="text-sm text-ink border border-ink/20 rounded-full px-4 py-2 hover:border-ink/60 transition-colors"
+                className="t-caption text-ink border border-mauve rounded-full px-4 py-2 hover:border-accent hover:text-accent transition-colors"
               >
                 {skill}
               </span>
@@ -88,19 +84,19 @@ export default function AboutPage() {
       </section>
 
       {/* Resume + Contact */}
-      <section className="px-8 lg:px-20 py-20">
-        <div className="max-w-5xl mx-auto flex flex-col sm:flex-row gap-8 items-start">
+      <section className="px-8 lg:px-16 py-16">
+        <div className="max-w-5xl mx-auto flex flex-col sm:flex-row gap-6 items-start">
           <a
             href="/resume.pdf"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-3 text-sm uppercase tracking-widest font-medium text-ink border border-ink rounded-full px-8 py-4 hover:bg-ink hover:text-cream transition-colors"
+            className="inline-flex items-center gap-3 label bg-accent text-cream rounded-full px-8 py-4 hover:opacity-90 transition-opacity"
           >
             Download Résumé
           </a>
           <a
-            href="mailto:simranchhabra@example.com"
-            className="inline-flex items-center gap-3 text-sm uppercase tracking-widest font-medium text-ink border border-ink/20 rounded-full px-8 py-4 hover:border-ink transition-colors"
+            href="mailto:skc9841@nyu.edu"
+            className="inline-flex items-center gap-3 label text-ink border border-mauve rounded-full px-8 py-4 hover:border-accent hover:text-accent transition-colors"
           >
             Get in Touch
           </a>
@@ -108,30 +104,22 @@ export default function AboutPage() {
       </section>
 
       {/* Footer */}
-      <footer className="bg-dark-bg border-t border-white/5 py-10 px-8 lg:px-20">
+      <footer className="bg-dark-bg border-t border-white/5 py-8 px-8 lg:px-16">
         <div className="max-w-6xl mx-auto flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
-          <span className="font-serif text-sm text-ink-subtle">
-            Simran Chhabra
-          </span>
-          <div className="flex gap-6 text-xs uppercase tracking-widest text-ink-subtle">
-            <a
-              href="mailto:simranchhabra@example.com"
-              className="hover:text-dark-text transition-colors"
-            >
+          <span className="font-serif text-[16px] text-mauve">Simran Chhabra</span>
+          <div className="flex gap-6">
+            <a href="mailto:skc9841@nyu.edu" className="label text-mauve hover:text-surface transition-colors">
               Email
             </a>
             <a
               href="https://linkedin.com/in/simranchhabra"
               target="_blank"
               rel="noopener noreferrer"
-              className="hover:text-dark-text transition-colors"
+              className="label text-mauve hover:text-surface transition-colors"
             >
               LinkedIn
             </a>
-            <Link
-              href="/work"
-              className="hover:text-dark-text transition-colors"
-            >
+            <Link href="/work" className="label text-mauve hover:text-surface transition-colors">
               Work
             </Link>
           </div>
