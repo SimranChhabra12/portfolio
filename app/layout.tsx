@@ -1,15 +1,17 @@
 import type { Metadata } from "next";
-import { Fraunces, Albert_Sans } from "next/font/google";
+import { Playfair_Display, Inter } from "next/font/google";
 import "./globals.css";
 
-const fraunces = Fraunces({
-  variable: "--font-fraunces",
+const playfairDisplay = Playfair_Display({
+  variable: "--font-display",
   subsets: ["latin"],
+  weight: ["400", "500", "600"],
+  style: ["normal", "italic"],
   display: "swap",
 });
 
-const albertSans = Albert_Sans({
-  variable: "--font-albert",
+const inter = Inter({
+  variable: "--font-body",
   subsets: ["latin"],
   display: "swap",
 });
@@ -26,7 +28,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${fraunces.variable} ${albertSans.variable}`}>
+    <html lang="en" className={`${playfairDisplay.variable} ${inter.variable}`}>
       <body>{children}</body>
     </html>
   );

@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Nav from "@/components/Nav";
-import projects from "@/data/projects";
+import caseStudies from "@/data/caseStudies";
 
 export const metadata = {
   title: "Work — Simran Chhabra",
@@ -14,7 +14,7 @@ export default function WorkPage() {
       <section className="pt-40 pb-16 px-8 lg:px-16">
         <div className="max-w-6xl mx-auto">
           <p className="label text-mauve mb-6">Selected Work</p>
-          <h1 className="t-display font-bold text-surface leading-[1.2] !text-[39px] lg:!text-[56px]">
+          <h1 className="t-display text-surface leading-[1.2] !text-[39px] lg:!text-[56px]">
             Case Studies
           </h1>
         </div>
@@ -23,7 +23,7 @@ export default function WorkPage() {
       <section className="px-8 lg:px-16 pb-24">
         <div className="max-w-6xl mx-auto">
           <div className="divide-y divide-white/5">
-            {projects.map((project, i) => (
+            {caseStudies.map((project, i) => (
               <Link
                 key={project.slug}
                 href={`/work/${project.slug}`}
@@ -39,9 +39,12 @@ export default function WorkPage() {
                         className="w-2 h-2 rounded-full shrink-0"
                         style={{ backgroundColor: project.color }}
                       />
-                      <p className="label text-mauve">{project.year}</p>
+                      <p className="label text-mauve">
+                        {project.year}
+                        {project.status && ` · ${project.status}`}
+                      </p>
                     </div>
-                    <h2 className="font-serif text-[31px] font-bold text-surface leading-[1.2] group-hover:text-white transition-colors mb-3">
+                    <h2 className="font-serif text-[31px] text-surface leading-[1.2] group-hover:text-white transition-colors mb-3">
                       {project.title}
                     </h2>
                     <p className="t-body text-mauve !max-w-none">{project.subtitle}</p>

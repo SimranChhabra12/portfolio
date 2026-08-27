@@ -9,9 +9,20 @@
   --mauve: #C99BA9;
   --blush: #E7C9C6;
 
-  /* Dark-section tokens */
-  --dark-bg: #111111;
-  --dark-surface: #1C1C1C;
+  /* Dark-section tokens — warm darks, never pure black */
+  --dark-bg: #2A1F28;
+  --dark-surface: #3A2A38;
+
+  /* Layout tokens — change once here, not at each call site */
+  --radius-card: 1.5rem;      /* 24px — cards, cover images */
+  --radius-card-sm: 1rem;     /* 16px — small chips, thumbnails */
+  --section-transition: 8rem; /* 128px — gradient band between light/dark sections */
+
+  /* Hero photo sizing — matches honeymehta.design's hero image (628x438 at 1440px viewport) */
+  --hero-photo-w: 20rem;      /* 320px — mobile */
+  --hero-photo-w-sm: 30rem;   /* 480px — tablet */
+  --hero-photo-w-lg: 39.25rem; /* 628px — desktop, 1:1 with reference */
+  --hero-photo-aspect: 628 / 438;
 }
 
 @theme inline {
@@ -29,8 +40,8 @@
   --color-ink-subtle: var(--mauve);
   --color-dark-text: var(--surface);
 
-  --font-serif: var(--font-fraunces);
-  --font-sans: var(--font-albert);
+  --font-serif: var(--font-display);
+  --font-sans: var(--font-body);
 }
 
 html {
@@ -40,7 +51,7 @@ html {
 body {
   background: var(--cream);
   color: var(--ink);
-  font-family: var(--font-albert), "Helvetica Neue", Arial, sans-serif;
+  font-family: var(--font-body), "Helvetica Neue", Arial, sans-serif;
   font-size: 16px;
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
@@ -51,13 +62,57 @@ body {
   color: var(--cream);
 }
 
+/* ─── Accessibility ──────────────────────────────────────────────────────── */
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ─── Scroll reveal ──────────────────────────────────────────────────────── */
+
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
 /* ─── Type scale ─────────────────────────────────────────────────────────── */
 
 /* Caption / label — 13px / 150% */
 .t-caption {
   font-size: 13px;
   line-height: 1.5;
-  font-family: var(--font-albert), sans-serif;
+  font-family: var(--font-body), sans-serif;
 }
 
 /* Body — 16px / 150% */
@@ -65,36 +120,39 @@ body {
   font-size: 16px;
   line-height: 1.5;
   max-width: 65ch;
-  font-family: var(--font-albert), sans-serif;
+  font-family: var(--font-body), sans-serif;
 }
 
 /* Subheading — 20px / 150% */
 .t-sub {
   font-size: 20px;
   line-height: 1.5;
-  font-family: var(--font-albert), sans-serif;
+  font-family: var(--font-body), sans-serif;
 }
 
-/* Section title — 25px / 120% */
+/* Section title — 28px / 120% */
 .t-section {
-  font-size: 25px;
+  font-size: 28px;
   line-height: 1.2;
-  font-family: var(--font-fraunces), serif;
+  font-weight: 500;
+  font-family: var(--font-display), serif;
 }
 
-/* Page heading — 31px / 120% */
+/* Page heading — fluid 30px (mobile) → 42px (desktop) / 120% */
 .t-heading {
-  font-size: 31px;
+  font-size: clamp(1.875rem, 1.35rem + 2.2vw, 2.625rem);
   line-height: 1.2;
-  font-family: var(--font-fraunces), serif;
+  font-weight: 500;
+  font-family: var(--font-display), serif;
 }
 
-/* Hero / display — 39px / 120% / -2% tracking */
+/* Hero / display — fluid 36px (mobile) → 60px (desktop) / 120% / -2% tracking */
 .t-display {
-  font-size: 39px;
-  line-height: 1.2;
+  font-size: clamp(2.25rem, 1rem + 5.5vw, 3.75rem);
+  line-height: 1.15;
   letter-spacing: -0.02em;
-  font-family: var(--font-fraunces), serif;
+  font-weight: 600;
+  font-family: var(--font-display), serif;
 }
 
 /* All-caps label utility */
@@ -103,5 +161,5 @@ body {
   line-height: 1.5;
   text-transform: uppercase;
   letter-spacing: 0.08em;
-  font-family: var(--font-albert), sans-serif;
+  font-family: var(--font-body), sans-serif;
 }
