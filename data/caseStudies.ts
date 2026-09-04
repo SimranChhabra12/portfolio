@@ -682,7 +682,6 @@ const caseStudies: CaseStudy[] = [
               { src: "/AIRAScreens/Luteal.png", caption: "Luteal" },
               { src: "/AIRAScreens/Luteal-1.png", caption: "Luteal (alt)" },
               { src: "/AIRAScreens/Workout - Cycle Insight.png", caption: "Workout — Cycle Insight" },
-              { src: "/AIRAScreens/TalkAboutFeelings.png", caption: "Talk About Feelings" },
               { src: "/AIRAScreens/Learn tab - Global NAV.png", caption: "Learn — Global Nav" },
             ],
           },
