@@ -42,6 +42,9 @@ export interface CaseStudy {
   disciplines: string[];
   color: string;
   prototypeUrl?: string;
+  // Keeps a project written but off the site: no card, no page, skipped by "next project".
+  // Delete the flag to bring it back.
+  hidden?: boolean;
   meta: {
     team: string;
     researchMethods: string[];
@@ -51,7 +54,7 @@ export interface CaseStudy {
   sections: Section[];
 }
 
-const caseStudies: CaseStudy[] = [
+const allCaseStudies: CaseStudy[] = [
   // ── Whspr ────────────────────────────────────────────────────────────────
   {
     slug: "whspr",
@@ -742,6 +745,7 @@ const caseStudies: CaseStudy[] = [
   {
     slug: "street-paws",
     title: "Street Paws",
+    hidden: true,
     cardDescription:
       "“Helpless. There aren't a lot of avenues except some WhatsApp groups and my story. People usually ignore these messages.”",
     homeOneLiner: "Connecting the people who already want to help street dogs",
@@ -859,6 +863,10 @@ const caseStudies: CaseStudy[] = [
     ],
   },
 ];
+
+// Everything downstream (cards, the /work list, the generated routes, and the
+// "next project" chain) reads this, so a hidden project drops off the site in one move.
+const caseStudies = allCaseStudies.filter((p) => !p.hidden);
 
 export default caseStudies;
 
