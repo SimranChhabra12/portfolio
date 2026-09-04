@@ -4,41 +4,49 @@ import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 
 // Frame is a fixed landscape aspect (628/438 ≈ 1.43, matching the reference site's hero
-// treatment — see DESIGN_RULES.md). Photos whose native aspect is close to that can fill the
-// frame with a mild center-crop; photos far from it (portrait shots) would lose the subject to
-// a blanket crop, so they're shown whole (contain) against a neutral fill instead.
+// treatment — see DESIGN_RULES.md), but three of these four photos are portrait. Every photo
+// fills the frame so the carousel stays consistent (no letterboxed frames mid-rotation), and
+// each one carries its own focal point so the crop never cuts Simran out. `focus` is the
+// vertical object-position: 0% holds the top of the photo, 50% is centred.
 const photos = [
   {
     src: "/hero/hero-1.jpg",
     alt: "Simran Chhabra at the Whspr showcase",
     width: 5712,
     height: 4284,
-    fit: "cover" as const,
+    // Landscape, near the frame's own aspect — barely cropped.
+    focus: "50%",
   },
   {
     src: "/hero/hero-2.jpg",
     alt: "Simran Chhabra with rescued street dogs",
     width: 1440,
     height: 1595,
-    fit: "cover" as const,
+    // Kneeling with the dogs, low in the frame: centring here cuts her head off.
+    focus: "0%",
   },
   {
     src: "/hero/hero-3.jpg",
     alt: "Simran Chhabra presenting a research poster",
     width: 4284,
     height: 5712,
-    fit: "contain" as const,
+    // She and the poster both sit mid-frame.
+    focus: "50%",
   },
   {
     src: "/hero/hero-4.jpg",
     alt: "Simran Chhabra at the Whspr showcase, talking with visitors",
     width: 4284,
     height: 5712,
-    fit: "contain" as const,
+    // Slightly high, to keep the Whspr showcase board above the table in shot.
+    focus: "35%",
   },
 ];
 
 const INTERVAL_MS = 4000;
+// The flip itself — kept short so the mid-rotation frame (where a turning photo reads as
+// squashed or mirrored) passes too fast to register.
+const TRANSITION_MS = 350;
 
 export default function HeroPhoto() {
   const [index, setIndex] = useState(0);
@@ -73,13 +81,16 @@ export default function HeroPhoto() {
           alt={photo.alt}
           aria-hidden={i !== index}
           fill
-          className={photo.fit === "contain" ? "object-contain" : "object-cover"}
+          className="object-cover"
           style={{
+            objectPosition: `50% ${photo.focus}`,
             opacity: i === index ? 1 : 0,
             transform: i === index ? "rotateY(0deg)" : "rotateY(-90deg)",
             transformStyle: "preserve-3d",
             backfaceVisibility: "hidden",
-            transition: "transform 0.8s cubic-bezier(0.65, 0, 0.35, 1), opacity 0.4s ease-in-out",
+            // Opacity and transform run on the same clock; when they drifted apart the
+            // half-turned outgoing photo stayed visible under the incoming one.
+            transition: `transform ${TRANSITION_MS}ms cubic-bezier(0.65, 0, 0.35, 1), opacity ${TRANSITION_MS}ms ease-in-out`,
           }}
           sizes="(max-width: 640px) 320px, (max-width: 1024px) 480px, 628px"
           priority={i === 0}
