@@ -278,68 +278,79 @@ const allCaseStudies: CaseStudy[] = [
   // ── Resy ─────────────────────────────────────────────────────────────────
   {
     slug: "resy",
-    title: "Resy Celebrations",
+    title: "Resy Celebrations — A Concept",
     cardDescription:
       "I was planning my own birthday dinner and somehow ended up doing venue scouting on foot.",
-    homeOneLiner: "Making large-group booking work for both sides",
+    homeOneLiner: "A concept for Resy: making large-group booking work for both sides",
     coverImage: "/covers/resy.jpg",
-    homeTags: ["Research", "Design"],
-    subtitle: "A large-party booking feature for the Resy platform",
+    homeTags: ["Concept", "Research", "Design"],
+    subtitle:
+      "An independent concept for large-party booking on Resy, for groups of 8+. Not affiliated with Resy.",
     role: "UX Researcher & Product Designer",
     year: "2024",
+    status: "Independent student concept — not affiliated with Resy",
     disciplines: ["UX Research", "Feature Design", "Service Design"],
     color: "#C4472A",
     prototypeUrl: "https://resy-celebrations-portfolio.surge.sh",
     meta: {
-      team: "4-person team",
+      team: "4 — me plus 3 engineers",
       researchMethods: [
-        "User Interviews",
-        "Restaurant Manager Interviews",
         "Survey",
+        "User Interviews (15)",
+        "Restaurant Manager Interviews (6)",
         "Affinity Mapping",
         "Journey Mapping",
       ],
-      platform: "Mobile App (iOS/Android)",
-      duration: "8 weeks",
+      platform: "Mobile feature, existing Resy app",
+      duration: "Semester 3, UX design course",
     },
+    // Rendered by the bespoke route at app/work/resy/page.tsx. These sections
+    // mirror that narrative — two-sided workflow, the trust problem each side
+    // faces, then how the design resolves it — and are kept in sync so the data
+    // never contradicts the page.
     sections: [
       {
-        id: "hook",
+        id: "context",
         number: "01",
-        heading: "Hook",
+        heading: "Context",
         blocks: [
           {
+            type: "note",
+            text: "An independent concept made for a university UX course. Not affiliated with, commissioned by, or endorsed by Resy. Nothing here shipped.",
+          },
+          {
             type: "p",
-            text: "I was planning my own birthday dinner in New York and somehow ended up doing venue scouting on foot. That's when I knew something was broken.",
+            text: "Booking a table for 2 on Resy takes seconds. Booking for 15 sends you to your email. For groups of 8 or more, most restaurants can't confirm through the app. Resy caps the party size and tells you to email the restaurant directly.",
+          },
+          {
+            type: "quote",
+            text: "There's no infrastructure inside Resy for the one kind of booking that needs it most.",
+          },
+          {
+            type: "p",
+            text: "The problem found me before the project did. My birthday was coming up and I was trying to book a group dinner in New York. Once I set the party size past 6 on Resy and OpenTable, both apps told me to email the restaurant. Most took 2-3 days to reply, some never did. My partner and I gave up and went to the Lower East Side and East Village in person, walking into bars to ask about minimum spends. We got more in an afternoon on foot than in a week of emails.",
           },
         ],
       },
       {
-        id: "role",
+        id: "both-sides",
         number: "02",
-        heading: "My Role",
+        heading: "The Workflow, From Both Sides",
         blocks: [
           {
-            type: "fields",
-            items: [
-              { label: "Team size", value: "4 — mostly engineers" },
-              {
-                label: "My specific responsibilities",
-                value:
-                  "I led the project direction, owned the research end-to-end (interviews, surveys, need-finding, user journey), and delegated from there.",
-              },
-              {
-                label: "What I did NOT do (owned by teammates)",
-                value: "Research analysis, user personas, some restaurant manager interviews.",
-              },
-            ],
+            type: "p",
+            text: "The fastest way to see the gap is to lay the two sides next to each other. The guest sets a party size past 6, gets handed to email, waits days, and finds out the minimum spend three emails deep. The restaurant receives an unstructured email, asks the follow-up questions Resy never collected, quotes a minimum, and holds the space on trust. Both are trying to reach the same outcome. Neither has anywhere in the product to do it.",
+          },
+          {
+            type: "p",
+            text: "The email hand-off isn't a slow step in the flow. It is the flow — everything that matters to either side happens outside the product.",
           },
         ],
       },
       {
         id: "research",
         number: "03",
-        heading: "Research",
+        heading: "The Research",
         blocks: [
           {
             type: "fields",
@@ -347,166 +358,202 @@ const allCaseStudies: CaseStudy[] = [
               {
                 label: "Methods",
                 value:
-                  "A survey to define the target user, followed by two rounds of interviews — consumers first, then restaurant managers.",
+                  "A survey to define the target user, then two rounds of interviews — 15 users first, then 6 restaurant managers across Brooklyn and Manhattan.",
               },
               {
                 label: "Who we spoke to",
                 value:
-                  "Working professionals in NYC, ages 24–35, plus four Brooklyn restaurants (Nuaa Table, Wayward Fare, Convivium Osteria, and La Rina).",
+                  "Working professionals in NYC, roughly 29-33, plus restaurant managers including Convivium Osteria.",
               },
             ],
           },
           {
             type: "stats",
             items: [
-              { value: "93%", label: "Contact restaurants directly for large group bookings" },
-              { value: "67%", label: "Only found out about minimums after reaching out" },
+              { value: "93%", label: "Still call or email restaurants directly for group bookings" },
+              { value: "67%", label: "Didn't learn the minimum spend or policy until after reaching out" },
+              { value: "87%", label: "Named limited availability and hidden costs as their biggest frustration" },
             ],
           },
           {
             type: "p",
-            text: "We started with a survey to figure out who we were designing for. Students dropped out of our target group fast. Most don't use Resy because the app requires a credit card on file, and the budget for a sit-down dinner for 15 just isn't there. That pointed us toward working professionals in NYC, ages 24-35.",
+            text: "The thing that would decide whether a place was even an option, the minimum spend and the policy, was the one thing you couldn't see until you'd already spent the effort to ask.",
           },
           {
             type: "p",
-            text: "From there we ran two rounds of interviews: consumers first, then restaurant managers. The consumer side confirmed what I already knew. Everyone had tried Resy for a large group at some point. None of them had actually booked through it. They'd all ended up calling, emailing, or just picking whatever restaurant responded first.",
+            text: "The survey decided the target. Students dropped out fast — most don't use Resy because it wants a card on file, and a sit-down dinner for 15 isn't in the budget. The user interviews confirmed the pattern: everyone had tried Resy for a big group, almost nobody had booked through it. The words that kept coming up were \u201cwaiting,\u201d \u201chidden costs,\u201d and \u201cI didn't even know if it was confirmed.\u201d",
           },
           {
-            type: "p",
-            text: "The restaurant interviews were the ones that changed how we saw the problem. We talked to four Brooklyn restaurants: Nuaa Table, Wayward Fare, Convivium Osteria, and La Rina. Every single manager said the same thing: Resy works fine for regular tables, but for groups of 8 or more, it can't collect what they actually need. Event type. Space preference. Menu selection. Minimum spend. None of it is in the standard flow. So guests email, find out the policies, and most of them disappear. One manager put it plainly: “If guests saw pricing and policies before emailing us, that would filter out groups who aren't serious.”",
+            type: "quote",
+            text: "If guests saw sample menus, pricing, and policies before emailing us, that would filter out groups who aren't serious.",
+            attribution: "Manager, Convivium Osteria",
           },
         ],
       },
       {
         id: "insight",
         number: "04",
-        heading: "The Insight That Changed Everything",
+        heading: "The Insight",
         blocks: [
           {
             type: "p",
-            text: "We almost didn't interview restaurant managers. Our professor pushed us to go beyond the user side and actually talk to the people running these places.",
-          },
-          { type: "p", text: "That's when the problem got more interesting." },
-          {
-            type: "p",
-            text: "The managers weren't refusing large bookings. They were doing work that Resy had no infrastructure for. Event type, seating preferences, dietary needs, minimum spend: none of it fits a standard reservation flow. So they took it to email because that was the only place that conversation could happen.",
+            text: "We almost didn't interview restaurant managers. My professor pushed us past the user side to talk to the people running these rooms. That's where the problem got more interesting.",
           },
           {
             type: "p",
-            text: "The back-and-forth email wasn't the problem alone. Resy just didn't have a way for restaurants and users to communicate the specifics at all. Once we understood that, we knew the solution had to work for both sides, not just the user.",
+            text: "The managers weren't refusing large bookings. They were doing work Resy had no infrastructure for. Event type, seating, dietary needs, minimum spend, prix fixe — none of it fits a standard reservation. So they took the conversation to email, because email was the only place it could happen.",
           },
-          { type: "asset", label: "Two-sided problem diagram — user side vs. restaurant side" },
+          {
+            type: "p",
+            text: "The back-and-forth email wasn't really the problem. Resy just didn't have anywhere for restaurants and guests to exchange the specifics at all. I couldn't fix the user's side by speeding up email. The fix had to give both sides a place to have the conversation Resy had been pushing off the platform.",
+          },
           {
             type: "hmw",
-            text: "How might we build the booking infrastructure that lets restaurants and large groups actually coordinate, instead of routing them back to email?",
+            text: "How might we help users book and manage a large-party reservation inside Resy, instead of routing them back to email?",
+          },
+        ],
+      },
+      {
+        id: "trust",
+        number: "05",
+        heading: "What Each Side Is Risking",
+        blocks: [
+          {
+            type: "p",
+            text: "Underneath the logistics, this is a trust problem, and it isn't symmetrical. Both sides are being asked to commit before the other one has.",
+          },
+          {
+            type: "p",
+            text: "The guest risks committing a group of 12 to a place they can't picture, at a price they can't see, through a channel that gives them no confirmation. The frustration that came up most wasn't cost — it was not knowing whether anything was actually booked.",
+          },
+          {
+            type: "p",
+            text: "The restaurant risks holding a room, staffing it, and prepping a set menu for a party that may not arrive. The managers described this directly: minimum spends, kitchen strain, staffing, no-show risk. Gating 8+ behind email isn't obstruction. It's the only screening tool they have.",
+          },
+          {
+            type: "p",
+            text: "The restaurant side turned out to be enormous — an operational problem in its own right, and never the scope of a research course project. What the manager research did was let me design a grounded, hypothetical experience for their side, built on what they actually told us, without pretending I'd solved restaurant operations.",
+          },
+        ],
+      },
+      {
+        id: "commitment",
+        number: "06",
+        heading: "Deposits and the Card Hold",
+        blocks: [
+          {
+            type: "p",
+            text: "This is the mechanism the whole concept rests on, and it's the part I got least far with. A restaurant will accept a large party when the party has committed to something. That is the entire reason the 8+ gate exists.",
+          },
+          {
+            type: "p",
+            text: "What the design does carry: once a booking is confirmed, it becomes a shared space. The host sends an RSVP link through the app, guests confirm and split any deposit in-app, and the restaurant's headcount updates automatically before the cutoff. That solves the guest-side half.",
+          },
+          {
+            type: "asset",
+            label:
+              "BLOCKED (E2): guest-side deposit / card-hold step in the request flow, restaurant-side view of a guaranteed booking, and the cancellation and refund rule. Not yet designed.",
+          },
+          {
+            type: "p",
+            text: "What the design does not carry is the other half: what actually protects the restaurant from a no-show or a late cancellation. I understood that risk from the manager research and never translated it into the design. There is no screen where a card is held, where a deposit is taken at request time rather than after confirmation, or where a cancellation window is stated and enforced.",
+          },
+          {
+            type: "p",
+            text: "That was the sharpest note this project got, and it's a fair one. A case study that writes about deposits without showing them is describing a mechanism it hasn't designed. Designing those three screens is the next thing I'm doing to this project.",
           },
         ],
       },
       {
         id: "decisions",
-        number: "05",
+        number: "07",
         heading: "Design Decisions",
         blocks: [
           {
             type: "decisions",
             items: [
               {
-                title: "Celebrations as a separate mode, not a filter",
-                body: "The first call was structural. We could have added a party size filter to the existing Resy flow. But large-group bookings aren't a variation of a regular reservation. It's a different kind of transaction, with different information needs, a longer timeline, and higher stakes for both sides. A dedicated Celebrations tab made that clear upfront, for users and restaurants both.",
+                title: "Celebrations as its own mode, not a filter",
+                body: "The first call was structural. I could have bolted a party-size filter onto the existing flow. But a large-group booking isn't a bigger version of a table for 2. It carries different information, a longer timeline, and higher stakes on both sides. A dedicated Celebrations tab signals that upfront, to guests and restaurants both.",
               },
               {
-                title: "Preference-first discovery (input before results)",
-                body: "Before showing any restaurants, we ask for event type, party size, date, budget, and vibe. Most discovery flows show results first and let you filter after. We didn't do that because the research told us why it wouldn't work: users were reaching out to restaurants that couldn't accommodate them, only to find out 2-3 emails in. Collecting preferences first meant every result was already a real option.",
+                title: "Preference-first discovery",
+                body: "Before showing any restaurants, Celebrations asks what you're planning: event type, party size, date, budget range, vibe. Most discovery shows results first and filters after. The research said why that fails here — people were reaching out to places that couldn't hold them, then finding out 3 emails deep. Collecting preferences first means every result on screen is already a real option. Browsing happens through a scrollable list with a map toggle, the pattern Resy users already know.",
               },
               {
-                title: "Swipe-based restaurant cards",
-                body: "For browsing, we went with swipe cards instead of a list. Each card shows minimum spend, capacity, layout previews, and event badges. One option at a time. The research kept coming back to the same thing: people weren't overwhelmed by the process; they were overwhelmed by not having the right information at the right moment. The card format puts everything on the table before anyone reaches out.",
-              },
-              {
-                title: "Structured booking request (replacing open email)",
-                body: "Instead of redirecting to email, we designed an in-app booking request form that collects what a restaurant actually needs: event type, headcount, dietary needs, budget range, timing flexibility. Restaurants get enough context to respond properly without asking follow-up questions. Users get a progress tracker so they're not just waiting and wondering.",
-              },
-              {
-                title: "Manager dashboard",
-                body: "On the restaurant side, incoming requests arrive in a dashboard, pre-filled with party details. Managers can accept, modify, or decline without touching their inbox. Every manager we talked to said the same thing: the email wasn't the problem; it was that there was nowhere else for that conversation to happen. The dashboard gives them a structured version of the same exchange.",
+                title: "A structured request, and a place for the restaurant to answer it",
+                body: "Instead of open email, the guest sends a structured request: event type, headcount, dietary needs, timing. The restaurant receives it in a manager dashboard, pre-filled, and can accept, counter, or decline without touching their inbox. Every manager said the same thing — the email was never the point, there was just nowhere else for that conversation to live.",
               },
               {
                 title: "Group coordination and payment split",
-                body: "The last piece was group coordination. Once a booking was confirmed, the host could send an RSVP link to the group directly through the app. Guests could confirm attendance and split any upfront deposit in-app, so the restaurant had a live headcount, and the host wasn't chasing 12 people on Venmo. Changes to party size before a reasonable cutoff window updated the restaurant automatically.",
+                body: "Once it's confirmed, the booking becomes a shared space. The host sends an RSVP link through the app, guests confirm and split any deposit in-app, and the restaurant's headcount updates automatically before the cutoff. No chasing 12 people on Venmo.",
               },
             ],
           },
-          { type: "asset", label: "Annotated screen — swipe card or booking request form" },
         ],
       },
       {
         id: "solution",
-        number: "06",
-        heading: "The Solution",
+        number: "08",
+        heading: "How The Design Resolves It",
         blocks: [
-          { type: "note", text: "Prototype status: Lo-fi complete. Hi-fi in progress." },
-          { type: "asset", label: "Before/after — booking a large party today vs. through Celebrations" },
           {
             type: "p",
-            text: "Resy Celebrations is a dedicated tab inside the existing Resy app for groups of 8 or more. Not a filter, not a workaround. A separate mode that signals to both the user and the restaurant that this is a different kind of booking.",
+            text: "Resy Celebrations is a dedicated tab inside Resy for groups of 8 or more. Not a filter, not a workaround. A separate mode that tells both the user and the restaurant this is a different kind of booking.",
           },
           {
             type: "p",
-            text: "A user opening Celebrations first tells the app what they're looking for: event type, party size, date, rough budget, vibe. That input filters the restaurant results before they even appear, so everything shown is already a realistic option.",
+            text: "The guest says what they're planning, browses only options that can actually hold the group with minimum spend and capacity visible upfront, sends one structured request, and watches the status move in a tracker instead of refreshing an inbox. The restaurant receives a pre-filled request, accepts or counters or declines from a dashboard, publishes its policies upfront, and sees a live headcount before the cutoff.",
           },
           {
-            type: "p",
-            text: "From there, browsing happens through swipe cards. Each card has the minimum spend, capacity, layout previews, and a Celebrations badge if the restaurant has opted in and shared their policies upfront. No hidden costs discovered 3 emails later.",
-          },
-          {
-            type: "p",
-            text: "When a user finds a place they want, they send a structured in-app request instead of an email. Party size, event type, dietary needs, budget range, timing. The restaurant receives this through a manager dashboard and can respond, counter-propose, or decline without leaving the platform. The user sees the status update in real time through a progress tracker.",
-          },
-          {
-            type: "p",
-            text: "Once confirmed, the booking becomes a shared space. The host sends an RSVP link to the group through the app. Guests confirm attendance and split any upfront deposit in-app. The restaurant sees the headcount update automatically if anything changes before the cutoff window.",
+            type: "quote",
+            text: "The whole feature does one thing the old flow couldn't: it keeps the guest and the restaurant in the same place long enough to actually agree on a plan.",
           },
           { type: "prototype", url: "https://resy-celebrations-portfolio.surge.sh" },
         ],
       },
       {
-        id: "outcomes",
-        number: "07",
-        heading: "Outcomes",
+        id: "landed",
+        number: "09",
+        heading: "Where It Landed",
         blocks: [
           {
             type: "p",
-            text: "The project delivered end-to-end research: consumer and restaurant manager interviews, an online survey, affinity mapping, personas, user journey mapping, and a lo-fi prototype covering the full booking flow for both sides.",
+            text: "The scope of this project was needfinding and proposing a solution, and that's what we delivered: end-to-end research across 15 users and 6 managers, a survey, synthesis, personas, current and future journey maps, and a lo-fi prototype covering the full flow on both sides. The hi-fi prototype in this case study I built after the course, on my own.",
           },
           {
-            type: "p",
-            text: "The feedback from our professor and class was largely positive. Two things stood out. First, the solution didn't go far enough in showing how Resy Celebrations protects restaurants from no-shows and last-minute cancellations. We understood the restaurant side through research but didn't fully translate that into the design. Second, the swipe mechanic got some valid pushback. A few reviewers felt it worked better as a discovery tool than a primary interaction pattern, which is a fair read.",
-          },
-          {
-            type: "p",
-            text: "Our professor also noted we had one persona too many, with two of them overlapping more than they needed to.",
+            type: "list",
+            items: [
+              "The solution didn't go far enough on how Celebrations protects restaurants from no-shows and last-minute cancellations. I understood that risk from the manager research but didn't fully translate it into the design.",
+              "The original swipe-to-browse mechanic got fair pushback for working better as discovery than as a primary way to choose a high-stakes booking, which is why the current version uses Resy's list and map instead.",
+              "We carried one persona too many, with two that overlapped.",
+            ],
           },
         ],
       },
       {
-        id: "retro",
-        number: "08",
+        id: "differently",
+        number: "10",
         heading: "What I'd Do Differently",
         blocks: [
           {
             type: "p",
-            text: "I'd have tried to speak to someone at Resy. We understood the problem from both the user and restaurant side, but we never pressure-tested whether the solution was actually viable for Resy as a business. Why does this gap exist on their end? Is it a technical constraint, a strategic choice, a resource problem? That conversation would have made the solution a lot sharper.",
+            text: "I'd have tried to talk to someone at Resy. We understood the problem cold from the user and restaurant sides, but we never pressure-tested whether this was viable for Resy as a business. Is the 8+ gap a technical limit, a strategic choice, a resource call? I don't know, and that conversation would have made the whole solution sharper.",
+          },
+          {
+            type: "p",
+            text: "We also debated the scope early — sit-down dinners versus standing events, bigger market versus tighter problem — and chose to focus on 8-15 sit-down. I still think that was right, but I'd defend it out loud rather than leave it implicit.",
           },
         ],
       },
       {
-        id: "learnings",
-        number: "09",
+        id: "taught",
+        number: "11",
         heading: "What This Taught Me",
         blocks: [
           {
             type: "p",
-            text: "This was my first time working on a two-sided problem and I didn't fully understand what that meant until we were in it. Once the restaurant side came in, almost every decision we'd made about the user had to be reconsidered. You can't design for one without understanding what the other actually needs.",
+            text: "This was my first two-sided problem, and I didn't really understand what that meant until I was inside it. The moment the restaurant side came in, almost every decision I'd made for the user had to be reconsidered. You can't design one side of a transaction well without understanding what the other side actually needs.",
           },
         ],
       },
