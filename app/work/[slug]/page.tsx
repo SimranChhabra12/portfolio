@@ -10,7 +10,7 @@ import { COL_MEDIA, COL_TEXT, PAGE_GUTTER, SECTION_GAP } from "../_components/co
 // Whspr and AIRA have hand-built routes (app/work/whspr, app/work/aira-pcos)
 // that take precedence over this dynamic one. Skip them here so the build
 // doesn't prerender a second, unreachable copy of each.
-const BESPOKE_ROUTES = new Set(["whspr", "aira-pcos"]);
+const BESPOKE_ROUTES = new Set(["whspr", "aira-pcos", "resy"]);
 
 export async function generateStaticParams() {
   return caseStudies
