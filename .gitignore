@@ -45,3 +45,21 @@ next-env.d.ts
 /notes/*
 !/notes/DESIGN_DOC.md
 !/notes/WORK_PACKAGES.md
+
+# Also match by filename, wherever they live. The docs folder has been renamed
+# repeatedly this session ("Portfolio Files/" <-> "notes/"), and each rename
+# silently un-ignored everything inside it — once staging the whole private set
+# for commit on this public repo. Filename rules survive the renaming.
+portfolio-vision.md
+portfolio-session-summary.md
+portfolio-references.md
+site-teardowns.md
+PLAYGROUND.md
+whspr.md
+aira.md
+resy-celebrations.md
+gesturesketch.md
+
+# ...but never the two docs the build agents must read.
+!DESIGN_DOC.md
+!WORK_PACKAGES.md
