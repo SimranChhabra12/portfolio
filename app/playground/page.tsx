@@ -18,8 +18,8 @@ export default function PlaygroundIndexPage() {
         No py-* utility on the grid section: the section rhythm in globals.css (§4) owns
         vertical spacing. pt-40 is here only to clear the fixed nav.
       */}
-      <section className="px-8 pt-40 pb-24">
-        <div className="max-w-7xl mx-auto">
+      <section className="px-[var(--page-gutter,32px)] pt-40 pb-24">
+        <div className="max-w-[var(--page-max,1280px)] mx-auto">
           <Link
             href="/"
             className="t-caption text-mauve hover:text-accent transition-colors focus-visible:outline-2 focus-visible:outline-accent focus-visible:outline-offset-4"
@@ -35,8 +35,8 @@ export default function PlaygroundIndexPage() {
         </div>
       </section>
 
-      <footer className="bg-dark-bg border-t border-white/5 py-8 px-8">
-        <div className="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+      <footer className="bg-dark-bg border-t border-white/5 py-8 px-[var(--page-gutter,32px)]">
+        <div className="max-w-[var(--page-max,1280px)] mx-auto flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
           <Link
             href="/"
             className="t-caption text-mauve hover:text-surface transition-colors focus-visible:outline-2 focus-visible:outline-accent focus-visible:outline-offset-4"
