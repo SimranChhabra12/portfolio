@@ -14,19 +14,43 @@ revamp is better than what's live.
 ## Dependency order
 
 ```
-WP0 (tokens) ──┬── WP1 (cover scenes)      [blocked on 2x asset exports]
-   BLOCKING    ├── WP2 (homepage)
-   lands alone ├── WP3 (playground page)
-               └── WP4 (case study template)
-                        │
-                   WP2 done ──┬── WP5 (motion)
-                              └── WP6 (copy)   [needs Simran's input]
+t=0   WP0 ║ WP2 ║ WP3 ║ WP4     four worktrees, fully parallel
+              ↓
+      reviewed + merged into redesign as each lands
+              ↓
+t=1   WP5 (motion)   WP6 (copy, needs Simran)   WP1 (covers, drop-in)
 ```
 
-**WP0 lands directly on `redesign`, alone.** Every other package edits files that depend on its tokens;
-running anything in parallel with it will collide.
+**All four round-one packages run at once.** They don't collide because the type-class contract
+(`.t-display / .t-heading / .t-section / .t-sub / .t-body / .t-caption`) already exists and is already
+wired up — 118 usages across the components. WP0 changes the *values* behind those names in one file;
+WP2–WP4 change *which class an element uses*, in entirely different files.
 
-WP1–WP4 then run in parallel, each in its own git worktree off `redesign`, merged back as they land.
+WP5 is genuinely sequential — it touches `Reveal.tsx`, reveal CSS in `globals.css` (WP0), and
+`HeroPhoto.tsx` (WP2).
+
+## File ownership — do not edit outside your list
+
+| WP | owns |
+|---|---|
+| WP0 | `app/globals.css` — **and nothing else** |
+| WP2 | `app/page.tsx`, `components/WorkChapters.tsx`, `HeroPhoto.tsx`, `CoverPlaceholder.tsx`, `SectionTransition.tsx`, `Nav.tsx`; deletes `WorkGrid.tsx` |
+| WP3 | `app/playground/**`, `components/Playground.tsx`, `PlaygroundPopup.tsx`, `public/playground/**` |
+| WP4 | `components/CaseStudyBlocks.tsx`, `CaseStudySectionNav.tsx`, `ScreenStrip.tsx`, `FlowComparison.tsx`, `app/work/**` |
+
+**Frozen this round:**
+- `app/globals.css` — WP0 only. **No other package may add CSS anywhere.** Need a new token? Report back
+  rather than adding it.
+- `components/Reveal.tsx` — WP5 owns it. Three packages consume it; none may change it.
+- `components/CoverPlaceholder.tsx` — **WP2 owns it.** WP3 consumes it unchanged.
+
+Code against the class names in `DESIGN_DOC.md` §2 and the layout tokens in §4. Only WP0 opens
+`globals.css`.
+
+## Dead code (0 importers, verified)
+
+`components/WorkGrid.tsx`, `PlaceholderSection.tsx`, `FlowComparison.tsx`, `ScreenStrip.tsx`.
+WP2 deletes `WorkGrid.tsx`; WP4 decides on the other three as it goes.
 
 ---
 
@@ -45,9 +69,23 @@ Replace the current token block and type scale with §2, §3, §4 of the design 
 - Keep the existing color tokens — they don't change. Remove nothing else yet; later packages will
   clean up call sites.
 
-**Done when:** the dev server compiles, and measuring at 1440 shows the six steps landing within ~10% of
-the doc's table. Expect the page to look *worse* mid-flight — call sites still use old classes. That's
-fine; don't fix them here.
+**Class-name mapping** — these names already exist and are used 118 times. **Do not rename them**; other
+packages are coding against them in parallel. Only change the values:
+
+| class | now | becomes | doc name |
+|---|---|---|---|
+| `.t-display` | 60px | **84px** | display |
+| `.t-heading` | 42px | **50px** | page |
+| `.t-section` | 28px | **36px** | project |
+| `.t-sub` | 20px | 20px | sub |
+| `.t-body` | 16px | 16px | body |
+| `.t-caption` | 13px | 13px | caption |
+
+**Done when:** the dev server compiles, and measuring at 1440 shows the six steps within ~10% of the
+doc's table, with **positive** tracking on the three display levels.
+
+**Not your criterion:** the section:project ratio ≥ 1.35× belongs to WP2, not here. See below for why —
+you cannot fix it from this file.
 
 ---
 
@@ -76,12 +114,27 @@ Prefer a repeatable script over hand-placed one-offs — these will be restyled.
 
 ## WP2 · Homepage restructure
 
-**Files:** `app/page.tsx`, `components/WorkGrid.tsx`, `components/HeroPhoto.tsx`
+**Files:** `app/page.tsx`, `components/WorkChapters.tsx`, `components/HeroPhoto.tsx`,
+`components/CoverPlaceholder.tsx`, `components/SectionTransition.tsx`, `components/Nav.tsx`
 
-Depends on WP0.
+Runs in parallel with WP0. Use the class names in the WP0 table — don't wait for the values to change,
+and **don't open `globals.css`.**
 
-1. **Hero** — add a real `<h1>` at `--t-display`. There is currently **no `<h1>` on the page**; the hero
-   line is a `<p>`. Use `[HERO — TBD]` as the copy; WP6 writes the real line. Do not invent it.
+### 0. The flatness fix — this package owns it
+
+The 1.0× type ratio is a **usage** bug, not a token bug:
+
+- `app/page.tsx:29` — section heading "I've worked on" → `.t-heading`
+- `components/WorkChapters.tsx:58` — project title → `.t-heading`
+
+Both elements use the same class. WP0 changing `.t-heading` from 42 to 50 leaves it 50 vs 50 — still
+1.0×. **Repoint project titles to `.t-section`.** Section headings keep `.t-heading`. That, and only
+that, produces the ≥1.35× ratio.
+
+1. **Hero** — add a real `<h1>` at `.t-display`. There is currently **no `<h1>` on the page**; the hero
+   line is a `<p>` at `app/page.tsx:18`. Use `[HERO — TBD]` as the copy; WP6 writes the real line. Do not
+   invent it. The footer line at `app/page.tsx:49` is also `[TBD]` — it's currently Honey's headline
+   verbatim.
 2. **Ground** — remove the dark work section (`bg-dark-bg`). Cream throughout; dark stays in the footer
    only (§3).
 3. **Work rows** — replace the 2-up grid with stacked full-width rows, one project each, per the §6
@@ -91,8 +144,12 @@ Depends on WP0.
 4. **Playground** — cut to a compact teaser: heading, a short tile row, link to `/playground`. Target
    **≤25% of homepage height** (currently 59%).
 5. Delete the `object-contain p-8` card treatment entirely — that's the 20%-fill bug.
+6. Delete `components/WorkGrid.tsx` — dead code, 0 importers. The live component is `WorkChapters.tsx`.
 
-Until WP1 lands, point rows at the existing covers. They'll be soft; that's expected.
+**Cover contract.** Point rows at `public/covers/{whspr,aira,resy}.jpg` using `aspect-[5/3]` +
+`object-cover` at `--col-media`. Those files exist today at 1000×750/16KB so the build won't break —
+they'll just look soft until WP1 drops in 2× replacements at the same paths. **Never `object-contain`
+on a landscape slot.**
 
 **Done when:** exactly one `<h1>`; no landscape slot holds a raw portrait image; section:project type
 ratio ≥ 1.35×; playground ≤25% of page height.
@@ -103,7 +160,12 @@ ratio ≥ 1.35×; playground ≤25% of page height.
 
 **Files:** `app/playground/`, `public/playground/`
 
-Independent of WP0's visuals but should use its tokens.
+Runs in parallel. Use the class names from the WP0 table; **don't open `globals.css`.**
+
+⚠️ **`app/playground/page.tsx` does not exist** — only `app/playground/[slug]/page.tsx`. You are
+*creating* the index route, not moving content into an existing one.
+
+⚠️ `components/CoverPlaceholder.tsx` is **owned by WP2** this round. Consume it; don't edit it.
 
 1. Full collection moves to `/playground` (homepage keeps only the teaser from WP2).
 2. **Fix five broken images.** `public/playground/Styling Assistant - Verve/` is an **empty folder** —
@@ -120,9 +182,11 @@ clean at all three widths.
 
 ## WP4 · Case study template
 
-**Files:** `components/CaseStudyBlocks.tsx`, `app/work/[slug]/page.tsx`, `components/ScreenStrip.tsx`
+**Files:** `components/CaseStudyBlocks.tsx`, `components/CaseStudySectionNav.tsx`,
+`components/ScreenStrip.tsx`, `components/FlowComparison.tsx`, `app/work/**`
 
-Depends on WP0.
+Runs in parallel. Use the class names from the WP0 table; **don't open `globals.css`.**
+`components/Reveal.tsx` is frozen — consume it, don't change it.
 
 Adopt Jackie's proportions (§4) — the single change that makes case studies feel designed:
 
