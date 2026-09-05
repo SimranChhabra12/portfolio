@@ -31,7 +31,7 @@ export default function Home() {
       {/* Hero */}
       <section className={SHELL}>
         <div className="flex justify-center">
-          <HeroPhoto />
+          <HeroPhoto single />
         </div>
         <h1 className="t-display text-ink text-left !max-w-none mt-10 lg:mt-14">
           Product Designer
@@ -108,14 +108,14 @@ export default function Home() {
         </Reveal>
       </section>
 
-      {/* Footer / About — the only dark ground on the page. The cream/dark edge is a
-          hard cut, matching /work and the case studies; a gradient band here read as a
-          rendering artefact rather than a transition. */}
-      <footer id="about" className="bg-dark-bg py-24 scroll-mt-8">
+      {/* Footer — contact only. The About identity that used to double up here moved to
+          the real /about route; this block does one job (DESIGN_DOC §6 Footer).
+          Still the only dark ground on the page, and the cream/dark edge is a hard cut,
+          matching /work and the case studies; a gradient band here read as a rendering
+          artefact rather than a transition. */}
+      <footer className="bg-dark-bg py-24">
         <div className={SHELL}>
-          <h2 className="t-display text-surface !max-w-none mb-8">
-            Made for people, designed with intention
-          </h2>
+          <h2 className="t-section text-surface !max-w-none mb-8">Get in touch</h2>
 
           <div className="flex flex-col gap-8">
             <p className="t-body text-cream/70 !max-w-none">

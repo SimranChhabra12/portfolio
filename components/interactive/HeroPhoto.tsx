@@ -33,7 +33,10 @@ const INTERVAL_MS = 4000;
 // squashed or mirrored) passes too fast to register.
 const TRANSITION_MS = 350;
 
-export default function HeroPhoto() {
+// `single` freezes the frame on the first photo and never starts the interval. The
+// carousel format now lives on /about; the homepage hero keeps exactly one photo, so it
+// renders the same frame without the motion rather than duplicating the component.
+export default function HeroPhoto({ single = false }: { single?: boolean } = {}) {
   const [index, setIndex] = useState(0);
   const [paused, setPaused] = useState(false);
   const reducedMotionRef = useRef(false);
@@ -43,12 +46,14 @@ export default function HeroPhoto() {
   }, []);
 
   useEffect(() => {
-    if (reducedMotionRef.current || paused) return;
+    if (single || reducedMotionRef.current || paused) return;
     const id = setInterval(() => {
       setIndex((i) => (i + 1) % photos.length);
     }, INTERVAL_MS);
     return () => clearInterval(id);
-  }, [paused]);
+  }, [single, paused]);
+
+  const shown = single ? [photos[0]] : photos;
 
   return (
     <div
@@ -59,7 +64,7 @@ export default function HeroPhoto() {
       onFocus={() => setPaused(true)}
       onBlur={() => setPaused(false)}
     >
-      {photos.map((photo, i) => (
+      {shown.map((photo, i) => (
         <Image
           key={photo.src}
           src={photo.src}
