@@ -37,7 +37,10 @@ export default async function PlaygroundEntryPage({
 
       <section className="px-8 lg:px-16 pt-40 pb-16">
         <div className="max-w-6xl mx-auto">
-          <Link href="/#play" className="label text-mauve hover:text-accent transition-colors">
+          <Link
+            href="/playground"
+            className="t-caption text-mauve hover:text-accent transition-colors focus-visible:outline-2 focus-visible:outline-accent focus-visible:outline-offset-4"
+          >
             ← Playground
           </Link>
           <p className="label text-mauve mt-6 mb-4">{entry.tags}</p>
@@ -86,7 +89,10 @@ export default async function PlaygroundEntryPage({
 
       <footer className="bg-dark-bg border-t border-white/5 py-8 px-8 lg:px-16">
         <div className="max-w-6xl mx-auto flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
-          <Link href="/#play" className="label text-mauve hover:text-surface transition-colors">
+          <Link
+            href="/playground"
+            className="t-caption text-mauve hover:text-surface transition-colors focus-visible:outline-2 focus-visible:outline-accent focus-visible:outline-offset-4"
+          >
             ← Playground
           </Link>
           <span className="font-serif text-[16px] text-mauve">Simran Chhabra</span>
