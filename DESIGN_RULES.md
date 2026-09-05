@@ -1,6 +1,6 @@
 > # ⚠️ SUPERSEDED — do not follow this file
 >
-> Replaced by **`Portfolio Files/DESIGN_DOC.md`**, which is now the single authority.
+> Replaced by **`notes/DESIGN_DOC.md`**, which is now the single authority.
 > Kept only for history. Three rules below are known to be wrong and were corrected there:
 >
 > | rule here | corrected to | why |

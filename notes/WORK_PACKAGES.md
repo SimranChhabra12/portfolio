@@ -3,7 +3,7 @@
 Sharded from `DESIGN_DOC.md`. Each brief is self-contained: an agent should be able to execute from it
 plus the design doc, with no other context.
 
-**Every package must read `Portfolio Files/DESIGN_DOC.md` first.** It is the authority.
+**Every package must read `notes/DESIGN_DOC.md` first.** It is the authority.
 `DESIGN_RULES.md` is superseded — ignore it.
 
 Base branch: `redesign` (cut from `main`, commit `a67286b`). Nothing merges to `main` until the whole
@@ -192,4 +192,4 @@ Before `redesign` → `main`:
 - [ ] 1440 / 768 / 390 — no horizontal scroll
 - [ ] Side-by-side against the three references
 - [ ] No `[TBD]` copy shipped
-- [ ] `Portfolio Files/` still gitignored except `DESIGN_DOC.md` — **the repo is public**
+- [ ] `notes/` still gitignored except `DESIGN_DOC.md` and `WORK_PACKAGES.md` — **the repo is public**

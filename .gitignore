@@ -42,6 +42,6 @@ next-env.d.ts
 
 # private working notes — this repo is public.
 # Only the design doc is tracked, so agents in git worktrees can read it.
-/Portfolio Files/*
-!/Portfolio Files/DESIGN_DOC.md
-!/Portfolio Files/WORK_PACKAGES.md
+/notes/*
+!/notes/DESIGN_DOC.md
+!/notes/WORK_PACKAGES.md
