@@ -184,9 +184,19 @@ portrait asset must appear in a wide slot, it goes into a **composed scene** (be
 |---|---|---|---|
 | work row feature | 5:3 | `cover` | composed scene only |
 | case study feature | 16:10 | `cover` | composed scene, or a natively-landscape capture |
-| supporting row (3-up) | 4:5 | `cover` | single phone screens, fine as portrait |
+| supporting row (3-up) | **the file's own aspect** | `cover` | single phone screens — see the correction below |
 | playground tile | native | `cover` | photography, cropped to the tile's aspect |
 | hero photo | 628:438 | `cover` | **landscape source only** — see below |
+
+**Correction — supporting screens do not get a fixed 4:5 slot.** This section originally specified 4:5,
+which contradicted the ">15% aspect mismatch" gate in the verification section. A real phone screenshot
+is about 0.41 aspect (402×977); a 4:5 slot is 0.80. Forcing one into the other with `cover` is a **48.6%
+mismatch and crops 49% of the screen away** — half the UI, gone. Both rules could not hold at once.
+
+The rule is: **give each supporting screen a slot matching its own aspect ratio**, then lay those slots
+out 3-up inside the media column. Uniformity comes from the *grid* — equal column widths, shared left
+edges, consistent gaps — not from forcing every image into an identical box. That preserves the tidy
+3-up rhythm without destroying the content.
 
 ### Composed scenes
 
