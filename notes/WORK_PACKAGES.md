@@ -54,7 +54,7 @@ WP2 deletes `WorkGrid.tsx`; WP4 decides on the other three as it goes.
 
 ---
 
-## WP0 · Design tokens — BLOCKING
+## WP0 · Design tokens
 
 **Files:** `app/globals.css`
 
