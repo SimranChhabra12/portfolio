@@ -1,8 +1,28 @@
+import Image from "next/image";
+import Link from "next/link";
 import Nav from "@/components/Nav";
 import HeroPhoto from "@/components/HeroPhoto";
 import SectionTransition from "@/components/SectionTransition";
 import WorkChapters from "@/components/WorkChapters";
-import Playground from "@/components/Playground";
+import Reveal from "@/components/Reveal";
+import playgroundEntries from "@/data/playgroundEntries";
+
+// Vertical rhythm is NOT set here. `globals.css` carries
+// `section { padding: calc(var(--section-gap) / 2) 0 }` in `@layer base` (DESIGN_DOC §4),
+// so neighbouring sections share one gap. A `py-*` utility on a <section> would outrank
+// that base rule and silently restore the old uniform padding — so these sections stay
+// bare vertically, and only carry the horizontal shell.
+const SHELL = "max-w-[var(--page-max,1280px)] mx-auto px-[var(--page-gutter,32px)]";
+
+// Playground on the homepage is a teaser, not the collection — the full set lives at
+// /playground. Tiles are picked for covers that actually render: the Road Trip cover
+// (`/playground/RTX Photos + Videos/IMG_20200117_171155.jpg`, a 4608×3456 camera
+// original) makes the image optimizer return "not a valid image", so it's kept off the
+// homepage until WP3 re-encodes the playground originals.
+const TEASER_SLUGS = ["si-ch", "spoken-word", "big-squat-festival"];
+const teaserEntries = TEASER_SLUGS.map((slug) =>
+  playgroundEntries.find((e) => e.slug === slug)
+).filter((e): e is (typeof playgroundEntries)[number] => Boolean(e?.cover));
 
 export default function Home() {
   return (
@@ -10,44 +30,92 @@ export default function Home() {
       <Nav />
 
       {/* Hero */}
-      <section className="pt-28 pb-16 px-8 lg:px-16">
-        <div className="max-w-6xl mx-auto">
-          <div className="flex justify-center">
-            <HeroPhoto />
-          </div>
-          <p className="t-display text-ink text-left mt-10 lg:mt-14 max-w-3xl !max-w-none">
-            Product Designer / Creative Wildflower / Endlessly Curious
-          </p>
+      <section className={SHELL}>
+        <div className="flex justify-center">
+          <HeroPhoto />
         </div>
+        <h1 className="t-display text-ink text-left !max-w-none mt-10 lg:mt-14">
+          [HERO — TBD]
+        </h1>
+      </section>
+
+      {/* Work — cream ground. The dark block that used to sit here competed with the
+          product colour inside the visuals (DESIGN_DOC §1/§3). */}
+      <section id="work" className={`${SHELL} scroll-mt-8`}>
+        <h2 className="t-heading text-ink !max-w-none mb-12 lg:mb-16">
+          I&apos;ve worked on
+        </h2>
+        <WorkChapters />
+      </section>
+
+      {/* Play — teaser only */}
+      <section id="play" className={`${SHELL} scroll-mt-8`}>
+        <Reveal>
+          <h2 className="t-heading text-ink !max-w-none">Playground</h2>
+
+          {/* Playground tiles keep their NATIVE aspect (DESIGN_DOC §5) — no forced slot,
+              so nothing is cropped or letterboxed. A justified row does that and still
+              lines the tiles up: give each tile flex-basis AND flex-grow proportional to
+              its own aspect ratio, and every tile in a line resolves to the same height. */}
+          <ul className="flex flex-wrap items-start gap-4 lg:gap-6 mt-8 max-w-[var(--col-media,1000px)]">
+            {teaserEntries.map((entry) => {
+              const cover = entry.cover!;
+              // basis only decides where the row wraps (two-up at 390); grow does the
+              // justifying. Both scale with the aspect, which is what equalises heights.
+              const aspect = cover.width / cover.height;
+              return (
+                <li
+                  key={entry.slug}
+                  style={{ flexGrow: aspect, flexBasis: `${aspect * 90}px` }}
+                  className="min-w-0"
+                >
+                  <Link
+                    href="/playground"
+                    className="group block focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent"
+                  >
+                    <div
+                      className="relative overflow-hidden rounded-[var(--radius-card)] bg-surface"
+                      style={{ aspectRatio: `${cover.width} / ${cover.height}` }}
+                    >
+                      <Image
+                        src={cover.src}
+                        alt={cover.alt}
+                        fill
+                        className="object-cover"
+                        sizes="(max-width: 640px) 50vw, 360px"
+                      />
+                    </div>
+                    <p className="t-caption uppercase tracking-[0.08em] text-mauve mt-3 transition-colors [@media(hover:hover)]:group-hover:text-accent">
+                      {entry.title}
+                    </p>
+                  </Link>
+                </li>
+              );
+            })}
+          </ul>
+
+          <Link
+            href="/playground"
+            className="group t-body text-accent inline-flex items-center gap-2 mt-8 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent"
+          >
+            See the whole playground
+            <span
+              aria-hidden
+              className="transition-transform duration-200 [@media(hover:hover)]:group-hover:translate-x-[2px] [@media(hover:hover)]:group-hover:-translate-y-[2px]"
+            >
+              ↗
+            </span>
+          </Link>
+        </Reveal>
       </section>
 
       <SectionTransition className="bg-gradient-to-b from-cream to-dark-bg" />
 
-      {/* Work */}
-      <section id="work" className="bg-dark-bg px-8 lg:px-16 py-16 scroll-mt-24">
-        <div className="max-w-7xl mx-auto">
-          <h2 className="t-heading text-surface mb-14">I&apos;ve worked on</h2>
-          <WorkChapters />
-        </div>
-      </section>
-
-      <SectionTransition className="bg-gradient-to-b from-dark-bg to-surface" />
-
-      {/* Play */}
-      <section id="play" className="px-8 lg:px-16 py-16 bg-surface scroll-mt-24">
-        <div className="max-w-7xl mx-auto">
-          <h2 className="t-heading text-ink mb-14">Playground</h2>
-          <Playground />
-        </div>
-      </section>
-
-      <SectionTransition className="bg-gradient-to-b from-surface to-dark-bg" />
-
-      {/* Footer / About */}
-      <footer id="about" className="bg-dark-bg py-24 px-8 lg:px-16 scroll-mt-24">
-        <div className="max-w-5xl mx-auto text-left">
-          <h2 className="t-display text-surface mb-8 !max-w-none">
-            Welcome to the wild side
+      {/* Footer / About — the only dark ground on the page */}
+      <footer id="about" className="bg-dark-bg py-24 scroll-mt-8">
+        <div className={SHELL}>
+          <h2 className="t-display text-surface !max-w-none mb-8">
+            [FOOTER — TBD]
           </h2>
 
           <div className="flex flex-col gap-8">
@@ -55,7 +123,7 @@ export default function Home() {
               Reach out to me:{" "}
               <a
                 href="mailto:simranchhabra92@gmail.com"
-                className="text-surface hover:text-mauve transition-colors"
+                className="text-surface underline underline-offset-4 decoration-cream/30 transition-colors [@media(hover:hover)]:hover:text-mauve focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-mauve"
               >
                 simranchhabra92@gmail.com
               </a>
@@ -67,7 +135,7 @@ export default function Home() {
                 href="https://linkedin.com/in/simranchhabra"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-surface hover:text-mauve transition-colors"
+                className="text-surface underline underline-offset-4 decoration-cream/30 transition-colors [@media(hover:hover)]:hover:text-mauve focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-mauve"
               >
                 LinkedIn
               </a>
@@ -76,7 +144,7 @@ export default function Home() {
                 href="/resume.pdf"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-surface hover:text-mauve transition-colors"
+                className="text-surface underline underline-offset-4 decoration-cream/30 transition-colors [@media(hover:hover)]:hover:text-mauve focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-mauve"
               >
                 Resume
               </a>

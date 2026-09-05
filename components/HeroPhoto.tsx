@@ -93,7 +93,8 @@ export default function HeroPhoto() {
             transition: `transform ${TRANSITION_MS}ms cubic-bezier(0.65, 0, 0.35, 1), opacity ${TRANSITION_MS}ms ease-in-out`,
           }}
           sizes="(max-width: 640px) 320px, (max-width: 1024px) 480px, 628px"
-          priority={i === 0}
+          // `priority` is deprecated in Next 16 in favour of `preload`.
+          preload={i === 0}
         />
       ))}
     </div>

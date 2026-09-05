@@ -1,23 +1,26 @@
 import Link from "next/link";
 
+// Not sticky (DESIGN_DOC §6). A fixed bar over a page whose whole point is generous
+// whitespace eats a strip of every viewport and forces every page to carry top padding
+// that compensates for it.
 export default function Nav({ dark = false }: { dark?: boolean }) {
   return (
     <nav
-      className={`fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-8 py-5 border-b backdrop-blur-sm ${
-        dark
-          ? "border-white/10 bg-dark-bg/80"
-          : "border-ink/10 bg-cream/80"
+      className={`relative z-50 flex items-center justify-between gap-6 px-[var(--page-gutter,32px)] py-5 ${
+        dark ? "bg-dark-bg" : "bg-cream"
       }`}
     >
       <Link
         href="/"
-        className={`font-serif text-[20px] tracking-tight transition-colors ${
-          dark ? "text-surface hover:text-mauve" : "text-ink hover:text-accent"
+        className={`font-serif text-[20px] whitespace-nowrap transition-colors focus-visible:outline-2 focus-visible:outline-offset-4 ${
+          dark
+            ? "text-surface [@media(hover:hover)]:hover:text-mauve focus-visible:outline-mauve"
+            : "text-ink [@media(hover:hover)]:hover:text-accent focus-visible:outline-accent"
         }`}
       >
         Simran Chhabra
       </Link>
-      <div className="flex items-center gap-8">
+      <div className="flex items-center gap-6 sm:gap-8">
         {[
           { href: "/#work", label: "Work" },
           { href: "/#play", label: "Play" },
@@ -26,10 +29,10 @@ export default function Nav({ dark = false }: { dark?: boolean }) {
           <Link
             key={href}
             href={href}
-            className={`label transition-colors ${
+            className={`t-caption uppercase tracking-[0.08em] transition-colors focus-visible:outline-2 focus-visible:outline-offset-4 ${
               dark
-                ? "text-mauve hover:text-surface"
-                : "text-mauve hover:text-accent"
+                ? "text-mauve [@media(hover:hover)]:hover:text-surface focus-visible:outline-mauve"
+                : "text-mauve [@media(hover:hover)]:hover:text-accent focus-visible:outline-accent"
             }`}
           >
             {label}
