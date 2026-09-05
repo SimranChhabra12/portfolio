@@ -741,6 +741,232 @@ const allCaseStudies: CaseStudy[] = [
     ],
   },
 
+  // ── GestureSketch ────────────────────────────────────────────────────────
+  {
+    slug: "gesture-sketch",
+    title: "GestureSketch",
+    cardDescription:
+      "Most people don't freeze because they have nothing to say. They freeze because on paper, one wrong line feels permanent.",
+    homeOneLiner: "Taking the pressure off starting, without taking over the meaning",
+    homeTags: ["Research", "Prototyping"],
+    coverImage: "/covers/gesture-sketch.jpg",
+    subtitle:
+      "An AI art therapist concept — research, a framework for where AI belongs, and one working prototype",
+    role: "Researcher, Designer & Builder",
+    year: "2025",
+    disciplines: ["UX Research", "Interaction Design", "Creative Coding"],
+    color: "#3E6B5A",
+    prototypeUrl: "https://simranchhabra12.github.io/gesturedrawing",
+    meta: {
+      team: "Solo",
+      researchMethods: [
+        "User Interviews",
+        "Survey",
+        "Concept Testing",
+        "Expert Review",
+      ],
+      platform: "Web (browser + webcam)",
+      duration: "Course project — NYU UX & AI",
+    },
+    sections: [
+      {
+        id: "hook",
+        number: "01",
+        heading: "Hook",
+        blocks: [
+          {
+            type: "p",
+            text: "Art therapy works. Starting is the hard part.",
+          },
+          {
+            type: "p",
+            text: "Most people don't freeze because they have nothing to say. They freeze because on paper, one wrong line feels permanent, so it's easier not to begin. I wanted to see if AI could take the pressure off the mechanics without taking over the meaning. I mapped where AI should help and where it shouldn't, landed on three ideas, and built one.",
+          },
+        ],
+      },
+      {
+        id: "role",
+        number: "02",
+        heading: "My Role",
+        blocks: [
+          {
+            type: "p",
+            text: "Solo project for NYU's UX & AI course. I ran the research, built the framework for where AI should and shouldn't sit in a session, designed the interaction, and wrote the prototype in p5.js with HandPose. The concept test and the therapist review were mine too.",
+          },
+          {
+            type: "fields",
+            items: [
+              { label: "Role", value: "Research, framework, interaction design, build" },
+              { label: "Course", value: "NYU · UX & AI" },
+              { label: "Scope", value: "Research, concept framework, working prototype" },
+              { label: "Built with", value: "p5.js · MediaPipe" },
+            ],
+          },
+        ],
+      },
+      {
+        id: "research",
+        number: "03",
+        heading: "Research",
+        blocks: [
+          {
+            type: "p",
+            text: "I kept coming back to one thing about art therapy: everyone I talked to believed it could help them, and almost no one actually did it.",
+          },
+          {
+            type: "p",
+            text: "So I ran 7 interviews and a short survey to find out where the gap was. The answers were consistent. People didn't know how to start, they'd sit down to do something creative and feel stuck before they'd made a single mark. A lot of them were anxious about being bad at it, worried the thing they made would be judged, or would just prove they couldn't draw. And the younger people I spoke to didn't really want a person in the room for this. They wanted something private, on their own time, no one watching.",
+          },
+          {
+            type: "p",
+            text: "Three problems, one shape. Getting in is the hard part. Not the drawing, the starting.",
+          },
+          { type: "asset", label: "Method strip — 7 interviews + survey, then the 3 findings as a small row" },
+        ],
+      },
+      {
+        id: "insight",
+        number: "04",
+        heading: "The Insight That Changed Everything",
+        blocks: [
+          {
+            type: "p",
+            text: "People wanted support, but the moment AI did too much, the drawing stopped being theirs. Smooth every line, fix every shape, and it's the AI's art, not yours. The whole point of art therapy is that the thing you made came from you.",
+          },
+          {
+            type: "p",
+            text: "So I mapped it before designing anything. One axis: how much a moment should lean on AI. The other: whether it's mechanical or personal. The split was clear. Hand off the friction, getting started, loosening up, the tools. Protect the meaning, the choices, the reflection, what the piece is about. A few things sit in between, where AI helps but you stay in control.",
+          },
+          {
+            type: "note",
+            text: "Build the parts that make starting easier and leave the meaning alone.",
+          },
+          { type: "asset", label: "The 2×2 — offload to AI / keep human, across session moments" },
+        ],
+      },
+      {
+        id: "decisions",
+        number: "05",
+        heading: "Design Decisions",
+        blocks: [
+          {
+            type: "p",
+            text: "The map pointed to three ideas, each for a different moment in a session.",
+          },
+          {
+            type: "decisions",
+            items: [
+              {
+                title: "Gesture drawing, for starting",
+                body: "Draw in the air with your hand, nothing permanent, nothing to ruin. I built this one. Starting was the problem almost everyone named, so that's where a real prototype beat a mockup.",
+              },
+              {
+                title: "A prompt assistant, for when you're stuck — tried, then cut",
+                body: "Gentle nudges you could take or ignore, never an instruction. I built it and removed it. The therapists kept saying people need to draw without being interrupted, and the AI prompts fought the quiet the drawing was there to create.",
+              },
+              {
+                title: "Audio-visual calm, for before you begin",
+                body: "Sound and visuals to settle you in. Scoped, not built.",
+              },
+              {
+                title: "Nothing you do is permanent",
+                body: "The whole tool is built around this. Undo is a gesture, not a buried button. Clear is one tap. Every stroke keeps its own color and size, so nothing you draw later can overwrite what's already there. You can't wreck it, which is the point — that's the fear the research kept turning up, and taking it away is the whole design.",
+              },
+              {
+                title: "Dead-zones on every gesture",
+                body: "Small buffers, so a shaky hand doesn't jitter into a mark you didn't mean.",
+              },
+              {
+                title: "Undo and clear exist as real buttons too",
+                body: "Not just as gestures. Having a visible way out is what builds the confidence to make a mess in the first place.",
+              },
+              {
+                title: "A welcome screen with exactly one job",
+                body: "Concept testing turned up the same freeze at the very start: people weren't sure which gesture actually draws. So the opening screen shows the three gestures and nothing else. No settings, no options, nothing to read past what you need to make your first mark. The camera never turns on cold.",
+              },
+            ],
+          },
+          {
+            type: "p",
+            text: "The concept was decided. The interface wasn't. So I sketched five layouts, each with the tools and the AI in a different place, and showed them to 6 people one at a time.",
+          },
+          {
+            type: "p",
+            text: "I was looking for where they agreed, and they agreed on a lot. Color and stroke size belong together, not on opposite sides of the screen. Save and clear belong together too, and away from everything else, so you don't hit one when you meant the other. The prompt had to stay on the same screen, people said they'd forget it if it opened another page. The camera window should be the biggest thing. And undo came up a lot, some people wanted it as a gesture, not a button to hunt for.",
+          },
+          {
+            type: "p",
+            text: "Most people preferred Layout 5, so I built from it and added the fixes they named.",
+          },
+          { type: "asset", label: "The 5 layout sketches, grid — Layout 5 marked as the one that won" },
+        ],
+      },
+      {
+        id: "solution",
+        number: "06",
+        heading: "The Solution",
+        blocks: [
+          {
+            type: "p",
+            text: "A webcam turns your hand into a brush. Pinch thumb and index to draw, tap thumb and ring to change color, tap thumb and pinky to undo. No stylus, no menus to learn, no blank sheet waiting to be ruined. You move, and a line follows.",
+          },
+          { type: "asset", label: "GestureSketch live — the canvas mid-drawing, hand tracked" },
+          { type: "asset", label: "The welcome / instructions screen" },
+        ],
+      },
+      {
+        id: "outcomes",
+        number: "07",
+        heading: "Outcomes",
+        blocks: [
+          {
+            type: "p",
+            text: "GestureSketch is a working prototype, not a finished product, and it's the one piece of the larger concept I actually built. It does the thing it set out to do, which is make starting feel safe enough to begin. But it's early, and I haven't tested it where it would actually live, in a real session with a real client.",
+          },
+          {
+            type: "p",
+            text: "The closest I got was showing it to Tanak Bajaj, an art therapist in London, who saw the thing I was hoping for:",
+          },
+          {
+            type: "quote",
+            text: "Clients simply move their hands to express what they're feeling, and I can watch their creations unfold in real time. It really bridges the gap that screens often put between therapist and client.",
+            attribution: "Tanak Bajaj, art therapist",
+          },
+          {
+            type: "p",
+            text: "That's one therapist's reaction, not a study, so whether it holds up in actual therapy is still the open question, and it's the one that matters most.",
+          },
+        ],
+      },
+      {
+        id: "retro",
+        number: "08",
+        heading: "What I'd Do Differently",
+        blocks: [
+          {
+            type: "p",
+            text: "I'd try prompts again, but built the opposite way from the ones I cut. The version I removed interrupted you mid-drawing. A better one would wait until you asked for it, on-demand, right beside the canvas, there when you're stuck and invisible when you're not.",
+          },
+          {
+            type: "p",
+            text: "I'd add gesture-triggered shapes, so a pinch could pull in a simple circle or wave to build from when a blank canvas still feels like too much. And the real next step is proper testing with therapists and their clients, to find out whether any of this actually helps where it counts.",
+          },
+        ],
+      },
+      {
+        id: "learnings",
+        number: "09",
+        heading: "What This Taught Me",
+        blocks: [
+          {
+            type: "p",
+            text: "The thing I keep coming back to is the feature I removed. I built an AI prompt assistant that pushed suggestions on you while you were drawing, and it fought the quiet the drawing was supposed to create, so I took it out. What I learned wasn't that AI doesn't belong here. It was that it can't be the one deciding when to speak. The prompts weren't the problem. The interruption was.",
+          },
+        ],
+      },
+    ],
+  },
+
   // ── Street Paws ──────────────────────────────────────────────────────────
   {
     slug: "street-paws",

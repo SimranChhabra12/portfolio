@@ -47,7 +47,6 @@
 
   --radius-card: 4px;         /* was 24px — references use flat, near-square corners */
   --radius-card-sm: 1rem;     /* 16px — small chips, thumbnails */
-  --section-transition: 8rem; /* 128px — gradient band between light/dark sections */
 
   /* Hero photo sizing — matches honeymehta.design's hero image (628x438 at 1440px viewport) */
   --hero-photo-w: 20rem;      /* 320px — mobile */
@@ -135,6 +134,145 @@ body {
     transform: none;
     transition: none;
   }
+}
+
+/* ─── Kaiser — cursor companion ───────────────────────────────────────────────
+   DESIGN_DOC §7, interaction 3. The wrapper's position is written by
+   KaiserCursor.tsx via rAF (never a CSS transition — the reduced-motion block
+   above flattens every transition to 0.01ms). Everything here is pose only:
+   limbs, tail, ears. `data-state` on .k-root is the switch.
+
+   The component doesn't render at all on coarse pointers or under reduced
+   motion, so none of this needs its own media guard. */
+
+.k-root {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 56px;
+  height: 42px;
+  z-index: 60;
+  pointer-events: none;
+  will-change: transform;
+  opacity: 1;
+  transition: opacity 0.25s ease;
+}
+
+.k-root[data-hidden="true"] {
+  opacity: 0;
+}
+
+.k-flip {
+  transform-origin: 50% 50%;
+  filter: drop-shadow(0 2px 3px rgba(58, 42, 56, 0.18));
+}
+
+.k-root svg g,
+.k-root svg .k-collar {
+  transform-box: view-box;
+}
+
+/* ── Trotting ─────────────────────────────────────────────────────────────── */
+
+.k-root[data-state="trotting"] .k-leg-fn { animation: k-stride 0.42s ease-in-out infinite; }
+.k-root[data-state="trotting"] .k-leg-ff { animation: k-stride 0.42s ease-in-out infinite reverse; }
+.k-root[data-state="trotting"] .k-leg-bn { animation: k-stride 0.42s ease-in-out infinite reverse; }
+.k-root[data-state="trotting"] .k-leg-bf { animation: k-stride 0.42s ease-in-out infinite; }
+.k-root[data-state="trotting"] .k-body,
+.k-root[data-state="trotting"] .k-head,
+.k-root[data-state="trotting"] .k-collar { animation: k-bob 0.42s ease-in-out infinite; }
+.k-root[data-state="trotting"] .k-tail { animation: k-wag-fast 0.34s ease-in-out infinite; }
+
+/* ── Idle: standing, breathing, the odd ear flick ─────────────────────────── */
+
+.k-root[data-state="idle"] .k-tail { animation: k-wag-slow 1.8s ease-in-out infinite; }
+.k-root[data-state="idle"] .k-body,
+.k-root[data-state="idle"] .k-collar { animation: k-breathe 3.2s ease-in-out infinite; }
+.k-root[data-state="idle"] .k-ear { animation: k-ear-flick 6s ease-in-out infinite; }
+
+/* ── Sitting: greeting hold only. The torso pivots about the chest so the rump
+      drops to the ground while the front legs stay planted, and the hind legs
+      fold forward on top of that rotation (they're nested inside .k-torso, so
+      the two compose). Tail keeps wagging throughout. */
+
+.k-root[data-state="sitting"] .k-torso {
+  transform: rotate(-15deg);
+  transform-origin: 40px 30px;
+}
+.k-root[data-state="sitting"] .k-leg-bn,
+.k-root[data-state="sitting"] .k-leg-bf {
+  transform: rotate(-40deg);
+  transform-origin: 20px 28.9px;
+}
+.k-root[data-state="sitting"] .k-tail { animation: k-wag-fast 0.4s ease-in-out infinite; }
+.k-root[data-state="sitting"] .k-ear { animation: k-ear-flick 4s ease-in-out infinite; }
+
+@keyframes k-stride {
+  0%, 100% { transform: rotate(-20deg); }
+  50%      { transform: rotate(20deg); }
+}
+
+@keyframes k-bob {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-1.4px); }
+}
+
+@keyframes k-breathe {
+  0%, 100% { transform: scaleY(1); }
+  50%      { transform: scaleY(1.025); }
+}
+
+@keyframes k-wag-fast {
+  0%, 100% { transform: rotate(-15deg); }
+  50%      { transform: rotate(15deg); }
+}
+
+@keyframes k-wag-slow {
+  0%, 100% { transform: rotate(-7deg); }
+  50%      { transform: rotate(7deg); }
+}
+
+/* Mostly still, with a flick right at the end of each cycle. */
+@keyframes k-ear-flick {
+  0%, 88%, 100% { transform: rotate(0deg); }
+  92%           { transform: rotate(-16deg); }
+  96%           { transform: rotate(6deg); }
+}
+
+/* Legs and tail hinge at the shoulder/hip/croup, not their own centres. */
+.k-leg-fn, .k-leg-ff { transform-origin: 40.4px 28.9px; }
+.k-leg-bn, .k-leg-bf { transform-origin: 20px 28.9px; }
+.k-tail { transform-origin: 13.5px 26px; }
+.k-head { transform-origin: 41px 21px; }
+.k-body { transform-origin: 28px 24px; }
+.k-ear  { transform-origin: 52.8px 8.6px; }
+.k-torso { transform-origin: 40px 30px; }
+
+/* ── Speech bubble. Decorative and aria-hidden — the copy is duplicated
+      nowhere, so nothing is lost to assistive tech. */
+
+.k-bubble {
+  position: absolute;
+  left: 50px;
+  bottom: 30px;
+  white-space: nowrap;
+  background: var(--cream);
+  color: var(--ink);
+  border: 1px solid var(--mauve);
+  border-radius: var(--radius-card-sm);
+  padding: 8px 16px;
+  font-family: var(--font-body), sans-serif;
+  font-size: var(--t-caption);
+  line-height: 1.5;
+  box-shadow: 0 4px 12px -4px rgba(58, 42, 56, 0.18);
+  opacity: 0;
+  transform: translateY(4px);
+  transition: opacity 0.35s ease, transform 0.35s ease;
+}
+
+.k-bubble[data-show="true"] {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 /* ─── Section rhythm ─────────────────────────────────────────────────────────

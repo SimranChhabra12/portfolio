@@ -3,10 +3,10 @@ import Link from "next/link";
 import Reveal from "@/components/Reveal";
 import caseStudies from "@/data/caseStudies";
 
-// Homepage display order: Whspr + AIRA, then Resy.
+// Homepage display order: Whspr + AIRA, then Resy, then GestureSketch.
 // (Independent of the canonical caseStudies order, which drives "next project" on the case study pages.)
 // Slugs that aren't in caseStudies — a hidden project, say — simply drop out below.
-const HOMEPAGE_ORDER = ["whspr", "aira-pcos", "resy"];
+const HOMEPAGE_ORDER = ["whspr", "aira-pcos", "resy", "gesture-sketch"];
 const orderedForHomepage = HOMEPAGE_ORDER.map((slug) =>
   caseStudies.find((p) => p.slug === slug)
 ).filter((p): p is (typeof caseStudies)[number] => Boolean(p));

@@ -268,7 +268,7 @@ Muted text is cream at lower opacity.
 
 ## 7. Motion
 
-Two deliberate interactions. Nothing else — scattered animation reads as AI-generated.
+Three deliberate interactions. Nothing else — scattered animation reads as AI-generated.
 
 **1. Scroll reveal.** Beverly's technique, which reads far more crafted than a plain fade at the same cost:
 
@@ -278,6 +278,25 @@ Two deliberate interactions. Nothing else — scattered animation reads as AI-ge
 
 **2. Hero photo carousel.** Auto-advances every 4s, pauses on hover/focus. The site's one signature
 moment. Sources must be landscape (§5).
+
+**3. Kaiser, the cursor companion.** A line-art German Shepherd — Simran's dog — who trots a little
+behind and below the pointer, and greets on first load: trots in from the left, sits, wags, and a
+bubble reads "Hi, I'm Kaiser." `components/KaiserCursor.tsx` + `KaiserSprite.tsx`, poses in
+`globals.css`.
+
+This is the exception to "two interactions", and it earns the slot the same way the carousel does —
+it's autobiography, not decoration (Street Paws is a street-dog case study; the hero photo is Simran
+with rescued dogs). It stays an exception because it's gated hard, and those gates are the rule, not
+the implementation detail:
+
+- He **never replaces the cursor.** No `cursor: none` anywhere — the I-beam and link pointer survive.
+- Fine pointers only (`(hover: hover) and (pointer: fine)`); the component renders nothing on touch.
+- Nothing at all under `prefers-reduced-motion` — no static fallback; a companion minus motion is nothing.
+- The greeting fires **once per browser session**, on `/` only, and any click, scroll, or keypress
+  cancels it immediately.
+- `pointer-events: none`, `aria-hidden`, fixed overlay — nothing under him is blocked or shifted.
+
+If a future change makes him ambient, always-on, or a cursor replacement, it has broken this section.
 
 **Hover states** on links and rows: plum, `.2s`. Gated behind `@media (hover: hover)`.
 

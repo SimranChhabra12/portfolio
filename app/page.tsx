@@ -2,7 +2,6 @@ import Image from "next/image";
 import Link from "next/link";
 import Nav from "@/components/Nav";
 import HeroPhoto from "@/components/HeroPhoto";
-import SectionTransition from "@/components/SectionTransition";
 import WorkChapters from "@/components/WorkChapters";
 import Reveal from "@/components/Reveal";
 import playgroundEntries from "@/data/playgroundEntries";
@@ -35,7 +34,7 @@ export default function Home() {
           <HeroPhoto />
         </div>
         <h1 className="t-display text-ink text-left !max-w-none mt-10 lg:mt-14">
-          Product Designer / Research-first / Designing for the overlooked
+          Product Designer
         </h1>
       </section>
 
@@ -109,9 +108,9 @@ export default function Home() {
         </Reveal>
       </section>
 
-      <SectionTransition className="bg-gradient-to-b from-cream to-dark-bg" />
-
-      {/* Footer / About — the only dark ground on the page */}
+      {/* Footer / About — the only dark ground on the page. The cream/dark edge is a
+          hard cut, matching /work and the case studies; a gradient band here read as a
+          rendering artefact rather than a transition. */}
       <footer id="about" className="bg-dark-bg py-24 scroll-mt-8">
         <div className={SHELL}>
           <h2 className="t-display text-surface !max-w-none mb-8">

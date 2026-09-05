@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Playfair_Display, Inter } from "next/font/google";
+import KaiserCursor from "@/components/KaiserCursor";
 import "./globals.css";
 
 const playfairDisplay = Playfair_Display({
@@ -29,7 +30,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${playfairDisplay.variable} ${inter.variable}`}>
-      <body>{children}</body>
+      <body>
+        {children}
+        {/* Sitewide on purpose — Nav is imported per page, but Kaiser should
+            survive every route, including the bespoke case studies. */}
+        <KaiserCursor />
+      </body>
     </html>
   );
 }
