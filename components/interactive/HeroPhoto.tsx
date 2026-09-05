@@ -36,7 +36,15 @@ const TRANSITION_MS = 350;
 // `single` freezes the frame on the first photo and never starts the interval. The
 // carousel format now lives on /about; the homepage hero keeps exactly one photo, so it
 // renders the same frame without the motion rather than duplicating the component.
-export default function HeroPhoto({ single = false }: { single?: boolean } = {}) {
+//
+// `fluid` drops the fixed token widths for `w-full`, so the frame takes whatever column it
+// is given. The homepage hero needs this: at a fixed 628px the photo leaves too little room
+// beside it for `.t-display`, and "Product Designer" breaks mid-word. The aspect ratio is
+// unchanged either way — only the width source moves from the token to the parent.
+export default function HeroPhoto({
+  single = false,
+  fluid = false,
+}: { single?: boolean; fluid?: boolean } = {}) {
   const [index, setIndex] = useState(0);
   const [paused, setPaused] = useState(false);
   const reducedMotionRef = useRef(false);
@@ -57,7 +65,11 @@ export default function HeroPhoto({ single = false }: { single?: boolean } = {})
 
   return (
     <div
-      className="relative w-[var(--hero-photo-w)] sm:w-[var(--hero-photo-w-sm)] lg:w-[var(--hero-photo-w-lg)] aspect-[var(--hero-photo-aspect)] rounded-[var(--radius-card)] shadow-[0_24px_48px_-16px_rgba(58,42,56,0.32)] bg-surface"
+      className={`relative ${
+        fluid
+          ? "w-full"
+          : "w-[var(--hero-photo-w)] sm:w-[var(--hero-photo-w-sm)] lg:w-[var(--hero-photo-w-lg)]"
+      } aspect-[var(--hero-photo-aspect)] rounded-[var(--radius-card)] shadow-[0_24px_48px_-16px_rgba(58,42,56,0.32)] bg-surface`}
       style={{ perspective: "1600px", overflow: "hidden" }}
       onMouseEnter={() => setPaused(true)}
       onMouseLeave={() => setPaused(false)}
@@ -82,7 +94,11 @@ export default function HeroPhoto({ single = false }: { single?: boolean } = {})
             // half-turned outgoing photo stayed visible under the incoming one.
             transition: `transform ${TRANSITION_MS}ms cubic-bezier(0.65, 0, 0.35, 1), opacity ${TRANSITION_MS}ms ease-in-out`,
           }}
-          sizes="(max-width: 640px) 320px, (max-width: 1024px) 480px, 628px"
+          sizes={
+            fluid
+              ? "(max-width: 768px) 100vw, 52vw"
+              : "(max-width: 640px) 320px, (max-width: 1024px) 480px, 628px"
+          }
           // `priority` is deprecated in Next 16 in favour of `preload`.
           preload={i === 0}
         />

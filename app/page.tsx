@@ -28,14 +28,24 @@ export default function Home() {
     <main className="min-h-screen bg-cream">
       <Nav />
 
-      {/* Hero */}
+      {/* Hero — the title and the photo are ONE unit, not a stack. `items-center` is what
+          does that: the display line centres against the frame, so the pair reads as a
+          single block rather than two things that happen to sit near each other.
+          Text left, photo right matches /about, so both pages open the same way.
+          The photo runs `fluid` here — at its fixed 628px there is too little room left for
+          `.t-display` and "Product Designer" breaks mid-word. 52% lands the frame within a
+          few pixels of the reference 628px at a 1280 viewport, so desktop is unchanged in
+          practice while the pair now scales together.
+          Below md it stacks to text-then-photo, opening on the words. */}
       <section className={SHELL}>
-        <div className="flex justify-center">
-          <HeroPhoto single />
+        <div className="flex flex-col gap-10 md:flex-row md:items-center md:gap-12 lg:gap-16">
+          <h1 className="t-display text-ink text-left !max-w-none md:flex-1 md:min-w-0">
+            Product Designer
+          </h1>
+          <div className="w-full md:w-[48%] lg:w-[52%] md:shrink-0">
+            <HeroPhoto single fluid />
+          </div>
         </div>
-        <h1 className="t-display text-ink text-left !max-w-none mt-10 lg:mt-14">
-          Product Designer
-        </h1>
       </section>
 
       {/* Work — a `--surface` band. Full-bleed on the <section> so the colour runs edge to
