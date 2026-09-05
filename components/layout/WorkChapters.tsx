@@ -102,6 +102,40 @@ export default function WorkChapters() {
                   tabIndex={-1}
                 />
               )}
+
+              {/* Hover layer, matching the reference: discipline pills bottom-left, a
+                  "View case study" pill bottom-right, both sitting on the tile itself.
+                  Three deliberate constraints:
+
+                  1. `[@media(hover:hover)]` gates the whole thing. On touch there is no
+                     hover to leave, so an always-on overlay would permanently cover a
+                     third of every cover image — and the tile is already a link, so the
+                     button buys a touch user nothing.
+                  2. Tags here are `disciplines`, NOT `homeTags`. The caption line below
+                     keeps homeTags always visible, because that is where Resy's "Student
+                     concept" attribution lives (task E1) — burying that behind a hover
+                     state would put it out of reach of touch and keyboard-only users.
+                  3. `aria-hidden` + `pointer-events-none`: every word here is decorative
+                     duplication of the link's own text and destination. Exposing it would
+                     make a screen reader read each card twice. */}
+              <div
+                aria-hidden
+                className="pointer-events-none absolute inset-x-0 bottom-0 hidden items-end justify-between gap-3 p-4 opacity-0 transition-opacity duration-200 motion-reduce:transition-none [@media(hover:hover)]:flex [@media(hover:hover)]:group-hover:opacity-100 [@media(hover:hover)]:group-focus-visible:opacity-100"
+              >
+                <div className="flex flex-wrap gap-2">
+                  {project.disciplines.map((d) => (
+                    <span
+                      key={d}
+                      className="t-caption rounded-full bg-cream px-3 py-1.5 text-ink shadow-sm"
+                    >
+                      {d}
+                    </span>
+                  ))}
+                </div>
+                <span className="t-caption shrink-0 whitespace-nowrap rounded-full bg-ink px-4 py-2 text-cream">
+                  View case study
+                </span>
+              </div>
             </div>
 
             {/* Caption block under the tile. The reference puts title left and role right
@@ -113,11 +147,11 @@ export default function WorkChapters() {
               {/* Title: project name AND the problem it solves, one line, one size
                   (task D1). `.t-sub`, not `.t-section` — the card is now half the width
                   it was, and 36px over a ~590px column ran every one of these to three
-                  lines. The em dash is glued to the name with a non-breaking space so it
-                  can never wrap onto a line of its own, and `text-wrap: pretty` keeps the
-                  last line off a single-word orphan. */}
+                  lines. The colon sits tight against the name, so unlike the em dash it
+                  was before it can never wrap onto a line of its own, and
+                  `text-wrap: pretty` keeps the last line off a single-word orphan. */}
               <h3 className="t-sub text-ink !max-w-none [text-wrap:pretty] transition-colors [@media(hover:hover)]:group-hover:text-accent">
-                {`${project.title} — ${project.homeOneLiner}`}
+                {`${project.title}: ${project.homeOneLiner}`}
               </h3>
 
               {/* Role/discipline. Was `text-mauve`, which measures 2.27:1 on cream and
