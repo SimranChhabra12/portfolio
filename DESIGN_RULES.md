@@ -1,3 +1,19 @@
+> # ⚠️ SUPERSEDED — do not follow this file
+>
+> Replaced by **`Portfolio Files/DESIGN_DOC.md`**, which is now the single authority.
+> Kept only for history. Three rules below are known to be wrong and were corrected there:
+>
+> | rule here | corrected to | why |
+> |---|---|---|
+> | Type scale 60/42/28 "close to honeymehta.design" | 84/50/36 | Measured at 1440px, Honey runs 85/50.6/36.7 — this was 24–29% smaller |
+> | Display tracking −2% | **+2%** | Honey measures +2% at every display level |
+> | `--radius-card` 24px | 4px | All three references use 0–4px |
+>
+> It also missed the failure that mattered most: nothing here prevented portrait screenshots
+> from being letterboxed into landscape slots. `DESIGN_DOC.md` §5 covers that.
+
+---
+
 # Design Rules — simranchhabradesign.com
 
 Rules for Claude Code to follow on every change to this site. These are decided; don't
