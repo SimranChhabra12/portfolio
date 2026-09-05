@@ -63,3 +63,4 @@ gesturesketch.md
 # ...but never the two docs the build agents must read.
 !DESIGN_DOC.md
 !WORK_PACKAGES.md
+.claude/worktrees/
