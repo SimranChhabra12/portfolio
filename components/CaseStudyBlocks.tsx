@@ -1,5 +1,14 @@
-import Image from "next/image";
 import type { Block } from "@/data/caseStudies";
+
+// DESIGN_DOC §4 — visuals run the media column, prose runs the text column and
+// shares its left edge. Fallbacks match the §4 values so this renders correctly
+// even on a branch that hasn't picked up the layout tokens yet.
+const COL_MEDIA = "var(--col-media, 1000px)";
+const COL_TEXT = "var(--col-text, 640px)";
+const RADIUS = "var(--radius-card, 4px)";
+
+// Which blocks are words (text column) and which are visuals (media column).
+const MEDIA_BLOCKS = new Set(["screens", "prototype"]);
 
 export default function CaseStudyBlocks({
   blocks,
@@ -9,9 +18,15 @@ export default function CaseStudyBlocks({
   color: string;
 }) {
   return (
-    <div className="flex flex-col gap-8">
+    <div className="flex flex-col gap-8 items-start w-full min-w-0">
       {blocks.map((block, i) => (
-        <CaseStudyBlock key={i} block={block} color={color} />
+        <div
+          key={i}
+          className="w-full min-w-0"
+          style={{ maxWidth: MEDIA_BLOCKS.has(block.type) ? COL_MEDIA : COL_TEXT }}
+        >
+          <CaseStudyBlock block={block} color={color} />
+        </div>
       ))}
     </div>
   );
@@ -20,7 +35,7 @@ export default function CaseStudyBlocks({
 function CaseStudyBlock({ block, color }: { block: Block; color: string }) {
   switch (block.type) {
     case "p":
-      return <p className="t-body text-ink">{block.text}</p>;
+      return <p className="t-body text-ink !max-w-none">{block.text}</p>;
 
     case "fields":
       return (
@@ -36,12 +51,13 @@ function CaseStudyBlock({ block, color }: { block: Block; color: string }) {
 
     case "stats":
       return (
-        <div className="grid grid-cols-2 gap-px bg-ink/10 rounded-2xl overflow-hidden">
+        <div
+          className="grid grid-cols-2 gap-px bg-ink/10 overflow-hidden"
+          style={{ borderRadius: RADIUS }}
+        >
           {block.items.map((s, i) => (
             <div key={i} className="bg-surface/60 p-8 flex flex-col gap-2">
-              <span className="font-serif text-[39px] text-ink leading-[1.2]">
-                {s.value}
-              </span>
+              <span className="t-section text-ink">{s.value}</span>
               <span className="label text-mauve">{s.label}</span>
             </div>
           ))}
@@ -71,9 +87,7 @@ function CaseStudyBlock({ block, color }: { block: Block; color: string }) {
               <p className="label mb-3" style={{ color }}>
                 Decision {i + 1}
               </p>
-              <h3 className="font-serif text-[20px] lg:text-[25px] text-ink leading-[1.2] mb-3">
-                {d.title}
-              </h3>
+              <h3 className="t-sub font-serif text-ink mb-3">{d.title}</h3>
               <p className="t-body text-ink !max-w-none">{d.body}</p>
             </div>
           ))}
@@ -82,19 +96,21 @@ function CaseStudyBlock({ block, color }: { block: Block; color: string }) {
 
     case "hmw":
       return (
-        <div className="bg-ink rounded-2xl p-8 lg:p-12">
-          <p className="label text-white/40 mb-4">How Might We</p>
-          <p className="font-serif text-[20px] lg:text-[25px] leading-[1.5] text-surface italic">
-            {block.text}
-          </p>
+        <div className="bg-ink p-8 lg:p-12" style={{ borderRadius: RADIUS }}>
+          <p className="label text-surface/60 mb-4">How Might We</p>
+          <p className="t-sub font-serif text-surface italic">{block.text}</p>
         </div>
       );
 
     case "note":
       return (
         <div
-          className="rounded-2xl p-6 lg:p-8 border"
-          style={{ borderColor: `${color}40`, backgroundColor: `${color}0d` }}
+          className="p-6 lg:p-8 border"
+          style={{
+            borderColor: `${color}40`,
+            backgroundColor: `${color}0d`,
+            borderRadius: RADIUS,
+          }}
         >
           <p className="t-body text-ink !max-w-none">{block.text}</p>
         </div>
@@ -103,7 +119,7 @@ function CaseStudyBlock({ block, color }: { block: Block; color: string }) {
     case "quote":
       return (
         <blockquote className="border-l-2 pl-6" style={{ borderColor: color }}>
-          <p className="font-serif text-[20px] lg:text-[25px] leading-[1.5] text-ink italic mb-3">
+          <p className="t-sub font-serif text-ink italic mb-3">
             &ldquo;{block.text}&rdquo;
           </p>
           {block.attribution && (
@@ -114,42 +130,52 @@ function CaseStudyBlock({ block, color }: { block: Block; color: string }) {
 
     case "asset":
       return (
-        <div className="rounded-2xl border border-dashed border-ink/20 px-8 py-10 flex items-center text-left">
-          <p className="t-caption text-mauve !max-w-none">[{block.label}]</p>
+        <div
+          className="border border-dashed border-ink/20 px-8 py-10 flex items-center text-left"
+          style={{ borderRadius: RADIUS }}
+        >
+          <p className="t-caption text-mauve">Needs asset — {block.label}</p>
         </div>
       );
 
     case "screens":
+      // Tidy 3-up rows inside the media column (§4). Portrait phone screens in
+      // portrait slots — each slot takes its aspect from the file itself, so
+      // nothing is letterboxed and nothing is cropped. These blocks carry no
+      // intrinsic dimensions, so a plain <img> (which reads the real ratio) is
+      // safer here than next/image with guessed width/height.
       return (
-        <div className="overflow-x-auto -mx-8 lg:-mx-0">
-          <div className="flex gap-4 px-8 lg:px-0 pb-4" style={{ width: "max-content" }}>
-            {block.images.map((screen, i) => (
-              <div key={i} className="flex flex-col gap-2 shrink-0">
-                <div
-                  className="rounded-2xl overflow-hidden"
-                  style={{ width: 200, backgroundColor: `${color}15` }}
-                >
-                  <Image
-                    src={screen.src}
-                    alt={screen.caption ?? `Screen ${i + 1}`}
-                    width={402}
-                    height={874}
-                    style={{ width: 200, height: "auto", display: "block" }}
-                  />
-                </div>
-                {screen.caption && (
-                  <p className="t-caption text-mauve text-left">{screen.caption}</p>
-                )}
+        <div className="grid grid-cols-2 sm:grid-cols-3 gap-6 items-start">
+          {block.images.map((screen, i) => (
+            <figure key={i} className="flex flex-col gap-2 min-w-0">
+              <div
+                className="overflow-hidden"
+                style={{ backgroundColor: `${color}15`, borderRadius: RADIUS }}
+              >
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src={screen.src}
+                  alt={screen.caption ?? `Product screen ${i + 1}`}
+                  loading="lazy"
+                  decoding="async"
+                  style={{ width: "100%", height: "auto", display: "block" }}
+                />
               </div>
-            ))}
-          </div>
+              {screen.caption && (
+                <figcaption className="t-caption text-mauve">{screen.caption}</figcaption>
+              )}
+            </figure>
+          ))}
         </div>
       );
 
     case "prototype":
       return (
         <div>
-          <div className="rounded-2xl overflow-hidden border border-ink/10 shadow-sm">
+          <div
+            className="overflow-hidden border border-ink/10"
+            style={{ borderRadius: RADIUS }}
+          >
             <iframe
               src={block.url}
               title={block.label ?? "Live prototype"}
