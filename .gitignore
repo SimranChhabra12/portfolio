@@ -44,3 +44,4 @@ next-env.d.ts
 # Only the design doc is tracked, so agents in git worktrees can read it.
 /Portfolio Files/*
 !/Portfolio Files/DESIGN_DOC.md
+!/Portfolio Files/WORK_PACKAGES.md
