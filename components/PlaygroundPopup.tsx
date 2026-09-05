@@ -21,7 +21,15 @@ export default function PlaygroundPopup({
       if (e.key === "Escape") onClose();
     }
     document.addEventListener("keydown", onKeyDown);
-    return () => document.removeEventListener("keydown", onKeyDown);
+
+    // Stop the page behind the dialog from scrolling while it is open.
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+
+    return () => {
+      document.removeEventListener("keydown", onKeyDown);
+      document.body.style.overflow = previousOverflow;
+    };
   }, [onClose]);
 
   return (
@@ -65,19 +73,27 @@ export default function PlaygroundPopup({
             ))}
           </div>
         ) : (
-          <div className="relative aspect-[4/3] overflow-hidden rounded-t-[var(--radius-card)] bg-surface">
+          <div
+            className="relative overflow-hidden rounded-t-[var(--radius-card)] bg-surface"
+            /* Native aspect, so object-cover neither crops nor letterboxes (§5). */
+            style={{
+              aspectRatio: entry.cover
+                ? `${entry.cover.width} / ${entry.cover.height}`
+                : "1000 / 750",
+            }}
+          >
             {entry.cover ? (
               <Image
                 src={entry.cover.src}
-                alt={`${entry.title} cover`}
+                alt={entry.cover.alt}
                 fill
                 className="object-cover"
-                sizes="(max-width: 640px) 100vw, 512px"
+                sizes="(max-width: 640px) calc(100vw - 48px), 512px"
               />
             ) : (
               <CoverPlaceholder
                 src="/covers/vr.jpg"
-                alt={`${entry.title} placeholder cover`}
+                alt={`${entry.title} — cover image coming soon`}
                 initial={entry.title[0]}
                 label="Coming soon"
                 sizes="512px"
@@ -87,7 +103,7 @@ export default function PlaygroundPopup({
         )}
 
         <div className="p-8 flex flex-col gap-4">
-          <p className="label text-mauve">{entry.tags}</p>
+          <p className="t-caption text-mauve">{entry.tags}</p>
           <h3 id="playground-popup-title" className="t-section text-ink !max-w-none">
             {entry.title}
           </h3>
