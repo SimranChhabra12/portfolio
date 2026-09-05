@@ -35,7 +35,7 @@ export default function Home() {
           <HeroPhoto />
         </div>
         <h1 className="t-display text-ink text-left !max-w-none mt-10 lg:mt-14">
-          [HERO — TBD]
+          Product Designer / Research-first / Designing for the overlooked
         </h1>
       </section>
 
@@ -115,7 +115,7 @@ export default function Home() {
       <footer id="about" className="bg-dark-bg py-24 scroll-mt-8">
         <div className={SHELL}>
           <h2 className="t-display text-surface !max-w-none mb-8">
-            [FOOTER — TBD]
+            Made for people, designed with intention
           </h2>
 
           <div className="flex flex-col gap-8">
