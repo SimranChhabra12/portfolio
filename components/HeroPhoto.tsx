@@ -4,42 +4,27 @@ import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 
 // Frame is a fixed landscape aspect (628/438 ≈ 1.43, matching the reference site's hero
-// treatment — see DESIGN_RULES.md), but three of these four photos are portrait. Every photo
-// fills the frame so the carousel stays consistent (no letterboxed frames mid-rotation), and
-// each one carries its own focal point so the crop never cuts Simran out. `focus` is the
-// vertical object-position: 0% holds the top of the photo, 50% is centred.
+// treatment — see DESIGN_RULES.md), but both of these photos are portrait 3:4. Filling the
+// frame therefore keeps only ~52% of each photo's height, so the vertical focal point does
+// real work here — `focus` is the vertical object-position, chosen by previewing the actual
+// crop rather than by eye. 0% holds the top of the photo, 100% the bottom.
 const photos = [
   {
     src: "/hero/hero-1.jpg",
-    alt: "Simran Chhabra at the Whspr showcase",
-    width: 5712,
-    height: 4284,
-    // Landscape, near the frame's own aspect — barely cropped.
-    focus: "50%",
+    alt: "Simran Chhabra in graduation dress under the Washington Square Arch",
+    width: 2000,
+    height: 2667,
+    // She stands low and small in a tall frame; 85% keeps her full figure and the arch's
+    // columns. Centring cuts her off at the waist, and 100% trades the arch for pavement.
+    focus: "85%",
   },
   {
     src: "/hero/hero-2.jpg",
-    alt: "Simran Chhabra with rescued street dogs",
-    width: 1440,
-    height: 1595,
-    // Kneeling with the dogs, low in the frame: centring here cuts her head off.
-    focus: "0%",
-  },
-  {
-    src: "/hero/hero-3.jpg",
-    alt: "Simran Chhabra presenting a research poster",
-    width: 4284,
-    height: 5712,
-    // She and the poster both sit mid-frame.
-    focus: "50%",
-  },
-  {
-    src: "/hero/hero-4.jpg",
-    alt: "Simran Chhabra at the Whspr showcase, talking with visitors",
-    width: 4284,
-    height: 5712,
-    // Slightly high, to keep the Whspr showcase board above the table in shot.
-    focus: "35%",
+    alt: "Simran Chhabra at One World Observatory, Manhattan skyline behind her",
+    width: 2000,
+    height: 2667,
+    // Enough headroom that her face clears the top edge, while keeping the skyline in shot.
+    focus: "65%",
   },
 ];
 
