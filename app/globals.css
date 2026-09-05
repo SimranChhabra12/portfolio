@@ -13,8 +13,39 @@
   --dark-bg: #2A1F28;
   --dark-surface: #3A2A38;
 
-  /* Layout tokens — change once here, not at each call site */
-  --radius-card: 1.5rem;      /* 24px — cards, cover images */
+  /* ── Type scale — DESIGN_DOC §2 ─────────────────────────────────────────
+     Calibrated to honeymehta.design at 1440px (measured 85.1/50.6/36.7/19.5/15.7).
+     Doc token name → utility class:
+       --t-display → .t-display   84px
+       --t-page    → .t-heading   50px
+       --t-project → .t-section   36px
+       --t-sub     → .t-sub       20px
+       --t-body    → .t-body      16px
+       --t-caption → .t-caption   13px
+     Class names are a fixed contract (118 call sites) — values change, names don't.
+     Each clamp is solved to land exactly on the doc value at 1440px and on its
+     floor at 390px. Body/sub/caption are fixed: prose never drops below 16px. */
+  --t-display: clamp(2.5rem, 1.479rem + 4.19vw, 5.25rem);    /* 40 → 84 */
+  --t-page: clamp(2rem, 1.582rem + 1.714vw, 3.125rem);       /* 32 → 50 */
+  --t-project: clamp(1.625rem, 1.393rem + 0.952vw, 2.25rem); /* 26 → 36 */
+  --t-sub: 20px;
+  --t-body: 16px;
+  --t-caption: 13px;
+
+  /* Tracking. POSITIVE on the three display-serif levels — this deliberately
+     reverses the old -0.02em. Honey measures +2% at every display level and it
+     lets Playfair breathe (DESIGN_DOC §2; supersedes DESIGN_RULES §2). */
+  --tracking-display: 0.02em;
+  --tracking-caps: 0.08em;
+
+  /* Layout tokens — DESIGN_DOC §4. Change once here, not at each call site */
+  --page-max: 1280px;    /* content shell */
+  --page-gutter: 32px;   /* Jackie measures 32; Beverly 24. 32 at this max-width */
+  --col-media: 1000px;   /* wide visuals — 1.56x the text column */
+  --col-text: 640px;     /* prose — lands near 65ch at 16px */
+  --section-gap: clamp(4rem, 10vh, 6rem); /* 64–96px, halved onto each neighbour */
+
+  --radius-card: 4px;         /* was 24px — references use flat, near-square corners */
   --radius-card-sm: 1rem;     /* 16px — small chips, thumbnails */
   --section-transition: 8rem; /* 128px — gradient band between light/dark sections */
 
@@ -106,60 +137,85 @@ body {
   }
 }
 
-/* ─── Type scale ─────────────────────────────────────────────────────────── */
+/* ─── Section rhythm ─────────────────────────────────────────────────────────
+   DESIGN_DOC §4 — Beverly's pattern: one variable, halved onto each side, so
+   neighbouring sections share the gap. Scoped to @layer base on purpose: it sets
+   the default rhythm while leaving Tailwind's utilities layer free to win, so
+   sections still carrying `py-16` keep it until their own package removes it. */
 
-/* Caption / label — 13px / 150% */
+@layer base {
+  section {
+    padding: calc(var(--section-gap) / 2) 0;
+  }
+}
+
+@media (max-width: 767px) {
+  :root {
+    --section-gap: clamp(2.75rem, 7vh, 3.5rem);
+  }
+}
+
+/* ─── Type scale ─────────────────────────────────────────────────────────────
+   Values per DESIGN_DOC §2. Class names are frozen — see the token block above. */
+
+/* Caption / label — 13px / 150%, Inter 400 */
 .t-caption {
-  font-size: 13px;
+  font-size: var(--t-caption);
   line-height: 1.5;
+  font-weight: 400;
   font-family: var(--font-body), sans-serif;
 }
 
-/* Body — 16px / 150% */
+/* Body — 16px / 150%, Inter 400. Never smaller for paragraphs. */
 .t-body {
-  font-size: 16px;
+  font-size: var(--t-body);
   line-height: 1.5;
+  font-weight: 400;
   max-width: 65ch;
   font-family: var(--font-body), sans-serif;
 }
 
-/* Subheading — 20px / 150% */
+/* Subheading / lede — 20px / 140%, Inter 400 */
 .t-sub {
-  font-size: 20px;
-  line-height: 1.5;
+  font-size: var(--t-sub);
+  line-height: 1.4;
+  font-weight: 400;
   font-family: var(--font-body), sans-serif;
 }
 
-/* Section title — 28px / 120% */
+/* Project title (doc: --t-project) — fluid 26 → 36px / 133% / +2%, Playfair 500 */
 .t-section {
-  font-size: 28px;
-  line-height: 1.2;
+  font-size: var(--t-project);
+  line-height: 1.33;
+  letter-spacing: var(--tracking-display);
   font-weight: 500;
   font-family: var(--font-display), serif;
 }
 
-/* Page heading — fluid 30px (mobile) → 42px (desktop) / 120% */
+/* Page + section heading (doc: --t-page) — fluid 32 → 50px / 129% / +2%, Playfair 500 */
 .t-heading {
-  font-size: clamp(1.875rem, 1.35rem + 2.2vw, 2.625rem);
-  line-height: 1.2;
+  font-size: var(--t-page);
+  line-height: 1.29;
+  letter-spacing: var(--tracking-display);
   font-weight: 500;
   font-family: var(--font-display), serif;
 }
 
-/* Hero / display — fluid 36px (mobile) → 60px (desktop) / 120% / -2% tracking */
+/* Hero display — fluid 40 → 84px / 118% / +2%, Playfair 600. Once per page. */
 .t-display {
-  font-size: clamp(2.25rem, 1rem + 5.5vw, 3.75rem);
-  line-height: 1.15;
-  letter-spacing: -0.02em;
+  font-size: var(--t-display);
+  line-height: 1.18;
+  letter-spacing: var(--tracking-display);
   font-weight: 600;
   font-family: var(--font-display), serif;
 }
 
 /* All-caps label utility */
 .label {
-  font-size: 13px;
+  font-size: var(--t-caption);
   line-height: 1.5;
+  font-weight: 400;
   text-transform: uppercase;
-  letter-spacing: 0.08em;
+  letter-spacing: var(--tracking-caps); /* §2: caption +8% when caps */
   font-family: var(--font-body), sans-serif;
 }
