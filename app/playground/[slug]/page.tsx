@@ -1,7 +1,7 @@
 import { notFound } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
-import Nav from "@/components/Nav";
+import Nav from "@/components/ui/Nav";
 import playgroundEntries, { getPlaygroundEntry } from "@/data/playgroundEntries";
 
 export async function generateStaticParams() {

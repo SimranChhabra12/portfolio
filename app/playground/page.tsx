@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import Nav from "@/components/Nav";
-import Playground from "@/components/Playground";
+import Nav from "@/components/ui/Nav";
+import Playground from "@/components/interactive/Playground";
 
 export const metadata: Metadata = {
   title: "Playground — Simran Chhabra",

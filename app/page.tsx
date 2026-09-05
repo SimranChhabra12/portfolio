@@ -1,9 +1,9 @@
 import Image from "next/image";
 import Link from "next/link";
-import Nav from "@/components/Nav";
-import HeroPhoto from "@/components/HeroPhoto";
-import WorkChapters from "@/components/WorkChapters";
-import Reveal from "@/components/Reveal";
+import Nav from "@/components/ui/Nav";
+import HeroPhoto from "@/components/interactive/HeroPhoto";
+import WorkChapters from "@/components/layout/WorkChapters";
+import Reveal from "@/components/ui/Reveal";
 import playgroundEntries from "@/data/playgroundEntries";
 
 // Vertical rhythm is NOT set here. `globals.css` carries

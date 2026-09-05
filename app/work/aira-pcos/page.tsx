@@ -127,7 +127,7 @@ export default function AiraPage() {
               plainMaxWidth={640}
               images={[
                 {
-                  src: "/AIRAScreens/Overwhelmed Woman Illustration.png",
+                  src: "/projects/aira-pcos/AIRAScreens/Overwhelmed Woman Illustration.png",
                   alt: "Illustration of an overwhelmed woman surrounded by the many things she manages: sleep, schedule, weight, periods, movement, mood, nutrition, supplements",
                   pixelWidth: 1182,
                   pixelHeight: 1274,
@@ -253,8 +253,8 @@ export default function AiraPage() {
               kind="phone"
               pairWidth={PHONE_PAIR}
               images={[
-                { src: "/AIRAScreens/Winter (M).png", alt: "Winter — Seasons view", pixelWidth: 440, pixelHeight: 956, label: "Seasons view" },
-                { src: "/AIRAScreens/Menstrual Phase.png", alt: "Menstrual — Phases view", pixelWidth: 440, pixelHeight: 956, label: "Phases view" },
+                { src: "/projects/aira-pcos/AIRAScreens/Winter (M).png", alt: "Winter — Seasons view", pixelWidth: 440, pixelHeight: 956, label: "Seasons view" },
+                { src: "/projects/aira-pcos/AIRAScreens/Menstrual Phase.png", alt: "Menstrual — Phases view", pixelWidth: 440, pixelHeight: 956, label: "Phases view" },
               ]}
               headline="Same data, your framing"
               caption="One toggle, two ways to read the same cycle — seasons, or clinical phases."
@@ -262,12 +262,12 @@ export default function AiraPage() {
             <ScreensRow
               width={PHONE_ROW_3UP}
               screens={[
-                { src: "/AIRAScreens/Spring (F).png", alt: "Spring — Seasons view", caption: "Spring — Seasons view", pixelWidth: 440, pixelHeight: 956 },
-                { src: "/AIRAScreens/Follicular Phase.png", alt: "Follicular — Phases view", caption: "Follicular — Phases view", pixelWidth: 440, pixelHeight: 956 },
-                { src: "/AIRAScreens/Summer (O).png", alt: "Summer — Seasons view", caption: "Summer — Seasons view", pixelWidth: 440, pixelHeight: 956 },
-                { src: "/AIRAScreens/Ovulation.png", alt: "Ovulation — Phases view", caption: "Ovulation — Phases view", pixelWidth: 440, pixelHeight: 956 },
-                { src: "/AIRAScreens/Luteal.png", alt: "Autumn — Seasons view", caption: "Autumn — Seasons view", pixelWidth: 440, pixelHeight: 956 },
-                { src: "/AIRAScreens/Luteal-1.png", alt: "Luteal — Phases view", caption: "Luteal — Phases view", pixelWidth: 440, pixelHeight: 956 },
+                { src: "/projects/aira-pcos/AIRAScreens/Spring (F).png", alt: "Spring — Seasons view", caption: "Spring — Seasons view", pixelWidth: 440, pixelHeight: 956 },
+                { src: "/projects/aira-pcos/AIRAScreens/Follicular Phase.png", alt: "Follicular — Phases view", caption: "Follicular — Phases view", pixelWidth: 440, pixelHeight: 956 },
+                { src: "/projects/aira-pcos/AIRAScreens/Summer (O).png", alt: "Summer — Seasons view", caption: "Summer — Seasons view", pixelWidth: 440, pixelHeight: 956 },
+                { src: "/projects/aira-pcos/AIRAScreens/Ovulation.png", alt: "Ovulation — Phases view", caption: "Ovulation — Phases view", pixelWidth: 440, pixelHeight: 956 },
+                { src: "/projects/aira-pcos/AIRAScreens/Luteal.png", alt: "Autumn — Seasons view", caption: "Autumn — Seasons view", pixelWidth: 440, pixelHeight: 956 },
+                { src: "/projects/aira-pcos/AIRAScreens/Luteal-1.png", alt: "Luteal — Phases view", caption: "Luteal — Phases view", pixelWidth: 440, pixelHeight: 956 },
               ]}
             />
 
@@ -281,7 +281,7 @@ export default function AiraPage() {
               </P>
             </Prose>
             <PhoneMockup
-              src="/AIRAScreens/Learn tab - Global NAV.png"
+              src="/projects/aira-pcos/AIRAScreens/Learn tab - Global NAV.png"
               alt="Learn tab — Daily Pulse"
               caption="Learn tab — Daily Pulse"
               width={PHONE_FEATURE}
@@ -300,7 +300,7 @@ export default function AiraPage() {
               </P>
             </Prose>
             <PhoneMockup
-              src="/AIRAScreens/Meal Tracking.png"
+              src="/projects/aira-pcos/AIRAScreens/Meal Tracking.png"
               alt="Meal tracking"
               caption="Meal tracking"
               width={PHONE_FEATURE}
@@ -317,7 +317,7 @@ export default function AiraPage() {
               </P>
             </Prose>
             <PhoneMockup
-              src="/AIRAScreens/Workout - Cycle Insight.png"
+              src="/projects/aira-pcos/AIRAScreens/Workout - Cycle Insight.png"
               alt="Activity insight"
               caption="Activity insight"
               width={PHONE_FEATURE}
@@ -352,8 +352,8 @@ export default function AiraPage() {
               kind="phone"
               pairWidth={PHONE_PAIR}
               images={[
-                { src: "/AIRAScreens/Notification.png", alt: "Lock-screen nudge", pixelWidth: 872, pixelHeight: 1776, label: "Lock-screen nudge" },
-                { src: "/AIRAScreens/Widget.png", alt: "Home-screen widget", pixelWidth: 872, pixelHeight: 1776, label: "Home-screen widget" },
+                { src: "/projects/aira-pcos/AIRAScreens/Notification.png", alt: "Lock-screen nudge", pixelWidth: 872, pixelHeight: 1776, label: "Lock-screen nudge" },
+                { src: "/projects/aira-pcos/AIRAScreens/Widget.png", alt: "Home-screen widget", pixelWidth: 872, pixelHeight: 1776, label: "Home-screen widget" },
               ]}
               headline="Warm, not clinical"
               caption="Nudges timed to low-energy moments, worded like encouragement."

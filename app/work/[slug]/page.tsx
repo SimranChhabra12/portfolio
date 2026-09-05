@@ -1,9 +1,9 @@
 import { notFound } from "next/navigation";
 import Link from "next/link";
-import Nav from "@/components/Nav";
-import Reveal from "@/components/Reveal";
-import CaseStudySectionNav from "@/components/CaseStudySectionNav";
-import CaseStudyBlocks from "@/components/CaseStudyBlocks";
+import Nav from "@/components/ui/Nav";
+import Reveal from "@/components/ui/Reveal";
+import CaseStudySectionNav from "@/components/layout/CaseStudySectionNav";
+import CaseStudyBlocks from "@/components/interactive/CaseStudyBlocks";
 import caseStudies, { getCaseStudy, getNextCaseStudy } from "@/data/caseStudies";
 import { COL_MEDIA, COL_TEXT, PAGE_GUTTER, SECTION_GAP } from "../_components/columns";
 

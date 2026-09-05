@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { Playfair_Display, Inter } from "next/font/google";
-import KaiserCursor from "@/components/KaiserCursor";
+import KaiserCursor from "@/components/interactive/KaiserCursor";
 import "./globals.css";
 
 const playfairDisplay = Playfair_Display({

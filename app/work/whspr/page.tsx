@@ -131,7 +131,7 @@ export default function WhsprPage() {
               </P>
             </Prose>
             <DeckSlide
-              src="/whspr-deck/three-key-frameworks.png"
+              src="/projects/whspr/whspr-deck/three-key-frameworks.png"
               alt="Slide — Three Key Frameworks: Perceived Safety is Real Data, Dismissal of Women's Experience, Friction as Quality"
               caption="Secondary research — three key frameworks"
               maxWidth={DECK_W}
@@ -144,7 +144,7 @@ export default function WhsprPage() {
               </P>
             </Prose>
             <DeckSlide
-              src="/whspr-deck/what-women-said.png"
+              src="/projects/whspr/whspr-deck/what-women-said.png"
               alt="Slide — What Women Actually Said: five themes that rewrote the brief"
               caption="User research — what women actually said"
               maxWidth={DECK_W}
@@ -198,7 +198,7 @@ export default function WhsprPage() {
               <P>All of these decisions came out of my secondary and primary research.</P>
             </Prose>
             <DeckSlide
-              src="/whspr-deck/three-principles.png"
+              src="/projects/whspr/whspr-deck/three-principles.png"
               alt="Slide — Three Principles: Auth (verified identity enables trust), Search (find a place by context, not rating), Contribute (add experience with friction)"
               caption="The three principles behind the information flow"
               maxWidth={DECK_W}
@@ -216,7 +216,7 @@ export default function WhsprPage() {
               kind="phone"
               phoneWidth={PHONE_FEATURE}
               images={[
-                { src: "/whspr/house-of-yes-contributions.png", alt: "House of Yes place profile — first-hand signals, no star rating", pixelWidth: 402, pixelHeight: 977 },
+                { src: "/projects/whspr/house-of-yes-contributions.png", alt: "House of Yes place profile — first-hand signals, no star rating", pixelWidth: 402, pixelHeight: 977 },
               ]}
               headline="Signals, not scores"
               caption="First-hand accounts, tagged with time and context — no star rating in sight."
@@ -234,8 +234,8 @@ export default function WhsprPage() {
               kind="phone"
               pairWidth={PHONE_PAIR}
               images={[
-                { src: "/whspr/Place Profile/Daytime.png", alt: "Schmuck place profile, day mode", pixelWidth: 402, pixelHeight: 977, label: "Day" },
-                { src: "/whspr/Place Profile/NightTime.png", alt: "Schmuck place profile, night mode", pixelWidth: 402, pixelHeight: 977, label: "Night" },
+                { src: "/projects/whspr/Place Profile/Daytime.png", alt: "Schmuck place profile, day mode", pixelWidth: 402, pixelHeight: 977, label: "Day" },
+                { src: "/projects/whspr/Place Profile/NightTime.png", alt: "Schmuck place profile, night mode", pixelWidth: 402, pixelHeight: 977, label: "Night" },
               ]}
               headline="Same place, different time"
               caption="The Schmuck place profile, toggled between day and night — different signals, different tags."
@@ -252,11 +252,11 @@ export default function WhsprPage() {
             <ScreensRow
               width={PHONE_ROW_3UP}
               screens={[
-                { src: "/whspr/sign-in.png", alt: "Sign in", caption: "Sign in", pixelWidth: 402, pixelHeight: 874 },
-                { src: "/whspr/create-account.png", alt: "Create account", caption: "Create account", pixelWidth: 402, pixelHeight: 874 },
-                { src: "/whspr/auth-gate.png", alt: "Auth gate", caption: "Auth gate", pixelWidth: 402, pixelHeight: 874 },
-                { src: "/whspr/verify-identity.png", alt: "Verify identity", caption: "Verify identity", pixelWidth: 402, pixelHeight: 874 },
-                { src: "/whspr/verification-pending.png", alt: "Verification pending", caption: "Verification pending", pixelWidth: 402, pixelHeight: 874 },
+                { src: "/projects/whspr/sign-in.png", alt: "Sign in", caption: "Sign in", pixelWidth: 402, pixelHeight: 874 },
+                { src: "/projects/whspr/create-account.png", alt: "Create account", caption: "Create account", pixelWidth: 402, pixelHeight: 874 },
+                { src: "/projects/whspr/auth-gate.png", alt: "Auth gate", caption: "Auth gate", pixelWidth: 402, pixelHeight: 874 },
+                { src: "/projects/whspr/verify-identity.png", alt: "Verify identity", caption: "Verify identity", pixelWidth: 402, pixelHeight: 874 },
+                { src: "/projects/whspr/verification-pending.png", alt: "Verification pending", caption: "Verification pending", pixelWidth: 402, pixelHeight: 874 },
               ]}
             />
 
@@ -272,7 +272,7 @@ export default function WhsprPage() {
               kind="plain"
               plainMaxWidth={DECK_W}
               images={[
-                { src: "/whspr-deck/friction-as-a-feature.png", alt: "Slide — Friction as a Feature: the five-step contribution flow (type of user, time, company details, category of observation, observation), shown in a device mockup", pixelWidth: 960, pixelHeight: 540 },
+                { src: "/projects/whspr/whspr-deck/friction-as-a-feature.png", alt: "Slide — Friction as a Feature: the five-step contribution flow (type of user, time, company details, category of observation, observation), shown in a device mockup", pixelWidth: 960, pixelHeight: 540 },
               ]}
               headline="The contribution friction model"
               caption="Five quick prompts before you can submit — deliberately more than a rating takes."
@@ -283,14 +283,14 @@ export default function WhsprPage() {
             <ScreensRow
               width={PHONE_ROW_3UP}
               screens={[
-                { src: "/whspr/mic-off.png", alt: "Voice input off", caption: "Voice input off", pixelWidth: 402, pixelHeight: 1041 },
-                { src: "/whspr/mic-on.png", alt: "Voice input on", caption: "Voice input on", pixelWidth: 402, pixelHeight: 1041 },
-                { src: "/whspr/post-submission.png", alt: "Submitted", caption: "Submitted", pixelWidth: 402, pixelHeight: 874 },
+                { src: "/projects/whspr/mic-off.png", alt: "Voice input off", caption: "Voice input off", pixelWidth: 402, pixelHeight: 1041 },
+                { src: "/projects/whspr/mic-on.png", alt: "Voice input on", caption: "Voice input on", pixelWidth: 402, pixelHeight: 1041 },
+                { src: "/projects/whspr/post-submission.png", alt: "Submitted", caption: "Submitted", pixelWidth: 402, pixelHeight: 874 },
               ]}
             />
 
             <DeckSlide
-              src="/whspr-deck/information-architecture.png"
+              src="/projects/whspr/whspr-deck/information-architecture.png"
               alt="Slide — Information Architecture: Search, Read, Contribute, Surface, plus the system layer rule — contributions older than 6 months fade, places with under 4 contributions show an early-data warning"
               caption="How the system holds it together — search, read, contribute, surface"
               maxWidth={DECK_W}
@@ -315,7 +315,7 @@ export default function WhsprPage() {
             />
 
             <DeckSlide
-              src="/whspr-deck/three-key-flows.png"
+              src="/projects/whspr/whspr-deck/three-key-flows.png"
               alt="Slide — Interactive Prototype, Three Key Flows: Search Flow, Place Profile, Contribution"
               caption="The interactive prototype — three key flows"
               maxWidth={DECK_W}
@@ -336,7 +336,7 @@ export default function WhsprPage() {
               kind="phone"
               phoneWidth={PHONE_FEATURE}
               images={[
-                { src: "/whspr/area-info-expanded.png", alt: "Area Info, expanded", pixelWidth: 402, pixelHeight: 977 },
+                { src: "/projects/whspr/area-info-expanded.png", alt: "Area Info, expanded", pixelWidth: 402, pixelHeight: 977 },
               ]}
               headline="Area Info"
               caption="What's open nearby, right now — well lit or not, busy or not."
@@ -344,12 +344,12 @@ export default function WhsprPage() {
             <ScreensRow
               width={PHONE_ROW_2UP}
               screens={[
-                { src: "/whspr/search.png", alt: "Search results for \"bars in lower east side\"", caption: "Search", pixelWidth: 402, pixelHeight: 1088 },
-                { src: "/whspr/laser-wolf.png", alt: "Laser Wolf place profile with first-hand signals", caption: "Place profile", pixelWidth: 402, pixelHeight: 977 },
+                { src: "/projects/whspr/search.png", alt: "Search results for \"bars in lower east side\"", caption: "Search", pixelWidth: 402, pixelHeight: 1088 },
+                { src: "/projects/whspr/laser-wolf.png", alt: "Laser Wolf place profile with first-hand signals", caption: "Place profile", pixelWidth: 402, pixelHeight: 977 },
               ]}
             />
             <DeckSlide
-              src="/whspr-deck/three-principles-screens.png"
+              src="/projects/whspr/whspr-deck/three-principles-screens.png"
               alt="Slide — Three Principles shown in device mockups: Authentication (Verify Your Identity), Search, Contribution (Add Your Thoughts)"
               caption="From the deck — authentication, search, and contribution"
               maxWidth={DECK_W}
@@ -362,18 +362,18 @@ export default function WhsprPage() {
               <ScreensRow
                 width={PHONE_ROW_4UP}
                 screens={[
-                  { src: "/whspr/intro-1.png", alt: "Onboarding 1", caption: "Onboarding", pixelWidth: 402, pixelHeight: 874 },
-                  { src: "/whspr/intro-2.png", alt: "Onboarding 2", caption: "Onboarding", pixelWidth: 402, pixelHeight: 874 },
-                  { src: "/whspr/intro-3.png", alt: "Onboarding 3", caption: "Onboarding", pixelWidth: 402, pixelHeight: 874 },
-                  { src: "/whspr/splash.png", alt: "Splash", caption: "Splash", pixelWidth: 402, pixelHeight: 874 },
-                  { src: "/whspr/filters.png", alt: "Filters", caption: "Filters", pixelWidth: 402, pixelHeight: 874 },
-                  { src: "/whspr/filters-selected.png", alt: "Filters selected", caption: "Filters selected", pixelWidth: 402, pixelHeight: 874 },
-                  { src: "/whspr/house-of-yes.png", alt: "Area profile — Bar Revival", caption: "Area profile — Bar Revival", pixelWidth: 402, pixelHeight: 977 },
-                  { src: "/whspr/parcelle.png", alt: "Area profile — Parcelle", caption: "Area profile — Parcelle", pixelWidth: 402, pixelHeight: 977 },
-                  { src: "/whspr/area-info-collapsed.png", alt: "Area Info, collapsed", caption: "Area Info, collapsed", pixelWidth: 402, pixelHeight: 977 },
-                  { src: "/whspr/see-more.png", alt: "See more", caption: "See more", pixelWidth: 402, pixelHeight: 977 },
-                  { src: "/whspr/saved.png", alt: "Saved", caption: "Saved", pixelWidth: 402, pixelHeight: 874 },
-                  { src: "/whspr/profile.png", alt: "Profile", caption: "Profile", pixelWidth: 402, pixelHeight: 874 },
+                  { src: "/projects/whspr/intro-1.png", alt: "Onboarding 1", caption: "Onboarding", pixelWidth: 402, pixelHeight: 874 },
+                  { src: "/projects/whspr/intro-2.png", alt: "Onboarding 2", caption: "Onboarding", pixelWidth: 402, pixelHeight: 874 },
+                  { src: "/projects/whspr/intro-3.png", alt: "Onboarding 3", caption: "Onboarding", pixelWidth: 402, pixelHeight: 874 },
+                  { src: "/projects/whspr/splash.png", alt: "Splash", caption: "Splash", pixelWidth: 402, pixelHeight: 874 },
+                  { src: "/projects/whspr/filters.png", alt: "Filters", caption: "Filters", pixelWidth: 402, pixelHeight: 874 },
+                  { src: "/projects/whspr/filters-selected.png", alt: "Filters selected", caption: "Filters selected", pixelWidth: 402, pixelHeight: 874 },
+                  { src: "/projects/whspr/house-of-yes.png", alt: "Area profile — Bar Revival", caption: "Area profile — Bar Revival", pixelWidth: 402, pixelHeight: 977 },
+                  { src: "/projects/whspr/parcelle.png", alt: "Area profile — Parcelle", caption: "Area profile — Parcelle", pixelWidth: 402, pixelHeight: 977 },
+                  { src: "/projects/whspr/area-info-collapsed.png", alt: "Area Info, collapsed", caption: "Area Info, collapsed", pixelWidth: 402, pixelHeight: 977 },
+                  { src: "/projects/whspr/see-more.png", alt: "See more", caption: "See more", pixelWidth: 402, pixelHeight: 977 },
+                  { src: "/projects/whspr/saved.png", alt: "Saved", caption: "Saved", pixelWidth: 402, pixelHeight: 874 },
+                  { src: "/projects/whspr/profile.png", alt: "Profile", caption: "Profile", pixelWidth: 402, pixelHeight: 874 },
                 ]}
               />
             </div>

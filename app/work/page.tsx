@@ -1,5 +1,5 @@
 import Link from "next/link";
-import Nav from "@/components/Nav";
+import Nav from "@/components/ui/Nav";
 import caseStudies from "@/data/caseStudies";
 import { CaseStudyShell, Prose, SECTION_GAP } from "./_components/columns";
 
