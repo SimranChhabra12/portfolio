@@ -111,10 +111,11 @@ export default function WorkChapters() {
                      hover to leave, so an always-on overlay would permanently cover a
                      third of every cover image — and the tile is already a link, so the
                      button buys a touch user nothing.
-                  2. Tags here are `disciplines`, NOT `homeTags`. The caption line below
-                     keeps homeTags always visible, because that is where Resy's "Student
-                     concept" attribution lives (task E1) — burying that behind a hover
-                     state would put it out of reach of touch and keyboard-only users.
+                  2. Tags are `homeTags` — the same words the caption already showed. So
+                     the caption's copy of them is now hover-gated in the mirror image of
+                     this (`hover:none`), which keeps Resy's "Student concept" attribution
+                     (task E1) permanently visible on touch without printing the tags
+                     twice on desktop.
                   3. `aria-hidden` + `pointer-events-none`: every word here is decorative
                      duplication of the link's own text and destination. Exposing it would
                      make a screen reader read each card twice. */}
@@ -123,7 +124,7 @@ export default function WorkChapters() {
                 className="pointer-events-none absolute inset-x-0 bottom-0 hidden items-end justify-between gap-3 p-4 opacity-0 transition-opacity duration-200 motion-reduce:transition-none [@media(hover:hover)]:flex [@media(hover:hover)]:group-hover:opacity-100 [@media(hover:hover)]:group-focus-visible:opacity-100"
               >
                 <div className="flex flex-wrap gap-2">
-                  {project.disciplines.map((d) => (
+                  {(project.homeTags ?? []).map((d) => (
                     <span
                       key={d}
                       className="t-caption rounded-full bg-cream px-3 py-1.5 text-ink shadow-sm"
@@ -159,8 +160,12 @@ export default function WorkChapters() {
                   this is meaningful text, so it takes ink at 70% — 5.00:1, AA pass.
                   Kept whole rather than truncated: "Student concept" is the attribution
                   that stops the Resy card reading as a shipped feature. */}
+              {/* Same tags as the hover pills, so this is the touch-only copy: shown
+                  only where there is no hover to reveal them with (`hover:none`), which
+                  is what keeps Resy's "Student concept" attribution reachable on a phone.
+                  On a pointer device the pills carry it and this stays out of the way. */}
               {project.homeTags && (
-                <p className="t-caption uppercase tracking-[0.08em] text-ink/70">
+                <p className="t-caption hidden uppercase tracking-[0.08em] text-ink/70 [@media(hover:none)]:block">
                   {project.homeTags.join(" · ")}
                 </p>
               )}
