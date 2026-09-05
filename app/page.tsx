@@ -38,13 +38,17 @@ export default function Home() {
         </h1>
       </section>
 
-      {/* Work — cream ground. The dark block that used to sit here competed with the
-          product colour inside the visuals (DESIGN_DOC §1/§3). */}
-      <section id="work" className={`${SHELL} scroll-mt-8`}>
-        <h2 className="t-heading text-ink !max-w-none mb-12 lg:mb-16">
-          I&apos;ve worked on
-        </h2>
-        <WorkChapters />
+      {/* Work — a `--surface` band. Full-bleed on the <section> so the colour runs edge to
+          edge, with the shell moved inside so the cards keep their column. A dark block sat
+          here once and competed with the product colour inside the visuals (DESIGN_DOC
+          §1/§3); surface is the quiet version of the same idea, and the cream→surface edge
+          is a hard cut, matching the footer — a gradient here read as a rendering artefact.
+          No heading: the cards are the only thing a portfolio's work section can be showing,
+          so "I've worked on" named nothing and just delayed them. */}
+      <section id="work" className="bg-surface scroll-mt-8">
+        <div className={SHELL}>
+          <WorkChapters />
+        </div>
       </section>
 
       {/* Play — teaser only */}

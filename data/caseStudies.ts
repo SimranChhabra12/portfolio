@@ -288,7 +288,10 @@ const allCaseStudies: CaseStudy[] = [
       "I was planning my own birthday dinner and somehow ended up doing venue scouting on foot.",
     homeOneLiner: "Making large-group booking work for both sides",
     coverImage: "/images/covers/resy.jpg",
-    homeTags: ["Research", "Design"],
+    // "Student concept" leads the eyebrow on purpose. The bespoke /work/resy page carries
+    // the full disclaimer, but the homepage card is where someone forms the impression that
+    // this shipped — the framing has to be on the card too, not only behind the click.
+    homeTags: ["Student concept", "Research", "Design"],
     subtitle: "A large-party booking feature for the Resy platform",
     role: "UX Researcher & Product Designer",
     year: "2024",
