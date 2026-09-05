@@ -34,6 +34,11 @@ export interface CaseStudy {
   homeOneLiner: string; // one-liner for the homepage work grid, as dictated by Simran
   homeTags?: string[]; // optional tag row for the homepage work grid card
   coverImage: string; // homepage work grid card image — gradient placeholder fallback
+  // Optional looping hero for the homepage card (task D2). When set, WorkChapters
+  // stacks it over `coverImage`, which stays the poster and the reduced-motion
+  // fallback — so this is purely additive and a card without it is unchanged.
+  // Expects a muted, seamless-looping 5:3 mp4 in `public/`; task D3 produces them.
+  coverVideo?: string;
   realCover?: string; // real screenshot to use instead of the placeholder, when available
   subtitle: string;
   role: string;
