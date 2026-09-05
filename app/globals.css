@@ -29,8 +29,23 @@
   --t-page: clamp(2rem, 1.582rem + 1.714vw, 3.125rem);       /* 32 → 50 */
   --t-project: clamp(1.625rem, 1.393rem + 0.952vw, 2.25rem); /* 26 → 36 */
   --t-sub: 20px;
-  --t-body: 16px;
+  --t-body: 17px;   /* was 16 — see the legibility note below */
   --t-caption: 13px;
+
+  /* ── Body legibility (task A2) ────────────────────────────────────────────
+     Review: prose "readable when zoomed but not dark or heavy enough". Two
+     value changes answer it, both here rather than at the 96 `.t-body`/`.t-sub`/
+     `.t-caption` call sites: --t-body 16 → 17px, and --weight-body 400 → 450.
+     Inter is loaded as a variable font (layout.tsx passes no `weight` array),
+     so 450 is a real interpolated instance, not a synthesised fake-bold.
+     450 is deliberately below 500: it thickens the stem without turning prose
+     into a semibold block.
+
+     NOTE — the body typeface is still undecided (task A1, blocked on Simran).
+     Inter's 450 is fairly light; a different face will hint and weight
+     differently, so BOTH values here should be re-tuned once A1 lands. If the
+     new face runs heavier, 450 may need to drop back toward 400. */
+  --weight-body: 450;
 
   /* Tracking. POSITIVE on the three display-serif levels — this deliberately
      reverses the old -0.02em. Honey measures +2% at every display level and it
@@ -43,7 +58,11 @@
   --page-gutter: 32px;   /* Jackie measures 32; Beverly 24. 32 at this max-width */
   --col-media: 1000px;   /* wide visuals — 1.56x the text column */
   --col-text: 640px;     /* prose — lands near 65ch at 16px */
-  --section-gap: clamp(4rem, 10vh, 6rem); /* 64–96px, halved onto each neighbour */
+  /* Halved onto each neighbour, so the number here IS the gap between two
+     adjacent sections. Task B3 raised it 64–96px → 88–136px: at 1280x900 the
+     homepage hero/work/play/footer boundaries measured 90px apart, which read
+     as one continuous field rather than four zones. */
+  --section-gap: clamp(5.5rem, 13vh, 8.5rem);
 
   --radius-card: 4px;         /* was 24px — references use flat, near-square corners */
   --radius-card-sm: 1rem;     /* 16px — small chips, thumbnails */
@@ -82,9 +101,13 @@ body {
   background: var(--cream);
   color: var(--ink);
   font-family: var(--font-body), "Helvetica Neue", Arial, sans-serif;
-  font-size: 16px;
+  font-size: var(--t-body);
+  font-weight: var(--weight-body);
   line-height: 1.5;
-  -webkit-font-smoothing: antialiased;
+  /* `antialiased` thins glyphs on macOS, which is part of why the review read
+     the copy as too light. Subpixel AA on a warm cream ground puts the weight
+     back without touching the colour. */
+  -webkit-font-smoothing: auto;
 }
 
 ::selection {
@@ -289,35 +312,60 @@ body {
 
 @media (max-width: 767px) {
   :root {
-    --section-gap: clamp(2.75rem, 7vh, 3.5rem);
+    --section-gap: clamp(3.5rem, 9vh, 4.5rem);
+  }
+}
+
+/* ─── Project card cover video — task D2 ─────────────────────────────────────
+   `WorkChapters` always renders the still <Image> as the base layer and stacks
+   the <video> on top of it, so the slot is never blank: the still is the poster
+   during load and the fallback whenever the video is hidden.
+
+   Reduced motion is handled by `display: none` rather than `opacity: 0` on
+   purpose: Chrome will not keep a video playing while it is not being rendered
+   (measured — a `display: none` video reports `paused === true`), so taking it
+   out of the box tree stops playback as well as hiding it, which an opacity or
+   visibility hide would not do.
+
+   This rule is the belt, not the braces. The script in `WorkChapters` is what
+   actually keeps reduced-motion users from fetching any video at all, and what
+   makes the off-screen cards lazy — `preload="none"` alone does NOT, because
+   `autoplay` overrides it. See the comment there. This rule covers the no-JS
+   case and stops a stray frame ever painting. */
+
+@media (prefers-reduced-motion: reduce) {
+  .cover-video {
+    display: none;
   }
 }
 
 /* ─── Type scale ─────────────────────────────────────────────────────────────
    Values per DESIGN_DOC §2. Class names are frozen — see the token block above. */
 
-/* Caption / label — 13px / 150%, Inter 400 */
+/* Caption / label — 13px / 150%, Inter 450 (A2) */
 .t-caption {
   font-size: var(--t-caption);
   line-height: 1.5;
-  font-weight: 400;
+  font-weight: var(--weight-body);
   font-family: var(--font-body), sans-serif;
 }
 
-/* Body — 16px / 150%, Inter 400. Never smaller for paragraphs. */
+/* Body — 17px / 155%, Inter 450 (A2). Never smaller for paragraphs.
+   Line-height nudged 1.5 → 1.55: at 17px the longer measure needs the extra
+   leading to keep 65ch scannable. */
 .t-body {
   font-size: var(--t-body);
-  line-height: 1.5;
-  font-weight: 400;
+  line-height: 1.55;
+  font-weight: var(--weight-body);
   max-width: 65ch;
   font-family: var(--font-body), sans-serif;
 }
 
-/* Subheading / lede — 20px / 140%, Inter 400 */
+/* Subheading / lede — 20px / 140%, Inter 450 (A2) */
 .t-sub {
   font-size: var(--t-sub);
   line-height: 1.4;
-  font-weight: 400;
+  font-weight: var(--weight-body);
   font-family: var(--font-body), sans-serif;
 }
 
