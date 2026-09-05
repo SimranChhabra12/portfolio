@@ -16,22 +16,42 @@ export interface PlaygroundEntry {
   slug: string;
   title: string;
   tags: string;
+  /**
+   * The half of the card title that says what the piece actually was. Rendered on the
+   * same line as `title` at the same size — "Zebein — Creative direction for ...".
+   * Matches the `Project — Problem` format the work cards use.
+   */
+  oneLiner: string;
+  /**
+   * Routing only. `full` entries carry a written body on their page; `light` ones are
+   * carried by their gallery. Every entry gets a page and an identical card either way —
+   * this must never reach the card treatment.
+   */
   kind: PlaygroundKind;
   teaser: string;
+  /**
+   * `object-position` for the cover inside the uniform 5:3 card slot. Portrait covers
+   * lose their subject to a centred crop, so those name their own focal point.
+   */
+  coverPosition?: string;
+  /** Id in the sketch registry (components/interactive/sketches). Renders live via P5Sketch. */
+  sketch?: string;
   cover: PlaygroundImage | null;
   images: PlaygroundImage[];
   videos?: PlaygroundVideo[];
   href?: string;
-  /** Gallery shown on the full page (FULL entries only) — the pop-up itself never shows a gallery. */
+  /** Overrides `images` as the page gallery where the two sets differ. */
   pageImages?: PlaygroundImage[];
 }
 
 const playgroundEntries: PlaygroundEntry[] = [
-  // ── FULL cards ──────────────────────────────────────────────────────────
+  // Order is the running order of the grid. `kind` below is routing, not presentation:
+  // every entry renders the same card at the same scale (review, 2026-09-05).
   {
     slug: "si-ch",
     title: "Si.Ch",
     tags: "Fashion · Brand",
+    oneLiner: "A gender-neutral label I designed, shot and ran for a year",
     kind: "full",
     teaser:
       "A gender-neutral fashion label I designed and ran for a year. It started on a trip to Sri Lanka and the sky I kept photographing.",
@@ -52,6 +72,7 @@ const playgroundEntries: PlaygroundEntry[] = [
     slug: "road-trip-experience",
     title: "The Road Trip Experience",
     tags: "Art · Documentary",
+    oneLiner: "Sixteen artists, one car, and the lost music of Kutchh on film",
     kind: "full",
     teaser:
       "Sixteen artists, one car, across Gujarat. I ran the experience and operations, and we ended up preserving the lost music of Kutchh on film.",
@@ -92,6 +113,7 @@ const playgroundEntries: PlaygroundEntry[] = [
     slug: "nightmare-in-neverland",
     title: "Nightmare in Neverland",
     tags: "VR · Art Direction",
+    oneLiner: "Keeping a VR nightmare fun by keeping it whimsical",
     kind: "full",
     teaser:
       "A surreal VR dreamscape, built by three of us. I made the tea party, where a little horror stays fun as long as you keep it whimsical.",
@@ -100,11 +122,12 @@ const playgroundEntries: PlaygroundEntry[] = [
     href: "/playground/nightmare-in-neverland",
   },
 
-  // ── LIGHT cards ─────────────────────────────────────────────────────────
   {
     slug: "humans-were-made-to-love",
     title: "Humans Were Made To Love",
     tags: "Styling · Art Direction",
+    oneLiner: "A gender-fluid fashion spread I directed in design school",
+    coverPosition: "center 25%",
     kind: "light",
     teaser:
       "A gender-fluid fashion spread I conceptualized, directed, and styled in design school.",
@@ -138,6 +161,8 @@ const playgroundEntries: PlaygroundEntry[] = [
     slug: "verve-magazine",
     title: "Verve Magazine",
     tags: "Styling · Editorial",
+    oneLiner: "Assistant stylist on an editorial story and two supplement covers",
+    coverPosition: "center 20%",
     kind: "light",
     teaser:
       "Assistant stylist on an editorial story and two supplement covers, with Shriya Saran and Tamannah Bhatia.",
@@ -176,6 +201,8 @@ const playgroundEntries: PlaygroundEntry[] = [
     slug: "niluk",
     title: "Niluk by Nilima Mehta",
     tags: "Styling · Art Direction",
+    oneLiner: "Indian embroidery on Western silhouettes, for the Safar collection",
+    coverPosition: "center 65%",
     kind: "light",
     teaser:
       "Creative direction and styling for the 'Safar' collection, Indian embroidery on Western silhouettes.",
@@ -195,6 +222,8 @@ const playgroundEntries: PlaygroundEntry[] = [
     slug: "zebein",
     title: "Zebein",
     tags: "Styling · Art Direction",
+    oneLiner: "Creative direction for an Indian label's debut campaign",
+    coverPosition: "center 20%",
     kind: "light",
     teaser:
       "Creative direction and styling for the debut campaign of an Indian contemporary label.",
@@ -217,6 +246,7 @@ const playgroundEntries: PlaygroundEntry[] = [
     slug: "spoken-word",
     title: "Spoken Word",
     tags: "Poetry · Performance",
+    oneLiner: "Twenty open mics that gave Ahmedabad a stage of its own",
     kind: "light",
     teaser:
       "In 2017, a few friends and I, all obsessed with Button Poetry, started a spoken word movement in our home city of Ahmedabad. Over the next two years we ran more than 20 open mics, tapping into the city's creative nerve and building a space for storytelling and performance.",
@@ -233,6 +263,7 @@ const playgroundEntries: PlaygroundEntry[] = [
     slug: "big-squat-festival",
     title: "Big Squat Festival",
     tags: "Events · Artist Relations",
+    oneLiner: "Artist relations for an eight-week indie arts festival",
     kind: "light",
     teaser:
       "Organizing committee, artist relations, for Fangirl Live's eight-week indie arts festival.",
