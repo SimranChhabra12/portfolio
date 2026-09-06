@@ -64,3 +64,11 @@ gesturesketch.md
 !DESIGN_DOC.md
 !WORK_PACKAGES.md
 .claude/worktrees/
+
+# Raw research: transcripts, audio, consent forms, participant photos.
+# Real names and PII — must never reach this public repo. Their home is
+# ../portfolio_docs/ (untracked); these rules are a second line of defence.
+Interviews_and_Transcripts_GuerrillaResearch_Whspr/
+WSQGuerrilla_ResearchPictures_Whspr/
+*.m4a
+*.HEIC
