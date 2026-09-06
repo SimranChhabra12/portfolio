@@ -1,10 +1,13 @@
 import { T } from "@/components/casestudy2/tokens";
 import { CaseStudyNav, CaseStudyFooter } from "@/components/casestudy2/CaseStudyChrome";
-import Section, { P, List, DecisionBlock, Caption, H2 } from "@/components/casestudy2/Section";
+import Section, { P, Caption, H2 } from "@/components/casestudy2/Section";
 import ScreensRow from "@/components/casestudy2/ScreensRow";
 import FeatureVisual from "@/components/casestudy2/FeatureVisual";
 import QuoteCallout from "@/components/casestudy2/QuoteCallout";
 import GapDiagram from "@/components/casestudy2/whspr/GapDiagram";
+import DecisionCard from "@/components/casestudy2/whspr/DecisionCard";
+import FindingsBoard from "@/components/casestudy2/whspr/FindingsBoard";
+import KilledKept from "@/components/casestudy2/whspr/KilledKept";
 import DesignSystemSlide from "@/components/casestudy2/whspr/DesignSystemSlide";
 import DeckSlide from "@/components/casestudy2/DeckSlide";
 import LivePrototype from "@/components/casestudy2/LivePrototype";
@@ -115,32 +118,19 @@ export default function WhsprPage() {
             <Prose>
               <P>
                 I began by researching why women still resort to the whisper network in the age of
-                apps, then went out and asked them. My first build carried some conventional
-                assumptions:
+                apps, then went out and asked them. My first build carried three conventional
+                assumptions, and all three did the same thing — they tried to manage women&apos;s
+                knowledge instead of making room for it. None survived to v2.
               </P>
-              <List
-                accent={AMBER}
-                items={[
-                  "Crime statistics and population density layered onto search",
-                  "AI pose detection for verification",
-                  "An LLM to summarize contributions",
-                ]}
-              />
+            </Prose>
+            <Media>
+              <KilledKept />
+            </Media>
+            <Prose>
               <P>
-                All three did the same thing: they tried to manage women&apos;s knowledge instead of
-                just making room for it. The research made the case against them better than I could.
-                One participant drew the line precisely — what actually signals danger is behavior
-                directed at you, not who happens to be nearby.
-              </P>
-              <QuoteCallout
-                accent={AMBER}
-                text="Not just being present in a space, but start outwardly doing things towards me."
-              />
-              <P>
-                She went further, on how women learn to read danger off appearance rather than
-                action, and what that costs: fear that keeps women out of entire neighborhoods they
-                would otherwise enjoy. A crime-statistics layer would have encoded exactly that. None
-                of the three features made it to v2.
+                What that participant was describing costs more than accuracy. Reading danger off
+                appearance is what keeps women out of entire neighborhoods they would otherwise
+                enjoy — and a crime-statistics layer would have encoded exactly that.
               </P>
             </Prose>
             <Media>
@@ -166,18 +156,20 @@ export default function WhsprPage() {
             <Prose>
               <P>Four decisions, each traceable to something a participant said or something the literature settled.</P>
 
-              <DecisionBlock
-                index={1}
-                accent={AMBER}
-                title="No star ratings"
-                body="Familiarity — knowing what to expect from a place — is what actually makes women feel safe in it (Dubey et al., 2025). A star rating gives you none of that. It flattens a place into a single number and strips out the context that builds familiarity: what the crowd was like, how the staff treated you, whether it felt okay to be there alone. So I cut ratings entirely. Instead, you leave a short, first-hand account, tagged with the time you were there."
-              />
-              <QuoteCallout
-                accent={AMBER}
-                text="Avoid it becoming a social platform. The more social it becomes, the less trustworthy it will be."
-                attribution="Interview participant, unprompted"
-              />
             </Prose>
+            <Media>
+              <DecisionCard
+                index={1}
+                choice="No star ratings"
+                insteadOf="A 1–5 score, like every other review platform"
+                because="Familiarity — knowing what to expect — is what makes a place navigable. A rating flattens that into one number and strips out the context that builds it: what the crowd was like, how the staff treated you, whether it felt okay to be there alone. Instead you leave a short first-hand account, tagged with the time you were there."
+                research="Dubey et al., 2025"
+                voice={{
+                  quote: "Avoid it becoming a social platform. The more social it becomes, the less trustworthy it will be.",
+                  attribution: "Interview participant, unprompted",
+                }}
+              />
+            </Media>
             <FeatureVisual
               kind="phone"
               phoneWidth={PHONE_FEATURE}
@@ -188,19 +180,18 @@ export default function WhsprPage() {
               caption="First-hand accounts, tagged with time and context — no star rating in sight."
             />
 
-            <Prose>
-              <DecisionBlock
+            <Media>
+              <DecisionCard
                 index={2}
-                accent={AMBER}
-                title="A day/night toggle"
-                body="Familiarity means knowing what to expect at the time you'll actually be there. But a place doesn't stay the same. Somewhere well-lit and full of people at 6pm can feel completely different at 1am. So Whspr keeps the two apart and lets you toggle between them. I didn't have to argue for this one — a participant asked for it before she'd seen anything I built."
+                choice="A day/night toggle"
+                insteadOf="One profile per place, averaged across every hour"
+                because="Somewhere well-lit and full of people at 6pm can feel completely different at 1am. Whspr keeps the two apart and lets you switch between them, so what you read matches the time you'll actually be there."
+                voice={{
+                  quote: "Even just knowing what time of day a place is really, really busy.",
+                  attribution: "Interview participant, before being shown the prototype",
+                }}
               />
-              <QuoteCallout
-                accent={AMBER}
-                text="Even just knowing what time of day a place is really, really busy."
-                attribution="Interview participant, before being shown the prototype"
-              />
-            </Prose>
+            </Media>
             <FeatureVisual
               kind="phone"
               pairWidth={PHONE_PAIR}
@@ -212,19 +203,18 @@ export default function WhsprPage() {
               caption="The Schmuck place profile, toggled between day and night — different signals, different tags."
             />
 
-            <Prose>
-              <DecisionBlock
+            <Media>
+              <DecisionCard
                 index={3}
-                accent={AMBER}
-                title="Verification, without surveillance"
-                body="A platform built on women's experiences only works if the people posting them actually are women. So posting requires ID verification, while browsing stays open to everyone. But verification cuts against the other thing that makes people contribute: privacy. So the two are kept apart. Verification confirms identity at the door, posts stay anonymous, and nothing personal is collected or stored along the way. This wasn't only my concern — the first thing one participant asked, before anything else, was how it would work."
+                choice="Verification, without surveillance"
+                insteadOf="Open posting, or an account tied to a real identity"
+                because="A platform built on women's experiences only works if the people posting them are women — but verification cuts against the privacy that makes people willing to post. So the two are kept apart. Identity is confirmed at the door, posts stay anonymous, and nothing personal is collected or stored."
+                voice={{
+                  quote: "How are you gonna be confirming that? Does a human look through all the submissions?",
+                  attribution: "Street participant, unprompted, on the women-only framing",
+                }}
               />
-              <QuoteCallout
-                accent={AMBER}
-                text="How are you gonna be confirming that? Does a human look through all the submissions?"
-                attribution="Street participant, on the women-only framing"
-              />
-            </Prose>
+            </Media>
             <ScreensRow
               width={PHONE_ROW_3UP}
               screens={[
@@ -236,28 +226,27 @@ export default function WhsprPage() {
               ]}
             />
 
-            <Prose>
-              <DecisionBlock
+            <Media>
+              <DecisionCard
                 index={4}
-                accent={AMBER}
-                title="Friction as a feature"
-                body="Verification decides who can post. The contribution flow decides what a post is worth. Research on contribution quality shows low-barrier input produces volume rather than value, while more structure produces something usable (Nissenbaum). So instead of an open text box, the flow walks you through five prompts: whether you've been there before, when you went, whether you were alone or in a group, what your observation is about, and the observation itself. That structure also answers something a participant flagged — that a bad experience caused by a staff member and one caused by another customer mean completely different things, and a single score can't tell them apart."
+                choice="Friction as a feature"
+                insteadOf="An open text box, or a one-tap rating"
+                because="Five prompts before you can submit: whether you've been there before, when you went, whether you were alone, what the observation is about, and the observation itself. It also answers something a participant raised — that a bad experience caused by a staff member and one caused by another customer mean completely different things, and a single score can't tell them apart."
+                research="Nissenbaum, on contribution quality"
+                voice={{
+                  quote: "How often are you gonna be like, 'let's take a picture'?",
+                  attribution: "Interview participant — the objection I designed against",
+                  stance: "challenges",
+                }}
               />
-              <P>
-                <strong>The obvious objection came from the research too.</strong> One participant
-                doubted anyone would contribute at all:
-              </P>
-              <QuoteCallout
-                accent={AMBER}
-                text="How often are you gonna be like, 'let's take a picture'?"
-                attribution="Interview participant, on contributing in the moment"
-              />
+            </Media>
+            <Prose>
               <P>
                 She was pointing at the real risk: a platform with no contributions is worth nothing,
-                and I was proposing to make contributing <em>harder</em>. I took the bet anyway. A
-                place with four thin, structured accounts is more useful than one with forty ratings,
-                and the structure signals to the person posting that their input is worth something.
-                Whether that holds at scale is genuinely unresolved.
+                and I was proposing to make contributing <em>harder</em>. I took the bet anyway. Four
+                thin, structured accounts are more useful than forty ratings, and the structure
+                signals to the person posting that their input is worth something. Whether that holds
+                at scale is genuinely unresolved.
               </P>
             </Prose>
             <FeatureVisual
@@ -366,36 +355,23 @@ export default function WhsprPage() {
                 way people named the problem in their own words before they ever saw my solution.
               </P>
 
-              <P><strong>Word of mouth decided it, in six of seven conversations.</strong></P>
-              <QuoteCallout accent={AMBER} text="If someone I know has an opinion about it, that's the number one thing that affects my decision." />
+            </Prose>
+            <Media>
+              <FindingsBoard />
+            </Media>
+            <Prose>
               <P>
-                That validated the premise: women already share this knowledge, so the job was to
-                build infrastructure for it, not invent a behavior.
+                The premise held: women already share this knowledge, so the job was building
+                infrastructure for it, not inventing a behavior. What&apos;s broken isn&apos;t
+                coverage — it&apos;s trust in the source.
               </P>
-
               <P>
-                <strong>What&apos;s broken isn&apos;t coverage — it&apos;s trust in the source.</strong>{" "}
-                Across both studies, people described information as plentiful and unreliable:
-                influencers taken with a grain of salt, Reddit users of unknown motive, one subreddit
-                described as actively hostile.
-              </P>
-              <QuoteCallout accent={AMBER} text="People on r/NYC are like, this question's been asked so many times, I don't even wanna answer it." />
-
-              <P>
-                <strong>The women-only framing was never contested</strong> — not once, in any of the
-                seven conversations. That was the finding I&apos;d most expected to go the other way.
-              </P>
-
-              <P>
-                <strong>Two of the ten said they wouldn&apos;t use it, and both were right about
-                something.</strong> One named the differentiation problem outright.
-              </P>
-              <QuoteCallout accent={AMBER} text="I feel like it's more just kind of like yell for something that already has reviews. Why would I use this particular?" />
-              <P>
-                The other doesn&apos;t own a smartphone — but in ruling herself out, she described
-                exactly who Whspr is for: someone without a set of places they already trust. Between
-                the two of them they scoped the product better than I had. Whspr isn&apos;t for
-                everyone in New York. It&apos;s for people going somewhere they don&apos;t know yet.
+                <strong>The two who said no were right about something.</strong> One named the
+                differentiation problem outright. The other doesn&apos;t own a smartphone — but in
+                ruling herself out, she described exactly who Whspr is for: someone without a set of
+                places they already trust. Between them they scoped the product better than I had.
+                Whspr isn&apos;t for everyone in New York. It&apos;s for people going somewhere they
+                don&apos;t know yet.
               </P>
               <QuoteCallout
                 accent={AMBER}
