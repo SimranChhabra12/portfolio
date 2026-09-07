@@ -38,9 +38,27 @@ export default function Home() {
               Width is 59% and NOT `flex-1`, which is what positions the photo: filling the
               row pinned the frame to the right edge; at 59% + a 64px gap its centre sits
               near 75% with ~180px trailing. */}
-          <h1 className="t-display [text-wrap:balance] text-ink text-left !max-w-none md:w-[59%] md:shrink-0 md:min-w-0 relative z-10">
-            I am Simran, a product designer
-          </h1>
+          <div className="md:w-[62%] md:shrink-0 md:min-w-0 relative z-10">
+            {/* Local size override on `.t-display`, deliberately reinstated. An earlier one
+                (84px → 59px) was removed because at five words the headline read timid, and
+                that reasoning still holds for a five-word headline. This copy is 13 words in
+                the h1 alone: taken straight, `.t-display` runs it to five lines and the block
+                towers over the photo column, which is the pairing §1 asks for. Scaled to a
+                60px ceiling it lands in three lines against a frame of near-equal height.
+                The token itself is untouched — /work, /work/[slug] and /playground/[slug]
+                all take `.t-display` straight for short titles and still want 84px. */}
+            <h1
+              className="t-display [text-wrap:balance] text-ink text-left !max-w-none"
+              // Inline, not a Tailwind arbitrary value: `.t-display` and a utility class are
+              // both single-class specificity, and the layered token wins the cascade tie.
+              style={{ fontSize: "clamp(2rem, 1.35rem + 2.667vw, 3.75rem)" }}
+            >
+              Hi, I&apos;m Simran Chhabra, a product designer in New York by way of fashion.
+            </h1>
+            <p className="t-sub text-ink/70 mt-6 max-w-[52ch]">
+              Endlessly curious about people, and drawn to the messy middle of things.
+            </p>
+          </div>
           {/* Portrait frame, matching the cropped source (880x1517) exactly, so the photo
               is never re-cropped by the slot. The aspect is fixed by `aspect`, so every
               width below is the same crop at a different scale — nothing re-frames.
@@ -52,8 +70,8 @@ export default function Home() {
               `min-w` because a percentage alone inverts at the narrow end of the md band:
               23% of a 768 shell is 162px, and without a floor a further-narrowed column
               would drop below the 210px the same photo gets once it stacks on a phone. */}
-          <div className="w-full max-w-[236px] md:max-w-none md:w-[26%] md:min-w-[168px] lg:w-[22.5%] md:shrink-0">
-            <HeroPhoto single fluid aspect="880 / 1517" />
+          <div className="w-full max-w-[236px] md:max-w-none md:w-[26%] md:min-w-[168px] lg:w-[26%] md:shrink-0">
+            <HeroPhoto single fluid aspect="3 / 4" />
           </div>
         </div>
       </section>

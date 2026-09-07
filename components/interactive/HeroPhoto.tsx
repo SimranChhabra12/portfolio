@@ -3,21 +3,28 @@
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 
-// Frame is a fixed landscape aspect (628/438 ≈ 1.43, matching the reference site's hero
-// treatment — see DESIGN_RULES.md), but both of these photos are portrait 3:4. Filling the
-// frame therefore keeps only ~52% of each photo's height, so the vertical focal point does
-// real work here — `focus` is the vertical object-position, chosen by previewing the actual
-// crop rather than by eye. 0% holds the top of the photo, 100% the bottom.
+// `focus` is the vertical object-position, chosen by previewing the actual crop rather than
+// by eye. 0% holds the top of the photo, 100% the bottom. It only does real work where the
+// file's own ratio differs from the frame it is rendered in; both callers now pass
+// aspect="3 / 4", so a 3:4 file is placed unchanged and 50% is a no-op.
 const photos = [
   {
-    // Cropped in tight from hero-2.jpg (source box 780,1150 → 1660,2667). The full frame
-    // was mostly observatory glass and skyline; this is her, with just enough window left
-    // to place her. Already 880x1517, so the frame's own aspect matches the file and
-    // `object-cover` has nothing left to trim — hence focus 50%.
-    src: "/images/hero/hero-2-portrait.jpg",
-    alt: "Simran Chhabra at One World Observatory, Manhattan skyline behind her",
-    width: 880,
-    height: 1517,
+    // Cropped from NewHeroImage_HomePage.jpeg (source box 1120,2902 → 3228,5712), a
+    // 4284x5712 full-length shot where she reads small. This centres on her and lets her
+    // fill ~78% of the frame height: deliberately looser than the old hero-2-portrait.jpg,
+    // which was a tight head-to-knees crop.
+    //
+    // Cut to 3:4, which is the ratio BOTH callers render at, so the file is placed
+    // unchanged on each and focus 50% is a no-op. The homepage used to pass 880/1517 while
+    // /about passed 3/4, which meant whichever file matched one page was re-cropped by the
+    // other. Tested against 880/1517 and a 1.43 landscape crop in the homepage pairing:
+    // landscape aligned with the text block almost exactly but shrank her to a figure in a
+    // plaza, and 880/1517 overshot the text by ~120px. 3:4 is the middle, and it is the
+    // ratio that lets one file serve both pages.
+    src: "/images/hero/hero-grad-arch.jpg",
+    alt: "Simran Chhabra in graduation robes under the Washington Square Arch",
+    width: 1200,
+    height: 1600,
     focus: "50%",
   },
   {
