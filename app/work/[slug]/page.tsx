@@ -1,4 +1,5 @@
 import { notFound } from "next/navigation";
+import Wordmark from "@/components/ui/Wordmark";
 import Link from "next/link";
 import Nav from "@/components/ui/Nav";
 import Reveal from "@/components/ui/Reveal";
@@ -48,7 +49,7 @@ export default async function CaseStudyPage({
   const navItems = project.sections.map((s) => ({ id: s.id, label: s.heading }));
 
   return (
-    <main className="min-h-screen bg-cream">
+    <main className="min-h-screen bg-cream pt-[66px]">
       <Nav />
 
       {/* One rail for the whole page: sticky section nav on the left, the media
@@ -186,7 +187,7 @@ export default async function CaseStudyPage({
           <Link href="/work" className="label text-surface/70 hover:text-surface transition-colors">
             ← All work
           </Link>
-          <span className="font-serif text-[16px] text-surface/70">Simran Chhabra</span>
+          <Wordmark size="16px" className="text-surface/70" />
         </div>
       </footer>
     </main>

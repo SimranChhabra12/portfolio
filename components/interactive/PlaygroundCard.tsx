@@ -25,7 +25,10 @@ export default function PlaygroundCard({
 }) {
   return (
     <Link
-      href={`/playground/${entry.slug}`}
+      /* `href` overrides the default destination. GestureSketch is listed here but its
+         write-up is a full case study, so its tile goes to /work/gesture-sketch rather
+         than to a thinner /playground page that would duplicate it. */
+      href={entry.href ?? `/playground/${entry.slug}`}
       className="group block text-left focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent"
     >
       {/* 1 — media, 5:3. Uniform slot is the point: it is what makes the grid one set. */}
@@ -58,7 +61,7 @@ export default function PlaygroundCard({
 
         {/* 3 — title and what it was, one line, one size (matches the work cards) */}
         <h3 className="t-section text-ink !max-w-none mt-2 transition-colors [@media(hover:hover)]:group-hover:text-accent">
-          {entry.title} — {entry.oneLiner}
+          {entry.title}: {entry.oneLiner}
         </h3>
 
         {/* 4 — link affordance */}

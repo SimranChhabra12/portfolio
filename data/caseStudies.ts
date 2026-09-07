@@ -40,16 +40,39 @@ export interface CaseStudy {
   // Expects a muted, seamless-looping 5:3 mp4 in `public/`; task D3 produces them.
   coverVideo?: string;
   realCover?: string; // real screenshot to use instead of the placeholder, when available
+  // Product screens for the homepage card to cycle through (ScreenCycler). Deliberately
+  // SCREENS, not deck slides: the card is showing what was built, and a slide of frameworks
+  // reads as a presentation about the work rather than the work. `coverImage` stays the
+  // ground under them, so a project without this is unchanged.
+  cardScreens?: { src: string; alt: string }[];
   subtitle: string;
   role: string;
   year: string;
   status?: string; // e.g. "Research stage — prototype in progress"
   disciplines: string[];
   color: string;
+  // Pale ground for the homepage work card. NOT picked by eye and not derived from
+  // `color` — every project's `color` is its dark UI chrome, and #1B1B2F vs #2D2D2D
+  // reduce to the same grey, which made all the cards look like one card. Each value
+  // below is the product's own accent, sampled from its actual screens (the hue that
+  // owns the most saturated pixels across them), then tuned so every ground sits the
+  // SAME PERCEPTUAL DISTANCE from the --surface band the cards sit on: dE 14-19 (CIE76).
+  //
+  // Distance, not "same L and S" — that was the first rule and it failed. --surface is
+  // itself a warm cream at hue ~35, and Whspr's amber is hue 39, so at equal saturation
+  // it landed at dE 7.1 against the band and read as no colour at all, while the lilac
+  // and blue at the same L/S sat at 19.3 and 14.4. A hue near the ground's own hue needs
+  // more saturation to travel the same distance. Whspr is therefore L 88.5 / S 92, the
+  // others L 90 / S 55, and it is the dE column that makes them a family, not the inputs.
+  cardTint?: string;
   prototypeUrl?: string;
   // Keeps a project written but off the site: no card, no page, skipped by "next project".
   // Delete the flag to bring it back.
   hidden?: boolean;
+  // Listed in the playground rather than the work grid, while keeping its case study page
+  // and its place in the "next project" chain. GestureSketch moved here on 2026-09-05: the
+  // page is unchanged, only where it is advertised.
+  listInPlayground?: boolean;
   meta: {
     team: string;
     researchMethods: string[];
@@ -60,6 +83,294 @@ export interface CaseStudy {
 }
 
 const allCaseStudies: CaseStudy[] = [
+  // ── Dream Of ─────────────────────────────────────────────────────────────
+  // Added 2026-09-05 at Simran's request, to hold the second slot in the homepage row.
+  // Scope and framing confirmed by her: Dream Of is the COMPANY she interned at, and the
+  // haircare brand is theirs — she worked on its identity, packaging and storefront. So this
+  // is real professional work rather than a student concept, and the framing has to hold
+  // both halves: named industry experience, without implying the brand was hers to own.
+  // That is why `role` leads with "Design Intern" and `homeTags` opens on "Internship".
+  // Source: the public prototype at
+  // figma.com/proto/TpTYwn4pXksmEmIWaj6xEM/DREAM-OF--Copy- (read 2026-09-05) — a desktop
+  // storefront for a tinted dry shampoo ("Instant Refresh") and a leave-in conditioner
+  // ("Soft Landing"), selling on tester stats and before/after strips rather than claims.
+  //
+  // Artwork is IN (2026-09-06): pulled from the prototype's own image store with Simran's
+  // confirmation that the work and the permission are hers, then curated, downsized and
+  // committed under public/projects/dream-of. The cover is her bath campaign shot cropped
+  // to the card's 5:3.
+  //
+  // Rewritten 2026-09-06 against Simran's revised resume ("Simran Resume (1).pdf", which
+  // now carries a Dream Of entry the earlier version did not). The resume is the source of
+  // truth for role, dates, research and outcomes:
+  //   "Product Design Intern, Dream Of | Jun 2025 - Aug 2025
+  //    - Conducted surveys and interviews with Indian women ages 25-40 across Tier 1 and 2
+  //      cities, uncovering a strong preference for haircare formulated for their specific
+  //      hair types; insights directly shaped the shop and product-page strategy.
+  //    - Designed the initial e-commerce experience in Figma (homepage, shop, product,
+  //      bundle, and checkout flows). The information architecture I designed led to a
+  //      projected 25% improvement in product-page engagement and a 15% increase in
+  //      add-to-cart rate in prototype usability tests."
+  //
+  // SCOPE CORRECTION. The earlier framing here ("Identity, packaging and the storefront",
+  // role "Design Intern — brand, packaging & web", disciplines Brand/Packaging/Web) was
+  // guessed off the artwork by a previous session, not stated by Simran. Her own resume
+  // claims research + e-commerce IA and says nothing about brand identity or packaging, so
+  // the entry now claims only that. The packaging and campaign imagery stays as CONTEXT for
+  // what the store had to sell, and My Role says out loud that the brand is Dream Of's.
+  // If she did own brand or packaging work, this undersells her and should be widened.
+  //
+  // The 25% / 15% figures are labelled as PROJECTIONS FROM PROTOTYPE TESTING on the page,
+  // matching the resume's own wording. Do not restate them as live-store results.
+  //
+  // The four artwork sections (The Brand, Packaging, Ingredients, The Storefront) are
+  // written strictly off what is readable in the committed images and the public prototype:
+  // bottle copy, weights, gradient colours, nav items, hero lines, the 95% figure.
+  //
+  // Still open: meta.team is a visible [TBD] (DESIGN_DOC §8: a real marker, never invented
+  // copy), and the shop / bundle / checkout screens the resume names are NOT in the repo.
+  // The Figma design file (node-id=12-2) is view-only canvas, so those need exports from
+  // Simran before The Storefront can show her actual IA work rather than the brand's.
+  {
+    slug: "dream-of",
+    title: "Dream Of",
+    cardDescription:
+      "Almost none of them answered in product categories. They answered in hair.",
+    // Drafted from the prototype, for Simran to edit. The site's whole structure is proof —
+    // 95%-of-testers, before/after, ingredients — which is the honest design problem for a
+    // dry shampoo nobody believes works yet.
+    homeOneLiner: "Building a haircare shop around hair type, not product type",
+    homeTags: ["Internship", "UX Research", "E-commerce"],
+    coverImage: "/images/covers/dream-of.jpg",
+    subtitle:
+      "Research and the first e-commerce experience for Dream Of, a haircare label for Indian women",
+    role: "Product Design Intern",
+    year: "2025",
+    disciplines: ["UX Research", "Information Architecture", "E-commerce"],
+    // Sampled from the brand's own campaign photography — the sage tile the range is shot
+    // against, darkened enough to hold as an accent against cream.
+    color: "#6C8B6B",
+    meta: {
+      team: "[TBD: who else was on it, and who you reported to]",
+      researchMethods: ["Surveys", "User Interviews", "Usability Testing"],
+      platform: "Web — direct-to-consumer storefront",
+      duration: "3 months (Jun–Aug 2025)",
+    },
+    // The `asset` blocks are the codebase's existing way of naming a visual that is not in
+    // the repo yet (see Whspr and AIRA): the slot is written down so the page says what is
+    // missing, rather than the gap being invisible. Each one below names a specific export
+    // to drop into public/projects/dream-of/.
+    sections: [
+      {
+        id: "hook",
+        number: "01",
+        heading: "Hook",
+        blocks: [
+          {
+            type: "p",
+            text: "I spent the first stretch of the internship talking to Indian women between 25 and 40, across Tier 1 and Tier 2 cities, about their hair.",
+          },
+          {
+            type: "p",
+            text: "Almost none of them answered in product categories. They answered in hair. Oily at the roots and dry at the ends. Frizz back by noon. A scalp that itches all summer.",
+          },
+          {
+            type: "p",
+            text: "It kept happening, so it stopped being an anecdote. People weren\u2019t shopping for a shampoo. They were shopping for their hair.",
+          },
+        ],
+      },
+      {
+        id: "role",
+        number: "02",
+        heading: "My Role",
+        blocks: [
+          {
+            type: "p",
+            text: "Product design intern, June to August 2025. I ran the research, and I designed the first version of the e-commerce experience in Figma: homepage, shop, product page, bundles and checkout.",
+          },
+          {
+            type: "p",
+            text: "The brand was already Dream Of\u2019s. The identity, the packaging and the campaign photography on this page are theirs, and they\u2019re here because they\u2019re what the store had to sell. What I owned is the research underneath it and the way the store is put together.",
+          },
+        ],
+      },
+      {
+        id: "research",
+        number: "03",
+        heading: "Research",
+        blocks: [
+          {
+            type: "fields",
+            items: [
+              { label: "Who", value: "Indian women, 25 to 40" },
+              { label: "Where", value: "Tier 1 and Tier 2 cities" },
+              { label: "How", value: "Surveys, then interviews" },
+            ],
+          },
+          {
+            type: "p",
+            text: "What I was actually listening for was how people decide. What came back was that hair type does nearly all the deciding, and that buying haircare mostly feels like guessing whether something was made with your hair in mind.",
+          },
+          {
+            type: "p",
+            text: "For oily and flat hair. For dry and unmanageable hair. For a greasy, itchy scalp. That\u2019s the language on the front of every Dream Of bottle, and it\u2019s the same language people were already using about themselves.",
+          },
+        ],
+      },
+      {
+        id: "insight",
+        number: "04",
+        heading: "The Insight That Changed Everything",
+        blocks: [
+          {
+            type: "p",
+            text: "I went in thinking my job was to organise a shop. The shop turned out to be the wrong unit.",
+          },
+          {
+            type: "p",
+            text: "A grid of four products sorted by category makes the customer do the translating. Read the name, read the category, work out whether it\u2019s for you. If hair type is doing the deciding, the store should lead with who a product is for and what\u2019s in it, and treat the name as the last thing you need.",
+          },
+          {
+            type: "p",
+            text: "That\u2019s the order the bottles already use. It wasn\u2019t the order the store used.",
+          },
+          {
+            type: "hmw",
+            text: "How might we let someone find their product by describing their own hair, instead of decoding a category?",
+          },
+        ],
+      },
+      {
+        id: "brand",
+        number: "05",
+        heading: "The Brand",
+        blocks: [
+          {
+            type: "p",
+            text: "Four products, and the lead one is a tinted dry shampoo. That\u2019s a hard first sell. You\u2019re asking someone to put a powder near their roots and trust it comes out.",
+          },
+          {
+            type: "p",
+            text: "The photography almost never poses the product in a white void. It gets shot on hibiscus, on a bathroom ledge, in a hand, in a pocket. Real light, real hair. The wordmark is DREAM in caps with a script \u201cof\u201d cutting into it, sitting above a short claim line in small caps. This is the material the store had to sell.",
+          },
+          {
+            type: "screens",
+            images: [
+              { src: "/projects/dream-of/hero-hibiscus.jpg", caption: "The hero still — Instant Refresh, shot on hibiscus" },
+              { src: "/projects/dream-of/campaign-model-bottle.jpg", caption: "Campaign portrait — Soft Landing" },
+              { src: "/projects/dream-of/campaign-hands-up.jpg", caption: "Campaign — Instant Refresh" },
+            ],
+          },
+          { type: "asset", label: "Logo, wordmark and type system — the lockup on its own, not yet exported" },
+        ],
+      },
+      {
+        id: "packaging",
+        number: "06",
+        heading: "Packaging",
+        blocks: [
+          {
+            type: "p",
+            text: "Four products, one bottle language. Every piece is a gradient with a pink cap at the top, the wordmark centred, and the claim line under it. Then the category and who it\u2019s for on the left, the product name and its ingredients on the right, and the weight below. Same order every time.",
+          },
+          {
+            type: "p",
+            text: "What changes is the colour the pink fades into. Instant Refresh runs pink to blue, Soft Landing pink to green, Smooth Route pink to a pale yellow-green. The pink holds the range together on a shelf and the second colour tells you which one you picked up.",
+          },
+          {
+            type: "p",
+            text: "Formats follow the use. Instant Refresh is a 12 g stick with a puff applicator, small enough for the in-pocket shot the campaign leans on. Fresh Start and Smooth Route are 150 g tubs. Soft Landing is a 120 ml bottle.",
+          },
+          {
+            type: "screens",
+            images: [
+              { src: "/projects/dream-of/packaging-instant-refresh.jpg", caption: "Instant Refresh — tinted dry shampoo, for oily and flat hair" },
+              { src: "/projects/dream-of/packaging-instant-refresh-open.jpg", caption: "Instant Refresh — the puff applicator" },
+              { src: "/projects/dream-of/packaging-soft-landing.jpg", caption: "Soft Landing — lightweight leave-in conditioner" },
+              { src: "/projects/dream-of/packaging-smooth-route.jpg", caption: "Smooth Route — frizz taming mask" },
+              { src: "/projects/dream-of/packaging-fresh-start.jpg", caption: "Fresh Start — clarifying shampoo scrub" },
+              { src: "/projects/dream-of/packaging-soft-landing-white.jpg", caption: "Soft Landing, on white" },
+            ],
+          },
+        ],
+      },
+      {
+        id: "ingredients",
+        number: "07",
+        heading: "Ingredients",
+        blocks: [
+          {
+            type: "p",
+            text: "Every product carries its ingredients on the front instead of the back. Fresh Start reads Sea Salt, Caffeine, Botanical Blend. Smooth Route reads Botanical Blend, Cationic Blend, Raspberry Seed Oil.",
+          },
+          {
+            type: "p",
+            text: "The site gives them a page of their own, shot the way food gets shot. Hibiscus, ginseng, taro, sea salt, each one on its own. It\u2019s the same argument the before and afters make, told with a different picture. Here\u2019s what\u2019s in it. Look at it.",
+          },
+          {
+            type: "screens",
+            images: [
+              { src: "/projects/dream-of/ingredient-hibiscus.jpg", caption: "Hibiscus" },
+              { src: "/projects/dream-of/ingredient-ginseng.jpg", caption: "Ginseng" },
+              { src: "/projects/dream-of/ingredient-taro.jpg", caption: "Taro" },
+              { src: "/projects/dream-of/ingredient-shell.jpg", caption: "Sea salt" },
+            ],
+          },
+        ],
+      },
+      {
+        id: "storefront",
+        number: "08",
+        heading: "The Storefront",
+        blocks: [
+          {
+            type: "p",
+            text: "The nav is four items: Home, Ingredients, Dream Story, Sustainability. Three of the four are the brand explaining itself rather than selling, which says a lot about what the site is for.",
+          },
+          {
+            type: "p",
+            text: "The hero reads \u201cYour Dream Of Good Hair Days Starts Here\u201d with a single SHOP ALL button, and the product grid sits under \u201cBetter Care That Your Hair Deserves.\u201d Then the page stops selling and starts proving. A claims block built on a question, removes oil but not your scalp. 95% of testers. Before and after strips of the same scalp. Tester videos that play inline.",
+          },
+          {
+            type: "p",
+            text: "That order is the design. Nobody believes a dry shampoo works yet, so the page spends most of its length on evidence and very little on adjectives.",
+          },
+          {
+            type: "screens",
+            images: [
+              { src: "/projects/dream-of/proof-scalp-before.jpg", caption: "Before — the scalp shot the claims are made against" },
+              { src: "/projects/dream-of/proof-after.jpg", caption: "After" },
+              { src: "/projects/dream-of/testimonial-1.jpg", caption: "Tester video, as it runs on the page" },
+              { src: "/projects/dream-of/testimonial-2.jpg", caption: "Tester video" },
+              { src: "/projects/dream-of/campaign-pocket.jpg", caption: "In-pocket — the size story, told in the photography" },
+              { src: "/projects/dream-of/lifestyle-vanity.jpg", caption: "Lifestyle still from the storefront" },
+            ],
+          },
+          { type: "asset", label: "Full-page storefront captures — home, product detail, Ingredients, Dream Story, Sustainability" },
+        ],
+      },
+      {
+        id: "outcomes",
+        number: "09",
+        heading: "Outcomes",
+        blocks: [
+          {
+            type: "stats",
+            items: [
+              { value: "25%", label: "Projected improvement in product-page engagement" },
+              { value: "15%", label: "Projected increase in add-to-cart rate" },
+            ],
+          },
+          {
+            type: "p",
+            text: "Both numbers come out of usability testing on the prototype, against the information architecture I designed. They\u2019re projections from testing rather than takings from a live store, and I\u2019d rather say that than round them up.",
+          },
+        ],
+      },
+    ],
+  },
+
   // ── Whspr ────────────────────────────────────────────────────────────────
   {
     slug: "whspr",
@@ -69,13 +380,23 @@ const allCaseStudies: CaseStudy[] = [
     homeOneLiner: "Giving women's place knowledge somewhere to live",
     homeTags: ["Research", "Interaction Design"],
     coverImage: "/images/covers/whspr.jpg",
-    realCover: "/projects/whspr/area-info-expanded.png",
+    realCover: "/projects/whspr/whspr/area-info-expanded.png",
+    // Five screens across the whole product, not five states of one flow: search, a place
+    // profile, the area detail, contributing, and what you keep. All 402px-wide exports.
+    cardScreens: [
+      { src: "/projects/whspr/whspr/search.png", alt: "Whspr search — recently active places" },
+      { src: "/projects/whspr/whspr/house-of-yes.png", alt: "Whspr place profile — first-hand signals" },
+      { src: "/projects/whspr/whspr/area-info-expanded.png", alt: "Whspr area info — getting there and back" },
+      { src: "/projects/whspr/whspr/post-submission.png", alt: "Whspr contribution — after submitting" },
+      { src: "/projects/whspr/whspr/saved.png", alt: "Whspr saved places" },
+    ],
     subtitle:
       "A crowdsourced urban intelligence platform for women navigating city spaces",
     role: "Product Lead & Designer",
     year: "2026",
     disciplines: ["Product Design", "Full-Stack", "AI Integration"],
     color: "#1B1B2F",
+    cardTint: "#FDEAC7", // amber CTA button, 296 px across 5 screens
     meta: {
       team: "Solo — product lead & designer",
       researchMethods: ["User Interviews", "Secondary Research", "Competitive Analysis"],
@@ -219,11 +540,11 @@ const allCaseStudies: CaseStudy[] = [
           {
             type: "screens",
             images: [
-              { src: "/projects/whspr/splash.png", caption: "Onboarding" },
-              { src: "/projects/whspr/search.png", caption: "Search" },
-              { src: "/projects/whspr/search-results.png", caption: "Signals" },
-              { src: "/projects/whspr/area-info.png", caption: "Area Info" },
-              { src: "/projects/whspr/post-submission.png", caption: "Submit a signal" },
+              { src: "/projects/whspr/whspr/splash.png", caption: "Onboarding" },
+              { src: "/projects/whspr/whspr/search.png", caption: "Search" },
+              { src: "/projects/whspr/whspr/search-results.png", caption: "Signals" },
+              { src: "/projects/whspr/whspr/area-info.png", caption: "Area Info" },
+              { src: "/projects/whspr/whspr/post-submission.png", caption: "Submit a signal" },
             ],
           },
         ],
@@ -297,6 +618,17 @@ const allCaseStudies: CaseStudy[] = [
     year: "2024",
     disciplines: ["UX Research", "Feature Design", "Service Design"],
     color: "#C4472A",
+    cardTint: "#D7E1F4", // primary blue, 175 px in the cover
+    // Captured from the Celebrations prototype itself (the HTML one in
+    // 03_Portfolio_Reference/Resy), rendered headless at 3x and cropped to the screen —
+    // so this is the real design, not a crop out of the composed cover, whose three
+    // phones overlap each other and cannot yield an uncropped screen.
+    cardScreens: [
+      {
+        src: "/projects/resy/celebrations-home.png",
+        alt: "Resy Celebrations home — booking a table for a whole group",
+      },
+    ],
     prototypeUrl: "https://resy-celebrations-portfolio.surge.sh",
     meta: {
       team: "4-person team",
@@ -531,11 +863,19 @@ const allCaseStudies: CaseStudy[] = [
     homeTags: ["Research", "Product Design"],
     coverImage: "/images/covers/aira.jpg",
     realCover: "/projects/aira-pcos/AIRAScreens/Energy PAge 4.png",
+    cardScreens: [
+      { src: "/projects/aira-pcos/AIRAScreens/HOme tab_.png", alt: "AIRA home tab" },
+      { src: "/projects/aira-pcos/AIRAScreens/Energy PAge 4.png", alt: "AIRA energy wave and readiness score" },
+      { src: "/projects/aira-pcos/AIRAScreens/Menstrual Phase.png", alt: "AIRA cycle, phases view" },
+      { src: "/projects/aira-pcos/AIRAScreens/Wind down landing tab.png", alt: "AIRA wind down" },
+      { src: "/projects/aira-pcos/AIRAScreens/Learn tab - Global NAV.png", alt: "AIRA learn tab" },
+    ],
     subtitle: "A circadian rhythm app for PCOS management",
     role: "Product Designer & Researcher",
     year: "2024",
     disciplines: ["UX Research", "Product Design", "Interaction Design"],
     color: "#2D2D2D",
+    cardTint: "#E2D7F4", // phase-ring purple, 533 px across 5 screens
     meta: {
       team: "4-person team (shared build)",
       researchMethods: [
@@ -752,6 +1092,7 @@ const allCaseStudies: CaseStudy[] = [
   // ── GestureSketch ────────────────────────────────────────────────────────
   {
     slug: "gesture-sketch",
+    listInPlayground: true,
     title: "GestureSketch",
     cardDescription:
       "Most people don't freeze because they have nothing to say. They freeze because on paper, one wrong line feels permanent.",
@@ -764,6 +1105,7 @@ const allCaseStudies: CaseStudy[] = [
     year: "2025",
     disciplines: ["UX Research", "Interaction Design", "Creative Coding"],
     color: "#3E6B5A",
+    cardTint: "#E0F4D7", // sketch-line green
     prototypeUrl: "https://simranchhabra12.github.io/gesturedrawing",
     meta: {
       team: "Solo",

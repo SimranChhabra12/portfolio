@@ -1,5 +1,6 @@
 import { T } from "@/components/casestudy2/tokens";
-import { CaseStudyNav, CaseStudyFooter } from "@/components/casestudy2/CaseStudyChrome";
+import { CaseStudyFooter } from "@/components/casestudy2/CaseStudyChrome";
+import Nav from "@/components/ui/Nav";
 import Section, { P, Caption, H2 } from "@/components/casestudy2/Section";
 import ScreensRow from "@/components/casestudy2/ScreensRow";
 import FeatureVisual from "@/components/casestudy2/FeatureVisual";
@@ -9,6 +10,12 @@ import DecisionCard from "@/components/casestudy2/whspr/DecisionCard";
 import FindingsBoard from "@/components/casestudy2/whspr/FindingsBoard";
 import KilledKept from "@/components/casestudy2/whspr/KilledKept";
 import DesignSystemSlide from "@/components/casestudy2/whspr/DesignSystemSlide";
+import WhereKnowledgeLives from "@/components/casestudy2/whspr/WhereKnowledgeLives";
+import ProjectHeadline from "@/components/casestudy2/whspr/ProjectHeadline";
+import WhatAndRole from "@/components/casestudy2/whspr/WhatAndRole";
+import HeroVisual from "@/components/casestudy2/whspr/HeroVisual";
+import IntroScreens from "@/components/casestudy2/whspr/IntroScreens";
+import SectionIndex from "@/components/casestudy2/SectionIndex";
 import DeckSlide from "@/components/casestudy2/DeckSlide";
 import LivePrototype from "@/components/casestudy2/LivePrototype";
 import { CaseStudyShell, Prose, Media } from "../_components/columns";
@@ -29,67 +36,40 @@ const PHONE_PAIR = 400;
 const PHONE_ROW_3UP = 316; // 3 x 316 + 2 x 24 gap = 1000
 const PHONE_ROW_2UP = 400;
 
+// Contents index, pinned in the left margin. Keep in step with the
+// <Section> ids, numbers and headings below.
+const SECTIONS = [
+  { id: "context", number: "01", label: "Context" },
+  { id: "research", number: "02", label: "Research" },
+  { id: "decisions", number: "03", label: "Design Decisions" },
+  { id: "product", number: "04", label: "The Product" },
+  { id: "testing", number: "05", label: "Testing It on the Street" },
+  { id: "next", number: "06", label: "What I'd Do Next" },
+  { id: "takeaway", number: "07", label: "What I Took Away" },
+];
+
 export default function WhsprPage() {
   return (
     <main style={{ backgroundColor: T.cream }} className="min-h-screen overflow-x-hidden">
-      <CaseStudyNav />
+      <Nav coverId="whspr-cover" />
+      <SectionIndex items={SECTIONS} alignWithId="whspr-headline" revealWithId="whspr-headline" />
+
+      {/* Cover band — top ~30% of the first screen */}
+      <HeroVisual />
 
       {/* Hero */}
-      <CaseStudyShell className="pt-40">
+      <CaseStudyShell className="pt-20">
         <div style={{ paddingBottom: T.space.section }}>
-          <p
-            className="mb-6"
-            style={{
-              fontFamily: "var(--font-body)",
-              fontSize: T.type.caption,
-              textTransform: "uppercase",
-              letterSpacing: "0.08em",
-              color: T.inkMuted,
-            }}
-          >
-            4 months (Jan 2026 – May 2026) · Mobile Application
-          </p>
-          <h1 className="t-display" style={{ color: T.ink, marginBottom: "1.5rem" }}>
-            Whspr
-          </h1>
-          <Prose>
-            <P large>
-              A crowdsourced urban intelligence platform for women navigating NYC.
-            </P>
-            <P>
-              I led this end to end — the interview study, the information architecture, the
-              contribution flow, the trust and verification system, and the visual design system.
-              I also designed and built the working prototype myself, solo, in Claude Code, so the
-              product decisions and the technical ones were the same set of decisions. Building it
-              meant I couldn&apos;t hand-wave the hard parts: the schema, the trust scoring, and the
-              API integrations all had to actually work.
-            </P>
-          </Prose>
+          <ProjectHeadline />
 
-          <div className="grid grid-cols-2 sm:grid-cols-3 gap-8 mt-16">
-            {[
-              { label: "Hats Worn", value: "Product Design, UX Research, Product Strategy, Prototyping, UI Design" },
-              { label: "Platform", value: "Mobile Application" },
-              { label: "Timeline", value: "4 months" },
-            ].map((f) => (
-              <div key={f.label}>
-                <p
-                  style={{
-                    fontFamily: "var(--font-body)",
-                    fontSize: T.type.caption,
-                    textTransform: "uppercase",
-                    letterSpacing: "0.08em",
-                    color: T.inkMuted,
-                    marginBottom: "0.5rem",
-                  }}
-                >
-                  {f.label}
-                </p>
-                <p style={{ fontFamily: "var(--font-body)", fontSize: "0.9375rem", color: T.ink, lineHeight: 1.5 }}>
-                  {f.value}
-                </p>
-              </div>
-            ))}
+          {/* The app's own onboarding, in the cover's palette — the premise stated in the
+              product's words before the case study starts explaining it. */}
+          <div className="mt-14">
+            <IntroScreens />
+          </div>
+
+          <div className="mt-20">
+            <WhatAndRole />
           </div>
         </div>
       </CaseStudyShell>
@@ -114,7 +94,10 @@ export default function WhsprPage() {
             </Prose>
           </Section>
 
-          <Section id="reframe" number="02" heading="The Reframe">
+          <Section id="research" number="02" heading="Research">
+            <Media>
+              <WhereKnowledgeLives />
+            </Media>
             <Prose>
               <P>
                 I began by researching why women still resort to the whisper network in the age of

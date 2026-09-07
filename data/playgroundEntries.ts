@@ -18,7 +18,7 @@ export interface PlaygroundEntry {
   tags: string;
   /**
    * The half of the card title that says what the piece actually was. Rendered on the
-   * same line as `title` at the same size — "Zebein — Creative direction for ...".
+   * same line as `title` at the same size — "Zebein: Creative direction for ...".
    * Matches the `Project — Problem` format the work cards use.
    */
   oneLiner: string;
@@ -47,6 +47,27 @@ export interface PlaygroundEntry {
 const playgroundEntries: PlaygroundEntry[] = [
   // Order is the running order of the grid. `kind` below is routing, not presentation:
   // every entry renders the same card at the same scale (review, 2026-09-05).
+  // GestureSketch lives here rather than in the work grid (2026-09-05), but its write-up
+  // is still the full case study at /work/gesture-sketch — hence `href`. Listing it in the
+  // playground is a statement about where it belongs among the projects, not a decision to
+  // throw away the research behind it, so nothing about that page changes.
+  {
+    slug: "gesture-sketch",
+    title: "GestureSketch",
+    tags: "Creative Coding · AI",
+    oneLiner: "Drawing in the air with your hands, as a way into art therapy",
+    kind: "light",
+    href: "/work/gesture-sketch",
+    teaser:
+      "An AI art therapist concept, built as a working p5.js prototype: your hand becomes the brush, so starting costs nothing.",
+    cover: {
+      src: "/images/covers/gesture-sketch.jpg",
+      alt: "GestureSketch — hand-tracked drawing canvas",
+      width: 2000,
+      height: 1200,
+    },
+    images: [],
+  },
   {
     slug: "si-ch",
     title: "Si.Ch",

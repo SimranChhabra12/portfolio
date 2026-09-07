@@ -1,5 +1,6 @@
 import { T } from "@/components/casestudy2/tokens";
-import { CaseStudyNav, CaseStudyFooter } from "@/components/casestudy2/CaseStudyChrome";
+import { CaseStudyFooter } from "@/components/casestudy2/CaseStudyChrome";
+import Nav from "@/components/ui/Nav";
 import Section, { P, List, DecisionBlock, Caption, H3 } from "@/components/casestudy2/Section";
 import DarkBlock from "@/components/casestudy2/DarkBlock";
 import QuoteCallout from "@/components/casestudy2/QuoteCallout";
@@ -20,7 +21,7 @@ const RUST = "#C4472A";
 export default function ResyPage() {
   return (
     <main style={{ backgroundColor: T.cream }} className="min-h-screen overflow-x-hidden">
-      <CaseStudyNav />
+      <Nav />
 
       {/* Hero */}
       <section className="px-8 lg:px-16 pt-40" style={{ paddingBottom: T.space.section }}>

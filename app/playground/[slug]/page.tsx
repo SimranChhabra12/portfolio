@@ -1,16 +1,25 @@
 import { notFound } from "next/navigation";
+import Wordmark from "@/components/ui/Wordmark";
 import Link from "next/link";
 import Nav from "@/components/ui/Nav";
 import PlaygroundCarousel from "@/components/interactive/PlaygroundCarousel";
 import P5Sketch from "@/components/interactive/P5Sketch";
 import playgroundEntries, { getPlaygroundEntry } from "@/data/playgroundEntries";
 
+// An entry whose `href` leaves /playground is written up somewhere else on the site; the
+// self-referential hrefs most entries carry are not that.
+const isWrittenElsewhere = (e: { href?: string }) =>
+  Boolean(e.href && !e.href.startsWith("/playground/"));
+
 // Every entry gets a page. The `full` / `light` split is still what decides how much
 // body copy a page carries, but it no longer decides whether a page exists — a `light`
 // entry used to open in a small modal instead, which is what made the detail views
 // inconsistent in size.
 export async function generateStaticParams() {
-  return playgroundEntries.map((e) => ({ slug: e.slug }));
+  // Most entries carry an `href` that simply points at their own page here. One points
+  // AWAY — GestureSketch is listed in the playground but written up as a case study — and
+  // that one gets no page of its own, since it would be a thinner duplicate.
+  return playgroundEntries.filter((e) => !isWrittenElsewhere(e)).map((e) => ({ slug: e.slug }));
 }
 
 export async function generateMetadata({
@@ -34,14 +43,16 @@ export default async function PlaygroundEntryPage({
 }) {
   const { slug } = await params;
   const entry = getPlaygroundEntry(slug);
-  if (!entry) notFound();
+  // Filtering generateStaticParams stops these being built, but a direct request would
+  // still render one, so the route refuses them outright.
+  if (!entry || isWrittenElsewhere(entry)) notFound();
 
   // `pageImages` is the page-specific set where one exists; otherwise the entry's own
   // images are the gallery. Either way the carousel frames them identically.
   const gallery = entry.pageImages?.length ? entry.pageImages : entry.images;
 
   return (
-    <main className="min-h-screen bg-cream">
+    <main className="min-h-screen bg-cream pt-[66px]">
       <Nav />
 
       <section className="px-[var(--page-gutter,32px)] pt-40">
@@ -101,7 +112,7 @@ export default async function PlaygroundEntryPage({
           >
             ← Playground
           </Link>
-          <span className="font-serif text-[16px] text-mauve">Simran Chhabra</span>
+          <Wordmark size="16px" className="text-mauve" />
         </div>
       </footer>
     </main>

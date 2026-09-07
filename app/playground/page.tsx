@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Wordmark from "@/components/ui/Wordmark";
 import Link from "next/link";
 import Nav from "@/components/ui/Nav";
 import Playground from "@/components/interactive/Playground";
@@ -11,7 +12,7 @@ export const metadata: Metadata = {
 
 export default function PlaygroundIndexPage() {
   return (
-    <main className="min-h-screen bg-cream">
+    <main className="min-h-screen bg-cream pt-[66px]">
       <Nav />
 
       {/*
@@ -43,7 +44,7 @@ export default function PlaygroundIndexPage() {
           >
             ← Home
           </Link>
-          <span className="font-serif text-[16px] text-mauve">Simran Chhabra</span>
+          <Wordmark size="16px" className="text-mauve" />
         </div>
       </footer>
     </main>

@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import Script from "next/script";
 import Reveal from "@/components/ui/Reveal";
+import ScreenCycler from "@/components/interactive/ScreenCycler";
 import caseStudies from "@/data/caseStudies";
 
 // Cover-video controller (task D2). This is an inline `next/script` rather than a
@@ -44,7 +45,9 @@ const COVER_VIDEO_SCRIPT = `
 // Homepage display order: Whspr + AIRA, then Resy, then GestureSketch.
 // (Independent of the canonical caseStudies order, which drives "next project" on the case study pages.)
 // Slugs that aren't in caseStudies — a hidden project, say — simply drop out below.
-const HOMEPAGE_ORDER = ["whspr", "aira-pcos", "resy", "gesture-sketch"];
+// GestureSketch left this list on 2026-09-05 (it is listed in the playground now, page
+// unchanged); Dream Of takes the second slot in the first row.
+const HOMEPAGE_ORDER = ["whspr", "dream-of", "aira-pcos", "resy"];
 const orderedForHomepage = HOMEPAGE_ORDER.map((slug) =>
   caseStudies.find((p) => p.slug === slug)
 ).filter((p): p is (typeof caseStudies)[number] => Boolean(p));
@@ -77,15 +80,52 @@ export default function WorkChapters() {
                 attribute: it would re-fetch the same artwork unoptimised, when the
                 `next/image` copy underneath is already there and responsive. */}
             <div className="relative w-full aspect-[5/3] overflow-hidden rounded-[var(--radius-card)] bg-surface">
-              <Image
-                src={project.coverImage}
-                alt={`Composed product screens from ${project.title}`}
-                fill
-                className="object-cover"
-                /* Half-width slot now, not the 1000px media column — two cards share
-                   the shell, so each is ~50vw on desktop and full-bleed once stacked. */
-                sizes="(max-width: 768px) 100vw, 50vw"
-              />
+              {!project.coverImage ? (
+                /* No artwork yet. A plate carrying the initial and an explicit "Coming
+                   soon" is the honest version — pointing <Image> at a missing file gives
+                   a broken card, and borrowing another project's cover would misdescribe
+                   this one. Drop a real cover into the entry and this branch stops firing. */
+                <div
+                  className="absolute inset-0 flex flex-col justify-between p-6 lg:p-8"
+                  style={{ backgroundColor: project.color }}
+                >
+                  <span
+                    aria-hidden
+                    className="font-serif leading-none text-cream/15 text-[120px] lg:text-[160px] -ml-2 -mt-2"
+                  >
+                    {project.title[0]}
+                  </span>
+                  <span className="t-caption uppercase tracking-[0.08em] text-cream/70 self-start">
+                    Coming soon
+                  </span>
+                </div>
+              ) : project.cardScreens ? (
+                /* Cards that have real screens show the product cycling through them
+                   rather than one composed still. Not every project qualifies: Resy's
+                   screens live in the hosted prototype, and GestureSketch is a camera
+                   piece whose composed cover shows the hand tracking — a phone screen
+                   would say less about it than the still does. Both keep the cover. */
+                <ScreenCycler
+                  screens={project.cardScreens}
+                  cover={project.coverImage}
+                  coverAlt={`Composed product screens from ${project.title}`}
+                  tint={project.cardTint ?? "var(--surface)"}
+                  wordmark={project.title}
+                  /* Offset from the mosaic's own stagger so the two sections never
+                     land on the same beat. */
+                  stagger={i * 520}
+                />
+              ) : (
+                <Image
+                  src={project.coverImage}
+                  alt={`Composed product screens from ${project.title}`}
+                  fill
+                  className="object-cover"
+                  /* Half-width slot now, not the 1000px media column — two cards share
+                     the shell, so each is ~50vw on desktop and full-bleed once stacked. */
+                  sizes="(max-width: 768px) 100vw, 50vw"
+                />
+              )}
               {project.coverVideo && (
                 <video
                   className="cover-video absolute inset-0 h-full w-full object-cover"
@@ -145,14 +185,22 @@ export default function WorkChapters() {
                 D1), so sharing that line cost the title ~280px and ran Resy to four lines
                 in a 588px column. Title takes the full width; the role sits under it. */}
             <div className="mt-4 flex flex-col gap-y-2">
-              {/* Title: project name AND the problem it solves, one line, one size
-                  (task D1). `.t-sub`, not `.t-section` — the card is now half the width
-                  it was, and 36px over a ~590px column ran every one of these to three
-                  lines. The colon sits tight against the name, so unlike the em dash it
-                  was before it can never wrap onto a line of its own, and
-                  `text-wrap: pretty` keeps the last line off a single-word orphan. */}
-              <h3 className="t-sub text-ink !max-w-none [text-wrap:pretty] transition-colors [@media(hover:hover)]:group-hover:text-accent">
-                {`${project.title}: ${project.homeOneLiner}`}
+              {/* Title: project name and the problem it solves (task D1), but on two lines
+                  rather than one. Merging them into a single string is what previously
+                  forced the whole thing down to `.t-sub` — 36px over a ~590px column ran
+                  the merged line long. Split, each half fits its own line at its own
+                  grade: the name alone is short enough to hold `.t-section` (36px
+                  Playfair) on one line for all four projects, and the problem sits under
+                  it at `.t-sub`. Measured at 1440 in the 588px column: 1 + 1 lines, 80px
+                  total per card — shorter than the 96px the merged string took at 36px,
+                  and uniform across all four so the row heights still match.
+                  This is also what restores DESIGN_DOC §2's ratio rule: the project title
+                  is back in the display family instead of sharing a grade with body copy. */}
+              <h3 className="!max-w-none [text-wrap:pretty]">
+                <span className="block t-section text-ink transition-colors [@media(hover:hover)]:group-hover:text-accent">
+                  {project.title}
+                </span>
+                <span className="block t-sub text-ink/75 mt-1">{project.homeOneLiner}</span>
               </h3>
 
               {/* Role/discipline. Was `text-mauve`, which measures 2.27:1 on cream and

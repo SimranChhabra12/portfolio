@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Wordmark from "@/components/ui/Wordmark";
 import Nav from "@/components/ui/Nav";
 import caseStudies from "@/data/caseStudies";
 import { CaseStudyShell, Prose, SECTION_GAP } from "./_components/columns";
@@ -11,7 +12,7 @@ const HALF_GAP = `calc(${SECTION_GAP} / 2)`;
 
 export default function WorkPage() {
   return (
-    <main className="min-h-screen bg-cream">
+    <main className="min-h-screen bg-cream pt-[66px]">
       <Nav />
 
       <CaseStudyShell className="pt-40">
@@ -24,7 +25,7 @@ export default function WorkPage() {
           className="divide-y divide-ink/10 border-t border-ink/10"
           style={{ marginTop: HALF_GAP, marginBottom: SECTION_GAP }}
         >
-          {caseStudies.map((project, i) => (
+          {caseStudies.filter((p) => !p.listInPlayground).map((project, i) => (
             <Link
               key={project.slug}
               href={`/work/${project.slug}`}
@@ -72,7 +73,7 @@ export default function WorkPage() {
 
       <footer className="bg-dark-bg py-8 px-8 lg:px-16">
         <div className="max-w-6xl mx-auto flex justify-between items-center">
-          <span className="font-serif text-[16px] text-surface/70">Simran Chhabra</span>
+          <Wordmark size="16px" className="text-surface/70" />
           <div className="flex gap-6">
             <a
               href="mailto:skc9841@nyu.edu"

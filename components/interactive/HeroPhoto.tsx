@@ -10,6 +10,17 @@ import Image from "next/image";
 // crop rather than by eye. 0% holds the top of the photo, 100% the bottom.
 const photos = [
   {
+    // Cropped in tight from hero-2.jpg (source box 780,1150 → 1660,2667). The full frame
+    // was mostly observatory glass and skyline; this is her, with just enough window left
+    // to place her. Already 880x1517, so the frame's own aspect matches the file and
+    // `object-cover` has nothing left to trim — hence focus 50%.
+    src: "/images/hero/hero-2-portrait.jpg",
+    alt: "Simran Chhabra at One World Observatory, Manhattan skyline behind her",
+    width: 880,
+    height: 1517,
+    focus: "50%",
+  },
+  {
     src: "/images/hero/hero-1.jpg",
     alt: "Simran Chhabra in graduation dress under the Washington Square Arch",
     width: 2000,
@@ -17,14 +28,6 @@ const photos = [
     // She stands low and small in a tall frame; 85% keeps her full figure and the arch's
     // columns. Centring cuts her off at the waist, and 100% trades the arch for pavement.
     focus: "85%",
-  },
-  {
-    src: "/images/hero/hero-2.jpg",
-    alt: "Simran Chhabra at One World Observatory, Manhattan skyline behind her",
-    width: 2000,
-    height: 2667,
-    // Enough headroom that her face clears the top edge, while keeping the skyline in shot.
-    focus: "65%",
   },
 ];
 
@@ -44,7 +47,8 @@ const TRANSITION_MS = 350;
 export default function HeroPhoto({
   single = false,
   fluid = false,
-}: { single?: boolean; fluid?: boolean } = {}) {
+  aspect,
+}: { single?: boolean; fluid?: boolean; aspect?: string } = {}) {
   const [index, setIndex] = useState(0);
   const [paused, setPaused] = useState(false);
   const reducedMotionRef = useRef(false);
@@ -63,14 +67,26 @@ export default function HeroPhoto({
 
   const shown = single ? [photos[0]] : photos;
 
+  // The 3D flip machinery only earns its keep when there is a second photo to turn to.
+  // Under `single` there is one photo and no interval, so `perspective`, `preserve-3d`,
+  // `backface-visibility` and the transform transition were all inert — but still enough to
+  // promote a compositing layer on the homepage hero, the largest image on the site. Gate
+  // them on the carousel actually running. No behaviour change on /about, which is the only
+  // caller that flips.
+  const flip = !single;
+
   return (
     <div
       className={`relative ${
         fluid
           ? "w-full"
           : "w-[var(--hero-photo-w)] sm:w-[var(--hero-photo-w-sm)] lg:w-[var(--hero-photo-w-lg)]"
-      } aspect-[var(--hero-photo-aspect)] rounded-[var(--radius-card)] shadow-[0_24px_48px_-16px_rgba(58,42,56,0.32)] bg-surface`}
-      style={{ perspective: "1600px", overflow: "hidden" }}
+      } rounded-[var(--radius-card)] shadow-[0_24px_48px_-16px_rgba(58,42,56,0.32)] bg-surface`}
+      style={{
+        perspective: flip ? "1600px" : undefined,
+        overflow: "hidden",
+        aspectRatio: aspect ?? "var(--hero-photo-aspect)",
+      }}
       onMouseEnter={() => setPaused(true)}
       onMouseLeave={() => setPaused(false)}
       onFocus={() => setPaused(true)}
@@ -87,16 +103,18 @@ export default function HeroPhoto({
           style={{
             objectPosition: `50% ${photo.focus}`,
             opacity: i === index ? 1 : 0,
-            transform: i === index ? "rotateY(0deg)" : "rotateY(-90deg)",
-            transformStyle: "preserve-3d",
-            backfaceVisibility: "hidden",
+            transform: flip ? (i === index ? "rotateY(0deg)" : "rotateY(-90deg)") : undefined,
+            transformStyle: flip ? "preserve-3d" : undefined,
+            backfaceVisibility: flip ? "hidden" : undefined,
             // Opacity and transform run on the same clock; when they drifted apart the
             // half-turned outgoing photo stayed visible under the incoming one.
-            transition: `transform ${TRANSITION_MS}ms cubic-bezier(0.65, 0, 0.35, 1), opacity ${TRANSITION_MS}ms ease-in-out`,
+            transition: flip
+              ? `transform ${TRANSITION_MS}ms cubic-bezier(0.65, 0, 0.35, 1), opacity ${TRANSITION_MS}ms ease-in-out`
+              : undefined,
           }}
           sizes={
             fluid
-              ? "(max-width: 768px) 100vw, 52vw"
+              ? "(max-width: 768px) 90vw, 30vw"
               : "(max-width: 640px) 320px, (max-width: 1024px) 480px, 628px"
           }
           // `priority` is deprecated in Next 16 in favour of `preload`.

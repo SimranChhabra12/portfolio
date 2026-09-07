@@ -1,5 +1,6 @@
 import { T } from "@/components/casestudy2/tokens";
-import { CaseStudyNav, CaseStudyFooter } from "@/components/casestudy2/CaseStudyChrome";
+import { CaseStudyFooter } from "@/components/casestudy2/CaseStudyChrome";
+import Nav from "@/components/ui/Nav";
 import Section, { H3, P, List, Caption } from "@/components/casestudy2/Section";
 import ScreensRow from "@/components/casestudy2/ScreensRow";
 import PhoneMockup from "@/components/casestudy2/PhoneMockup";
@@ -25,7 +26,7 @@ const PHONE_ROW_3UP = 316; // 3 x 316 + 2 x 24 gap = 1000
 export default function AiraPage() {
   return (
     <main style={{ backgroundColor: T.cream }} className="min-h-screen overflow-x-hidden">
-      <CaseStudyNav />
+      <Nav />
 
       {/* Hero */}
       <CaseStudyShell className="pt-40">
