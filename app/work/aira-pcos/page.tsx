@@ -8,6 +8,7 @@ import QuoteCallout from "@/components/casestudy2/QuoteCallout";
 import { StatRow } from "@/components/casestudy2/StatCallout";
 import SeasonsDiagram from "@/components/casestudy2/aira/SeasonsDiagram";
 import FeatureVisual from "@/components/casestudy2/FeatureVisual";
+import HeroVisual from "@/components/casestudy2/aira/HeroVisual";
 import { CaseStudyShell, Prose, Media } from "../_components/columns";
 
 export const metadata = {
@@ -26,10 +27,13 @@ const PHONE_ROW_3UP = 316; // 3 x 316 + 2 x 24 gap = 1000
 export default function AiraPage() {
   return (
     <main style={{ backgroundColor: T.cream }} className="min-h-screen overflow-x-hidden">
-      <Nav />
+      <Nav coverId="aira-cover" />
+
+      {/* Cover band — top ~30% of the first screen */}
+      <HeroVisual />
 
       {/* Hero */}
-      <CaseStudyShell className="pt-40">
+      <CaseStudyShell className="pt-20">
         <div style={{ paddingBottom: T.space.section }}>
           <p
             className="mb-6"

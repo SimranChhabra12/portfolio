@@ -55,7 +55,17 @@ export default function Home() {
             >
               Hi, I&apos;m Simran Chhabra, a product designer in New York by way of fashion.
             </h1>
-            <p className="t-sub text-ink/70 mt-6 max-w-[52ch]">
+            {/* Raised off the 20px `.t-sub` token, and inline for the same specificity reason
+                as the h1 above. The complaint was that this line read as a caption rather than
+                the second half of the introduction, and the cause is the ratio: 60/20 is a 3:1
+                drop. Scaling the whole hero up was the other option and it overpowers the
+                photo column. Lifting only this line to 26px puts the pair at ~2.3:1, which
+                reads as two weights of one sentence. Colour lifted 70% → 78% for the same
+                reason: at 20px the lighter ink was doing part of the shrinking. */}
+            <p
+              className="t-sub text-ink/[0.78] mt-7 max-w-[46ch]"
+              style={{ fontSize: "clamp(1.125rem, 0.93rem + 0.8vw, 1.625rem)", lineHeight: 1.45 }}
+            >
               Endlessly curious about people, and drawn to the messy middle of things.
             </p>
           </div>
@@ -142,17 +152,17 @@ export default function Home() {
             <p className="t-body text-cream/70 !max-w-none">
               Reach out to me:{" "}
               <a
-                href="mailto:simranchhabra92@gmail.com"
+                href="mailto:simran.chhabra012@gmail.com"
                 className="text-surface underline underline-offset-4 decoration-cream/30 transition-colors [@media(hover:hover)]:hover:text-mauve focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-mauve"
               >
-                simranchhabra92@gmail.com
+                simran.chhabra012@gmail.com
               </a>
             </p>
 
             <p className="t-body text-cream/70 !max-w-none">
               Find me on:{" "}
               <a
-                href="https://linkedin.com/in/simranchhabra"
+                href="https://www.linkedin.com/in/simranchhabra12/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-surface underline underline-offset-4 decoration-cream/30 transition-colors [@media(hover:hover)]:hover:text-mauve focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-mauve"

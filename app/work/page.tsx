@@ -82,7 +82,7 @@ export default function WorkPage() {
               Email
             </a>
             <a
-              href="https://linkedin.com/in/simranchhabra"
+              href="https://www.linkedin.com/in/simranchhabra12/"
               target="_blank"
               rel="noopener noreferrer"
               className="label text-surface/70 hover:text-surface transition-colors"
