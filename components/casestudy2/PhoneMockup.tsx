@@ -11,6 +11,7 @@ export default function PhoneMockup({
   width = 240,
   pixelWidth,
   pixelHeight,
+  priority = false,
 }: {
   src: string;
   alt: string;
@@ -18,6 +19,8 @@ export default function PhoneMockup({
   width?: number;
   pixelWidth: number;
   pixelHeight: number;
+  /** Set for above-the-fold screens so Next doesn't lazy-load the LCP image. */
+  priority?: boolean;
 }) {
   const bezel = Math.round(width * 0.045);
   const outerRadius = Math.round(width * 0.17);
@@ -83,6 +86,7 @@ export default function PhoneMockup({
             height={pixelHeight}
             style={{ width: "100%", height: "auto", display: "block" }}
             sizes={`${width}px`}
+            priority={priority}
           />
           {/* Dynamic-island notch */}
           <div

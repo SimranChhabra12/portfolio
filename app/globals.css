@@ -13,10 +13,59 @@
   --dark-bg: #2A1F28;
   --dark-surface: #3A2A38;
 
-  /* Layout tokens — change once here, not at each call site */
-  --radius-card: 1.5rem;      /* 24px — cards, cover images */
+  /* ── Type scale — DESIGN_DOC §2 ─────────────────────────────────────────
+     Calibrated to honeymehta.design at 1440px (measured 85.1/50.6/36.7/19.5/15.7).
+     Doc token name → utility class:
+       --t-display → .t-display   84px
+       --t-page    → .t-heading   50px
+       --t-project → .t-section   36px
+       --t-sub     → .t-sub       20px
+       --t-body    → .t-body      16px
+       --t-caption → .t-caption   13px
+     Class names are a fixed contract (118 call sites) — values change, names don't.
+     Each clamp is solved to land exactly on the doc value at 1440px and on its
+     floor at 390px. Body/sub/caption are fixed: prose never drops below 16px. */
+  --t-display: clamp(2.5rem, 1.479rem + 4.19vw, 5.25rem);    /* 40 → 84 */
+  --t-page: clamp(2rem, 1.582rem + 1.714vw, 3.125rem);       /* 32 → 50 */
+  --t-project: clamp(1.625rem, 1.393rem + 0.952vw, 2.25rem); /* 26 → 36 */
+  --t-sub: 20px;
+  --t-body: 17px;   /* was 16 — see the legibility note below */
+  --t-caption: 13px;
+
+  /* ── Body legibility (task A2) ────────────────────────────────────────────
+     Review: prose "readable when zoomed but not dark or heavy enough". Two
+     value changes answer it, both here rather than at the 96 `.t-body`/`.t-sub`/
+     `.t-caption` call sites: --t-body 16 → 17px, and --weight-body 400 → 450.
+     Inter is loaded as a variable font (layout.tsx passes no `weight` array),
+     so 450 is a real interpolated instance, not a synthesised fake-bold.
+     450 is deliberately below 500: it thickens the stem without turning prose
+     into a semibold block.
+
+     NOTE — the body typeface is still undecided (task A1, blocked on Simran).
+     Inter's 450 is fairly light; a different face will hint and weight
+     differently, so BOTH values here should be re-tuned once A1 lands. If the
+     new face runs heavier, 450 may need to drop back toward 400. */
+  --weight-body: 450;
+
+  /* Tracking. POSITIVE on the three display-serif levels — this deliberately
+     reverses the old -0.02em. Honey measures +2% at every display level and it
+     lets Playfair breathe (DESIGN_DOC §2; supersedes DESIGN_RULES §2). */
+  --tracking-display: 0.02em;
+  --tracking-caps: 0.08em;
+
+  /* Layout tokens — DESIGN_DOC §4. Change once here, not at each call site */
+  --page-max: 1280px;    /* content shell */
+  --page-gutter: 32px;   /* Jackie measures 32; Beverly 24. 32 at this max-width */
+  --col-media: 1000px;   /* wide visuals — 1.56x the text column */
+  --col-text: 640px;     /* prose — lands near 65ch at 16px */
+  /* Halved onto each neighbour, so the number here IS the gap between two
+     adjacent sections. Task B3 raised it 64–96px → 88–136px: at 1280x900 the
+     homepage hero/work/play/footer boundaries measured 90px apart, which read
+     as one continuous field rather than four zones. */
+  --section-gap: clamp(5.5rem, 13vh, 8.5rem);
+
+  --radius-card: 4px;         /* was 24px — references use flat, near-square corners */
   --radius-card-sm: 1rem;     /* 16px — small chips, thumbnails */
-  --section-transition: 8rem; /* 128px — gradient band between light/dark sections */
 
   /* Hero photo sizing — matches honeymehta.design's hero image (628x438 at 1440px viewport) */
   --hero-photo-w: 20rem;      /* 320px — mobile */
@@ -41,6 +90,7 @@
   --color-dark-text: var(--surface);
 
   --font-serif: var(--font-display);
+  --font-gurmukhi-serif: var(--font-gurmukhi);
   --font-sans: var(--font-body);
 }
 
@@ -52,9 +102,13 @@ body {
   background: var(--cream);
   color: var(--ink);
   font-family: var(--font-body), "Helvetica Neue", Arial, sans-serif;
-  font-size: 16px;
+  font-size: var(--t-body);
+  font-weight: var(--weight-body);
   line-height: 1.5;
-  -webkit-font-smoothing: antialiased;
+  /* `antialiased` thins glyphs on macOS, which is part of why the review read
+     the copy as too light. Subpixel AA on a warm cream ground puts the weight
+     back without touching the colour. */
+  -webkit-font-smoothing: auto;
 }
 
 ::selection {
@@ -106,60 +160,331 @@ body {
   }
 }
 
-/* ─── Type scale ─────────────────────────────────────────────────────────── */
+/* ─── Kaiser — cursor companion ───────────────────────────────────────────────
+   DESIGN_DOC §7, interaction 3. The wrapper's position is written by
+   KaiserCursor.tsx via rAF (never a CSS transition — the reduced-motion block
+   above flattens every transition to 0.01ms). Everything here is pose only:
+   limbs, tail, ears. `data-state` on .k-root is the switch.
 
-/* Caption / label — 13px / 150% */
-.t-caption {
-  font-size: 13px;
+   The component doesn't render at all on coarse pointers or under reduced
+   motion, so none of this needs its own media guard. */
+
+.k-root {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 56px;
+  height: 42px;
+  /* Above the page's own content (everything there sits at the z=0 auto level) but BELOW
+     the hero headline, which takes `relative z-10` on the homepage. Kaiser follows the
+     pointer with no exclusion zone by design — penning him in a box would turn a companion
+     into a demo widget — so he used to walk straight across the h1, tooltip and all. Sending
+     him under the type keeps him free of the whole viewport and just changes who occludes
+     whom. Was 60, which also put him over the nav. */
+  z-index: 5;
+  pointer-events: none;
+  will-change: transform;
+  opacity: 1;
+  transition: opacity 0.25s ease;
+}
+
+.k-root[data-hidden="true"] {
+  opacity: 0;
+}
+
+/* ── The bone. Pinned to the true pointer (written on pointermove, not eased),
+      so it reads as the thing leading Kaiser rather than a second follower.
+      Sits under .k-root's z-index so his nose passes in front of it. */
+
+.k-bone {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 24px;
+  height: 12px;
+  z-index: 4;
+  pointer-events: none;
+  will-change: transform;
+  transition: opacity 0.25s ease;
+  filter: drop-shadow(0 2px 3px rgba(58, 42, 56, 0.18));
+}
+
+.k-bone[data-hidden="true"] {
+  opacity: 0;
+}
+
+/* Held: the tumble stops and it hangs at a slight angle in his jaw. The wrapper
+   keeps being positioned by JS, so only the inner svg is touched here. */
+.k-bone[data-held="true"] svg {
+  animation: none;
+  transform: rotate(-12deg);
+}
+
+/* The tilt lives on the inner svg so it composes with the wrapper's translate
+   instead of overwriting it. */
+.k-bone svg {
+  display: block;
+  animation: k-bone-float 1.15s ease-in-out infinite;
+}
+
+@keyframes k-bone-float {
+  0%   { transform: translateY(1px) rotate(-26deg); }
+  25%  { transform: translateY(-4px) rotate(4deg); }
+  50%  { transform: translateY(0) rotate(28deg); }
+  75%  { transform: translateY(-4px) rotate(6deg); }
+  100% { transform: translateY(1px) rotate(-26deg); }
+}
+
+.k-flip {
+  transform-origin: 50% 50%;
+  filter: drop-shadow(0 2px 3px rgba(58, 42, 56, 0.18));
+}
+
+.k-root svg g,
+.k-root svg .k-collar {
+  transform-box: view-box;
+}
+
+/* ── Trotting ─────────────────────────────────────────────────────────────── */
+
+.k-root[data-state="trotting"] .k-leg-fn { animation: k-stride 0.42s ease-in-out infinite; }
+.k-root[data-state="trotting"] .k-leg-ff { animation: k-stride 0.42s ease-in-out infinite reverse; }
+.k-root[data-state="trotting"] .k-leg-bn { animation: k-stride 0.42s ease-in-out infinite reverse; }
+.k-root[data-state="trotting"] .k-leg-bf { animation: k-stride 0.42s ease-in-out infinite; }
+.k-root[data-state="trotting"] .k-body,
+.k-root[data-state="trotting"] .k-head,
+.k-root[data-state="trotting"] .k-collar { animation: k-bob 0.42s ease-in-out infinite; }
+.k-root[data-state="trotting"] .k-tail { animation: k-wag-fast 0.34s ease-in-out infinite; }
+
+/* Ambling: at 35px/s the default 0.42s stride would have him running on the
+   spot, so the amble gets a slow, deliberate step that covers roughly the same
+   ground per stride as the pounce does. */
+.k-root[data-run="false"][data-state="trotting"] .k-leg,
+.k-root[data-run="false"][data-state="trotting"] .k-body,
+.k-root[data-run="false"][data-state="trotting"] .k-head,
+.k-root[data-run="false"][data-state="trotting"] .k-collar {
+  animation-duration: 1.1s;
+}
+.k-root[data-run="false"][data-state="trotting"] .k-tail {
+  animation-duration: 1.4s;
+}
+
+/* Pouncing: same gait, wound up. Only the rate changes, so the stride keeps
+   matching the (now much faster) ground speed. */
+.k-root[data-run="true"][data-state="trotting"] .k-leg,
+.k-root[data-run="true"][data-state="trotting"] .k-body,
+.k-root[data-run="true"][data-state="trotting"] .k-head,
+.k-root[data-run="true"][data-state="trotting"] .k-collar {
+  animation-duration: 0.32s;
+}
+.k-root[data-run="true"][data-state="trotting"] .k-tail {
+  animation-duration: 0.28s;
+}
+
+/* ── Idle: standing, breathing, the odd ear flick ─────────────────────────── */
+
+.k-root[data-state="idle"] .k-tail { animation: k-wag-slow 1.8s ease-in-out infinite; }
+.k-root[data-state="idle"] .k-body,
+.k-root[data-state="idle"] .k-collar { animation: k-breathe 3.2s ease-in-out infinite; }
+.k-root[data-state="idle"] .k-ear { animation: k-ear-flick 6s ease-in-out infinite; }
+
+/* ── Holding: he's caught the bone and is standing over it, pleased with
+      himself. Same standing body as idle, but the tail gives it away. */
+
+.k-root[data-state="holding"] .k-tail { animation: k-wag-fast 0.36s ease-in-out infinite; }
+.k-root[data-state="holding"] .k-body,
+.k-root[data-state="holding"] .k-collar { animation: k-breathe 3.2s ease-in-out infinite; }
+.k-root[data-state="holding"] .k-ear { animation: k-ear-flick 5s ease-in-out infinite; }
+
+/* ── Sitting: greeting hold only. The torso pivots about the chest so the rump
+      drops to the ground while the front legs stay planted, and the hind legs
+      fold forward on top of that rotation (they're nested inside .k-torso, so
+      the two compose). Tail keeps wagging throughout. */
+
+.k-root[data-state="sitting"] .k-torso {
+  transform: rotate(-15deg);
+  transform-origin: 40px 30px;
+}
+.k-root[data-state="sitting"] .k-leg-bn,
+.k-root[data-state="sitting"] .k-leg-bf {
+  transform: rotate(-40deg);
+  transform-origin: 20px 28.9px;
+}
+.k-root[data-state="sitting"] .k-tail { animation: k-wag-fast 0.4s ease-in-out infinite; }
+.k-root[data-state="sitting"] .k-ear { animation: k-ear-flick 4s ease-in-out infinite; }
+
+@keyframes k-stride {
+  0%, 100% { transform: rotate(-20deg); }
+  50%      { transform: rotate(20deg); }
+}
+
+@keyframes k-bob {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-1.4px); }
+}
+
+@keyframes k-breathe {
+  0%, 100% { transform: scaleY(1); }
+  50%      { transform: scaleY(1.025); }
+}
+
+@keyframes k-wag-fast {
+  0%, 100% { transform: rotate(-15deg); }
+  50%      { transform: rotate(15deg); }
+}
+
+@keyframes k-wag-slow {
+  0%, 100% { transform: rotate(-7deg); }
+  50%      { transform: rotate(7deg); }
+}
+
+/* Mostly still, with a flick right at the end of each cycle. */
+@keyframes k-ear-flick {
+  0%, 88%, 100% { transform: rotate(0deg); }
+  92%           { transform: rotate(-16deg); }
+  96%           { transform: rotate(6deg); }
+}
+
+/* Legs and tail hinge at the shoulder/hip/croup, not their own centres. */
+.k-leg-fn, .k-leg-ff { transform-origin: 40.4px 28.9px; }
+.k-leg-bn, .k-leg-bf { transform-origin: 20px 28.9px; }
+.k-tail { transform-origin: 13.5px 26px; }
+.k-head { transform-origin: 41px 21px; }
+.k-body { transform-origin: 28px 24px; }
+.k-ear  { transform-origin: 52.8px 8.6px; }
+.k-torso { transform-origin: 40px 30px; }
+
+/* ── Speech bubble. Decorative and aria-hidden — the copy is duplicated
+      nowhere, so nothing is lost to assistive tech. */
+
+.k-bubble {
+  position: absolute;
+  left: 50px;
+  bottom: 30px;
+  white-space: nowrap;
+  background: var(--cream);
+  color: var(--ink);
+  border: 1px solid var(--mauve);
+  border-radius: var(--radius-card-sm);
+  padding: 8px 16px;
+  font-family: var(--font-body), sans-serif;
+  font-size: var(--t-caption);
   line-height: 1.5;
+  box-shadow: 0 4px 12px -4px rgba(58, 42, 56, 0.18);
+  opacity: 0;
+  transform: translateY(4px);
+  transition: opacity 0.35s ease, transform 0.35s ease;
+}
+
+.k-bubble[data-show="true"] {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ─── Section rhythm ─────────────────────────────────────────────────────────
+   DESIGN_DOC §4 — Beverly's pattern: one variable, halved onto each side, so
+   neighbouring sections share the gap. Scoped to @layer base on purpose: it sets
+   the default rhythm while leaving Tailwind's utilities layer free to win, so
+   sections still carrying `py-16` keep it until their own package removes it. */
+
+@layer base {
+  section {
+    padding: calc(var(--section-gap) / 2) 0;
+  }
+}
+
+@media (max-width: 767px) {
+  :root {
+    --section-gap: clamp(3.5rem, 9vh, 4.5rem);
+  }
+}
+
+/* ─── Project card cover video — task D2 ─────────────────────────────────────
+   `WorkChapters` always renders the still <Image> as the base layer and stacks
+   the <video> on top of it, so the slot is never blank: the still is the poster
+   during load and the fallback whenever the video is hidden.
+
+   Reduced motion is handled by `display: none` rather than `opacity: 0` on
+   purpose: Chrome will not keep a video playing while it is not being rendered
+   (measured — a `display: none` video reports `paused === true`), so taking it
+   out of the box tree stops playback as well as hiding it, which an opacity or
+   visibility hide would not do.
+
+   This rule is the belt, not the braces. The script in `WorkChapters` is what
+   actually keeps reduced-motion users from fetching any video at all, and what
+   makes the off-screen cards lazy — `preload="none"` alone does NOT, because
+   `autoplay` overrides it. See the comment there. This rule covers the no-JS
+   case and stops a stray frame ever painting. */
+
+@media (prefers-reduced-motion: reduce) {
+  .cover-video {
+    display: none;
+  }
+}
+
+/* ─── Type scale ─────────────────────────────────────────────────────────────
+   Values per DESIGN_DOC §2. Class names are frozen — see the token block above. */
+
+/* Caption / label — 13px / 150%, Inter 450 (A2) */
+.t-caption {
+  font-size: var(--t-caption);
+  line-height: 1.5;
+  font-weight: var(--weight-body);
   font-family: var(--font-body), sans-serif;
 }
 
-/* Body — 16px / 150% */
+/* Body — 17px / 155%, Inter 450 (A2). Never smaller for paragraphs.
+   Line-height nudged 1.5 → 1.55: at 17px the longer measure needs the extra
+   leading to keep 65ch scannable. */
 .t-body {
-  font-size: 16px;
-  line-height: 1.5;
+  font-size: var(--t-body);
+  line-height: 1.55;
+  font-weight: var(--weight-body);
   max-width: 65ch;
   font-family: var(--font-body), sans-serif;
 }
 
-/* Subheading — 20px / 150% */
+/* Subheading / lede — 20px / 140%, Inter 450 (A2) */
 .t-sub {
-  font-size: 20px;
-  line-height: 1.5;
+  font-size: var(--t-sub);
+  line-height: 1.4;
+  font-weight: var(--weight-body);
   font-family: var(--font-body), sans-serif;
 }
 
-/* Section title — 28px / 120% */
+/* Project title (doc: --t-project) — fluid 26 → 36px / 133% / +2%, Playfair 500 */
 .t-section {
-  font-size: 28px;
-  line-height: 1.2;
+  font-size: var(--t-project);
+  line-height: 1.33;
+  letter-spacing: var(--tracking-display);
   font-weight: 500;
   font-family: var(--font-display), serif;
 }
 
-/* Page heading — fluid 30px (mobile) → 42px (desktop) / 120% */
+/* Page + section heading (doc: --t-page) — fluid 32 → 50px / 129% / +2%, Playfair 500 */
 .t-heading {
-  font-size: clamp(1.875rem, 1.35rem + 2.2vw, 2.625rem);
-  line-height: 1.2;
+  font-size: var(--t-page);
+  line-height: 1.29;
+  letter-spacing: var(--tracking-display);
   font-weight: 500;
   font-family: var(--font-display), serif;
 }
 
-/* Hero / display — fluid 36px (mobile) → 60px (desktop) / 120% / -2% tracking */
+/* Hero display — fluid 40 → 84px / 118% / +2%, Playfair 600. Once per page. */
 .t-display {
-  font-size: clamp(2.25rem, 1rem + 5.5vw, 3.75rem);
-  line-height: 1.15;
-  letter-spacing: -0.02em;
+  font-size: var(--t-display);
+  line-height: 1.18;
+  letter-spacing: var(--tracking-display);
   font-weight: 600;
   font-family: var(--font-display), serif;
 }
 
 /* All-caps label utility */
 .label {
-  font-size: 13px;
+  font-size: var(--t-caption);
   line-height: 1.5;
+  font-weight: 400;
   text-transform: uppercase;
-  letter-spacing: 0.08em;
+  letter-spacing: var(--tracking-caps); /* §2: caption +8% when caps */
   font-family: var(--font-body), sans-serif;
 }
