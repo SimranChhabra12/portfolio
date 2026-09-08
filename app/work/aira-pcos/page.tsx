@@ -8,7 +8,7 @@ import QuoteCallout from "@/components/casestudy2/QuoteCallout";
 import { StatRow } from "@/components/casestudy2/StatCallout";
 import SeasonsDiagram from "@/components/casestudy2/aira/SeasonsDiagram";
 import FeatureVisual from "@/components/casestudy2/FeatureVisual";
-import HeroVisual from "@/components/casestudy2/aira/HeroVisual";
+import HeroScrub from "@/components/casestudy2/aira/HeroScrub";
 import { CaseStudyShell, Prose, Media } from "../_components/columns";
 
 export const metadata = {
@@ -29,8 +29,9 @@ export default function AiraPage() {
     <main style={{ backgroundColor: T.cream }} className="min-h-screen overflow-x-hidden">
       <Nav coverId="aira-cover" />
 
-      {/* Cover band — top ~30% of the first screen */}
-      <HeroVisual />
+      {/* Cover band — the season wheel, scrubbable. States the phases-as-seasons
+          framing that SeasonsDiagram explains further down the page. */}
+      <HeroScrub />
 
       {/* Hero */}
       <CaseStudyShell className="pt-20">
