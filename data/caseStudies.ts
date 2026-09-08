@@ -629,7 +629,7 @@ const allCaseStudies: CaseStudy[] = [
         alt: "Resy Celebrations home — booking a table for a whole group",
       },
     ],
-    prototypeUrl: "https://resy-celebrations-portfolio.surge.sh",
+    prototypeUrl: "/work/resy/prototype",
     meta: {
       team: "4-person team",
       researchMethods: [
@@ -806,7 +806,7 @@ const allCaseStudies: CaseStudy[] = [
             type: "p",
             text: "Once confirmed, the booking becomes a shared space. The host sends an RSVP link to the group through the app. Guests confirm attendance and split any upfront deposit in-app. The restaurant sees the headcount update automatically if anything changes before the cutoff window.",
           },
-          { type: "prototype", url: "https://resy-celebrations-portfolio.surge.sh" },
+          { type: "prototype", url: "/work/resy/prototype" },
         ],
       },
       {
@@ -1118,6 +1118,10 @@ const allCaseStudies: CaseStudy[] = [
       platform: "Web (browser + webcam)",
       duration: "Course project — NYU UX & AI",
     },
+    // /work/gesture-sketch is a hand-built route now (app/work/gesture-sketch), so
+    // these sections no longer render — the card, tags and next-project chain still
+    // read from here. The [visual: ...] placeholders that used to sit in them are
+    // built components under components/casestudy2/gesture/.
     sections: [
       {
         id: "hook",
@@ -1171,7 +1175,6 @@ const allCaseStudies: CaseStudy[] = [
             type: "p",
             text: "Three problems, one shape. Getting in is the hard part. Not the drawing, the starting.",
           },
-          { type: "asset", label: "Method strip — 7 interviews + survey, then the 3 findings as a small row" },
         ],
       },
       {
@@ -1191,7 +1194,6 @@ const allCaseStudies: CaseStudy[] = [
             type: "note",
             text: "Build the parts that make starting easier and leave the meaning alone.",
           },
-          { type: "asset", label: "The 2×2 — offload to AI / keep human, across session moments" },
         ],
       },
       {
@@ -1248,7 +1250,6 @@ const allCaseStudies: CaseStudy[] = [
             type: "p",
             text: "Most people preferred Layout 5, so I built from it and added the fixes they named.",
           },
-          { type: "asset", label: "The 5 layout sketches, grid — Layout 5 marked as the one that won" },
         ],
       },
       {
@@ -1260,8 +1261,6 @@ const allCaseStudies: CaseStudy[] = [
             type: "p",
             text: "A webcam turns your hand into a brush. Pinch thumb and index to draw, tap thumb and ring to change color, tap thumb and pinky to undo. No stylus, no menus to learn, no blank sheet waiting to be ruined. You move, and a line follows.",
           },
-          { type: "asset", label: "GestureSketch live — the canvas mid-drawing, hand tracked" },
-          { type: "asset", label: "The welcome / instructions screen" },
         ],
       },
       {

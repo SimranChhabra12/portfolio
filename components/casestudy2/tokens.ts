@@ -1,4 +1,4 @@
-// Design tokens for the Whspr and AIRA case study pages ONLY.
+// Design tokens for the Whspr, AIRA and GestureSketch case study pages ONLY.
 // Deliberately scoped here (not in globals.css) so nothing else on the
 // site — homepage, other case studies — is affected. Tweak values here.
 
@@ -31,6 +31,14 @@ export const T = {
     coralPhase: "#EFA07A", // autumn / luteal
     textLight: "#F5F3F1",
     textMuted: "rgba(245, 243, 241, 0.6)",
+  },
+
+  gesture: {
+    green: "#3E6B5A", // project color — the drawn stroke
+    greenLight: "#6FA98A",
+    tint: "#E0F4D7", // sketch-line green wash
+    plum: "#7A3F5D", // a second stroke's colour, and the "cut" marker
+    surface: "#F0ECE6",
   },
 
   type: {

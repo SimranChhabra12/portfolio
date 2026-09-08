@@ -6,7 +6,7 @@ import DarkBlock from "@/components/casestudy2/DarkBlock";
 import QuoteCallout from "@/components/casestudy2/QuoteCallout";
 import { StatRow } from "@/components/casestudy2/StatCallout";
 import AssetFlag from "@/components/casestudy2/AssetFlag";
-import LivePrototype from "@/components/casestudy2/LivePrototype";
+import PrototypeShell from "@/components/casestudy2/resy/PrototypeShell";
 import TwoSidedFlow from "./TwoSidedFlow";
 import { COL } from "./columns";
 
@@ -440,15 +440,14 @@ export default function ResyPage() {
           {/* 09 — live prototype treatment */}
           <Section id="prototype" number="09" heading="Give It A Try">
             <P>
-              This is the working hi-fi prototype, not a video. Set your preferences, browse the
-              matches, and send a request the way a guest would.
+              This is the working hi-fi prototype, not a video, and not a recording. Set your
+              preferences, browse the matches that actually fit your party, and send a request.
+              Then open the restaurant&apos;s dashboard and answer your own inquiry — accept it or
+              counter it — and watch your tracker move. Both sides read the same data.
             </P>
-            <LivePrototype
-              src="https://resy-celebrations-portfolio.surge.sh"
-              title="Resy Celebrations — interactive prototype"
-            />
+            <PrototypeShell />
             <Caption>
-              A concept prototype. It is not connected to Resy and no real reservation is made.
+              A concept prototype. It is not connected to Resy, and no real reservation is made.
             </Caption>
           </Section>
 

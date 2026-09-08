@@ -8,10 +8,11 @@ import CaseStudyBlocks from "@/components/interactive/CaseStudyBlocks";
 import caseStudies, { getCaseStudy, getNextCaseStudy } from "@/data/caseStudies";
 import { COL_MEDIA, COL_TEXT, PAGE_GUTTER, SECTION_GAP } from "../_components/columns";
 
-// Whspr and AIRA have hand-built routes (app/work/whspr, app/work/aira-pcos)
+// Whspr, AIRA, Resy and GestureSketch have hand-built routes (app/work/whspr,
+// app/work/aira-pcos, app/work/resy, app/work/gesture-sketch)
 // that take precedence over this dynamic one. Skip them here so the build
 // doesn't prerender a second, unreachable copy of each.
-const BESPOKE_ROUTES = new Set(["whspr", "aira-pcos", "resy"]);
+const BESPOKE_ROUTES = new Set(["whspr", "aira-pcos", "resy", "gesture-sketch"]);
 
 export async function generateStaticParams() {
   return caseStudies
