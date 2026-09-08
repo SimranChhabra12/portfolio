@@ -8,7 +8,11 @@ import QuoteCallout from "@/components/casestudy2/QuoteCallout";
 import { StatRow } from "@/components/casestudy2/StatCallout";
 import SeasonsDiagram from "@/components/casestudy2/aira/SeasonsDiagram";
 import FeatureVisual from "@/components/casestudy2/FeatureVisual";
-import HeroScrub from "@/components/casestudy2/aira/HeroScrub";
+import HeroCover from "@/components/casestudy2/aira/HeroCover";
+import SeasonWheelBlock from "@/components/casestudy2/aira/SeasonWheelBlock";
+import CaseStudyHeadline from "@/components/casestudy2/CaseStudyHeadline";
+import ContextAndRole from "@/components/casestudy2/ContextAndRole";
+import SectionIndex from "@/components/casestudy2/SectionIndex";
 import { CaseStudyShell, Prose, Media } from "../_components/columns";
 
 export const metadata = {
@@ -24,66 +28,57 @@ const PHONE_FEATURE = 440;
 const PHONE_PAIR = 420;
 const PHONE_ROW_3UP = 316; // 3 x 316 + 2 x 24 gap = 1000
 
+// Contents index, pinned in the left margin. Keep in step with the
+// <Section> ids, numbers and headings below.
+const SECTIONS = [
+  { id: "pmos", number: "01", label: "What is PMOS?" },
+  { id: "problem", number: "02", label: "The Problem" },
+  { id: "team", number: "03", label: "My Role & The Team" },
+  { id: "research", number: "04", label: "Research" },
+  { id: "insight", number: "05", label: "The Insight" },
+  { id: "designed", number: "06", label: "What I Designed" },
+  { id: "nudges", number: "07", label: "Designing the Nudges" },
+  { id: "next", number: "08", label: "What I'd Do Next" },
+  { id: "takeaway", number: "09", label: "What I Took Away" },
+];
+
 export default function AiraPage() {
   return (
     <main style={{ backgroundColor: T.cream }} className="min-h-screen overflow-x-hidden">
       <Nav coverId="aira-cover" />
+      <SectionIndex items={SECTIONS} alignWithId="aira-headline" revealWithId="aira-headline" />
 
-      {/* Cover band — the season wheel, scrubbable. States the phases-as-seasons
-          framing that SeasonsDiagram explains further down the page. */}
-      <HeroScrub />
+      {/* Cover band */}
+      <HeroCover />
 
       {/* Hero */}
       <CaseStudyShell className="pt-20">
         <div style={{ paddingBottom: T.space.section }}>
-          <p
-            className="mb-6"
-            style={{
-              fontFamily: "var(--font-body)",
-              fontSize: T.type.caption,
-              textTransform: "uppercase",
-              letterSpacing: "0.08em",
-              color: T.inkMuted,
-            }}
-          >
-            12 weeks · Mobile App
-          </p>
-          <h1 className="t-display" style={{ color: T.ink, marginBottom: "1.5rem" }}>
-            AIRA
-          </h1>
-          <Prose>
-            <P large>
-              AIRA began as a project for a UX class on habit change — built around seven connected
-              health pillars and a single daily readiness score, instead of a pile of separate charts
-              to make sense of alone.
-            </P>
-          </Prose>
+          <CaseStudyHeadline
+            id="aira-headline"
+            headline="AIRA: A cycle-aware health companion for living with PMOS"
+            meta={[
+              { label: "Role", value: "Product Designer • UX Researcher • Visual & Interaction Design" },
+              { label: "Platform", value: "Mobile Application" },
+              { label: "Timeline", value: "12 weeks | 4-person team, shared build" },
+            ]}
+          />
 
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-8 mt-16">
-            {[
-              { label: "Role", value: "Product Designer & Researcher" },
-              { label: "Team", value: "4-person team (shared build)" },
-              { label: "Platform", value: "Mobile App" },
-              { label: "Duration", value: "12 weeks" },
-            ].map((f) => (
-              <div key={f.label}>
-                <p
-                  style={{
-                    fontFamily: "var(--font-body)",
-                    fontSize: T.type.caption,
-                    textTransform: "uppercase",
-                    letterSpacing: "0.08em",
-                    color: T.inkMuted,
-                    marginBottom: "0.5rem",
-                  }}
-                >
-                  {f.label}
-                </p>
-                <p style={{ fontFamily: "var(--font-body)", fontSize: "0.9375rem", color: T.ink, lineHeight: 1.5 }}>
-                  {f.value}
-                </p>
-              </div>
-            ))}
+          <div className="mt-20">
+            <ContextAndRole
+              columns={[
+                {
+                  heading: "What is AIRA?",
+                  body:
+                    "AIRA is a mobile app for people managing PMOS, built around seven connected health pillars and one daily readiness score instead of a pile of separate charts to reconcile alone. It reads the day against where you are in your cycle, so the same number of hours of sleep doesn't mean the same thing in every week of the month.",
+                },
+                {
+                  heading: "My Role",
+                  body:
+                    "I owned the research and the product direction: the interviews, the seven-pillar model, the seasons framing the whole product rests on, the readiness score, the nudge system and the visual language. The build was shared across a team of four.",
+                },
+              ]}
+            />
           </div>
         </div>
       </CaseStudyShell>
@@ -220,6 +215,19 @@ export default function AiraPage() {
             <Media>
               <SeasonsDiagram />
             </Media>
+            {/* The wheel sits here, next to the framing it illustrates, rather than
+                at the top of the page where it read as decoration above the title.
+                Full-bleed out of the media column so it reads as the product's own
+                surface, the way the cover band does. */}
+            <Media>
+              <SeasonWheelBlock />
+            </Media>
+            <Prose>
+              <Caption>
+                Drag the wheel to move through the cycle. The season, the reading and the
+                light all change together.
+              </Caption>
+            </Prose>
           </Section>
 
           <Section id="designed" number="06" heading="What I Designed">

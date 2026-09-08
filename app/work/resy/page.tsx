@@ -7,8 +7,13 @@ import QuoteCallout from "@/components/casestudy2/QuoteCallout";
 import { StatRow } from "@/components/casestudy2/StatCallout";
 import AssetFlag from "@/components/casestudy2/AssetFlag";
 import PrototypeShell from "@/components/casestudy2/resy/PrototypeShell";
+import HeroCover from "@/components/casestudy2/resy/HeroCover";
+import CaseStudyHeadline from "@/components/casestudy2/CaseStudyHeadline";
+import ContextAndRole from "@/components/casestudy2/ContextAndRole";
+import SectionIndex from "@/components/casestudy2/SectionIndex";
 import TwoSidedFlow from "./TwoSidedFlow";
 import { COL } from "./columns";
+import { CaseStudyShell } from "../_components/columns";
 
 export const metadata = {
   title: "Resy Celebrations — A Concept — Simran Chhabra",
@@ -18,45 +23,65 @@ export const metadata = {
 
 const RUST = "#C4472A";
 
+// Contents index, pinned in the left margin. Keep in step with the
+// <Section> ids, numbers and headings below.
+const SECTIONS = [
+  { id: "context", number: "01", label: "Context" },
+  { id: "both-sides", number: "02", label: "The Workflow, From Both Sides" },
+  { id: "research", number: "03", label: "The Research" },
+  { id: "insight", number: "04", label: "The Insight" },
+  { id: "trust", number: "05", label: "What Each Side Is Risking" },
+  { id: "commitment", number: "06", label: "Deposits and the Card Hold" },
+  { id: "decisions", number: "07", label: "Design Decisions" },
+  { id: "solution", number: "08", label: "How The Design Resolves It" },
+  { id: "prototype", number: "09", label: "Give It A Try" },
+  { id: "landed", number: "10", label: "Where It Landed" },
+  { id: "differently", number: "11", label: "What I'd Do Differently" },
+  { id: "taught", number: "12", label: "What This Taught Me" },
+];
+
 export default function ResyPage() {
   return (
     <main style={{ backgroundColor: T.cream }} className="min-h-screen overflow-x-hidden">
-      <Nav />
+      <Nav coverId="resy-cover" />
+      <SectionIndex items={SECTIONS} alignWithId="resy-headline" revealWithId="resy-headline" />
+
+      {/* Cover band */}
+      <HeroCover />
 
       {/* Hero */}
-      <section className="px-8 lg:px-16 pt-40" style={{ paddingBottom: T.space.section }}>
-        <div style={{ maxWidth: COL.media }}>
-          <p
-            className="mb-6"
-            style={{
-              fontFamily: "var(--font-body)",
-              fontSize: T.type.caption,
-              textTransform: "uppercase",
-              letterSpacing: "0.08em",
-              color: T.inkMuted,
-            }}
-          >
-            Student concept · UX course project · Mobile feature
-          </p>
-          <h1
-            style={{
-              fontFamily: "var(--font-display)",
-              fontWeight: 600,
-              fontSize: T.type.hero,
-              lineHeight: 1.05,
-              letterSpacing: "-0.02em",
-              color: T.ink,
-              marginBottom: "1.5rem",
-            }}
-          >
-            Resy Celebrations
-            <span style={{ color: T.inkMuted }}> — a concept</span>
-          </h1>
-          <P large>A large-party booking flow for groups of 8+, designed inside Resy&apos;s existing app.</P>
+      <CaseStudyShell className="pt-20">
+        <div style={{ paddingBottom: T.space.section }}>
+          <CaseStudyHeadline
+            id="resy-headline"
+            headline="Resy Celebrations: Booking a table when the party is bigger than the app expects"
+            meta={[
+              { label: "Role", value: "UX Researcher • Product Designer • Prototyping" },
+              { label: "Platform", value: "Mobile feature, inside the existing Resy app" },
+              { label: "Timeline", value: "Semester 3 course project | 4 people — I led direction and owned research" },
+            ]}
+          />
+
+          <div className="mt-20">
+            <ContextAndRole
+              columns={[
+                {
+                  heading: "What is Resy Celebrations?",
+                  body:
+                    "A large-party booking flow for groups of eight and up, designed inside Resy's existing app. Parties that size don't fit the normal reservation grid, so today they fall out of the app into phone calls and email threads. Celebrations turns that into an inquiry both sides can see: the guest states what the occasion needs, the restaurant answers or counters, and the group splits the deposit in-app.",
+                },
+                {
+                  heading: "My Role",
+                  body:
+                    "I owned the research end to end and led the product direction — the interviews on both sides of the table, the decision to treat this as an inquiry rather than a booking, the preference-first discovery flow, the deposit and card-hold model, and the hi-fi prototype you can use further down this page.",
+                },
+              ]}
+            />
+          </div>
 
           {/* E1 — attribution. This never shipped and Resy was never involved. */}
           <div
-            className="mt-8"
+            className="mt-16"
             style={{
               borderLeft: `2px solid ${RUST}`,
               paddingLeft: "1.25rem",
@@ -77,38 +102,11 @@ export default function ResyPage() {
               concept was designed against.
             </p>
           </div>
-
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-8 mt-16" style={{ maxWidth: 900 }}>
-            {[
-              { label: "Hats Worn", value: "UX Research, Product Design, Prototyping" },
-              { label: "Team", value: "4 — me plus 3 engineers. I led direction and owned research end to end." },
-              { label: "Platform", value: "Mobile feature, existing Resy app" },
-              { label: "Timeline", value: "Semester 3, UX design course" },
-            ].map((f) => (
-              <div key={f.label}>
-                <p
-                  style={{
-                    fontFamily: "var(--font-body)",
-                    fontSize: T.type.caption,
-                    textTransform: "uppercase",
-                    letterSpacing: "0.08em",
-                    color: T.inkMuted,
-                    marginBottom: "0.5rem",
-                  }}
-                >
-                  {f.label}
-                </p>
-                <p style={{ fontFamily: "var(--font-body)", fontSize: "0.9375rem", color: T.ink, lineHeight: 1.5 }}>
-                  {f.value}
-                </p>
-              </div>
-            ))}
-          </div>
         </div>
-      </section>
+      </CaseStudyShell>
 
-      <div className="px-8 lg:px-16 min-w-0">
-        <div className="flex flex-col min-w-0" style={{ maxWidth: COL.media }}>
+      <CaseStudyShell>
+        <div className="flex flex-col min-w-0">
           {/* 01 — quote treatment */}
           <Section id="context" number="01" heading="Context" first>
             <P>
@@ -502,7 +500,7 @@ export default function ResyPage() {
             </P>
           </Section>
         </div>
-      </div>
+      </CaseStudyShell>
 
       <CaseStudyFooter />
     </main>

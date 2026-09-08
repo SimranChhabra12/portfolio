@@ -11,8 +11,8 @@ import FindingsBoard from "@/components/casestudy2/whspr/FindingsBoard";
 import KilledKept from "@/components/casestudy2/whspr/KilledKept";
 import DesignSystemSlide from "@/components/casestudy2/whspr/DesignSystemSlide";
 import WhereKnowledgeLives from "@/components/casestudy2/whspr/WhereKnowledgeLives";
-import ProjectHeadline from "@/components/casestudy2/whspr/ProjectHeadline";
-import WhatAndRole from "@/components/casestudy2/whspr/WhatAndRole";
+import CaseStudyHeadline from "@/components/casestudy2/CaseStudyHeadline";
+import ContextAndRole from "@/components/casestudy2/ContextAndRole";
 import HeroVisual from "@/components/casestudy2/whspr/HeroVisual";
 import IntroScreens from "@/components/casestudy2/whspr/IntroScreens";
 import SectionIndex from "@/components/casestudy2/SectionIndex";
@@ -60,7 +60,15 @@ export default function WhsprPage() {
       {/* Hero */}
       <CaseStudyShell className="pt-20">
         <div style={{ paddingBottom: T.space.section }}>
-          <ProjectHeadline />
+          <CaseStudyHeadline
+            id="whspr-headline"
+            headline="Whspr: Crowdsourced urban intelligence platform for women"
+            meta={[
+              { label: "Role", value: "UX Researcher • Product Strategist • Prototyping • Visual & Interaction Designer" },
+              { label: "Platform", value: "Mobile Application" },
+              { label: "Timeline", value: "4 months | Jan 2026 – May 2026" },
+            ]}
+          />
 
           {/* The app's own onboarding, in the cover's palette — the premise stated in the
               product's words before the case study starts explaining it. */}
@@ -69,7 +77,20 @@ export default function WhsprPage() {
           </div>
 
           <div className="mt-20">
-            <WhatAndRole />
+            <ContextAndRole
+              columns={[
+                {
+                  heading: "What is Whspr?",
+                  body:
+                    "Whspr is a mobile app that makes what women already know about places in the city findable, collecting short first-hand accounts instead of star ratings, and tagging each one with the time of the visit so you can tell what a place is actually like before you go.",
+                },
+                {
+                  heading: "My Role",
+                  body:
+                    "I led this end to end: the interview study, the information architecture, the contribution flow, the trust and verification system, visual design system and a prototype using AI.",
+                },
+              ]}
+            />
           </div>
         </div>
       </CaseStudyShell>

@@ -143,7 +143,7 @@ const allCaseStudies: CaseStudy[] = [
     homeTags: ["Internship", "UX Research", "E-commerce"],
     coverImage: "/images/covers/dream-of.jpg",
     subtitle:
-      "Research and the first e-commerce experience for Dream Of, a haircare label for Indian women",
+      "Research and the first e-commerce experience for Dream Of, a haircare brand",
     role: "Product Design Intern",
     year: "2025",
     disciplines: ["UX Research", "Information Architecture", "E-commerce"],

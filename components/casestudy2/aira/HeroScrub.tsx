@@ -192,7 +192,7 @@ function arc(from: number, to: number, r: number) {
   return `M ${a.x} ${a.y} A ${r} ${r} 0 ${large} 1 ${b.x} ${b.y}`;
 }
 
-export default function HeroScrub() {
+export default function HeroScrub({ inline = false }: { inline?: boolean } = {}) {
   const [day, setDay] = useState(20);
   const [dragging, setDragging] = useState(false);
   const [touched, setTouched] = useState(false);
@@ -246,11 +246,16 @@ export default function HeroScrub() {
 
   return (
     <div
-      id="aira-cover"
+      // `inline` renders it inside the media column as one of the page's figures
+      // instead of as the full-bleed cover band: no cover id for the Nav to watch,
+      // and no padding reserved for a nav bar that isn't over it.
+      id={inline ? undefined : "aira-cover"}
       className="relative w-full overflow-hidden"
       style={{
         backgroundColor: K.ground,
-        paddingTop: "clamp(5rem, 4rem + 3vw, 7rem)",
+        paddingTop: inline
+          ? "clamp(2.5rem, 2rem + 2vw, 3.5rem)"
+          : "clamp(5rem, 4rem + 3vw, 7rem)",
         paddingBottom: "clamp(3rem, 2.25rem + 2.5vw, 4.5rem)",
       }}
     >

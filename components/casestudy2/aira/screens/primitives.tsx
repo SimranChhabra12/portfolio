@@ -244,7 +244,10 @@ export function ScreenHeader({ title, nav = false }: { title: string; nav?: bool
       }}
     >
       <span style={{ width: 12 }}>{nav && <Chevron dir="left" color={K.muted} />}</span>
-      <h1
+      {/* Deliberately a <p>, not a heading: these screens are a picture of an
+          interface, and real headings here hijack the page's document outline —
+          the case study's own h1 stopped being the page's first h1. */}
+      <p
         style={{
           fontFamily: FONT,
           fontSize: K.type.screenTitle.size,
@@ -254,7 +257,7 @@ export function ScreenHeader({ title, nav = false }: { title: string; nav?: bool
         }}
       >
         {title}
-      </h1>
+      </p>
       <span style={{ width: 12, display: "flex", justifyContent: "flex-end" }}>
         {nav && <Chevron color={K.muted} />}
       </span>
