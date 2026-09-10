@@ -60,13 +60,13 @@ const WOMEN: Woman[] = [
         </g>
         {/* calendar: three months crossed out */}
         <g {...line}>
-          <rect x="140" y="30" width="46" height="44" rx="4" />
-          <path d="M140 42h46M150 26v8M176 26v8" />
+          <rect x="130" y="58" width="42" height="40" rx="4" />
+          <path d="M130 69h42M139 54v8M163 54v8" />
         </g>
         <g {...accent} strokeWidth={2}>
-          <path d="M146 50l8 8M154 50l-8 8" />
-          <path d="M159 50l8 8M167 50l-8 8" />
-          <path d="M172 50l8 8M180 50l-8 8" />
+          <path d="M135 77l7 7M142 77l-7 7" />
+          <path d="M147 77l7 7M154 77l-7 7" />
+          <path d="M159 77l7 7M166 77l-7 7" />
         </g>
       </>
     ),
@@ -125,7 +125,7 @@ const WOMEN: Woman[] = [
           {/* shoulders */}
           <path d="M44 200C50 172 72 162 104 160 136 162 156 172 162 200" />
           {/* arm up to the can */}
-          <path d="M52 194C42 182 34 172 30 162" />
+          <path d="M58 194C50 182 44 172 40 162" />
         </g>
         {/* streaks the last dry shampoo left in her hair */}
         <g {...accent} strokeWidth={2.2} strokeDasharray="5 5">
@@ -133,17 +133,17 @@ const WOMEN: Woman[] = [
         </g>
         {/* aerosol can: cap, nozzle, and the spray going everywhere */}
         <g {...line}>
-          <rect x="18" y="114" width="22" height="46" rx="5" />
-          <path d="M22 114v-8h14v8M30 106v-6h8" />
+          <rect x="28" y="114" width="22" height="46" rx="5" />
+          <path d="M32 114v-8h14v8M40 106v-6h8" />
         </g>
         <g fill={SAGE}>
-          <circle cx="46" cy="96" r="2.2" />
-          <circle cx="54" cy="88" r="2.2" />
-          <circle cx="52" cy="102" r="2" />
-          <circle cx="62" cy="94" r="2" />
-          <circle cx="60" cy="80" r="1.8" />
-          <circle cx="68" cy="86" r="1.8" />
-          <circle cx="66" cy="104" r="1.6" />
+          <circle cx="54" cy="96" r="2.2" />
+          <circle cx="62" cy="88" r="2.2" />
+          <circle cx="60" cy="102" r="2" />
+          <circle cx="70" cy="94" r="2" />
+          <circle cx="68" cy="80" r="1.8" />
+          <circle cx="76" cy="86" r="1.8" />
+          <circle cx="74" cy="104" r="1.6" />
         </g>
       </>
     ),
