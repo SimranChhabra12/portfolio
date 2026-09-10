@@ -120,7 +120,7 @@ export default function LayoutStudy() {
                 color: l.won ? G.green : T.inkMuted,
               }}
             >
-              {l.won ? `Layout ${l.n} — built from` : `Layout ${l.n}`}
+              {l.won ? `Layout ${l.n} (built from this)` : `Layout ${l.n}`}
             </p>
           </div>
         ))}

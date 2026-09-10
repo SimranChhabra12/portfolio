@@ -17,7 +17,7 @@ const IDEAS = [
     moment: "Starting",
     title: "Gesture drawing",
     body: "Draw in the air with your hand. Nothing permanent, nothing to ruin.",
-    status: "Built — GestureSketch",
+    status: "Built as GestureSketch",
     tone: "built",
   },
   {

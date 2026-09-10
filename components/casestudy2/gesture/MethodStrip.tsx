@@ -122,7 +122,7 @@ export default function MethodStrip() {
             lineHeight: 1.3,
           }}
         >
-          Three problems, one shape. Getting in is the hard part — not the drawing, the starting.
+          All three come back to the same thing: the hardest part is starting, more than the drawing itself.
         </p>
       </div>
     </figure>

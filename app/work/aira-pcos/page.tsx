@@ -76,7 +76,7 @@ export default function AiraPage() {
                 {
                   heading: "My Role",
                   body:
-                    "I owned the research and the product direction: the interviews, the seven-pillar model, the seasons framing the whole product rests on, the readiness score, the nudge system and the visual language. Within the four-person build I owned cycle tracking, nutrition, activity and the dashboard; my teammates took onboarding, sleep, mood and help.",
+                    "I owned the research and the product direction: the interviews, the seven-pillar model, the seasons framing the whole product rests on, the readiness score, the nudge system and the visual language. Within the four-person build I owned cycle tracking, nutrition, activity and the dashboard, and my teammates took onboarding, sleep, mood and help.",
                 },
               ]}
             />
@@ -267,7 +267,7 @@ export default function AiraPage() {
                 choice="Nudges timed to low-energy moments and written to encourage"
                 insteadOf="Reminders on a fixed schedule, or streaks and missed-day counters"
                 because="People dropped habits on the days they had no energy, and with PMOS that's a lot of days. A 9am reminder that shows up no matter what feels like judgment on those days. That's also why logging ends with an encouraging message instead of a number."
-                research="Fogg and COM-B; survey respondents chose gentle, well-timed prompts over rigid reminders"
+                research="Fogg and COM-B. Survey respondents chose gentle, well-timed prompts over rigid reminders"
               />
             </Media>
           </Section>
