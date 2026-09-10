@@ -1,6 +1,6 @@
 import { T } from "../tokens";
 
-const W = T.whspr;
+const W = T.whsprLight;
 
 // The three features cut between v1 and v2, each paired with what replaced it,
 // over a shared evidence spine. The spine is the point: the cut was made on a
@@ -53,7 +53,7 @@ export default function KilledKept() {
           <div
             key={i}
             className="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-6 py-5"
-            style={{ borderTop: "1px solid rgba(255,255,255,0.06)" }}
+            style={{ borderTop: "1px solid rgba(42,31,40,0.08)" }}
           >
             <p
               style={{

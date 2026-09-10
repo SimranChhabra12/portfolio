@@ -26,7 +26,25 @@ const FADE_MS = 600;
 // Widest screen ratio across every project's `cardScreens` (AIRA 440x956 = 0.4603).
 // If a project ever adds a wider export than this, its sides WILL be cropped — re-measure
 // and raise this rather than letting the frame quietly trim the new screens.
-const FRAME_ASPECT = "440 / 956";
+const SCREEN_ASPECT = 440 / 956;
+
+// Device geometry, in cqh (percent of the card's height). The phone sits whole inside
+// the card with 7% clear above and below, so it reads as a mockup rather than a crop.
+const PHONE_TOP = 7;
+const PHONE_H = 86;
+// Bezel ~3.8% of the phone's width, corners ~15%: iPhone 15 proportions.
+const BEZEL = 1.55;
+const SCREEN_W = (PHONE_H - BEZEL * 2) * SCREEN_ASPECT;
+const PHONE_W = SCREEN_W + BEZEL * 2;
+const RADIUS_OUT = PHONE_W * 0.155;
+const RADIUS_IN = RADIUS_OUT - BEZEL;
+const BUTTON_DEPTH = 0.45;
+const SIDE_BUTTONS = [
+  { key: "action", side: "left", top: PHONE_H * 0.17, height: PHONE_H * 0.04 },
+  { key: "vol-up", side: "left", top: PHONE_H * 0.25, height: PHONE_H * 0.075 },
+  { key: "vol-down", side: "left", top: PHONE_H * 0.345, height: PHONE_H * 0.075 },
+  { key: "power", side: "right", top: PHONE_H * 0.28, height: PHONE_H * 0.11 },
+] as const;
 
 // Chip copy comes from the screen's own alt text, which is already written per screen as
 // "<Product> <screen> — <what it does>". The half after the dash is the part worth reading
@@ -89,7 +107,14 @@ export default function ScreenCycler({
   const mountUpTo = Math.min(reached + 1, screens.length - 1);
 
   return (
-    <div ref={ref} className="absolute inset-0 overflow-hidden" onMouseEnter={advance}>
+    <div
+      ref={ref}
+      className="absolute inset-0 overflow-hidden"
+      // The card is the size container the device measures itself against (cqh), so
+      // the phone keeps real iPhone proportions at every card width.
+      style={{ containerType: "size" }}
+      onMouseEnter={advance}
+    >
       {/* Ground: a pale wash of the project's own colour, not the blurred cover.
           The blur was solving the wrong problem — it filled the tile without saying
           anything, and all four covers being dark composites made the grid read as one
@@ -129,78 +154,73 @@ export default function ScreenCycler({
           the top edge and took the header with it, and the header is the half of a screen
           that says what the screen is. */}
       <div className="absolute inset-0">
-        {/* The device. Bezel is drawn, not an asset: a PNG frame would have to be fetched
-            per card and would fight `object-cover` at every breakpoint, where this scales
-            with the tile for free.
-            `p-[1.15%]` — percentage padding resolves against the CONTAINING BLOCK's width
-            (the tile, 588px), not the element's own, on all four sides. So the bezel is an
-            even thickness that scales with the card, where a fixed px value would not; the
-            number looks small because it is a share of the tile, and 1.15% of 588 lands at
-            ~6.8px, about 3.5% of the phone's own width — a real handset's proportion. At
-            2.6% it measured 15.3px, roughly double a real bezel.
-            FRAME ASPECT — the rule: it must be at least as WIDE as the widest screen in
-            any set, because `object-cover` crops whichever axis is in surplus. At 402/977
-            (0.411) every AIRA screen (440x956, 0.460) lost 11% off its sides — 5.5% off
-            each edge — and so did two of Whspr's five (402x874). Side-cropping is the one
-            crop that damages a screen: it eats the leading and trailing edge of every row
-            of UI and pushes what is left into the bezel.
-            0.460 is the widest ratio measured across both sets, so nothing is cropped
-            horizontally any more, and taller screens now lose only their bottom — the tab
-            bar and safe area — which `object-top` was already protecting against.
-            It is also, by coincidence worth keeping, almost exactly a real handset:
-            393/852 on an iPhone 15 is 0.4613. */}
+        {/* The device: a standard iPhone mockup, whole and inside the card.
+            It used to bleed off the bottom edge with corners fixed at 13px/23px. Those
+            were tuned for a 106px/192px phone, but the phone renders nearer 240px, so
+            the corners came out at ~5% of its width (a real iPhone is ~15%) and the
+            bottom corners were never visible. It read as a square slab, not a phone.
+            Everything is now sized in cqh (card height), so bezel, corners, island and
+            buttons stay in iPhone proportion at any card size. */}
         <div
-          className={
-            // Body: a vertical gradient rather than one flat fill, so the titanium rail
-            // catches light down its length instead of reading as a black rectangle.
-            // `w-auto`: an absolutely positioned box with no width and no right offset
-            // shrink-wraps its content, so the body is exactly the screen plus its bezel.
-            "absolute top-[10%] left-[9%] h-[126%] w-auto bg-gradient-to-b from-[#3A3540] via-[#15131A] to-[#2A2530] p-[1.15%] " +
-            // Corner radius has to track the device width, and a percentage radius would
-            // resolve per-axis and go elliptical on a 0.41 portrait. So: two fixed values.
-            // A real handset's corner is ~12% of its width — 13px on the 106px phone a
-            // mobile card renders, 23px on the 192px one at desktop.
-            "rounded-[13px] md:rounded-[23px] " +
-            // The rim: a hairline inset highlight is what separates glass from a slab.
-            "shadow-[0_18px_40px_-12px_rgba(58,42,56,0.35),inset_0_0_0_1px_rgba(255,255,255,0.14)]"
-          }
+          className="absolute"
+          style={{
+            top: `${PHONE_TOP}cqh`,
+            left: "11%",
+            width: `${PHONE_W}cqh`,
+            height: `${PHONE_H}cqh`,
+          }}
         >
-          <div
-            style={{ aspectRatio: FRAME_ASPECT }}
-            className={
-              // The aspect lives HERE, on the screen, not on the body. With it on the body,
-              // the uniform bezel padding made the inner box narrower than the frame —
-              // 0.443 against the 0.460 the screens need — and AIRA still lost 3.8% off its
-              // sides after the frame itself was corrected. The screen is what has to match
-              // the export; the body is then whatever that plus a bezel comes to.
-              "relative h-full w-auto overflow-hidden rounded-[9px] md:rounded-[17px] " +
-              // Screen sits *in* the body: a dark inner hairline stops the screenshot's
-              // own edge butting flush against the bezel highlight.
-              "shadow-[inset_0_0_0_1px_rgba(0,0,0,0.55)]"
-            }
-          >
-            {screens.slice(0, mountUpTo + 1).map((screen, i) => (
-              <Image
-                key={screen.src}
-                src={screen.src}
-                alt={screen.alt}
-                aria-hidden={i !== index}
-                fill
-                sizes="240px"
-                // `object-top`: where the heights differ it is the bottom of the screen —
-                // tab bar, safe area — that is expendable, never the header.
-                className="object-cover object-top transition-opacity motion-reduce:transition-none"
-                style={{ opacity: i === index ? 1 : 0, transitionDuration: `${FADE_MS}ms` }}
-              />
-            ))}
-
-            {/* Dynamic island. Sized off the screen width so it tracks the bezel, and
-                deliberately drawn ON the screenshot: these exports carry a status bar but
-                no cut-out, so without it the frame reads as a generic slab. */}
-            <div
+          {/* Side buttons: action + volume on the left, power on the right. */}
+          {SIDE_BUTTONS.map((b) => (
+            <span
+              key={b.key}
               aria-hidden
-              className="absolute left-1/2 top-[1.6%] h-[3.1%] w-[30%] -translate-x-1/2 rounded-full bg-[#15131A]"
+              className="absolute bg-[#2A2530]"
+              style={{
+                [b.side]: `-${BUTTON_DEPTH}cqh`,
+                top: `${b.top}cqh`,
+                width: `${BUTTON_DEPTH}cqh`,
+                height: `${b.height}cqh`,
+                borderRadius: `${BUTTON_DEPTH}cqh`,
+              }}
             />
+          ))}
+
+          <div
+            className="relative h-full w-full bg-gradient-to-b from-[#3A3540] via-[#15131A] to-[#2A2530] shadow-[0_18px_40px_-12px_rgba(58,42,56,0.35),inset_0_0_0_1px_rgba(255,255,255,0.14)]"
+            style={{ padding: `${BEZEL}cqh`, borderRadius: `${RADIUS_OUT}cqh` }}
+          >
+            <div
+              className="relative h-full w-full overflow-hidden bg-black shadow-[inset_0_0_0_1px_rgba(0,0,0,0.55)]"
+              style={{ borderRadius: `${RADIUS_IN}cqh` }}
+            >
+              {screens.slice(0, mountUpTo + 1).map((screen, i) => (
+                <Image
+                  key={screen.src}
+                  src={screen.src}
+                  alt={screen.alt}
+                  aria-hidden={i !== index}
+                  fill
+                  sizes="260px"
+                  // Width always fits exactly (the screen is as wide as the widest
+                  // export), so nothing is lost off the sides. A taller scroll capture
+                  // loses only its bottom, never its header.
+                  className="object-cover object-top transition-opacity motion-reduce:transition-none"
+                  style={{ opacity: i === index ? 1 : 0, transitionDuration: `${FADE_MS}ms` }}
+                />
+              ))}
+
+              {/* Dynamic Island. The exports carry a status bar but no cut-out. */}
+              <div
+                aria-hidden
+                className="absolute left-1/2 top-[1.5%] h-[3.6%] w-[31%] -translate-x-1/2 rounded-full bg-black"
+              />
+              {/* Home indicator. None of the exports draw one. */}
+              <div
+                aria-hidden
+                className="absolute bottom-[1.1%] left-1/2 h-[0.6%] w-[35%] -translate-x-1/2 rounded-full bg-white/60"
+              />
+            </div>
           </div>
         </div>
 

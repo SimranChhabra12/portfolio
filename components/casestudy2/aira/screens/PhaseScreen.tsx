@@ -1,7 +1,8 @@
 import { K, SCREEN_W } from "./kit";
 import { StatusBar, Label, Body, Card, Segmented, ScreenHeader, FONT } from "./primitives";
 
-// Menstrual phase — where you are in the cycle, and what that means today.
+// Luteal phase (Autumn), day 18 — the same day the Home screen and the hero's
+// season panel show, so every surface on the cover tells one story.
 //
 // Fixed from the export: the orphaned floating "Phases" toggle is now a labelled
 // segmented control in the header stack; the dead zone between the ring and the
@@ -44,7 +45,7 @@ function Ring() {
               strokeDashoffset={-offset}
               // Day 1 sits at the top of the menstrual band: full opacity for the
               // active phase, the rest recede so the ring has a clear subject.
-              opacity={p.name === "Menstrual" ? 1 : 0.38}
+              opacity={p.name === ACTIVE ? 1 : 0.38}
             />
           );
           offset += len;
@@ -55,17 +56,19 @@ function Ring() {
   );
 }
 
+const ACTIVE = "Luteal";
+
 export default function PhaseScreen() {
   return (
     <div style={{ width: SCREEN_W, height: "100%", background: K.ground, position: "relative" }}>
       <StatusBar />
-      <ScreenHeader title="Menstrual Phase" nav />
+      <ScreenHeader title="Luteal Phase" nav />
 
       <div style={{ padding: `${K.space.lg}px ${K.pagePad}px 0` }}>
         <Segmented options={["Phases", "Calendar"]} active={0} />
         {/* Left-aligned: the centred version set ragged on both edges. */}
         <Body style={{ marginTop: K.space.lg }}>
-          This week is about rest and steady, gentle habits. Here&rsquo;s what can support you today.
+          Energy is winding down. Steady movement and a little more sleep help most this week.
         </Body>
       </div>
 
@@ -73,7 +76,7 @@ export default function PhaseScreen() {
         <Ring />
         <div style={{ position: "absolute", inset: 0, display: "grid", placeItems: "center", textAlign: "center" }}>
           <div>
-            <Label>Cycle day 1</Label>
+            <Label>Cycle day 18</Label>
             <p
               style={{
                 fontFamily: FONT,
@@ -83,9 +86,9 @@ export default function PhaseScreen() {
                 margin: "6px 0 4px",
               }}
             >
-              Low energy
+              Slowing down
             </p>
-            <Body style={{ fontSize: K.type.caption.size }}>Thu, Dec 21</Body>
+            <Body style={{ fontSize: K.type.caption.size }}>Autumn · Tue, Jan 7</Body>
           </div>
         </div>
       </div>
@@ -110,15 +113,15 @@ export default function PhaseScreen() {
                 borderRadius: 999,
                 background: p.color,
                 display: "block",
-                opacity: p.name === "Menstrual" ? 1 : 0.5,
+                opacity: p.name === ACTIVE ? 1 : 0.5,
               }}
             />
             <span
               style={{
                 fontFamily: FONT,
                 fontSize: K.type.caption.size,
-                color: p.name === "Menstrual" ? K.text : K.faint,
-                fontWeight: p.name === "Menstrual" ? 600 : 400,
+                color: p.name === ACTIVE ? K.text : K.faint,
+                fontWeight: p.name === ACTIVE ? 600 : 400,
               }}
             >
               {p.name}

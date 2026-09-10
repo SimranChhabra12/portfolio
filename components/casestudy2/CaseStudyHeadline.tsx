@@ -1,19 +1,34 @@
-import { T } from "../tokens";
+import { T } from "./tokens";
 
-// The headline unit: one block, title on the left and the credits stacked on
-// the right. The top of the page states what the product does for someone,
-// not what it is called.
+export interface HeadlineMeta {
+  label: string;
+  value: string;
+}
 
-const META: { label: string; value: string }[] = [
-  { label: "Role", value: "UX Researcher • Product Strategist • Prototyping • Visual & Interaction Designer" },
-  { label: "Platform", value: "Mobile Application" },
-  { label: "Timeline", value: "4 months | Jan 2026 – May 2026" },
-];
-
-export default function ProjectHeadline() {
+/**
+ * The headline unit shared by every case study: one block, the claim on the left
+ * and the credits stacked on the right.
+ *
+ * The rule this encodes — from Whspr, which set the format — is that the top of a
+ * case study states what the product does for someone, not what it is called. A
+ * page that opens on "AIRA" or "Resy Celebrations" has spent its largest type on
+ * a word the reader can't do anything with.
+ *
+ * `id` is load-bearing: SectionIndex aligns its first entry to this block and
+ * reveals itself when the block arrives, so every page must pass one.
+ */
+export default function CaseStudyHeadline({
+  id,
+  headline,
+  meta,
+}: {
+  id: string;
+  headline: string;
+  meta: HeadlineMeta[];
+}) {
   return (
     <div
-      id="whspr-headline"
+      id={id}
       className="w-full grid grid-cols-1 lg:grid-cols-[minmax(0,1.6fr)_minmax(0,1fr)] gap-x-16 gap-y-12 items-start"
     >
       {/* Left — the claim, not the name */}
@@ -28,12 +43,12 @@ export default function ProjectHeadline() {
           margin: 0,
         }}
       >
-        Whspr: Crowdsourced urban intelligence platform for women
+        {headline}
       </h1>
 
       {/* Right — credits, stacked so they read as one column against the title */}
       <dl className="flex flex-col gap-8 m-0">
-        {META.map((m) => (
+        {meta.map((m) => (
           <div key={m.label} className="min-w-0">
             <dt
               style={{

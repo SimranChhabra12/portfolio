@@ -2,12 +2,12 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import Nav from "@/components/ui/Nav";
 import Reveal from "@/components/ui/Reveal";
-import HeroPhoto from "@/components/interactive/HeroPhoto";
+import AboutPhotoPile from "@/components/interactive/AboutPhotoPile";
 
 export const metadata: Metadata = {
   title: "About — Simran Chhabra",
   description:
-    "Simran Chhabra is a product designer working on research-driven experiences for people existing systems overlook.",
+    "Simran Chhabra, product designer in New York. Fashion school, a clothing label, 75 community events, and a lot of interviews.",
 };
 
 // Vertical rhythm is NOT set here — `globals.css` carries
@@ -75,7 +75,7 @@ const TIMELINE: {
     role: "Product Design Intern",
     org: "Upload Digital",
     blurb:
-      "Research and prototyping on Even's healthcare redesign, turning insurance plans people couldn't compare into flows they could. Also a data-visualization report on women in India's climate workforce.",
+      "Research and prototyping on Even's healthcare redesign. People couldn't tell two insurance plans apart, so most of the work was making the comparison possible at all. Also a data-visualization report on women in India's climate workforce.",
     thumb: null,
   },
   {
@@ -83,7 +83,7 @@ const TIMELINE: {
     role: "Community & Brand Associate",
     org: "WeWork India",
     blurb:
-      "75+ events across two Bengaluru locations for about 850 members, plus the invites, newsletters, and in-app content that got people to show up.",
+      "75 events across 2 Bengaluru locations for about 850 members, plus the invites, newsletters, and in-app content that got people to show up.",
     thumb: null,
   },
   {
@@ -101,16 +101,18 @@ const TIMELINE: {
 // The reference puts award art on a shelf. There is no award art here yet and none is
 // invented: these are the four things that are true, rendered as flat cards on the same
 // shelf line. Add `art` to a card when Simran supplies an image.
-const SHELF: { title: string; issuer: string; year: string }[] = [
+const SHELF: { title: string; issuer: string; year: string; detail?: string }[] = [
   {
     title: "AI / Migration / Futures",
-    issuer: "Workshop at LSE — research contributed",
+    issuer: "Workshop at the London School of Economics",
     year: "2026",
+    detail: "Research I contributed to at NYU was shared at this workshop.",
   },
   {
     title: "Southeast Asian Studies Graduate Conference",
-    issuer: "Harvard-Yale — research presented",
+    issuer: "Harvard-Yale",
     year: "2026",
+    detail: "As a research assistant at NYU Tandon, I ran and coded interviews with immigrant food delivery workers in NYC. That research was presented here and is going into an upcoming book.",
   },
   {
     title: "MS, Integrated Design and Media",
@@ -138,24 +140,14 @@ export default function AboutPage() {
           The stack is two offset plates behind the existing hero frame — the frame's own
           flip is the site's one signature motion (DESIGN_DOC §7), nothing new added. */}
       <section className={SHELL}>
-        <p className="t-sub text-ink !max-w-none mb-12 max-w-[24ch] text-balance">
-          I design for people existing systems overlook — and I got here through a clothing
-          label, 75 events, and a lot of interviews.
+        <p className="t-sub text-ink !max-w-none mb-12 max-w-[28ch] text-balance">
+          I&apos;m a product designer in New York. Before this I studied fashion, ran a small
+          clothing label, and worked in community and events.
         </p>
 
         <div className="flex justify-center">
-          <div className="relative w-full max-w-[420px]">
-            <div
-              aria-hidden
-              className="absolute inset-0 rotate-[-4deg] rounded-[var(--radius-card)] bg-surface"
-            />
-            <div
-              aria-hidden
-              className="absolute inset-0 rotate-[3deg] rounded-[var(--radius-card)] bg-blush/40"
-            />
-            <div className="relative">
-              <HeroPhoto fluid aspect="3 / 4" />
-            </div>
+          <div className="w-full max-w-[420px]">
+            <AboutPhotoPile />
           </div>
         </div>
       </section>
@@ -175,8 +167,9 @@ export default function AboutPage() {
                   I didn&apos;t start in tech. I studied fashion design at NIFT in Gandhinagar,
                   and for two years after that I ran Si.Ch, a small sustainable clothing label.
                   I did all of it: the product, the brand, the store, the photos, the customer
-                  DMs. We sold 400+ pieces in the first year. The part I liked most was never
-                  the clothes. It was watching someone decide.
+                  DMs. We sold 400+ pieces in the first year. The part I enjoyed most was
+                  seeing someone fall in love with a piece, and working out what it was about it
+                  that drew them in. What were they actually looking for?
                 </>
               ),
             },
@@ -184,10 +177,10 @@ export default function AboutPage() {
               mark: "WeWork India",
               body: (
                 <>
-                  Then a year at WeWork India, running 75+ community events across two Bengaluru
-                  locations for about 850 members. Designing an invite is easy. Getting 50 people
-                  to show up on a Wednesday is not. That was the first time I understood that the
-                  thing you make is only half of the work.
+                  Then a year at WeWork India, running 75 community events across 2 Bengaluru
+                  locations for about 850 members. Most of it was getting to know the members,
+                  listening for what they wished the space had, and planning events around that.
+                  The ones that worked were usually the ones people had half-asked for already.
                 </>
               ),
             },
@@ -195,12 +188,14 @@ export default function AboutPage() {
               mark: "NYU IDM",
               body: (
                 <>
-                  I came to NYU for the MS in Integrated Design and Media and the work got
-                  sharper. I interviewed immigrant food delivery workers in NYC for a research
-                  project at Tandon. At Upload Digital I worked on insurance flows until people
-                  could actually tell two plans apart. Now I design consumer products for
-                  early-stage teams, and I&apos;m still asking the question I had with the
-                  clothing label. How does a person decide, and what is in their way?
+                  I came to NYU for the MS in Integrated Design and Media, where I specialised in
+                  product design. Some of the most exciting parts of the course were the chance to
+                  work across very different kinds of technology: designing and fabricating
+                  wearables, building VR experiences, and learning the basics of UX and AI. Running
+                  through all of it was a close look at the social impact of design decisions,
+                  both digital and physical. Now I design consumer products for early-stage teams,
+                  and I&apos;m still curious about the same thing I was with the clothing label:
+                  what draws people to something, and what they&apos;re really looking for.
                 </>
               ),
             },
@@ -253,16 +248,19 @@ export default function AboutPage() {
 
       {/* Recognition — the reference's shelf, rendered as flat cards sitting on one rule. */}
       <section className={SHELL}>
-        <SectionHeading lead="What" rest="it's added up to" />
+        <SectionHeading lead="Education" rest="and research" />
 
         <div className="mt-10">
           <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
             {SHELF.map((card, i) => (
               <Reveal key={card.title} delay={i * 60}>
                 <article className="flex h-full flex-col justify-between rounded-[var(--radius-card)] bg-surface p-6">
-                  <h3 className="t-sub text-ink">{card.title}</h3>
-                  <p className="t-caption text-ink/75 mt-4">{card.issuer}</p>
-                  <p className="t-caption label text-mauve mt-2">{card.year}</p>
+                  <div>
+                    <h3 className="t-sub text-ink">{card.title}</h3>
+                    <p className="t-caption text-ink/75 mt-4">{card.issuer}</p>
+                    {card.detail && <p className="t-caption text-ink mt-3">{card.detail}</p>}
+                  </div>
+                  <p className="t-caption label text-mauve mt-4">{card.year}</p>
                 </article>
               </Reveal>
             ))}
@@ -286,6 +284,12 @@ export default function AboutPage() {
           curriculum to middle schoolers. I&apos;ve handed out menstrual cups in Gujarat with
           Boondh and fundraised for an animal shelter in Auroville. Before that there was a slam
           poetry night and a few music festivals.
+        </p>
+
+        <p className="t-body text-ink mt-6">
+          Outside work you&apos;ll find me hanging out with my best friend Kaiser and saying hi to
+          all the doggos I see and meet! I love spending time in a park reading and discovering
+          more female authors from around the world, or in the water surfing!
         </p>
       </section>
     </main>

@@ -1,66 +1,104 @@
 import { T } from "@/components/casestudy2/tokens";
 import { CaseStudyFooter } from "@/components/casestudy2/CaseStudyChrome";
 import Nav from "@/components/ui/Nav";
-import Section, { P, List, DecisionBlock, Caption, H3 } from "@/components/casestudy2/Section";
-import DarkBlock from "@/components/casestudy2/DarkBlock";
+import Section, { P, List, Caption, H3 } from "@/components/casestudy2/Section";
 import QuoteCallout from "@/components/casestudy2/QuoteCallout";
-import { StatRow } from "@/components/casestudy2/StatCallout";
-import AssetFlag from "@/components/casestudy2/AssetFlag";
-import LivePrototype from "@/components/casestudy2/LivePrototype";
+import ResearchStats from "./ResearchStats";
+import DecisionCard from "@/components/casestudy2/DecisionCard";
+import PrototypeShell from "@/components/casestudy2/resy/PrototypeShell";
+import HeroCover from "@/components/casestudy2/resy/HeroCover";
+import CaseStudyHeadline from "@/components/casestudy2/CaseStudyHeadline";
+import ContextAndRole from "@/components/casestudy2/ContextAndRole";
+import SectionIndex from "@/components/casestudy2/SectionIndex";
 import TwoSidedFlow from "./TwoSidedFlow";
-import { COL } from "./columns";
+import CommitmentLadder from "./CommitmentLadder";
+import { CaseStudyShell } from "../_components/columns";
 
 export const metadata = {
-  title: "Resy Celebrations — A Concept — Simran Chhabra",
+  title: "Resy Celebrations, a Concept | Simran Chhabra",
   description:
     "An independent student concept for large-party booking on Resy, for groups of 8+. Not affiliated with or endorsed by Resy.",
 };
 
 const RUST = "#C4472A";
 
+// Contents index, pinned in the left margin. Keep in step with the
+// <Section> ids, numbers and headings below.
+const SECTIONS = [
+  { id: "context", number: "01", label: "Context" },
+  { id: "research", number: "02", label: "Research" },
+  { id: "insight", number: "03", label: "The Insight" },
+  { id: "decisions", number: "04", label: "Design Decisions" },
+  { id: "product", number: "05", label: "The Product" },
+  { id: "landed", number: "06", label: "Where It Landed" },
+  { id: "next", number: "07", label: "What I'd Do Next" },
+  { id: "takeaway", number: "08", label: "What I Took Away" },
+];
+
 export default function ResyPage() {
   return (
     <main style={{ backgroundColor: T.cream }} className="min-h-screen overflow-x-hidden">
-      <Nav />
+      <Nav coverId="resy-cover" />
+      <SectionIndex items={SECTIONS} alignWithId="resy-headline" revealWithId="resy-headline" />
+
+      {/* Cover band */}
+      <HeroCover />
 
       {/* Hero */}
-      <section className="px-8 lg:px-16 pt-40" style={{ paddingBottom: T.space.section }}>
-        <div style={{ maxWidth: COL.media }}>
-          <p
-            className="mb-6"
+      <CaseStudyShell className="pt-20">
+        <div style={{ paddingBottom: T.space.section }}>
+          <CaseStudyHeadline
+            id="resy-headline"
+            headline="Resy Celebrations: Making in‑app large party reservations simpler"
+            meta={[
+              { label: "Role", value: "UX Researcher • Product Designer • Prototyping" },
+              { label: "Platform", value: "Mobile feature, inside the existing Resy app" },
+              { label: "Timeline", value: "Semester 3 course project | Team of 4, I led direction and owned research" },
+            ]}
+          />
+
+          <div className="mt-20">
+            <ContextAndRole
+              columns={[
+                {
+                  heading: "What is Resy Celebrations?",
+                  body:
+                    "A large-party booking flow for groups of eight and up, designed inside Resy's existing app. Parties that size don't fit the normal reservation grid, so today they fall out of the app into phone calls and email threads. Celebrations turns that into an inquiry both sides can see: the guest states what the occasion needs, the restaurant answers or counters, and the group splits the deposit in-app.",
+                },
+                {
+                  heading: "My Role",
+                  body:
+                    "I owned the research end to end and led the product direction. That meant the interviews on both sides of the table, the decision to treat this as an inquiry rather than a booking, the preference-first discovery flow, the deposit and card-hold model, and the hi-fi prototype you can use further down this page.",
+                },
+              ]}
+            />
+          </div>
+
+          {/* Same placement and treatment as the Whspr prototype link: straight under
+              My Role, so the working prototype is one click from the top. */}
+          <a
+            href="/work/resy/prototype"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 mt-10 px-5 py-3 rounded-full"
             style={{
               fontFamily: "var(--font-body)",
-              fontSize: T.type.caption,
-              textTransform: "uppercase",
-              letterSpacing: "0.08em",
-              color: T.inkMuted,
+              fontSize: "0.9375rem",
+              fontWeight: 500,
+              color: T.cream,
+              backgroundColor: T.ink,
             }}
           >
-            Student concept · UX course project · Mobile feature
-          </p>
-          <h1
-            style={{
-              fontFamily: "var(--font-display)",
-              fontWeight: 600,
-              fontSize: T.type.hero,
-              lineHeight: 1.05,
-              letterSpacing: "-0.02em",
-              color: T.ink,
-              marginBottom: "1.5rem",
-            }}
-          >
-            Resy Celebrations
-            <span style={{ color: T.inkMuted }}> — a concept</span>
-          </h1>
-          <P large>A large-party booking flow for groups of 8+, designed inside Resy&apos;s existing app.</P>
+            Try the live prototype ↗
+          </a>
 
           {/* E1 — attribution. This never shipped and Resy was never involved. */}
           <div
-            className="mt-8"
+            className="mt-16"
             style={{
               borderLeft: `2px solid ${RUST}`,
               paddingLeft: "1.25rem",
-              maxWidth: COL.text,
+              maxWidth: "var(--col-text, 640px)",
             }}
           >
             <p
@@ -77,38 +115,11 @@ export default function ResyPage() {
               concept was designed against.
             </p>
           </div>
-
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-8 mt-16" style={{ maxWidth: 900 }}>
-            {[
-              { label: "Hats Worn", value: "UX Research, Product Design, Prototyping" },
-              { label: "Team", value: "4 — me plus 3 engineers. I led direction and owned research end to end." },
-              { label: "Platform", value: "Mobile feature, existing Resy app" },
-              { label: "Timeline", value: "Semester 3, UX design course" },
-            ].map((f) => (
-              <div key={f.label}>
-                <p
-                  style={{
-                    fontFamily: "var(--font-body)",
-                    fontSize: T.type.caption,
-                    textTransform: "uppercase",
-                    letterSpacing: "0.08em",
-                    color: T.inkMuted,
-                    marginBottom: "0.5rem",
-                  }}
-                >
-                  {f.label}
-                </p>
-                <p style={{ fontFamily: "var(--font-body)", fontSize: "0.9375rem", color: T.ink, lineHeight: 1.5 }}>
-                  {f.value}
-                </p>
-              </div>
-            ))}
-          </div>
         </div>
-      </section>
+      </CaseStudyShell>
 
-      <div className="px-8 lg:px-16 min-w-0">
-        <div className="flex flex-col min-w-0" style={{ maxWidth: COL.media }}>
+      <CaseStudyShell>
+        <div className="flex flex-col min-w-0">
           {/* 01 — quote treatment */}
           <Section id="context" number="01" heading="Context" first>
             <P>
@@ -135,10 +146,6 @@ export default function ResyPage() {
               person, walking into bars to ask about minimum spends and availability. We got more in
               an afternoon on foot than in a week of emails.
             </P>
-          </Section>
-
-          {/* 02 — two-sided flow block, dark */}
-          <Section id="both-sides" number="02" heading="The Workflow, From Both Sides">
             <P>
               The fastest way to see the gap is to lay the two sides next to each other. Both are
               trying to reach the same outcome. Neither has anywhere to do it.
@@ -163,18 +170,18 @@ export default function ResyPage() {
               ]}
             />
             <Caption>
-              The email hand-off isn&apos;t a slow step in the flow. It is the flow — everything that
+              The email hand-off isn&apos;t a slow step in the flow. It is the flow. Everything that
               matters to either side happens outside the product.
             </Caption>
           </Section>
 
-          {/* 03 — stats treatment */}
-          <Section id="research" number="03" heading="The Research">
+          {/* 02 — stats treatment */}
+          <Section id="research" number="02" heading="Research">
             <P>
               I ran a survey to define who this was for, then two rounds of interviews: 15 users
               first, then 6 restaurant managers across Brooklyn and Manhattan.
             </P>
-            <StatRow
+            <ResearchStats
               stats={[
                 { value: "93%", label: "Still call or email restaurants directly for group bookings, even when they normally use an app" },
                 { value: "67%", label: "Didn't learn a restaurant's minimum spend or event policy until after they'd already reached out" },
@@ -187,7 +194,7 @@ export default function ResyPage() {
               effort to ask.
             </P>
             <P>
-              The survey also decided the target. Students dropped out fast — most don&apos;t use
+              The survey also decided the target. Students dropped out fast. Most don&apos;t use
               Resy because it wants a card on file, and a sit-down dinner for 15 isn&apos;t in the
               budget. That left working professionals, roughly 29-33. The user interviews confirmed
               the pattern: everyone had tried Resy for a big group at some point, almost nobody had
@@ -203,7 +210,7 @@ export default function ResyPage() {
           </Section>
 
           {/* 04 — prose + HMW treatment */}
-          <Section id="insight" number="04" heading="The Insight">
+          <Section id="insight" number="03" heading="The Insight">
             <P>
               We almost didn&apos;t interview restaurant managers. My professor pushed us past the
               user side to talk to the people running these rooms. That&apos;s where the problem got
@@ -211,7 +218,7 @@ export default function ResyPage() {
             </P>
             <P>
               The managers weren&apos;t refusing large bookings. They were doing work Resy had no
-              infrastructure for. Event type, seating, dietary needs, minimum spend, prix fixe — none
+              infrastructure for. Event type, seating, dietary needs, minimum spend, prix fixe. None
               of it fits a standard reservation. So they took the conversation to email, because
               email was the only place it could happen.
             </P>
@@ -228,7 +235,7 @@ export default function ResyPage() {
                 borderTop: `1px solid ${T.inkFaint}`,
                 borderBottom: `1px solid ${T.inkFaint}`,
                 padding: "2rem 0",
-                maxWidth: COL.text,
+                maxWidth: "var(--col-text, 640px)",
               }}
             >
               <p
@@ -258,92 +265,83 @@ export default function ResyPage() {
             </div>
           </Section>
 
-          {/* 05 — dark block treatment */}
-          <Section id="trust" number="05" heading="What Each Side Is Risking">
+          {/* 04 — the decisions, opening on the trust asymmetry they all answer to */}
+          <Section id="decisions" number="04" heading="Design Decisions">
             <P>
-              Underneath the logistics, this is a trust problem, and it isn&apos;t symmetrical. Both
-              sides are being asked to commit before the other one has.
+              Every decision below answers the same thing. Underneath the logistics, this is a trust
+              problem, and it isn&apos;t symmetrical. Both sides are being asked to commit before the
+              other one has.
             </P>
-            <DarkBlock bg="#231A18" label="The trust gap">
-              <div className="flex flex-col md:flex-row gap-8 md:gap-12">
-                <div className="flex-1 flex flex-col gap-3 min-w-0">
-                  <p
-                    style={{
-                      fontFamily: "var(--font-body)",
-                      fontSize: T.type.caption,
-                      textTransform: "uppercase",
-                      letterSpacing: "0.08em",
-                      color: RUST,
-                    }}
+            <figure className="w-full m-0">
+              <p
+                className="mb-4"
+                style={{
+                  fontFamily: "var(--font-body)",
+                  fontSize: T.type.caption,
+                  textTransform: "uppercase",
+                  letterSpacing: "0.08em",
+                  color: T.inkMuted,
+                }}
+              >
+                The trust gap
+              </p>
+              <div
+                className="grid grid-cols-1 md:grid-cols-2"
+                style={{ borderTop: `1px solid ${T.ink}` }}
+              >
+                {[
+                  {
+                    who: "The guest risks",
+                    text: "Committing a group of 12 to a place they can't picture, at a price they can't see, through a channel that gives them no confirmation. The frustration that came up most wasn't cost. It was not knowing whether anything was actually booked.",
+                  },
+                  {
+                    who: "The restaurant risks",
+                    text: "Holding a room, staffing it, and prepping a set menu for a party that may not arrive. The managers described this directly: minimum spends, kitchen strain, staffing, no-show risk. Gating 8+ behind email isn't obstruction. It's the only screening tool they have.",
+                  },
+                ].map((side, i) => (
+                  <div
+                    key={side.who}
+                    className={`flex flex-col gap-3 pt-6 pb-2 ${i === 0 ? "md:pr-10" : "md:pl-10 md:border-l border-t md:border-t-0 mt-6 md:mt-0"}`}
+                    style={{ borderColor: T.inkFaint }}
                   >
-                    The guest risks
-                  </p>
-                  <p
-                    style={{
-                      fontFamily: "var(--font-body)",
-                      fontSize: T.type.body,
-                      lineHeight: 1.65,
-                      color: "#F5F1EE",
-                    }}
-                  >
-                    Committing a group of 12 to a place they can&apos;t picture, at a price they
-                    can&apos;t see, through a channel that gives them no confirmation. The
-                    frustration that came up most wasn&apos;t cost — it was not knowing whether
-                    anything was actually booked.
-                  </p>
-                </div>
-                {/* Divider only while stacked — on md+ the columns sit side by side. */}
-                <div
-                  className="flex-1 flex flex-col gap-3 min-w-0 border-t md:border-t-0 pt-6 md:pt-0"
-                  style={{ borderTopColor: "rgba(245,241,238,0.14)" }}
-                >
-                  <p
-                    style={{
-                      fontFamily: "var(--font-body)",
-                      fontSize: T.type.caption,
-                      textTransform: "uppercase",
-                      letterSpacing: "0.08em",
-                      color: RUST,
-                    }}
-                  >
-                    The restaurant risks
-                  </p>
-                  <p
-                    style={{
-                      fontFamily: "var(--font-body)",
-                      fontSize: T.type.body,
-                      lineHeight: 1.65,
-                      color: "#F5F1EE",
-                    }}
-                  >
-                    Holding a room, staffing it, and prepping a set menu for a party that may not
-                    arrive. The managers described this directly: minimum spends, kitchen strain,
-                    staffing, no-show risk. Gating 8+ behind email isn&apos;t obstruction. It&apos;s
-                    the only screening tool they have.
-                  </p>
-                </div>
+                    <p
+                      style={{
+                        fontFamily: "var(--font-display)",
+                        fontWeight: 600,
+                        fontSize: "1.25rem",
+                        color: RUST,
+                        lineHeight: 1.3,
+                      }}
+                    >
+                      {side.who}
+                    </p>
+                    <p
+                      style={{
+                        fontFamily: "var(--font-body)",
+                        fontSize: "1rem",
+                        lineHeight: 1.65,
+                        color: T.ink,
+                      }}
+                    >
+                      {side.text}
+                    </p>
+                  </div>
+                ))}
               </div>
-            </DarkBlock>
+            </figure>
             <P>
-              The restaurant side turned out to be enormous — an operational problem in its own
+              The restaurant side turned out to be enormous, an operational problem in its own
               right. Solving all of it was never the scope of a research course project. What the
               manager research did was let me design a grounded, hypothetical experience for their
               side, built on what they actually told us, without pretending I&apos;d solved
               restaurant operations. The user was the problem I was solving. The managers were the
               context that made the user&apos;s side designable.
             </P>
-          </Section>
-
-          {/* 06 — the named commitment section. Screens are BLOCKED on E2. */}
-          <Section id="commitment" number="06" heading="Deposits and the Card Hold">
-            <P>
-              This is the mechanism the whole concept rests on, and it&apos;s the part I got least
-              far with.
-            </P>
+            <H3>Deposits and the card hold</H3>
             <P>
               A restaurant will accept a large party when the party has committed to something. That
-              is the entire reason the 8+ gate exists. Everything upstream in this design — the
-              preference-first flow, the structured request, the manager dashboard — only earns a
+              is the entire reason the 8+ gate exists. Everything upstream in this design (the
+              preference-first flow, the structured request, the manager dashboard) only earns a
               &ldquo;yes&rdquo; if there&apos;s something at the end of it that makes the booking
               real for the restaurant, not just for the guest.
             </P>
@@ -351,65 +349,71 @@ export default function ResyPage() {
               What the design does carry: once a booking is confirmed, it becomes a shared space. The
               host sends an RSVP link through the app, guests confirm and split any deposit in-app,
               and the restaurant&apos;s headcount updates automatically before the cutoff. That
-              solves the guest-side half — nobody is chasing 12 people on Venmo, and the restaurant
+              solves the guest-side half. Nobody is chasing 12 people on Venmo, and the restaurant
               gets a live headcount instead of a number from three weeks ago.
             </P>
 
-            <AssetFlag label="E2, blocked on design: the guest-side deposit / card-hold step inside the request flow, the restaurant-side view of a guaranteed booking, and the cancellation and refund rule. These screens do not exist yet — this section is written around the gap rather than illustrating it." />
-
-            <H3>The honest gap</H3>
+            <CommitmentLadder />
             <P>
-              What the design does <em>not</em> carry is the other half: what actually protects the
-              restaurant from a no-show or a late cancellation. I understood that risk from the
-              manager research and never translated it into the design. There is no screen in this
-              case study where a card is held, where a deposit is taken at request time rather than
-              after confirmation, or where a cancellation window is stated and enforced.
+              The prototype now has the hold. Once the restaurant says yes, the guest holds a card
+              against the minimum. Nothing is charged, and it&apos;s only taken if the group cancels
+              late or doesn&apos;t show. That&apos;s the moment the booking becomes real for the
+              restaurant, and their dashboard marks it guaranteed instead of just accepted. Until
+              the guest holds a card, the tracker stops one step short of confirmed. That was the
+              sharpest note this project got, and it&apos;s a fair one, so it was the first thing I
+              built after the course.
             </P>
-            <P>
-              That was the sharpest note this project got, and it&apos;s a fair one. A case study
-              that writes about deposits without showing them is describing a mechanism it
-              hasn&apos;t designed. Designing those three screens is the next thing I&apos;m doing to
-              this project, and when they exist they belong right here, before the design decisions
-              that assume them.
-            </P>
-          </Section>
 
-          {/* 07 — decisions treatment */}
-          <Section id="decisions" number="07" heading="Design Decisions">
-            <P>All four came out of the research.</P>
+            <H3>The four decisions this made possible</H3>
 
-            <DecisionBlock
+            <DecisionCard
+              project="resy"
+              variant="notes"
               index={1}
-              accent={RUST}
-              title="Celebrations as its own mode, not a filter"
-              body="The first call was structural. I could have bolted a party-size filter onto the existing flow. But a large-group booking isn't a bigger version of a table for 2. It carries different information, a longer timeline, and higher stakes on both sides. A dedicated Celebrations tab signals that upfront, to guests and restaurants both."
+              choice="Celebrations as its own mode, not a filter"
+              insteadOf="A party-size filter bolted onto the existing reservation flow"
+              because="A large-group booking isn't a bigger version of a table for two. It carries different information, a longer timeline, and higher stakes on both sides. A dedicated tab says that upfront, to guests and restaurants both."
+              research="6 manager interviews. Every one described 8+ as a different job, not a bigger one"
             />
-            <DecisionBlock
+            <DecisionCard
+              project="resy"
+              variant="notes"
               index={2}
-              accent={RUST}
-              title="Preference-first discovery"
-              body="Before showing any restaurants, Celebrations asks what you're planning: event type, party size, date, budget range, vibe. Most discovery shows results first and filters after. The research said why that fails here — people were reaching out to places that couldn't hold them, then finding out 3 emails deep. Collecting preferences first means every result on screen is already a real option. Browsing happens through a scrollable list with a map toggle, the pattern Resy users already know, with minimum spend and capacity visible on each card."
+              choice="Ask what you're planning before showing a single restaurant"
+              insteadOf="Results first, filters after, the way most discovery flows work"
+              because="People were reaching out to places that could never have held them, and only finding out three emails deep. Collecting event type, size, date, budget and vibe first means every result on screen is already a real option, with minimum spend and capacity on the card."
+              research="67% didn't learn the minimum spend or policy until after they'd already reached out"
+              voice={{
+                quote: "If guests saw sample menus, pricing, and policies before emailing us, that would filter out groups who aren't serious.",
+                attribution: "Manager, Convivium Osteria",
+              }}
             />
-            <DecisionBlock
+            <DecisionCard
+              project="resy"
+              variant="notes"
               index={3}
-              accent={RUST}
-              title="A structured request, and a place for the restaurant to answer it"
-              body="Instead of open email, the guest sends a structured request: event type, headcount, dietary needs, timing. The restaurant receives it in a manager dashboard, pre-filled, and can accept, counter, or decline without touching their inbox. This is the two-sided piece. Every manager said the same thing — the email was never the point, there was just nowhere else for that conversation to live. The dashboard is that somewhere. Input stays light while you're inquiring, and only steps up to committing detail once the restaurant says yes."
+              choice="A structured request, and a dashboard for the restaurant to answer it"
+              insteadOf="Speeding up the email thread, or auto-confirming large parties"
+              because="The email was never the point. There was just nowhere else for that conversation to live. The guest sends event type, headcount, dietary needs and timing as fields, and the restaurant accepts, counters, or declines without touching their inbox. Input stays light while you're inquiring and only steps up once the restaurant says yes."
+              research="All 6 managers described the same inbox workaround, independently"
             />
-            <DecisionBlock
+            <DecisionCard
+              project="resy"
+              variant="notes"
               index={4}
-              accent={RUST}
-              title="Group coordination and payment split"
-              body="Once it's confirmed, the booking becomes a shared space. The host sends an RSVP link through the app, guests confirm and split any deposit in-app, and the restaurant's headcount updates automatically before the cutoff. No chasing 12 people on Venmo."
+              choice="The confirmed booking becomes a shared space, not a receipt"
+              insteadOf="One host on the hook for the deposit, chasing twelve people on Venmo"
+              because="The host sends an RSVP link through the app, guests confirm and split the deposit in-app, and the restaurant's headcount updates automatically before the cutoff. The restaurant stops planning against a number that's three weeks old."
+              research="Managers named no-shows and stale headcounts as the two costs of saying yes"
             />
           </Section>
 
-          {/* 08 — two-sided flow block again, resolved / light */}
-          <Section id="solution" number="08" heading="How The Design Resolves It">
+          {/* 05 — the resolved flow, then the thing itself */}
+          <Section id="product" number="05" heading="The Product">
             <P>
-              Resy Celebrations is a dedicated tab inside Resy for groups of 8 or more. Not a filter,
-              not a workaround. A separate mode that tells both the user and the restaurant this is a
-              different kind of booking. Here is the same workflow, walked from both sides again.
+              Resy Celebrations is a dedicated tab inside Resy for groups of 8 or more. It&apos;s its
+              own mode, so both the guest and the restaurant know this is a different kind of
+              booking. Here&apos;s the same workflow again, from both sides.
             </P>
             <TwoSidedFlow
               tone="resolved"
@@ -435,38 +439,34 @@ export default function ResyPage() {
               accent={RUST}
               text="The whole feature does one thing the old flow couldn't: it keeps the guest and the restaurant in the same place long enough to actually agree on a plan."
             />
-          </Section>
-
-          {/* 09 — live prototype treatment */}
-          <Section id="prototype" number="09" heading="Give It A Try">
+            <H3>Give it a try</H3>
             <P>
-              This is the working hi-fi prototype, not a video. Set your preferences, browse the
-              matches, and send a request the way a guest would.
+              This is the working hi-fi prototype, so you can actually use it. Set your
+              preferences, browse the matches that fit your party, and send a request.
+              Then open the restaurant&apos;s dashboard, accept or counter your own inquiry,
+              and watch your tracker move. Both sides read the same data.
             </P>
-            <LivePrototype
-              src="https://resy-celebrations-portfolio.surge.sh"
-              title="Resy Celebrations — interactive prototype"
-            />
+            <PrototypeShell />
             <Caption>
-              A concept prototype. It is not connected to Resy and no real reservation is made.
+              A concept prototype. It is not connected to Resy, and no real reservation is made.
             </Caption>
           </Section>
 
           {/* 10 — list treatment */}
-          <Section id="landed" number="10" heading="Where It Landed">
+          <Section id="landed" number="06" heading="Where It Landed">
             <P>
               The scope of this project was needfinding and proposing a solution, so that&apos;s what
-              the course asked for and what we delivered: end-to-end research across 15 users and 6
+              the course asked for and what we delivered: research across 15 users and 6
               managers, a survey, synthesis, personas, current and future journey maps, and a lo-fi
               prototype covering the full flow on both sides. The hi-fi prototype in this case study
               I built after the course, on my own, to take the proposed solution from a flow into
               something you can actually move through.
             </P>
-            <H3>The honest gaps, named plainly</H3>
+            <H3>What didn&apos;t work</H3>
             <List
               accent={RUST}
               items={[
-                "The solution didn't go far enough on how Celebrations protects restaurants from no-shows and last-minute cancellations. I understood that risk from the manager research but didn't fully translate it into the design.",
+                "The course version didn't go far enough on protecting restaurants from no-shows and last-minute cancellations. I understood that risk from the manager research but didn't design for it until the hi-fi prototype, which added the card hold.",
                 "The original swipe-to-browse mechanic got fair pushback for working better as discovery than as a primary way to choose a high-stakes booking, which is why the current version uses Resy's list and map instead.",
                 "We carried one persona too many, with two that overlapped.",
               ]}
@@ -474,23 +474,28 @@ export default function ResyPage() {
           </Section>
 
           {/* 11 — prose treatment */}
-          <Section id="differently" number="11" heading="What I'd Do Differently">
+          <Section id="next" number="07" heading="What I'd Do Next">
             <P>
-              I&apos;d have tried to talk to someone at Resy. We understood the problem cold from the
-              user and restaurant sides, but we never pressure-tested whether this was viable for
-              Resy as a business. Is the 8+ gap a technical limit, a strategic choice, a resource
-              call? I don&apos;t know, and that conversation would have made the whole solution
-              sharper.
+              <strong>Put it in front of people.</strong>{" "}Everything in this prototype is built on
+              interviews, but nobody has used it yet. I&apos;d run short sessions with 3-5 people
+              who&apos;ve organized a group dinner recently, give them a real occasion to plan, and
+              watch where they stop. The hold is the part I&apos;m least sure of.
             </P>
             <P>
-              We also debated the scope early — sit-down dinners versus standing events, bigger
-              market versus tighter problem — and chose to focus on 8-15 sit-down. I still think that
-              was right, but I&apos;d defend it out loud rather than leave it implicit.
+              <strong>Talk to someone at Resy.</strong>{" "}We understood the problem cold from the guest
+              and restaurant sides and never pressure-tested whether it was viable for Resy as a
+              business. Is the 8+ gap a technical limit, a strategic choice, or a resource call? I
+              don&apos;t know, and not knowing is the biggest hole in the argument.
+            </P>
+            <P>
+              <strong>Defend the scope out loud.</strong> We debated sit-down dinners versus standing
+              events early on and chose 8-15 sit-down. I still think that was right, but the case
+              study currently assumes it rather than making the case.
             </P>
           </Section>
 
           {/* 12 — closing quote treatment */}
-          <Section id="taught" number="12" heading="What This Taught Me">
+          <Section id="takeaway" number="08" heading="What I Took Away">
             <QuoteCallout
               large
               accent={RUST}
@@ -503,7 +508,7 @@ export default function ResyPage() {
             </P>
           </Section>
         </div>
-      </div>
+      </CaseStudyShell>
 
       <CaseStudyFooter />
     </main>

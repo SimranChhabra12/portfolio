@@ -28,7 +28,7 @@ const PHONES = [
   },
   {
     src: "/projects/whspr/whspr/Home/Hi-Fi.png",
-    alt: "Whspr home — a map of NYC carrying women's first-hand signals about places",
+    alt: "Whspr home screen: a map of NYC with women's first-hand accounts of places",
     pixelWidth: 804,
     pixelHeight: 1748,
     center: true,

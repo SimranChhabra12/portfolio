@@ -67,7 +67,8 @@ export default function HomeScreen() {
         }}
       >
         <div>
-          <h1
+          {/* <p>, not a heading — see the note in primitives.tsx ScreenHeader. */}
+          <p
             style={{
               fontFamily: FONT,
               fontSize: K.type.screenTitle.size,
@@ -78,7 +79,7 @@ export default function HomeScreen() {
             }}
           >
             Today
-          </h1>
+          </p>
           <Body style={{ fontSize: K.type.caption.size }}>Luteal phase · Day 18</Body>
         </div>
         <span
@@ -147,7 +148,7 @@ export default function HomeScreen() {
           />
           <Card
             title="Worth knowing"
-            body="Gentle movement boosts insulin sensitivity — short walks count more than you think."
+            body="Gentle movement boosts insulin sensitivity. Short walks count more than you think."
           />
         </div>
       </div>

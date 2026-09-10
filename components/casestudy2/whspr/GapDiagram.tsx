@@ -1,6 +1,6 @@
 import { T } from "../tokens";
 
-const W = T.whspr;
+const W = T.whsprLight;
 
 // "Gap diagram — remade to match the dark/amber system." Built in code per
 // the Notion build notes rather than sourced from the original deck.
@@ -27,7 +27,7 @@ export default function GapDiagram() {
         &ldquo;Not another safety app.&rdquo;
       </p>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-px" style={{ backgroundColor: "rgba(255,255,255,0.06)" }}>
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-px" style={{ backgroundColor: "rgba(42,31,40,0.08)" }}>
         <div className="p-6 lg:p-8 flex flex-col gap-4" style={{ backgroundColor: W.surface1 }}>
           <p
             style={{

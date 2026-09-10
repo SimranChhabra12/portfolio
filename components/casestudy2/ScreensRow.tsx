@@ -13,9 +13,11 @@ export interface ScreenItem {
 export default function ScreensRow({
   screens,
   width = 240,
+  ownHomeIndicator = false,
 }: {
   screens: ScreenItem[];
   width?: number;
+  ownHomeIndicator?: boolean;
 }) {
   return (
     <div className="flex flex-wrap gap-6 items-start w-full">
@@ -28,6 +30,7 @@ export default function ScreensRow({
           width={width}
           pixelWidth={s.pixelWidth}
           pixelHeight={s.pixelHeight}
+          ownHomeIndicator={ownHomeIndicator}
         />
       ))}
     </div>

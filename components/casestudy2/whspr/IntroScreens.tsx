@@ -12,13 +12,13 @@ import { AMBER_GLOW } from "./HeroVisual";
 // padding so it speaks the page's existing shape language. DarkBlock itself is not reused —
 // it has no glow layer and no overflow clipping, which the gradient needs in order to be
 // cut by the rounded corners.
-const PHONE_W = 240;
+const PHONE_W = 168; // 30% under the original 240
 
 // The screens are the 1x set at 402x874; next/image derives the retina source from these.
 const SCREENS = [
   {
     src: "/projects/whspr/whspr/intro-1.png",
-    alt: "Whspr onboarding, first screen: “The city through her eyes — real experiences from real women.”",
+    alt: "Whspr onboarding, first screen, headed “The city through her eyes” and describing real experiences from real women",
   },
   {
     src: "/projects/whspr/whspr/intro-2.png",

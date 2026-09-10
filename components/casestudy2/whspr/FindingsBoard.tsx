@@ -1,6 +1,6 @@
 import { T } from "../tokens";
 
-const W = T.whspr;
+const W = T.whsprLight;
 
 // Section 05 as a board rather than prose. Two of these findings contradict the
 // thesis, and they are deliberately given the same size and position as the
@@ -26,14 +26,14 @@ const FINDINGS: Finding[] = [
   },
   {
     count: "2/10",
-    claim: "Said they would not use it",
-    quote: "More just kind of like yell for something that already has reviews.",
+    claim: "Wouldn't use it without a clear reason to choose it over reviews",
+    quote: "It's nice if there's something that makes it more specific.",
     tone: "counter",
   },
   {
     count: "1/10",
-    claim: "Doubted anyone would contribute at all",
-    quote: "How often are you gonna be like, 'let's take a picture'?",
+    claim: "Wasn't sure she'd stop to post while out",
+    quote: "I don't know how often I'm going to post.",
     tone: "counter",
   },
   {
@@ -105,9 +105,8 @@ export default function FindingsBoard() {
               {f.quote && (
                 <p
                   style={{
-                    fontFamily: "var(--font-display)",
-                    fontStyle: "italic",
-                    fontSize: "0.9375rem",
+                    fontFamily: "var(--font-body)",
+                    fontSize: "0.875rem",
                     color: W.dusk400,
                     lineHeight: 1.55,
                   }}

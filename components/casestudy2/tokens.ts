@@ -1,4 +1,4 @@
-// Design tokens for the Whspr and AIRA case study pages ONLY.
+// Design tokens for the Whspr, AIRA and GestureSketch case study pages ONLY.
 // Deliberately scoped here (not in globals.css) so nothing else on the
 // site — homepage, other case studies — is affected. Tweak values here.
 
@@ -20,6 +20,20 @@ export const T = {
     dusk500: "#6B6B7E",
   },
 
+  // The same keys as `whspr`, remapped for infographics sitting on cream, so a
+  // component flips by swapping which set it reads. Signal Amber washes out on
+  // cream (~2.3:1), so the accent is a burnt amber that holds as text (~6:1).
+  whsprLight: {
+    midnight: "#F2EDE6", // panel ground
+    surface1: "#FFFFFF",
+    surface2: "#E9E2D8",
+    amber: "#B35A00",
+    amberDim: "#CC6F00",
+    textLight: "#2A1F28", // ink
+    dusk400: "#6E6270",
+    dusk500: "#7E727C",
+  },
+
   aira: {
     dark: "#0A0A0C",
     darkAlt: "#101012",
@@ -31,6 +45,14 @@ export const T = {
     coralPhase: "#EFA07A", // autumn / luteal
     textLight: "#F5F3F1",
     textMuted: "rgba(245, 243, 241, 0.6)",
+  },
+
+  gesture: {
+    green: "#3E6B5A", // project color — the drawn stroke
+    greenLight: "#6FA98A",
+    tint: "#E0F4D7", // sketch-line green wash
+    plum: "#7A3F5D", // a second stroke's colour, and the "cut" marker
+    surface: "#F0ECE6",
   },
 
   type: {

@@ -60,7 +60,7 @@ export default function DesignSystemSlide() {
           DM Serif Display
         </p>
         <p style={{ fontFamily: dmSans.style.fontFamily, fontSize: "1.0625rem", color: W.dusk400 }}>
-          DM Sans — body, labels, captions
+          DM Sans: body, labels, captions
         </p>
       </div>
     </div>

@@ -124,6 +124,14 @@ body {
   border-radius: 2px;
 }
 
+/* The Resy prototype renders dark product UI inside a phone frame. The page's
+   plum focus ring is near-invisible on that ground, so the ring inside the
+   device is the product's own accent instead. */
+[data-resy-proto] :focus-visible {
+  outline: 2px solid #FE482D;
+  outline-offset: 2px;
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
