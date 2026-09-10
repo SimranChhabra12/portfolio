@@ -49,7 +49,7 @@ export default function Rsvp({ state, dispatch }: ScreenProps) {
       <ScreenHeader title="You're invited" onBack={() => dispatch({ type: "back" })} />
 
       <div style={{ flex: 1, overflowY: "auto", padding: `0 ${R.pagePad}px ${R.space.xxl}px`, display: "flex", flexDirection: "column", gap: R.space.xl }}>
-        <Body style={{ fontSize: 12 }}>Viewing as {me.name} — an invited guest, not the host.</Body>
+        <Body style={{ fontSize: 12 }}>Viewing as {me.name}, an invited guest (not the host).</Body>
 
         <div style={{ borderRadius: R.radius.card, overflow: "hidden" }}>
           <Photo src={r.photo} alt="" style={{ width: "100%", height: 140 }} />

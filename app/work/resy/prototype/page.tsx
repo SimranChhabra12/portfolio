@@ -3,10 +3,9 @@ import { T } from "@/components/casestudy2/tokens";
 import { CaseStudyFooter } from "@/components/casestudy2/CaseStudyChrome";
 import Nav from "@/components/ui/Nav";
 import PrototypeShell from "@/components/casestudy2/resy/PrototypeShell";
-import { COL } from "../columns";
 
 export const metadata = {
-  title: "Resy Celebrations — Interactive Prototype — Simran Chhabra",
+  title: "Resy Celebrations Prototype | Simran Chhabra",
   description:
     "A working prototype of a large-party booking flow for groups of 8+, designed inside Resy's existing app. An independent student concept, not affiliated with or endorsed by Resy.",
 };
@@ -25,7 +24,7 @@ export default function ResyPrototypePage() {
       <Nav />
 
       <div className="px-8 lg:px-16 pt-40 pb-24">
-        <div style={{ maxWidth: COL.media }} className="mx-auto">
+        <div style={{ maxWidth: "var(--col-media, 1000px)" }} className="mx-auto">
           <Link
             href="/work/resy"
             style={{
@@ -50,7 +49,7 @@ export default function ResyPrototypePage() {
               color: T.ink,
             }}
           >
-            Resy Celebrations — prototype
+            Resy Celebrations prototype
           </h1>
 
           <p
@@ -60,11 +59,11 @@ export default function ResyPrototypePage() {
               fontSize: T.type.body,
               lineHeight: 1.6,
               color: T.inkMuted,
-              maxWidth: COL.text,
+              maxWidth: "var(--col-text, 640px)",
             }}
           >
             Both sides of the booking, running on the same data. Set your preferences, browse the
-            matches that fit your party, and send a request — then open the restaurant&apos;s
+            matches that fit your party, and send a request. Then open the restaurant&apos;s
             dashboard, answer your own inquiry, and watch your tracker move.
           </p>
 

@@ -183,7 +183,17 @@ export function Pill({ children, tone = "neutral" }: { children: React.ReactNode
 export function StatusChip({
   status,
 }: {
-  status: "confirmed" | "pending" | "declined" | "countered" | "reviewing" | "paid" | "unpaid";
+  status:
+    | "confirmed"
+    | "pending"
+    | "declined"
+    | "countered"
+    | "reviewing"
+    | "paid"
+    | "unpaid"
+    | "accepted"
+    | "guaranteed"
+    | "awaiting-hold";
 }) {
   const map = {
     confirmed: { label: "Confirmed", fg: R.status.confirmed, bg: R.status.confirmedWash },
@@ -191,6 +201,9 @@ export function StatusChip({
     // Payment is its own axis. Reusing "Confirmed" for a paid share made the
     // guest list read as an attendance list with the wrong numbers on it.
     paid: { label: "Paid", fg: R.status.confirmed, bg: R.status.confirmedWash },
+    accepted: { label: "Accepted", fg: R.brand, bg: R.brandWash },
+    guaranteed: { label: "Guaranteed", fg: R.status.confirmed, bg: R.status.confirmedWash },
+    "awaiting-hold": { label: "Awaiting hold", fg: R.status.pending, bg: R.status.pendingWash },
     unpaid: { label: "Unpaid", fg: R.status.pending, bg: R.status.pendingWash },
     reviewing: { label: "Reviewing", fg: R.status.pending, bg: R.status.pendingWash },
     countered: { label: "Counter-offer", fg: R.brand, bg: R.brandWash },

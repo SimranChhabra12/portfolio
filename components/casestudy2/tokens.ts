@@ -20,6 +20,20 @@ export const T = {
     dusk500: "#6B6B7E",
   },
 
+  // The same keys as `whspr`, remapped for infographics sitting on cream, so a
+  // component flips by swapping which set it reads. Signal Amber washes out on
+  // cream (~2.3:1), so the accent is a burnt amber that holds as text (~6:1).
+  whsprLight: {
+    midnight: "#F2EDE6", // panel ground
+    surface1: "#FFFFFF",
+    surface2: "#E9E2D8",
+    amber: "#B35A00",
+    amberDim: "#CC6F00",
+    textLight: "#2A1F28", // ink
+    dusk400: "#6E6270",
+    dusk500: "#7E727C",
+  },
+
   aira: {
     dark: "#0A0A0C",
     darkAlt: "#101012",

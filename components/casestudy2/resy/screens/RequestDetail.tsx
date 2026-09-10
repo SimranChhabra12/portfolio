@@ -66,7 +66,10 @@ export default function RequestDetail({ state, dispatch }: ScreenProps) {
       {!live && (
         <div style={{ padding: `0 ${R.pagePad}px ${R.space.xl}px` }}>
           <Body style={{ fontSize: 13, textAlign: "center" }}>
-            {req.status === "accepted" && "Accepted. The guest can now invite their group."}
+            {req.status === "accepted" &&
+              (req.held
+                ? "Guaranteed. The guest has a card held against the minimum, so this table is safe to staff and prep."
+                : "Accepted. Waiting on the guest to hold a card before it's guaranteed.")}
             {req.status === "declined" && "Declined. The guest has been told."}
             {req.status === "countered" && "Counter-offer sent. Waiting on the guest."}
           </Body>

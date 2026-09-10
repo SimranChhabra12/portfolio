@@ -298,7 +298,7 @@ export default function HeroScrub({ inline = false }: { inline?: boolean } = {})
           aria-valuemin={1}
           aria-valuemax={DAYS}
           aria-valuenow={day}
-          aria-valuetext={`Day ${day} — ${active.season}, the ${active.phase.toLowerCase()} phase. ${active.feel}.`}
+          aria-valuetext={`Day ${day}: ${active.season}, the ${active.phase.toLowerCase()} phase. ${active.feel}.`}
           onPointerDown={(e) => {
             e.preventDefault();
             // No setPointerCapture here: the window-level listeners above already

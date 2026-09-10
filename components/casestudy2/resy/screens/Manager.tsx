@@ -88,7 +88,19 @@ function RequestCard({ req, state, dispatch }: { req: Request } & ScreenProps) {
             </p>
             <Body style={{ fontSize: 13, marginTop: 2 }}>{dateLabel(req.dateOffset)}</Body>
           </div>
-          {!live && <StatusChip status={req.status === "accepted" ? "confirmed" : req.status === "countered" ? "countered" : "declined"} />}
+          {!live && (
+            <StatusChip
+              status={
+                req.status === "accepted"
+                  ? req.held
+                    ? "guaranteed"
+                    : "awaiting-hold"
+                  : req.status === "countered"
+                    ? "countered"
+                    : "declined"
+              }
+            />
+          )}
         </div>
 
         <div style={{ display: "flex", flexWrap: "wrap", gap: 6, marginTop: R.space.md }}>

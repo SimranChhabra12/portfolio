@@ -148,7 +148,7 @@ export default function HomeScreen() {
           />
           <Card
             title="Worth knowing"
-            body="Gentle movement boosts insulin sensitivity — short walks count more than you think."
+            body="Gentle movement boosts insulin sensitivity. Short walks count more than you think."
           />
         </div>
       </div>

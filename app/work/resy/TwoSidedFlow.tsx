@@ -7,12 +7,14 @@ export interface FlowStep {
   note?: string;
 }
 
-// The workflow, walked from both sides at once — guest on the left, restaurant
-// on the right, and what sits between them in the middle.
+// The workflow, walked from both sides at once: guest on the left, restaurant on
+// the right, and what sits between them down the middle.
 //
-// This replaces the deck slides the review flagged as a weaker medium (E5):
-// the "current-state journey" and the "before / after" comparison are rebuilt
-// as native blocks so they scale, reflow at 390px, and read as page content.
+// This used to be a rounded panel (dark for the problem, grey for the fix) that
+// read like a slide dropped into the page. It's now open on the cream, built from
+// rules and type like the rest of the case study. The two versions differ in the
+// one place that matters: the line between the sides. Today it's broken (email),
+// with Celebrations it's continuous (one request in the product).
 export default function TwoSidedFlow({
   label,
   guest,
@@ -26,53 +28,44 @@ export default function TwoSidedFlow({
   middle: string;
   tone?: "problem" | "resolved";
 }) {
-  const dark = tone === "problem";
-  const bg = dark ? "#231A18" : T.inkFainter;
-  const ink = dark ? "#F5F1EE" : T.ink;
-  const muted = dark ? "rgba(245, 241, 238, 0.55)" : T.inkMuted;
-  const rule = dark ? "rgba(245, 241, 238, 0.14)" : T.inkFaint;
-  const accent = dark ? RUST : "#2E7D5B";
+  const broken = tone === "problem";
+  const line = broken ? `1px dashed ${RUST}` : `1px solid ${T.ink}`;
 
   const column = (title: string, steps: FlowStep[]) => (
-    <div className="flex flex-col gap-4 flex-1 min-w-0">
+    <div className="flex flex-col min-w-0">
       <p
+        className="pb-3"
         style={{
-          fontFamily: "var(--font-body)",
-          fontSize: T.type.caption,
-          textTransform: "uppercase",
-          letterSpacing: "0.08em",
-          color: accent,
+          fontFamily: "var(--font-display)",
+          fontWeight: 600,
+          fontSize: "1.25rem",
+          color: T.ink,
+          lineHeight: 1.3,
+          borderBottom: `1px solid ${T.inkFaint}`,
         }}
       >
         {title}
       </p>
-      <ol className="flex flex-col gap-3 list-none">
+      <ol className="flex flex-col list-none m-0 p-0">
         {steps.map((s, i) => (
           <li
             key={i}
-            className="flex gap-3 items-start"
-            style={{ paddingBottom: i === steps.length - 1 ? 0 : "0.75rem", borderBottom: i === steps.length - 1 ? "none" : `1px solid ${rule}` }}
+            className="grid grid-cols-[2rem_minmax(0,1fr)] gap-x-2 py-4"
+            style={{ borderBottom: `1px solid ${T.inkFaint}` }}
           >
             <span
-              className="shrink-0"
               style={{
-                fontFamily: "var(--font-body)",
-                fontSize: "0.8125rem",
-                color: muted,
-                lineHeight: 1.7,
-                minWidth: "1.25rem",
+                fontFamily: "var(--font-display)",
+                fontSize: "1rem",
+                color: RUST,
+                lineHeight: 1.5,
               }}
             >
               {String(i + 1).padStart(2, "0")}
             </span>
             <span className="flex flex-col gap-1 min-w-0">
               <span
-                style={{
-                  fontFamily: "var(--font-body)",
-                  fontSize: "1rem",
-                  color: ink,
-                  lineHeight: 1.5,
-                }}
+                style={{ fontFamily: "var(--font-body)", fontSize: "1rem", color: T.ink, lineHeight: 1.5 }}
               >
                 {s.step}
               </span>
@@ -80,8 +73,8 @@ export default function TwoSidedFlow({
                 <span
                   style={{
                     fontFamily: "var(--font-body)",
-                    fontSize: T.type.caption,
-                    color: muted,
+                    fontSize: "0.875rem",
+                    color: T.inkMuted,
                     lineHeight: 1.5,
                   }}
                 >
@@ -96,53 +89,48 @@ export default function TwoSidedFlow({
   );
 
   return (
-    <div
-      className="w-full"
-      style={{
-        backgroundColor: bg,
-        borderRadius: T.radius.darkBlock,
-        border: dark ? "none" : `1px solid ${T.inkFaint}`,
-        padding: "clamp(1.5rem, 1rem + 2.5vw, 2.75rem)",
-      }}
-    >
+    <figure className="w-full m-0">
       <p
-        className="mb-8"
+        className="mb-4"
         style={{
           fontFamily: "var(--font-body)",
           fontSize: T.type.caption,
           textTransform: "uppercase",
           letterSpacing: "0.08em",
-          color: muted,
+          color: T.inkMuted,
         }}
       >
         {label}
       </p>
 
-      <div className="flex flex-col md:flex-row gap-8 md:gap-6 items-stretch">
+      <div
+        className="grid grid-cols-1 md:grid-cols-[minmax(0,1fr)_9.5rem_minmax(0,1fr)] gap-y-8 pt-6"
+        style={{ borderTop: `1px solid ${T.ink}` }}
+      >
         {column("Guest", guest)}
 
-        {/* What sits between the two sides */}
-        <div
-          className="flex md:flex-col items-center justify-center gap-3 shrink-0 md:w-40"
-          style={{
-            borderTop: `1px solid ${rule}`,
-            borderBottom: `1px solid ${rule}`,
-            padding: "1rem 0",
-          }}
-        >
+        {/* What sits between the two sides. A vertical line on desktop, a
+            horizontal one when the columns stack. */}
+        <div className="relative flex items-center justify-center py-6 md:py-0">
           <span
             aria-hidden
-            style={{ color: accent, fontSize: "1.25rem", lineHeight: 1 }}
-          >
-            ⇄
-          </span>
+            className="absolute hidden md:block top-0 bottom-0 left-1/2"
+            style={{ borderLeft: line }}
+          />
           <span
-            className="text-center"
+            aria-hidden
+            className="absolute md:hidden left-0 right-0 top-1/2"
+            style={{ borderTop: line }}
+          />
+          <span
+            className="relative text-center px-3 py-2"
             style={{
+              backgroundColor: T.cream,
               fontFamily: "var(--font-body)",
-              fontSize: T.type.caption,
-              color: ink,
+              fontSize: "0.875rem",
               lineHeight: 1.45,
+              color: broken ? RUST : T.ink,
+              maxWidth: "9rem",
             }}
           >
             {middle}
@@ -151,6 +139,6 @@ export default function TwoSidedFlow({
 
         {column("Restaurant", restaurant)}
       </div>
-    </div>
+    </figure>
   );
 }

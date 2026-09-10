@@ -41,7 +41,7 @@ export default function Preferences({ state, dispatch }: ScreenProps) {
           <Label style={{ marginBottom: R.space.md }}>Party size</Label>
           <Stepper value={state.partySize} min={8} max={20} suffix="guests" onChange={(v) => dispatch({ type: "set", patch: { partySize: v } })} />
           <Body style={{ fontSize: 12, marginTop: R.space.sm }}>
-            Under 8? That&apos;s a standard Resy booking — no inquiry needed.
+            Under 8? That&apos;s a standard Resy booking, no inquiry needed.
           </Body>
         </Group>
 

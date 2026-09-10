@@ -53,6 +53,12 @@ export type Request = {
   note: string;
   status: RequestStatus;
   counter?: Counter;
+  /**
+   * True once the guest has held a card against the booking. Acceptance alone is
+   * the restaurant saying yes; the hold is the guest committing back, and it's the
+   * point the booking becomes guaranteed for the restaurant.
+   */
+  held?: boolean;
   /** Present once accepted. Keyed by guest id. */
   rsvps: Record<string, "yes" | "no" | "pending">;
   payments: Record<string, "paid" | "pending">;
@@ -80,7 +86,7 @@ export type State = {
   savedIds: string[];
   requests: Request[];
   toast: string | null;
-  sheet: "counter" | "policy" | null;
+  sheet: "counter" | "policy" | "hold" | null;
   /** Which guest the RSVP screen is answering as. */
   rsvpGuestId: string;
 };
@@ -172,6 +178,7 @@ export type Action =
   | { type: "advanceToReviewing"; id: string }
   | { type: "resolveRequest"; id: string; status: RequestStatus; counter?: Counter }
   | { type: "acceptCounter"; id: string }
+  | { type: "holdCard"; id: string }
   | { type: "setRsvp"; id: string; guestId: string; answer: "yes" | "no" }
   | { type: "setGuestDietary"; id: string; guestId: string; items: string[] }
   | { type: "payShare"; id: string; guestId: string }
@@ -283,7 +290,7 @@ export function reducer(state: State, action: Action): State {
         sheet: null,
         toast:
           action.status === "accepted"
-            ? "Request accepted — the guest has been notified"
+            ? "Request accepted. The guest has been notified"
             : action.status === "declined"
               ? "Request declined"
               : "Counter-offer sent to the guest",
@@ -302,7 +309,15 @@ export function reducer(state: State, action: Action): State {
             headcount: r.counter.headcount ?? r.headcount,
           };
         }),
-        toast: "Counter accepted — you're confirmed",
+        toast: "Counter accepted. Hold the table to confirm.",
+      };
+
+    case "holdCard":
+      return {
+        ...state,
+        requests: state.requests.map((r) => (r.id === action.id ? { ...r, held: true } : r)),
+        sheet: null,
+        toast: "Card held. Nothing is charged tonight.",
       };
 
     case "setRsvp":
@@ -391,6 +406,24 @@ export function restaurantById(id: string | null) {
 
 export function requestById(state: State, id: string | null) {
   return state.requests.find((r) => r.id === id) ?? null;
+}
+
+/** Confirmed means accepted AND held. An accepted request still needs the hold. */
+export function isConfirmed(req: Request) {
+  return req.status === "accepted" && !!req.held;
+}
+
+/** Where the guest's rail sits. Acceptance is "Response received"; the hold confirms. */
+export function railStep(req: Request): number {
+  if (req.status === "accepted") return req.held ? 3 : 2;
+  return stepIndex(req.status);
+}
+
+/** The chip a guest sees for their own request. */
+export function guestChip(req: Request) {
+  if (req.status === "accepted") return req.held ? ("confirmed" as const) : ("accepted" as const);
+  if (req.status === "sent") return "pending" as const;
+  return req.status;
 }
 
 export function stepIndex(status: RequestStatus): number {

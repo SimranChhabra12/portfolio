@@ -56,33 +56,111 @@ function Grain() {
   );
 }
 
-/** One lifted UI fragment, floated off the phones. */
-function Lifted({
-  children,
-  style,
-}: {
-  children: React.ReactNode;
-  style: React.CSSProperties;
-}) {
+const SEASONS = [
+  { name: "Winter", color: A.purple, days: 5 },
+  { name: "Spring", color: A.blue, days: 8 },
+  { name: "Summer", color: A.green, days: 4 },
+  { name: "Autumn", color: A.coralPhase, days: 11 },
+];
+
+const PHONE_W = 232;
+const PANEL_W = 212;
+
+/**
+ * A side panel. Both panels share one width, one padding, one radius and one
+ * header treatment, so they read as a pair of annotations on the phones rather
+ * than as stickers dropped wherever there was room.
+ */
+function Panel({ label, children }: { label: string; children: React.ReactNode }) {
   return (
     <div
       aria-hidden
-      className="hidden lg:block absolute"
       style={{
-        background: "rgba(20, 20, 23, 0.82)",
-        backdropFilter: "blur(12px)",
-        WebkitBackdropFilter: "blur(12px)",
-        border: `1px solid rgba(245, 243, 241, 0.10)`,
-        borderRadius: 12,
-        padding: "12px 14px",
-        boxShadow: "0 18px 40px rgba(0, 0, 0, 0.38)",
+        width: PANEL_W,
+        background: "rgba(20, 20, 23, 0.78)",
+        backdropFilter: "blur(14px)",
+        WebkitBackdropFilter: "blur(14px)",
+        border: "1px solid rgba(245, 243, 241, 0.10)",
+        borderRadius: 16,
+        padding: 18,
+        boxShadow: "0 24px 48px rgba(0, 0, 0, 0.35)",
         fontFamily: "var(--font-body)",
         color: K.text,
-        ...style,
       }}
     >
+      <span
+        style={{
+          display: "block",
+          fontSize: 10.5,
+          fontWeight: 600,
+          letterSpacing: "0.1em",
+          textTransform: "uppercase",
+          color: K.faint,
+          marginBottom: 14,
+        }}
+      >
+        {label}
+      </span>
       {children}
     </div>
+  );
+}
+
+function ReadinessPanel() {
+  // Same arc geometry as the Home screen's gauge, at panel scale.
+  const r = 34;
+  const sweep = 0.92 * 180;
+  const rad = ((180 + sweep) * Math.PI) / 180;
+  const end = { x: 40 + r * Math.cos(rad), y: 40 + r * Math.sin(rad) };
+  return (
+    <Panel label="Readiness">
+      <div style={{ display: "flex", alignItems: "center", gap: 14 }}>
+        <svg width="80" height="46" viewBox="0 0 80 46" style={{ flexShrink: 0 }}>
+          <defs>
+            <linearGradient id="hero-panel-gauge" x1="0" y1="1" x2="1" y2="0">
+              <stop offset="0%" stopColor={K.coral} />
+              <stop offset="100%" stopColor={A.green} />
+            </linearGradient>
+          </defs>
+          <path d={`M 6 40 A ${r} ${r} 0 0 1 74 40`} stroke={K.raised} strokeWidth="6" strokeLinecap="round" fill="none" />
+          <path d={`M 6 40 A ${r} ${r} 0 0 1 ${end.x.toFixed(2)} ${end.y.toFixed(2)}`} stroke="url(#hero-panel-gauge)" strokeWidth="6" strokeLinecap="round" fill="none" />
+        </svg>
+        <span style={{ fontSize: 34, fontWeight: 600, lineHeight: 1, fontVariantNumeric: "tabular-nums" }}>92</span>
+      </div>
+      <p style={{ margin: "14px 0 0", fontSize: 12.5, lineHeight: 1.5, color: K.muted }}>
+        Seven pillars, one number for the day.
+      </p>
+    </Panel>
+  );
+}
+
+function SeasonPanel() {
+  const total = SEASONS.reduce((n, s) => n + s.days, 0);
+  return (
+    <Panel label="Your season">
+      <div style={{ display: "flex", gap: 3, marginBottom: 14 }}>
+        {SEASONS.map((s) => (
+          <i
+            key={s.name}
+            style={{
+              display: "block",
+              height: 6,
+              borderRadius: 3,
+              flex: s.days / total,
+              background: s.color,
+              opacity: s.name === "Autumn" ? 1 : 0.32,
+            }}
+          />
+        ))}
+      </div>
+      <div style={{ display: "flex", alignItems: "baseline", justifyContent: "space-between" }}>
+        <span style={{ fontSize: 20, fontWeight: 600 }}>Autumn</span>
+        <span style={{ fontSize: 12, color: K.muted }}>Day 18</span>
+      </div>
+      <p style={{ margin: "6px 0 0", fontSize: 12.5, lineHeight: 1.5, color: K.muted }}>
+        Luteal phase. Slowing down, turning inward.
+      </p>
+    </Panel>
   );
 }
 
@@ -99,46 +177,34 @@ export default function HeroCover() {
       <SeasonField />
       <Grain />
 
-      {/* Cropped by the bottom edge — the phones continue past frame rather than
-          sitting centred in their own empty room. */}
+      {/* One row on one grid: panel, two phones, panel. The phones share a width
+          and a top line, stand upright, and are cropped together by the band's
+          bottom edge. The panels share a width and sit on the same top line,
+          level with the phones' content rather than their bezels. */}
       <div
-        className="relative mx-auto"
-        style={{ maxWidth: 1000, paddingInline: 24, height: "clamp(260px, 30vw, 400px)" }}
+        className="relative mx-auto flex justify-center items-start"
+        style={{ maxWidth: 1000, paddingInline: 24, gap: 40, height: "clamp(300px, 32vw, 420px)" }}
       >
-        <div
-          className="absolute"
-          style={{ left: "8%", bottom: -28, transform: "rotate(-3.5deg)" }}
-        >
-          <PhoneShell label="AIRA cycle phase screen" width={196}>
-            <PhaseScreen />
-          </PhoneShell>
+        <div className="hidden lg:block" style={{ paddingTop: 72 }}>
+          <ReadinessPanel />
         </div>
 
-        <div
-          className="absolute"
-          style={{ left: "34%", bottom: -74, transform: "rotate(1.5deg)" }}
-        >
-          <PhoneShell label="AIRA home — one daily readiness score" width={244}>
-            <HomeScreen />
-          </PhoneShell>
+        <div className="flex items-start" style={{ gap: 28 }}>
+          <div className="hidden sm:block" style={{ width: PHONE_W, flex: "0 0 auto" }}>
+            <PhoneShell label="AIRA cycle phase screen" width={PHONE_W}>
+              <PhaseScreen />
+            </PhoneShell>
+          </div>
+          <div style={{ width: PHONE_W, flex: "0 0 auto" }}>
+            <PhoneShell label="AIRA home, one daily readiness score" width={PHONE_W}>
+              <HomeScreen />
+            </PhoneShell>
+          </div>
         </div>
 
-        {/* The two mechanics the case study is actually about, pulled out of the
-            screens so they read at cover scale. */}
-        <Lifted style={{ right: "2%", top: "16%" }}>
-          <span style={{ fontSize: 11, fontWeight: 600, letterSpacing: "0.08em", color: K.faint, display: "block" }}>
-            READINESS
-          </span>
-          <span style={{ fontSize: 30, fontWeight: 600, lineHeight: 1.1, fontVariantNumeric: "tabular-nums" }}>
-            92
-          </span>
-        </Lifted>
-
-        <Lifted style={{ right: "12%", top: "56%", display: "flex", alignItems: "center", gap: 9 }}>
-          <i style={{ width: 8, height: 8, borderRadius: 999, background: A.coralPhase, display: "block" }} />
-          <span style={{ fontSize: 13, fontWeight: 600 }}>Autumn</span>
-          <span style={{ fontSize: 13, color: K.muted }}>· luteal, day 18</span>
-        </Lifted>
+        <div className="hidden lg:block" style={{ paddingTop: 72 }}>
+          <SeasonPanel />
+        </div>
       </div>
     </div>
   );

@@ -5,7 +5,7 @@ import { R } from "./kit";
 import { initialState, reducer, type ScreenId } from "./store";
 import { Body, Toast } from "./primitives";
 import PhoneShell, { StatusBar, TabBar, type TabName } from "./PhoneShell";
-import { CounterSheet, PolicySheet } from "./sheets";
+import { CounterSheet, HoldSheet, PolicySheet } from "./sheets";
 import Home from "./screens/Home";
 import Preferences from "./screens/Preferences";
 import Matches from "./screens/Matches";
@@ -99,6 +99,7 @@ export default function PrototypeShell({ width = 390 }: { width?: number }) {
 
       {state.sheet === "counter" && <CounterSheet state={state} dispatch={dispatch} />}
       {state.sheet === "policy" && <PolicySheet state={state} dispatch={dispatch} />}
+      {state.sheet === "hold" && <HoldSheet state={state} dispatch={dispatch} />}
 
       {state.toast && <Toast message={state.toast} />}
 

@@ -22,8 +22,14 @@ export default function FeatureVisual({
   phoneWidth = 340,
   pairWidth = 250,
   plainMaxWidth = 720,
+  ownHomeIndicator = false,
 }: {
-  kind: "phone" | "plain";
+  /**
+   * "device" is for exports that already contain a complete phone (chassis,
+   * Dynamic Island). Wrapping those in PhoneMockup draws a phone inside a phone.
+   */
+  kind: "phone" | "device" | "plain";
+  ownHomeIndicator?: boolean;
   images: FeatureImage[];
   headline?: string;
   caption?: string;
@@ -77,7 +83,28 @@ export default function FeatureVisual({
               width={isPair ? pairWidth : phoneWidth}
               pixelWidth={img.pixelWidth}
               pixelHeight={img.pixelHeight}
+              ownHomeIndicator={ownHomeIndicator}
             />
+          ))}
+        </div>
+      ) : kind === "device" ? (
+        <div className="flex flex-wrap gap-8 items-start w-full">
+          {images.map((img, i) => (
+            <figure key={i} className="flex flex-col gap-3 m-0" style={{ width: isPair ? pairWidth : phoneWidth, maxWidth: "100%" }}>
+              <Image
+                src={img.src}
+                alt={img.alt}
+                width={img.pixelWidth}
+                height={img.pixelHeight}
+                style={{ width: "100%", height: "auto", display: "block" }}
+                sizes={`${isPair ? pairWidth : phoneWidth}px`}
+              />
+              {img.label && (
+                <figcaption style={{ fontSize: T.type.caption, color: T.inkMuted, fontFamily: "var(--font-body)", lineHeight: 1.5 }}>
+                  {img.label}
+                </figcaption>
+              )}
+            </figure>
           ))}
         </div>
       ) : (

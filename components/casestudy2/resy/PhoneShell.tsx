@@ -23,11 +23,14 @@ export default function PhoneShell({
   label: string;
 }) {
   return (
-    <div data-resy-proto style={{ width: "100%", maxWidth: width, minWidth: 0 }}>
+    <div data-resy-proto style={{ width: "100%", maxWidth: width, minWidth: 0, containerType: "inline-size" }}>
       <div
         style={{
-          borderRadius: 52,
-          padding: 12,
+          // In cqw (percent of the phone's own width) so a 224px cover phone and the
+          // 390px prototype share one set of iPhone proportions. Fixed 12px/52px made
+          // the bezel twice as thick as a real one on the small cover phones.
+          borderRadius: "15.5cqw",
+          padding: "3.6cqw",
           backgroundColor: "#0B0B0C",
           boxShadow: "0 18px 48px rgba(0,0,0,0.28)",
         }}
@@ -37,7 +40,7 @@ export default function PhoneShell({
           style={{
             position: "relative",
             overflow: "hidden",
-            borderRadius: 40,
+            borderRadius: "calc(15.5cqw - 3.6cqw)",
             width: "100%",
             aspectRatio: `${SCREEN_W} / ${SCREEN_H}`,
             backgroundColor: R.ground,

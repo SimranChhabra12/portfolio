@@ -12,6 +12,7 @@ export default function PhoneMockup({
   pixelWidth,
   pixelHeight,
   priority = false,
+  ownHomeIndicator = false,
 }: {
   src: string;
   alt: string;
@@ -21,6 +22,8 @@ export default function PhoneMockup({
   pixelHeight: number;
   /** Set for above-the-fold screens so Next doesn't lazy-load the LCP image. */
   priority?: boolean;
+  /** The export already draws its own home indicator; don't draw a second one. */
+  ownHomeIndicator?: boolean;
 }) {
   const bezel = Math.round(width * 0.045);
   const outerRadius = Math.round(width * 0.17);
@@ -105,7 +108,7 @@ export default function PhoneMockup({
         </div>
 
         {/* Home indicator */}
-        <div
+        {!ownHomeIndicator && <div
           aria-hidden
           style={{
             position: "absolute",
@@ -117,7 +120,7 @@ export default function PhoneMockup({
             borderRadius: 2,
             backgroundColor: "rgba(255,255,255,0.35)",
           }}
-        />
+        />}
       </div>
       {caption && (
         <figcaption

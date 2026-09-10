@@ -1,7 +1,7 @@
 "use client";
 
 import { R, FONT } from "../kit";
-import { dateLabel, restaurantById, stepIndex, TRACKER_STEPS, type Request } from "../store";
+import { dateLabel, deposit, guestChip, isConfirmed, railStep, restaurantById, TRACKER_STEPS, type Request } from "../store";
 import { Body, Btn, Card, Label, Photo, ProgressRail, StatusChip } from "../primitives";
 import type { ScreenProps } from "./types";
 import { ScreenHeader } from "../PhoneShell";
@@ -52,7 +52,7 @@ export default function Tracker({ state, dispatch }: ScreenProps) {
 
 function TrackerCard({ req, state, dispatch }: { req: Request } & ScreenProps) {
   const r = restaurantById(req.restaurantId);
-  const open = req.status === "accepted";
+  const open = isConfirmed(req);
 
   return (
     <Card
@@ -67,14 +67,14 @@ function TrackerCard({ req, state, dispatch }: { req: Request } & ScreenProps) {
             {dateLabel(req.dateOffset)} · {req.headcount} guests
           </Body>
         </div>
-        <StatusChip status={req.status === "accepted" ? "confirmed" : req.status === "sent" ? "pending" : req.status} />
+        <StatusChip status={guestChip(req)} />
       </div>
 
       <div style={{ marginTop: R.space.lg }}>
         <ProgressRail
           steps={TRACKER_STEPS}
-          current={stepIndex(req.status)}
-          complete={req.status === "accepted"}
+          current={railStep(req)}
+          complete={isConfirmed(req)}
           derailed={req.status === "countered" ? "countered" : req.status === "declined" ? "declined" : undefined}
         />
       </div>
@@ -104,9 +104,27 @@ function TrackerCard({ req, state, dispatch }: { req: Request } & ScreenProps) {
         </div>
       )}
 
+      {/* The restaurant said yes. The booking isn't real for them until the guest
+          commits back, so this is the one step the guest has to take. */}
+      {req.status === "accepted" && !req.held && r && (
+        <div style={{ marginTop: R.space.lg, background: R.brandWash, border: `1px solid ${R.brand}`, borderRadius: R.radius.control, padding: R.space.md }}>
+          <Label style={{ color: R.brand, marginBottom: 6 }}>They said yes</Label>
+          <Body style={{ fontSize: 13, color: R.text }}>
+            Hold a card to lock in the table. Nothing is charged now. ${deposit(r, req.headcount).total} is only
+            taken if you cancel inside {r.policy.refundableUntilDays}{" "}days or the group doesn&apos;t show.
+          </Body>
+          <Btn
+            style={{ height: 42, marginTop: R.space.md }}
+            onClick={() => dispatch({ type: "set", patch: { activeRequestId: req.id, sheet: "hold" } })}
+          >
+            Hold my table
+          </Btn>
+        </div>
+      )}
+
       {req.status === "declined" && (
         <Body style={{ fontSize: 13, marginTop: R.space.md }}>
-          They couldn&apos;t take this one. Your preferences are saved — the other matches are still there.
+          They couldn&apos;t take this one. Your preferences are saved, and the other matches are still there.
         </Body>
       )}
     </Card>

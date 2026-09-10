@@ -41,9 +41,9 @@ const MANAGER: State = reducer(initialState, {
 });
 
 const PHONES: { state: State; label: string; Screen: (p: { state: State; dispatch: typeof noop }) => React.ReactNode; center: boolean }[] = [
-  { state: MATCHES, label: "Resy Celebrations — restaurants that fit the whole party", Screen: Matches, center: false },
-  { state: HOME, label: "Resy Celebrations — the Celebrations tab", Screen: Home, center: true },
-  { state: MANAGER, label: "Resy Celebrations — the restaurant\u2019s inbox of incoming inquiries", Screen: Manager, center: false },
+  { state: MATCHES, label: "Resy Celebrations: restaurants that fit the whole party", Screen: Matches, center: false },
+  { state: HOME, label: "Resy Celebrations: the Celebrations tab", Screen: Home, center: true },
+  { state: MANAGER, label: "Resy Celebrations: the restaurant\u2019s inbox of incoming inquiries", Screen: Manager, center: false },
 ];
 
 export default function HeroCover() {

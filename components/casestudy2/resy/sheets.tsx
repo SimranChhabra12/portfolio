@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { R, FONT } from "./kit";
 import { TIMINGS } from "./data";
-import { dateLabel, requestById, restaurantById, type Action, type State } from "./store";
+import { dateLabel, deposit, requestById, restaurantById, type Action, type State } from "./store";
 import { Body, Btn, Chip, DetailRow, Group, Label, Sheet, Stepper } from "./primitives";
 import { DateStrip } from "./controls";
 
@@ -152,6 +152,64 @@ export function PolicySheet({ state, dispatch }: Props) {
         Holding {r.capacity} seats means turning away other bookings for the night. The deposit is what lets{" "}
         {r.name} say yes to a group this size on {dateLabel(state.dateOffset)}.
       </Body>
+    </Sheet>
+  );
+}
+
+/**
+ * The card hold, which the case study calls the mechanism the whole concept rests
+ * on. Until now it existed only as a rule and a diagram.
+ *
+ * It's a hold, not a charge. The guest commits a card against the minimum; the
+ * restaurant gets a booking it can staff against. Money only moves if the group
+ * cancels late or doesn't arrive. The card here is a placeholder; the prototype
+ * never asks for real payment details.
+ */
+export function HoldSheet({ state, dispatch }: Props) {
+  const req = requestById(state, state.activeRequestId);
+  const r = req ? restaurantById(req.restaurantId) : null;
+  if (!req || !r) return null;
+  const { total } = deposit(r, req.headcount);
+
+  return (
+    <Sheet title="Hold your table" onClose={() => dispatch({ type: "set", patch: { sheet: null } })}>
+      <Body style={{ fontSize: 13, marginBottom: R.space.lg }}>
+        {r.name} said yes to {req.headcount} guests on {dateLabel(req.dateOffset)}. Holding a card is what
+        makes it a guaranteed booking for them.
+      </Body>
+
+      <div>
+        <DetailRow label="Held today" value={`$${total}`} />
+        <DetailRow label="Charged now" value="Nothing" />
+        <DetailRow label="Taken only if" value={`You cancel inside ${r.policy.refundableUntilDays} days, or no-show`} />
+        <DetailRow label="On the night" value="Released, comes off the bill" />
+      </div>
+
+      <Group style={{ marginTop: R.space.xl }}>
+        <Label style={{ marginBottom: R.space.md }}>Card</Label>
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "space-between",
+            background: R.surface,
+            border: `1px solid ${R.hairline}`,
+            borderRadius: R.radius.control,
+            padding: R.space.md,
+            fontFamily: FONT,
+          }}
+        >
+          <span style={{ fontSize: 14, fontWeight: 700, color: R.text }}>Card on your Resy account</span>
+          <span style={{ fontSize: 13, color: R.muted }}>•••• 4242</span>
+        </div>
+        <Body style={{ fontSize: 12, marginTop: R.space.sm }}>
+          Prototype only. No real card is used.
+        </Body>
+      </Group>
+
+      <Btn style={{ marginTop: R.space.xl }} onClick={() => dispatch({ type: "holdCard", id: req.id })}>
+        Hold ${total}, charge nothing
+      </Btn>
     </Sheet>
   );
 }

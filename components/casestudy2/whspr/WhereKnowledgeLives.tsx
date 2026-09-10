@@ -1,6 +1,6 @@
 import { T } from "../tokens";
 
-const W = T.whspr;
+const W = T.whsprLight;
 
 // Where the knowledge women already share actually lives, and what each place
 // knows about the person who left it.
@@ -9,14 +9,16 @@ const W = T.whspr;
 // whose testimony a system treats as real (Fricker). Columns ask how far it
 // reaches — the one thing the group chat fails at, and the reason Whspr exists.
 //
-// Whspr is deliberately not plotted. The top row is empty across every level of
-// reach, which is the claim: nothing verifies that the woman telling you about a
-// place is a woman who was there.
+// Whspr is deliberately not plotted. Rows climb from strangers up to verified
+// women, and the last row is empty across every level of reach — which is the
+// claim: nothing verifies that the woman telling you about a place is a woman
+// who was there.
 
 type Icon = { d: string; color: string };
 
 // Brand marks from simple-icons (CC0), in their official colors. Word of mouth
-// and Citizen have no usable mark, so those two are drawn to match.
+// Citizen and Nextdoor have no usable glyph (Nextdoor's official mark is a
+// wordmark that dies at 14px), so those and word of mouth are drawn to match.
 const ICONS: Record<string, Icon> = {
   yelp: { d: "m7.6885 15.1415-3.6715.8483c-.3769.0871-.755.183-1.1452.155-.2611-.0188-.5122-.0414-.7606-.213a1.179 1.179 0 0 1-.331-.3594c-.3486-.5519-.3656-1.3661-.3697-2.0004a6.2874 6.2874 0 0 1 .3314-2.0642 1.857 1.857 0 0 1 .1073-.2474 2.3426 2.3426 0 0 1 .1255-.2165 2.4572 2.4572 0 0 1 .1563-.1975 1.1736 1.1736 0 0 1 .399-.2831 1.082 1.082 0 0 1 .4592-.0837c.2355.0016.5139.052.91.1734.0555.0191.1237.0382.1856.0572.3277.1013.7048.2404 1.1499.3987.6863.2404 1.3663.487 2.0463.7397l1.2117.4423c.2217.0807.4363.18.6412.297.174.0984.3273.2298.4512.387a1.217 1.217 0 0 1 .192.4309 1.2205 1.2205 0 0 1-.872 1.4522c-.0468.0151-.0852.0239-.1085.0293l-1.105.2553-.0031-.001zM18.8208 7.565a1.8506 1.8506 0 0 0-.2042-.1754 2.4082 2.4082 0 0 0-.2077-.1394 2.3607 2.3607 0 0 0-.2269-.109 1.1705 1.1705 0 0 0-.482-.0796 1.0862 1.0862 0 0 0-.4498.1263c-.2107.1048-.4388.2732-.742.5551-.042.0417-.0947.0886-.142.133-.2502.2351-.5286.5252-.8599.863a114.6363 114.6363 0 0 0-1.5166 1.5629l-.8962.9293a4.1897 4.1897 0 0 0-.4466.5483 1.541 1.541 0 0 0-.2364.5459 1.2199 1.2199 0 0 0 .0107.4518l.0046.02a1.218 1.218 0 0 0 1.4184.923 1.162 1.162 0 0 0 .1105-.0213l4.7781-1.104c.3766-.087.7587-.1667 1.097-.3631.2269-.1316.4428-.262.5909-.5252a1.1793 1.1793 0 0 0 .1405-.4683c.0733-.6512-.2668-1.3908-.5403-1.963a6.2792 6.2792 0 0 0-1.2001-1.7103zM8.9703.0754a8.6724 8.6724 0 0 0-.83.1564c-.2754.066-.548.1383-.8146.2236-.868.2844-2.0884.8063-2.295 1.8065-.1165.5655.1595 1.1439.3737 1.66.2595.6254.614 1.1889.9373 1.7777.8543 1.5545 1.7245 3.0993 2.5922 4.6457.259.4617.5416 1.0464 1.043 1.2856a1.058 1.058 0 0 0 .1013.0383c.2248.0851.4699.1016.7041.0471a4.3015 4.3015 0 0 0 .0418-.0097 1.2136 1.2136 0 0 0 .5658-.3397 1.1033 1.1033 0 0 0 .079-.0822c.3463-.435.3454-1.0833.3764-1.6134.1042-1.771.2139-3.5423.3009-5.3142.0332-.6712.1055-1.3333.0655-2.0096-.0328-.5579-.0368-1.1984-.3891-1.6563-.6218-.8073-1.9476-.741-2.8523-.6158zm2.084 15.9505a1.1053 1.1053 0 0 0-1.2306-.4145 1.1398 1.1398 0 0 0-.1526.0633 1.4806 1.4806 0 0 0-.2171.1354c-.1992.1475-.3668.3392-.5196.5315-.0386.049-.074.1143-.12.1562l-.7686 1.0573a113.9168 113.9168 0 0 0-1.2913 1.789c-.278.3895-.5184.7184-.7083 1.0094-.036.0547-.0734.116-.1075.1647-.2277.3522-.3566.6092-.4228.8381a1.0945 1.0945 0 0 0-.046.4721c.0211.1655.0768.3246.1635.467.046.0715.0957.1406.1487.207a2.334 2.334 0 0 0 .1754.1825 1.843 1.843 0 0 0 .2108.1732c.5304.369 1.1112.6342 1.722.8391a6.0958 6.0958 0 0 0 1.5716.3004c.091.0046.1821.0025.2728-.006a2.3878 2.3878 0 0 0 .2506-.0351 2.3862 2.3862 0 0 0 .2447-.071 1.1927 1.1927 0 0 0 .4175-.2658c.1127-.113.1994-.249.2541-.3989.0889-.2214.1473-.5026.1857-.92.0034-.0593.0118-.1305.0177-.1958.0304-.3463.0443-.7531.0666-1.2315.0375-.7357.067-1.4681.0903-2.2026 0 0 .0495-1.3053.0494-1.306.0113-.3008.002-.6342-.0814-.9336a1.396 1.396 0 0 0-.1756-.4054zm8.6754 2.0439c-.1605-.176-.3878-.3514-.7462-.5682-.0518-.0288-.1124-.0674-.1684-.1009-.2985-.1795-.658-.3684-1.078-.5965a120.7615 120.7615 0 0 0-1.9427-1.042l-1.1515-.6107c-.0597-.0175-.1203-.0607-.1766-.0878-.2212-.1058-.4558-.2045-.6992-.2498a1.4915 1.4915 0 0 0-.2545-.0265 1.1527 1.1527 0 0 0-.1648.01 1.1077 1.1077 0 0 0-.9227.9133 1.4186 1.4186 0 0 0 .0159.439c.0563.3065.1932.6096.3346.875l.615 1.1526c.3422.65.6884 1.2963 1.0435 1.9406.229.4202.4196.7799.5982 1.078.0338.056.0721.1163.1011.1682.2173.3584.392.584.569.7458.1146.1107.252.195.4026.247.1583.0525.326.071.4919.0546a2.368 2.368 0 0 0 .251-.0435c.0817-.022.1622-.048.241-.0784a1.863 1.863 0 0 0 .2475-.1143 6.1018 6.1018 0 0 0 1.2818-.9597c.4596-.4522.8659-.9454 1.182-1.51.044-.08.0819-.163.1138-.2483a2.49 2.49 0 0 0 .0773-.2411c.0186-.083.033-.1669.0429-.2513a1.188 1.188 0 0 0-.0565-.491 1.0933 1.0933 0 0 0-.248-.4041zm2.86 3.742a.8523.8523 0 0 1-.111.4236c-.074.132-.178.2377-.3115.3172a.8428.8428 0 0 1-.4385.119.847.847 0 0 1-.4373-.1179.8526.8526 0 0 1-.3125-.3171.8548.8548 0 0 1-.111-.4248c0-.1526.038-.2958.1143-.4294a.8405.8405 0 0 1 .315-.3159.849.849 0 0 1 .4315-.1156.8514.8514 0 0 1 .4294.1144.84.84 0 0 1 .316.3148.8494.8494 0 0 1 .1156.4317zm-.1202 0c0-.1328-.0332-.256-.0996-.3698s-.1564-.2038-.2702-.2702a.7125.7125 0 0 0-.371-.1007.7204.7204 0 0 0-.3698.0996.7487.7487 0 0 0-.2713.2702.7181.7181 0 0 0-.0996.3709c0 .132.0332.2557.0996.371a.7355.7355 0 0 0 .2713.2713.7354.7354 0 0 0 .3698.0985.7205.7205 0 0 0 .3698-.0996.7423.7423 0 0 0 .2702-.2691.7186.7186 0 0 0 .1008-.3721zm-.577.0584.2724.4522h-.1922l-.237-.4052h-.1546v.4052h-.1695v-1.02h.2988c.1268 0 .2195.0247.2783.0744.0595.0496.0892.1252.0892.2267a.2785.2785 0 0 1-.0492.1625c-.032.0466-.0775.0813-.1362.1042zm-.0412-.1408a.1532.1532 0 0 0 .056-.1214c0-.0573-.0164-.0981-.0491-.1225-.0329-.0251-.0847-.0377-.1557-.0377h-.1214v.3285h.1237c.061 0 .1098-.0157.1465-.047z", color: "#FF1A1A" },
   facebook: { d: "M9.101 23.691v-7.98H6.627v-3.667h2.474v-1.58c0-4.085 1.848-5.978 5.858-5.978.401 0 .955.042 1.468.103a8.68 8.68 0 0 1 1.141.195v3.325a8.623 8.623 0 0 0-.653-.036 26.805 26.805 0 0 0-.733-.009c-.707 0-1.259.096-1.675.309a1.686 1.686 0 0 0-.679.622c-.258.42-.374.995-.374 1.752v1.297h3.919l-.386 2.103-.287 1.564h-3.246v8.245C19.396 23.238 24 18.179 24 12.044c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.628 3.874 10.35 9.101 11.647Z", color: "#0866FF" },
@@ -24,37 +26,73 @@ const ICONS: Record<string, Icon> = {
   reddit: { d: "M12 0C5.373 0 0 5.373 0 12c0 3.314 1.343 6.314 3.515 8.485l-2.286 2.286C.775 23.225 1.097 24 1.738 24H12c6.627 0 12-5.373 12-12S18.627 0 12 0Zm4.388 3.199c1.104 0 1.999.895 1.999 1.999 0 1.105-.895 2-1.999 2-.946 0-1.739-.657-1.947-1.539v.002c-1.147.162-2.032 1.15-2.032 2.341v.007c1.776.067 3.4.567 4.686 1.363.473-.363 1.064-.58 1.707-.58 1.547 0 2.802 1.254 2.802 2.802 0 1.117-.655 2.081-1.601 2.531-.088 3.256-3.637 5.876-7.997 5.876-4.361 0-7.905-2.617-7.998-5.87-.954-.447-1.614-1.415-1.614-2.538 0-1.548 1.255-2.802 2.803-2.802.645 0 1.239.218 1.712.585 1.275-.79 2.881-1.291 4.64-1.365v-.01c0-1.663 1.263-3.034 2.88-3.207.188-.911.993-1.595 1.959-1.595Zm-8.085 8.376c-.784 0-1.459.78-1.506 1.797-.047 1.016.64 1.429 1.426 1.429.786 0 1.371-.369 1.418-1.385.047-1.017-.553-1.841-1.338-1.841Zm7.406 0c-.786 0-1.385.824-1.338 1.841.047 1.017.634 1.385 1.418 1.385.785 0 1.473-.413 1.426-1.429-.046-1.017-.721-1.797-1.506-1.797Zm-3.703 4.013c-.974 0-1.907.048-2.77.135-.147.015-.241.168-.183.305.483 1.154 1.622 1.964 2.953 1.964 1.33 0 2.47-.81 2.953-1.964.057-.137-.037-.29-.184-.305-.863-.087-1.795-.135-2.769-.135Z", color: "#FF4500" },
   imessage: { d: "M5.285 0A5.273 5.273 0 0 0 0 5.285v13.43A5.273 5.273 0 0 0 5.285 24h13.43A5.273 5.273 0 0 0 24 18.715V5.285A5.273 5.273 0 0 0 18.715 0ZM12 4.154a8.809 7.337 0 0 1 8.809 7.338A8.809 7.337 0 0 1 12 18.828a8.809 7.337 0 0 1-2.492-.303A8.656 7.337 0 0 1 5.93 19.93a9.929 7.337 0 0 0 1.54-2.155 8.809 7.337 0 0 1-4.279-6.283A8.809 7.337 0 0 1 12 4.154", color: "#34DA50" },
   google: { d: "M12.48 10.92v3.28h7.84c-.24 1.84-.853 3.187-1.787 4.133-1.147 1.147-2.933 2.4-6.053 2.4-4.827 0-8.6-3.893-8.6-8.72s3.773-8.72 8.6-8.72c2.6 0 4.507 1.027 5.907 2.347l2.307-2.307C18.747 1.44 16.133 0 12.48 0 5.867 0 .307 5.387.307 12s5.56 12 12.173 12c3.573 0 6.267-1.173 8.373-3.36 2.16-2.16 2.84-5.213 2.84-7.667 0-.76-.053-1.467-.173-2.053H12.48z", color: "#4285F4" },
-  wordofmouth: { d: "M9 11.2a3.1 3.1 0 1 0 0-6.2 3.1 3.1 0 0 0 0 6.2Zm7.4.3a2.6 2.6 0 1 0 0-5.2 2.6 2.6 0 0 0 0 5.2ZM9 12.8c-3.2 0-6 1.65-6 3.7V19h12v-2.5c0-2.05-2.8-3.7-6-3.7Zm7.4.5c-.66 0-1.29.06-1.87.18 1.3.92 2.07 2.16 2.07 3.52V19H21v-2.2c0-1.78-2.13-3.5-4.6-3.5Z", color: "#C9C9D4" },
+  wordofmouth: { d: "M9 11.2a3.1 3.1 0 1 0 0-6.2 3.1 3.1 0 0 0 0 6.2Zm7.4.3a2.6 2.6 0 1 0 0-5.2 2.6 2.6 0 0 0 0 5.2ZM9 12.8c-3.2 0-6 1.65-6 3.7V19h12v-2.5c0-2.05-2.8-3.7-6-3.7Zm7.4.5c-.66 0-1.29.06-1.87.18 1.3.92 2.07 2.16 2.07 3.52V19H21v-2.2c0-1.78-2.13-3.5-4.6-3.5Z", color: "#7E727C" },
   citizen: { d: "M12 9.6a2.4 2.4 0 1 0 0 4.8 2.4 2.4 0 0 0 0-4.8Zm-4.6-2.35a1 1 0 0 1 .07 1.41 4.6 4.6 0 0 0 0 6.28 1 1 0 1 1-1.48 1.34 6.6 6.6 0 0 1 0-8.96 1 1 0 0 1 1.41-.07Zm9.2 0a1 1 0 0 1 1.41.07 6.6 6.6 0 0 1 0 8.96 1 1 0 0 1-1.48-1.34 4.6 4.6 0 0 0 0-6.28 1 1 0 0 1 .07-1.41ZM4.62 3.9a1 1 0 0 1 .06 1.42 9.8 9.8 0 0 0 0 13.36 1 1 0 1 1-1.48 1.35 11.8 11.8 0 0 1 0-16.06A1 1 0 0 1 4.62 3.9Zm14.76 0a1 1 0 0 1 1.42.07 11.8 11.8 0 0 1 0 16.06 1 1 0 0 1-1.48-1.35 9.8 9.8 0 0 0 0-13.36 1 1 0 0 1 .06-1.42Z", color: "#F2C230" },
+  nextdoor: { d: "M12 3.1 2.8 10.4a1 1 0 0 0 1.24 1.57l.46-.36V20a1 1 0 0 0 1 1h4.1v-5.3h4.8V21h4.1a1 1 0 0 0 1-1v-8.39l.46.36a1 1 0 0 0 1.24-1.57Z", color: "#8ED500" },
+  discord: { d: "M20.317 4.3698a19.7913 19.7913 0 00-4.8851-1.5152.0741.0741 0 00-.0785.0371c-.211.3753-.4447.8648-.6083 1.2495-1.8447-.2762-3.68-.2762-5.4868 0-.1636-.3933-.4058-.8742-.6177-1.2495a.077.077 0 00-.0785-.037 19.7363 19.7363 0 00-4.8852 1.515.0699.0699 0 00-.0321.0277C.5334 9.0458-.319 13.5799.0992 18.0578a.0824.0824 0 00.0312.0561c2.0528 1.5076 4.0413 2.4228 5.9929 3.0294a.0777.0777 0 00.0842-.0276c.4616-.6304.8731-1.2952 1.226-1.9942a.076.076 0 00-.0416-.1057c-.6528-.2476-1.2743-.5495-1.8722-.8923a.077.077 0 01-.0076-.1277c.1258-.0943.2517-.1923.3718-.2914a.0743.0743 0 01.0776-.0105c3.9278 1.7933 8.18 1.7933 12.0614 0a.0739.0739 0 01.0785.0095c.1202.099.246.1981.3728.2924a.077.077 0 01-.0066.1276 12.2986 12.2986 0 01-1.873.8914.0766.0766 0 00-.0407.1067c.3604.698.7719 1.3628 1.225 1.9932a.076.076 0 00.0842.0286c1.961-.6067 3.9495-1.5219 6.0023-3.0294a.077.077 0 00.0313-.0552c.5004-5.177-.8382-9.6739-3.5485-13.6604a.061.061 0 00-.0312-.0286zM8.02 15.3312c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9555-2.4189 2.157-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.9555 2.4189-2.1569 2.4189zm7.9748 0c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9554-2.4189 2.1569-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.946 2.4189-2.1568 2.4189Z", color: "#5865F2" },
+  tiktok: { d: "M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z", color: "#000000" },
+  instagram: { d: "M7.0301.084c-1.2768.0602-2.1487.264-2.911.5634-.7888.3075-1.4575.72-2.1228 1.3877-.6652.6677-1.075 1.3368-1.3802 2.127-.2954.7638-.4956 1.6365-.552 2.914-.0564 1.2775-.0689 1.6882-.0626 4.947.0062 3.2586.0206 3.6671.0825 4.9473.061 1.2765.264 2.1482.5635 2.9107.308.7889.72 1.4573 1.388 2.1228.6679.6655 1.3365 1.0743 2.1285 1.38.7632.295 1.6361.4961 2.9134.552 1.2773.056 1.6884.069 4.9462.0627 3.2578-.0062 3.668-.0207 4.9478-.0814 1.28-.0607 2.147-.2652 2.9098-.5633.7889-.3086 1.4578-.72 2.1228-1.3881.665-.6682 1.0745-1.3378 1.3795-2.1284.2957-.7632.4966-1.636.552-2.9124.056-1.2809.0692-1.6898.063-4.948-.0063-3.2583-.021-3.6668-.0817-4.9465-.0607-1.2797-.264-2.1487-.5633-2.9117-.3084-.7889-.72-1.4568-1.3876-2.1228C21.2982 1.33 20.628.9208 19.8378.6165 19.074.321 18.2017.1197 16.9244.0645 15.6471.0093 15.236-.005 11.977.0014 8.718.0076 8.31.0215 7.0301.0839m.1402 21.6932c-1.17-.0509-1.8053-.2453-2.2287-.408-.5606-.216-.96-.4771-1.3819-.895-.422-.4178-.6811-.8186-.9-1.378-.1644-.4234-.3624-1.058-.4171-2.228-.0595-1.2645-.072-1.6442-.079-4.848-.007-3.2037.0053-3.583.0607-4.848.05-1.169.2456-1.805.408-2.2282.216-.5613.4762-.96.895-1.3816.4188-.4217.8184-.6814 1.3783-.9003.423-.1651 1.0575-.3614 2.227-.4171 1.2655-.06 1.6447-.072 4.848-.079 3.2033-.007 3.5835.005 4.8495.0608 1.169.0508 1.8053.2445 2.228.408.5608.216.96.4754 1.3816.895.4217.4194.6816.8176.9005 1.3787.1653.4217.3617 1.056.4169 2.2263.0602 1.2655.0739 1.645.0796 4.848.0058 3.203-.0055 3.5834-.061 4.848-.051 1.17-.245 1.8055-.408 2.2294-.216.5604-.4763.96-.8954 1.3814-.419.4215-.8181.6811-1.3783.9-.4224.1649-1.0577.3617-2.2262.4174-1.2656.0595-1.6448.072-4.8493.079-3.2045.007-3.5825-.006-4.848-.0608M16.953 5.5864A1.44 1.44 0 1 0 18.39 4.144a1.44 1.44 0 0 0-1.437 1.4424M5.8385 12.012c.0067 3.4032 2.7706 6.1557 6.173 6.1493 3.4026-.0065 6.157-2.7701 6.1506-6.1733-.0065-3.4032-2.771-6.1565-6.174-6.1498-3.403.0067-6.156 2.771-6.1496 6.1738M8 12.0077a4 4 0 1 1 4.008 3.9921A3.9996 3.9996 0 0 1 8 12.0077", color: "#E4405F" },
 };
 
 type Mark = "removable" | "alarmist";
 type Entry = { icon: keyof typeof ICONS; name: string; short?: string; sub?: string; mark?: Mark };
 
-const KNOWN: Entry[] = [
-  { icon: "imessage", name: "iMessage" },
-  { icon: "whatsapp", name: "WhatsApp" },
-  { icon: "wordofmouth", name: "Word of mouth" },
-];
-const CLAIMED: Entry[] = [
-  { icon: "facebook", name: "Are We Dating The Same Guy", short: "AWDTSG", sub: "Facebook group", mark: "removable" },
-];
-const STRANGERS_COMMUNITY: Entry[] = [{ icon: "reddit", name: "Reddit", sub: "Ask, wait, maybe" }];
-const STRANGERS_PUBLIC: Entry[] = [
-  { icon: "google", name: "Google", sub: "4.2 stars", mark: "removable" },
-  { icon: "yelp", name: "Yelp", sub: "Price, wait", mark: "removable" },
-  { icon: "citizen", name: "Citizen", sub: "Crime alerts", mark: "alarmist" },
-];
-
 const COLS = ["People you know", "A community you joined", "Anyone"];
-const ROWS: { label: string; cells: (Entry[] | null)[] }[] = [
-  { label: "Women, verified", cells: [null, null, null] }, // rendered as one span
-  { label: "Women you know", cells: [KNOWN, null, null] },
-  { label: "Women, self-claimed", cells: [null, CLAIMED, null] },
-  { label: "Strangers", cells: [null, STRANGERS_COMMUNITY, STRANGERS_PUBLIC] },
-];
 
-const MARK_COLOR: Record<Mark, string> = { alarmist: W.amber, removable: W.amberDim };
+// Rows climb toward verification; the destination — women, verified — is the
+// empty one at the bottom.
+type Row = { label: string; cells: (Entry[] | null)[] };
+
+const ROWS: Row[] = [
+  {
+    label: "Strangers",
+    cells: [
+      null,
+      [
+        { icon: "reddit", name: "Reddit", sub: "Ask, wait, maybe" },
+        { icon: "nextdoor", name: "Nextdoor", sub: "Block-level alerts", mark: "alarmist" },
+      ],
+      [
+        { icon: "google", name: "Google", sub: "4.2 stars", mark: "removable" },
+        { icon: "yelp", name: "Yelp", sub: "Price, wait", mark: "removable" },
+        { icon: "citizen", name: "Citizen", sub: "Crime alerts", mark: "alarmist" },
+      ],
+    ],
+  },
+  {
+    label: "Women, self-claimed",
+    cells: [
+      null,
+      [
+        {
+          icon: "facebook",
+          name: "Are We Dating The Same Guy",
+          short: "AWDTSG",
+          sub: "Facebook group",
+          mark: "removable",
+        },
+        { icon: "discord", name: "Discord", sub: "Invite-only servers" },
+      ],
+      [
+        { icon: "tiktok", name: "TikTok", sub: "Safety POVs" },
+        { icon: "instagram", name: "Instagram", sub: "Reposted screenshots" },
+      ],
+    ],
+  },
+  {
+    label: "Women you know",
+    cells: [
+      [
+        { icon: "imessage", name: "iMessage" },
+        { icon: "whatsapp", name: "WhatsApp" },
+        { icon: "wordofmouth", name: "Word of mouth" },
+      ],
+      [{ icon: "instagram", name: "Instagram", sub: "Close friends story" }],
+      null,
+    ],
+  },
+  { label: "Women, verified", cells: [null, null, null] }, // rendered as one span
+];
 
 const microLabel = {
   fontFamily: "var(--font-body), sans-serif",
@@ -66,19 +104,39 @@ const microLabel = {
   lineHeight: 1.4,
 };
 
-function Dot({ mark }: { mark: Mark }) {
+// The two flags mean different things, so they get different shapes as well as
+// different colors: a filled amber triangle warns, a hollow slate square is a
+// thing that can be emptied out.
+const MARK_COLOR: Record<Mark, string> = { alarmist: W.amber, removable: "#7E727C" };
+
+function MarkGlyph({ mark }: { mark: Mark }) {
   return (
-    <span
+    <svg
+      viewBox="0 0 8 8"
+      width={8}
+      height={8}
       aria-hidden="true"
-      className="inline-block shrink-0"
-      style={{ width: 6, height: 6, borderRadius: "50%", background: MARK_COLOR[mark] }}
-    />
+      className="shrink-0 overflow-visible"
+    >
+      {mark === "alarmist" ? (
+        <path d="M4 0.5 7.7 7H0.3Z" fill={MARK_COLOR.alarmist} />
+      ) : (
+        <rect
+          x="0.9"
+          y="0.9"
+          width="6.2"
+          height="6.2"
+          rx="1"
+          fill="none"
+          stroke={MARK_COLOR.removable}
+          strokeWidth="1.4"
+        />
+      )}
+    </svg>
   );
 }
 
 // One platform: a small mark, its name, and what it actually gives you.
-// Laid out as a row so three of them stack inside a cell instead of
-// competing for horizontal space they do not have.
 function Item({ entry }: { entry: Entry }) {
   const ico = ICONS[entry.icon];
   return (
@@ -89,8 +147,8 @@ function Item({ entry }: { entry: Entry }) {
           width: 26,
           height: 26,
           borderRadius: "50%",
-          background: "rgba(255,255,255,.06)",
-          border: "1px solid rgba(255,255,255,.09)",
+          background: "rgba(42,31,40,.04)",
+          border: "1px solid rgba(42,31,40,.08)",
         }}
       >
         <svg viewBox="0 0 24 24" width={14} height={14} aria-hidden="true">
@@ -99,7 +157,7 @@ function Item({ entry }: { entry: Entry }) {
       </span>
       <span className="flex flex-col min-w-0">
         <span className="flex items-center gap-1.5 min-w-0">
-          {entry.mark && <Dot mark={entry.mark} />}
+          {entry.mark && <MarkGlyph mark={entry.mark} />}
           <b
             className="[display:-webkit-box] [-webkit-line-clamp:3] [-webkit-box-orient:vertical] overflow-hidden"
             style={{
@@ -139,18 +197,34 @@ function Item({ entry }: { entry: Entry }) {
   );
 }
 
-function Cell({ entries }: { entries: Entry[] | null }) {
+// A grid tile. Every tile is the same card, filled or not, so the one empty
+// band at the bottom reads as a hole in a grid rather than a blank table row.
+function Tile({ entries, col }: { entries: Entry[] | null; col: string }) {
+  if (!entries) {
+    return (
+      <div
+        aria-hidden="true"
+        className="hidden sm:block rounded-[14px] min-h-[116px]"
+        style={{ background: "rgba(42,31,40,.03)" }}
+      />
+    );
+  }
   return (
-    <td
-      className="align-middle rounded-[14px] p-2 sm:p-2.5"
-      style={{ background: entries ? W.surface1 : "rgba(255,255,255,.022)", width: "29%" }}
+    <div
+      className="rounded-[14px] p-2.5 sm:p-3 flex flex-col justify-center min-h-[116px]"
+      style={{ background: W.surface1 }}
     >
-      <ul className="flex flex-col justify-center gap-2 list-none m-0 p-0 overflow-hidden h-[112px]">
-        {entries?.map((e) => (
+      {/* the column headers do not survive the phone layout, so each tile
+          carries its own */}
+      <span className="sm:hidden mb-2 block" style={{ ...microLabel, fontSize: "0.625rem" }}>
+        {col}
+      </span>
+      <ul className="flex flex-col gap-2 list-none m-0 p-0">
+        {entries.map((e) => (
           <Item key={e.name} entry={e} />
         ))}
       </ul>
-    </td>
+    </div>
   );
 }
 
@@ -193,69 +267,64 @@ export default function WhereKnowledgeLives() {
           padding: "clamp(0.875rem, 0.5rem + 1.6vw, 1.75rem)",
         }}
       >
-        <table
-          className="w-full"
-          style={{ borderCollapse: "separate", borderSpacing: 7, tableLayout: "fixed" }}
+        <div
+          role="table"
+          aria-label="Platforms where women share knowledge about places, arranged by whether the speaker is a verified woman and by how far the information reaches."
+          className="grid gap-2 grid-cols-1 sm:grid-cols-[minmax(104px,0.62fr)_repeat(3,minmax(0,1fr))]"
         >
-          <caption className="sr-only">
-            Platforms where women share knowledge about places, arranged by whether the speaker is a
-            verified woman and by how far the information reaches.
-          </caption>
-          <thead>
-            <tr>
-              <td className="p-0 align-bottom" style={{ width: "13%", background: "none" }}>
-                <span style={{ ...microLabel, color: W.dusk400 }}>Reach &rarr;</span>
-              </td>
-              {COLS.map((c) => (
-                <th key={c} scope="col" className="align-bottom pb-1" style={microLabel}>
-                  {c}
-                </th>
-              ))}
-            </tr>
-          </thead>
-          <tbody>
-            {ROWS.map((row, i) => (
-              <tr key={row.label}>
-                <th
-                  scope="row"
-                  className="text-left align-middle pr-2"
-                  style={{ ...microLabel, color: i === 0 ? W.amber : W.dusk500 }}
+          {/* header band */}
+          <div className="hidden sm:flex items-end pb-1">
+            <span style={{ ...microLabel, color: W.dusk400 }}>Reach &rarr;</span>
+          </div>
+          {COLS.map((c) => (
+            <div key={c} role="columnheader" className="hidden sm:flex items-end pb-1" style={microLabel}>
+              {c}
+            </div>
+          ))}
+
+          {ROWS.map((row, i) => {
+            const isGap = i === ROWS.length - 1;
+            return (
+              <div key={row.label} role="row" className="contents">
+                <div
+                  role="rowheader"
+                  className="flex items-center pt-3 sm:pt-0 sm:pr-2"
+                  style={{ ...microLabel, color: isGap ? W.amber : W.dusk500 }}
                 >
                   {row.label}
-                </th>
-                {i === 0 ? (
-                  // The claim: nothing verifies, at any reach. One span so the
+                </div>
+                {isGap ? (
+                  // The claim: nothing verifies, at any reach. One band so the
                   // emptiness reads as a single fact, not three coincidences.
-                  <td
-                    colSpan={3}
-                    className="rounded-[14px] h-[128px] sm:h-[132px]"
+                  <div
+                    className="rounded-[14px] min-h-[92px] sm:min-h-[116px] sm:col-span-3"
                     style={{
-                      background: "rgba(255,136,48,.06)",
-                      border: "1.5px dashed rgba(255,136,48,.45)",
+                      background: "rgba(179,90,0,.05)",
+                      border: "1.5px dashed rgba(179,90,0,.5)",
                     }}
                   />
                 ) : (
-                  row.cells.map((c, j) => <Cell key={j} entries={c} />)
+                  row.cells.map((c, j) => <Tile key={j} entries={c} col={COLS[j]} />)
                 )}
-              </tr>
-            ))}
-          </tbody>
-        </table>
+              </div>
+            );
+          })}
+        </div>
 
         <div
           className="flex flex-wrap gap-x-5 gap-y-2 mt-5 pt-4"
           style={{
-            borderTop: "1px solid rgba(255,255,255,.07)",
+            borderTop: "1px solid rgba(42,31,40,.08)",
             fontFamily: "var(--font-body), sans-serif",
             fontSize: "0.75rem",
             color: W.dusk400,
           }}
         >
           <span className="flex items-center gap-2">
-            <Dot mark="alarmist" /> Frames places as threats
+            <MarkGlyph mark="alarmist" /> Frames places as threats
           </span>
           <span className="flex items-center gap-2">
-            <Dot mark="removable" /> The business can get it taken down
+            <MarkGlyph mark="removable" /> The business can get it taken down
           </span>
           <span className="flex items-center gap-2">
             <i
@@ -264,8 +333,8 @@ export default function WhereKnowledgeLives() {
                 width: 22,
                 height: 12,
                 borderRadius: 4,
-                border: "1.5px dashed rgba(255,136,48,.45)",
-                background: "rgba(255,136,48,.06)",
+                border: "1.5px dashed rgba(179,90,0,.5)",
+                background: "rgba(179,90,0,.05)",
               }}
             />
             Nothing here

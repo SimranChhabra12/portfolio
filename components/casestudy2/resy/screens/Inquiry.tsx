@@ -88,7 +88,7 @@ export default function Inquiry({ state, dispatch }: ScreenProps) {
           <textarea
             value={state.note}
             onChange={(e) => dispatch({ type: "set", patch: { note: e.target.value } })}
-            placeholder="Celebrating my 30th — we'd love the private room if it's free."
+            placeholder="Celebrating my 30th, we'd love the private room if it's free."
             rows={4}
             style={{
               width: "100%",

@@ -2,7 +2,7 @@
 
 import { R, FONT } from "../kit";
 import { EVENT_TYPES, HERO_IMAGE, RESTAURANTS } from "../data";
-import { dateLabel, restaurantById, stepIndex, TRACKER_STEPS } from "../store";
+import { dateLabel, guestChip, isConfirmed, railStep, restaurantById, TRACKER_STEPS } from "../store";
 import { Body, Btn, Card, Chevron, Group, Label, Photo, Pill, ProgressRail, StatusChip } from "../primitives";
 import type { ScreenProps } from "./types";
 
@@ -123,7 +123,7 @@ export default function Home({ state, dispatch }: ScreenProps) {
               color: R.brand,
             }}
           >
-            Something else — start from scratch
+            Something else? Start from scratch
           </button>
         </Group>
 
@@ -166,13 +166,13 @@ export default function Home({ state, dispatch }: ScreenProps) {
                           {dateLabel(req.dateOffset)} · {req.headcount} guests
                         </Body>
                       </div>
-                      <StatusChip status={req.status === "accepted" ? "confirmed" : req.status === "sent" ? "pending" : req.status} />
+                      <StatusChip status={guestChip(req)} />
                     </div>
                     <div style={{ marginTop: R.space.md }}>
                       <ProgressRail
                         steps={TRACKER_STEPS}
-                        current={stepIndex(req.status)}
-                        complete={req.status === "accepted"}
+                        current={railStep(req)}
+                        complete={isConfirmed(req)}
                         derailed={req.status === "countered" ? "countered" : req.status === "declined" ? "declined" : undefined}
                       />
                     </div>

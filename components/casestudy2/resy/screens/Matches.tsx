@@ -65,7 +65,7 @@ export default function Matches({ state, dispatch }: ScreenProps) {
                   key={r.id}
                   r={r}
                   onOpen={() => dispatch({ type: "openRestaurant", id: r.id })}
-                  miss={r.capacity < state.partySize ? `Seats ${r.capacity} — you need ${state.partySize}` : "Above your budget"}
+                  miss={r.capacity < state.partySize ? `Seats ${r.capacity}, you need ${state.partySize}` : "Above your budget"}
                 />
               ))}
             </>
