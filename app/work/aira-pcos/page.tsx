@@ -393,8 +393,9 @@ export default function AiraPage() {
             <Prose>
               <P>
                 <strong>Test it with the women we interviewed.</strong> We designed AIRA from research
-                but never tested it with users. The seasons idea came from one comment in one
-                interview, so I&apos;d want to know if it works for other people too.
+                but never tested it with users. One interview pointed me toward the seasons framing,
+                and I built the app around it, so I&apos;d want to know if it works for other people
+                too.
               </P>
               <P>
                 <strong>A dashboard that brings it together.</strong>{" "}Next I&apos;d build a home
@@ -416,8 +417,8 @@ export default function AiraPage() {
           <Section id="takeaway" number="07" heading="What I Took Away">
             <Prose>
               <P>
-                AIRA started from something one participant mentioned in passing: she&apos;d started
-                thinking of her cycle as seasons. That comment ended up shaping the whole app. The
+                One participant mentioned in passing that she&apos;d started thinking of her cycle as
+                seasons. Her comment pointed me toward a framing I then built out across the app. The
                 biggest thing I learned was to design around irregular cycles instead of treating
                 them as something to fix.
               </P>
