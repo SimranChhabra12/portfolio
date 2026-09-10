@@ -83,6 +83,42 @@ export interface CaseStudy {
 }
 
 const allCaseStudies: CaseStudy[] = [
+  // ── Whspr ────────────────────────────────────────────────────────────────
+  {
+    slug: "whspr",
+    title: "Whspr",
+    cardDescription:
+      "That knowledge lives in DMs and disappears the second the conversation ends.",
+    homeOneLiner: "Giving women's place knowledge somewhere to live",
+    homeTags: ["Research", "Interaction Design"],
+    coverImage: "/images/covers/whspr.jpg",
+    realCover: "/projects/whspr/whspr/area-info-expanded.png",
+    // Five screens across the whole product, not five states of one flow: search, a place
+    // profile, the area detail, contributing, and what you keep. All 402px-wide exports.
+    cardScreens: [
+      { src: "/projects/whspr/whspr/search-fit.png", alt: "Whspr search — recently active places" },
+      { src: "/projects/whspr/whspr/house-of-yes-fit.png", alt: "Whspr place profile — first-hand signals" },
+      { src: "/projects/whspr/whspr/area-info-expanded-fit.png", alt: "Whspr area info — getting there and back" },
+      { src: "/projects/whspr/whspr/post-submission.png", alt: "Whspr contribution — after submitting" },
+      { src: "/projects/whspr/whspr/saved.png", alt: "Whspr saved places" },
+    ],
+    subtitle:
+      "A crowdsourced urban intelligence platform for women navigating city spaces",
+    role: "Product Lead & Designer",
+    year: "2026",
+    disciplines: ["Product Design", "Full-Stack", "AI Integration"],
+    color: "#1B1B2F",
+    cardTint: "#FDEAC7", // amber CTA button, 296 px across 5 screens
+    meta: {
+      team: "Solo — product lead & designer",
+      researchMethods: ["User Interviews", "Secondary Research", "Competitive Analysis"],
+      platform: "Mobile Web App",
+      duration: "6 sprints",
+    },
+    // Body content lives in app/work/whspr/page.tsx. Nothing here renders it.
+    sections: [],
+  },
+
   // ── Dream Of ─────────────────────────────────────────────────────────────
   // Added 2026-09-05 at Simran's request, to hold the second slot in the homepage row.
   // Scope and framing confirmed by her: Dream Of is the COMPANY she interned at, and the
@@ -160,42 +196,6 @@ const allCaseStudies: CaseStudy[] = [
     // missing, rather than the gap being invisible. Each one below names a specific export
     // to drop into public/projects/dream-of/.
     // Body content lives in app/work/dream-of/page.tsx. Nothing here renders it.
-    sections: [],
-  },
-
-  // ── Whspr ────────────────────────────────────────────────────────────────
-  {
-    slug: "whspr",
-    title: "Whspr",
-    cardDescription:
-      "That knowledge lives in DMs and disappears the second the conversation ends.",
-    homeOneLiner: "Giving women's place knowledge somewhere to live",
-    homeTags: ["Research", "Interaction Design"],
-    coverImage: "/images/covers/whspr.jpg",
-    realCover: "/projects/whspr/whspr/area-info-expanded.png",
-    // Five screens across the whole product, not five states of one flow: search, a place
-    // profile, the area detail, contributing, and what you keep. All 402px-wide exports.
-    cardScreens: [
-      { src: "/projects/whspr/whspr/search-fit.png", alt: "Whspr search — recently active places" },
-      { src: "/projects/whspr/whspr/house-of-yes-fit.png", alt: "Whspr place profile — first-hand signals" },
-      { src: "/projects/whspr/whspr/area-info-expanded-fit.png", alt: "Whspr area info — getting there and back" },
-      { src: "/projects/whspr/whspr/post-submission.png", alt: "Whspr contribution — after submitting" },
-      { src: "/projects/whspr/whspr/saved.png", alt: "Whspr saved places" },
-    ],
-    subtitle:
-      "A crowdsourced urban intelligence platform for women navigating city spaces",
-    role: "Product Lead & Designer",
-    year: "2026",
-    disciplines: ["Product Design", "Full-Stack", "AI Integration"],
-    color: "#1B1B2F",
-    cardTint: "#FDEAC7", // amber CTA button, 296 px across 5 screens
-    meta: {
-      team: "Solo — product lead & designer",
-      researchMethods: ["User Interviews", "Secondary Research", "Competitive Analysis"],
-      platform: "Mobile Web App",
-      duration: "6 sprints",
-    },
-    // Body content lives in app/work/whspr/page.tsx. Nothing here renders it.
     sections: [],
   },
 

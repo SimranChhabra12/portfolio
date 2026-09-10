@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import CoverPlaceholder from "@/components/ui/CoverPlaceholder";
+import MosaicTile from "@/components/interactive/MosaicTile";
 import type { PlaygroundEntry } from "@/data/playgroundEntries";
 
 /**
@@ -33,7 +34,14 @@ export default function PlaygroundCard({
     >
       {/* 1 — media, 5:3. Uniform slot is the point: it is what makes the grid one set. */}
       <div className="relative w-full aspect-[5/3] overflow-hidden rounded-[var(--radius-card)] bg-surface">
-        {entry.cover ? (
+        {entry.coverFrames ? (
+          <MosaicTile
+            frames={entry.coverFrames}
+            aspect="5 / 3"
+            objectPosition={entry.coverPosition}
+            sizes={sizes}
+          />
+        ) : entry.cover ? (
           <Image
             src={entry.cover.src}
             alt={entry.cover.alt}
