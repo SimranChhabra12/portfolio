@@ -37,6 +37,11 @@ export interface PlaygroundEntry {
   /** Id in the sketch registry (components/interactive/sketches). Renders live via P5Sketch. */
   sketch?: string;
   cover: PlaygroundImage | null;
+  /**
+   * Hand-picked frames the cover cycles through, cover first. Overrides the mosaic's
+   * automatic sampling of `images`, and makes the /playground card cycle too.
+   */
+  coverFrames?: PlaygroundImage[];
   images: PlaygroundImage[];
   videos?: PlaygroundVideo[];
   href?: string;
@@ -97,7 +102,13 @@ const playgroundEntries: PlaygroundEntry[] = [
     kind: "full",
     teaser:
       "Sixteen artists, one car, across Gujarat. I ran the experience and operations, and we ended up preserving the lost music of Kutchh on film.",
-    cover: { src: "/playground/rtx/IMG_20200117_171155.jpg", alt: "Hand-painting a vehicle with folk-art patterns", width: 1200, height: 900 },
+    cover: { src: "/playground/rtx/RTX-.png", alt: "The Road Trip Experience", width: 918, height: 996 },
+    coverFrames: [
+      { src: "/playground/rtx/RTX-.png", alt: "The Road Trip Experience", width: 918, height: 996 },
+      { src: "/playground/rtx/RTX1.png", alt: "The Road Trip Experience", width: 910, height: 988 },
+      { src: "/playground/rtx/RTX2.jpg", alt: "The Road Trip Experience", width: 698, height: 1200 },
+      { src: "/playground/rtx/RTX3.jpg", alt: "The Road Trip Experience", width: 1200, height: 900 },
+    ],
     images: [],
     pageImages: [
     { src: `/playground/rtx/IMG-20200118-WA0029.jpg`, alt: "RTX — folk-art painting on site", width: 698, height: 1200 },

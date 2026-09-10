@@ -66,7 +66,7 @@ export default function PlaygroundMosaic() {
             >
               {cover ? (
                 <MosaicTile
-                  frames={framesFor(cover, entry.pageImages ?? entry.images)}
+                  frames={entry.coverFrames ?? framesFor(cover, entry.pageImages ?? entry.images)}
                   aspect={`${cover.width} / ${cover.height}`}
                   objectPosition={entry.coverPosition}
                   // 370ms apart. Prime-ish and unrelated to the 3200ms dwell, so the
