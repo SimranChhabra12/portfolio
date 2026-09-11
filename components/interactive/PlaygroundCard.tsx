@@ -69,8 +69,14 @@ export default function PlaygroundCard({
 
         {/* 3 — title and what it was, one line, one size (matches the work cards) */}
         <h3 className="t-section text-ink !max-w-none mt-2 transition-colors [@media(hover:hover)]:group-hover:text-accent">
-          {entry.title}: {entry.oneLiner}
+          {entry.title}
+          {entry.oneLinerOnCard && `: ${entry.oneLiner}`}
         </h3>
+
+        {/* How it started. Only on entries whose real origin is known. */}
+        {entry.origin && (
+          <p className="t-body italic text-ink/70 mt-2">Started with {entry.origin}</p>
+        )}
 
         {/* 4 — link affordance */}
         <span className="t-body text-accent inline-flex items-center gap-2 mt-4">

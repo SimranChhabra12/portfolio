@@ -23,6 +23,16 @@ export interface PlaygroundEntry {
    */
   oneLiner: string;
   /**
+   * Cards show the title alone by default; the one-liner stays as the subtitle on the
+   * entry's own page. Set this where the name needs the one-liner to make sense.
+   */
+  oneLinerOnCard?: boolean;
+  /**
+   * How the piece started, shown on the /playground card as "Started with …". Only set
+   * where the real origin is known; cards without one simply show no tag.
+   */
+  origin?: string;
+  /**
    * Routing only. `full` entries carry a written body on their page; `light` ones are
    * carried by their gallery. Every entry gets a page and an identical card either way —
    * this must never reach the card treatment.
@@ -59,27 +69,12 @@ const playgroundEntries: PlaygroundEntry[] = [
   // playground is a statement about where it belongs among the projects, not a decision to
   // throw away the research behind it, so nothing about that page changes.
   {
-    slug: "gesture-sketch",
-    title: "GestureSketch",
-    tags: "Creative Coding · AI",
-    oneLiner: "Drawing in the air with your hands, as a way into art therapy",
-    kind: "light",
-    href: "/work/gesture-sketch",
-    teaser:
-      "An AI art therapist concept, built as a working p5.js prototype: your hand becomes the brush, so starting costs nothing.",
-    cover: {
-      src: "/images/covers/gesture-sketch.jpg",
-      alt: "GestureSketch — hand-tracked drawing canvas",
-      width: 2000,
-      height: 1200,
-    },
-    images: [],
-  },
-  {
     slug: "si-ch",
     title: "Si.Ch",
     tags: "Fashion · Brand",
-    oneLiner: "A gender-neutral label I designed, shot and ran for a year",
+    oneLiner: "My gender-neutral clothing label",
+    oneLinerOnCard: true,
+    origin: "a trip to Sri Lanka, and the sky I kept photographing",
     kind: "full",
     teaser:
       "A gender-neutral fashion label I designed and ran for a year. It started on a trip to Sri Lanka and the sky I kept photographing.",
@@ -97,10 +92,28 @@ const playgroundEntries: PlaygroundEntry[] = [
     href: "/playground/si-ch",
   },
   {
+    slug: "gesture-sketch",
+    title: "GestureSketch",
+    tags: "Creative Coding · AI",
+    oneLiner: "Drawing in the air with your hands, as a way into art therapy",
+    kind: "light",
+    href: "/work/gesture-sketch",
+    teaser:
+      "An AI art therapist concept, built as a working p5.js prototype: your hand becomes the brush, so starting costs nothing.",
+    cover: {
+      src: "/images/covers/gesture-sketch.jpg",
+      alt: "GestureSketch — hand-tracked drawing canvas",
+      width: 2000,
+      height: 1200,
+    },
+    images: [],
+  },
+  {
     slug: "road-trip-experience",
-    title: "The Road Trip Experience",
+    title: "The Roadtrip Experience",
     tags: "Art · Documentary",
     oneLiner: "Sixteen artists, one car, and the lost music of Kutchh on film",
+    origin: "friends I made at the Kochi Biennale",
     kind: "full",
     teaser:
       "Gujarat is home, so when friends I'd made at an art festival needed someone to take 16 artists around it, I said yes. It became The Roadtrip Experience, a project with Mahindra & Mahindra exploring the state's indigenous art forms.",
@@ -109,12 +122,12 @@ const playgroundEntries: PlaygroundEntry[] = [
       "I ran the experience and operations, which meant showing artists from around the world the places I grew up with, and watching them see it for the first time.",
       "Along the way we made a documentary on the lost music of Kutchh, a tradition that's slowly disappearing, and gave local artists resources and mentorship to work alongside the visiting ones.",
     ],
-    cover: { src: "/playground/rtx/RTX-.png", alt: "The Road Trip Experience", width: 918, height: 996 },
+    cover: { src: "/playground/rtx/RTX-.png", alt: "The Roadtrip Experience", width: 918, height: 996 },
     coverFrames: [
-      { src: "/playground/rtx/RTX-.png", alt: "The Road Trip Experience", width: 918, height: 996 },
-      { src: "/playground/rtx/RTX1.png", alt: "The Road Trip Experience", width: 910, height: 988 },
-      { src: "/playground/rtx/RTX2.jpg", alt: "The Road Trip Experience", width: 698, height: 1200 },
-      { src: "/playground/rtx/RTX3.jpg", alt: "The Road Trip Experience", width: 1200, height: 900 },
+      { src: "/playground/rtx/RTX-.png", alt: "The Roadtrip Experience", width: 918, height: 996 },
+      { src: "/playground/rtx/RTX1.png", alt: "The Roadtrip Experience", width: 910, height: 988 },
+      { src: "/playground/rtx/RTX2.jpg", alt: "The Roadtrip Experience", width: 698, height: 1200 },
+      { src: "/playground/rtx/RTX3.jpg", alt: "The Roadtrip Experience", width: 1200, height: 900 },
     ],
     images: [],
     pageImages: [
@@ -140,7 +153,7 @@ const playgroundEntries: PlaygroundEntry[] = [
     { src: `/playground/poetry-festivals/IMG-20200121-WA0003.jpg`, alt: "An artist taking a break beside the hand-painted car, paintbrush still in hand", width: 1200, height: 799 },
     ],
     videos: [
-      { src: "/playground/rtx/VID-20200120-WA0015.mp4", alt: "The Road Trip Experience — video from site" },
+      { src: "/playground/rtx/VID-20200120-WA0015.mp4", alt: "The Roadtrip Experience — video from site" },
     ],
     href: "/playground/road-trip-experience",
   },
@@ -173,7 +186,7 @@ const playgroundEntries: PlaygroundEntry[] = [
 
   {
     slug: "humans-were-made-to-love",
-    title: "Humans Were Made To Love",
+    title: "Humans Were Made to Love",
     tags: "Styling · Art Direction",
     oneLiner: "A gender-fluid fashion spread I directed in design school",
     coverPosition: "center 25%",
@@ -248,9 +261,9 @@ const playgroundEntries: PlaygroundEntry[] = [
   },
   {
     slug: "niluk",
-    title: "Niluk by Nilima Mehta",
+    title: "Niluk: Safar Collection",
     tags: "Styling · Art Direction",
-    oneLiner: "Indian embroidery on Western silhouettes, for the Safar collection",
+    oneLiner: "Indian embroidery on Western silhouettes",
     coverPosition: "center 65%",
     kind: "light",
     teaser:
@@ -293,9 +306,10 @@ const playgroundEntries: PlaygroundEntry[] = [
   },
   {
     slug: "spoken-word",
-    title: "Spoken Word",
+    title: "Spoken Word Ahmedabad",
     tags: "Poetry · Performance",
     oneLiner: "Twenty open mics that gave Ahmedabad a stage of its own",
+    origin: "a few friends obsessed with Button Poetry",
     kind: "light",
     teaser:
       "In 2017, a few friends and I, all obsessed with Button Poetry, started a spoken word movement in our home city of Ahmedabad. Over the next two years we ran more than 20 open mics, tapping into the city's creative nerve and building a space for storytelling and performance.",

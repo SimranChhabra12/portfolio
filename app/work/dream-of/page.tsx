@@ -27,11 +27,11 @@ export const metadata = {
 
 // Pinned contents index. Keep in step with the <Section> ids below.
 const SECTIONS = [
-  { id: "products", number: "01", label: "The Products" },
+  { id: "context", number: "01", label: "Context" },
   { id: "research", number: "02", label: "Research" },
   { id: "decisions", number: "03", label: "Design Decisions" },
-  { id: "screens", number: "04", label: "First Iteration" },
-  { id: "after", number: "05", label: "What Happened Next" },
+  { id: "product", number: "04", label: "The Product" },
+  { id: "landed", number: "05", label: "Where It Landed" },
   { id: "next", number: "06", label: "What I'd Do Next" },
   { id: "takeaway", number: "07", label: "What I Took Away" },
 ];
@@ -83,7 +83,7 @@ export default function DreamOfPage() {
 
       <CaseStudyShell>
         <div className="flex flex-col min-w-0">
-          <Section id="products" number="01" heading="The Products" first>
+          <Section id="context" number="01" heading="Context" first>
             <Prose>
               <P>
                 Each product came from a gap in what you could buy for Indian hair.
@@ -182,7 +182,7 @@ export default function DreamOfPage() {
             </Media>
           </Section>
 
-          <Section id="screens" number="04" heading="First Iteration">
+          <Section id="product" number="04" heading="The Product">
             <Prose>
               <P>
                 These are the screens from my first version. Each frame scrolls, so you can go
@@ -284,7 +284,7 @@ export default function DreamOfPage() {
             </Media>
           </Section>
 
-          <Section id="after" number="05" heading="What Happened Next">
+          <Section id="landed" number="05" heading="Where It Landed">
             <Prose>
               <P>
                 The site that&apos;s live at dreamof.in now was rebuilt by someone else after my
