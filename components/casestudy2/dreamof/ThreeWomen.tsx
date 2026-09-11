@@ -151,7 +151,7 @@ const WOMEN: Woman[] = [
 ];
 
 const label = {
-  fontSize: "0.75rem",
+  fontSize: "var(--t-caption)",
   textTransform: "uppercase" as const,
   letterSpacing: "0.1em",
   fontFamily: "var(--font-body)",
@@ -191,7 +191,7 @@ export default function ThreeWomen() {
               style={{
                 fontFamily: "var(--font-display)",
                 fontStyle: "italic",
-                fontSize: "1.0625rem",
+                fontSize: "var(--t-body)",
                 color: T.ink,
                 lineHeight: 1.45,
                 maxWidth: "26ch",
@@ -201,7 +201,7 @@ export default function ThreeWomen() {
             </p>
             <figcaption className="flex flex-col gap-1">
               <span style={{ ...label, color: SAGE }}>{w.decision}</span>
-              <span style={{ fontFamily: "var(--font-body)", fontSize: "0.9375rem", fontWeight: 500, color: T.ink, lineHeight: 1.45 }}>
+              <span style={{ fontFamily: "var(--font-body)", fontSize: "var(--t-body)", fontWeight: 500, color: T.ink, lineHeight: 1.45 }}>
                 {w.point}
               </span>
             </figcaption>

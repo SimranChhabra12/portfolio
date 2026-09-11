@@ -66,7 +66,7 @@ export default async function CaseStudyPage({
           <div className="flex-1 min-w-0" style={{ maxWidth: COL_MEDIA }}>
             {/* Hero */}
             <header className="pt-40" style={{ paddingBottom: HALF_GAP }}>
-              <p className="label text-mauve mb-6">
+              <p className="label text-mauve-deep mb-6">
                 {project.year} · {project.role}
                 {project.status && <> · {project.status}</>}
               </p>
@@ -93,25 +93,25 @@ export default async function CaseStudyPage({
               style={{ paddingTop: HALF_GAP, paddingBottom: HALF_GAP }}
             >
               <div>
-                <p className="label text-mauve mb-2">Role</p>
+                <p className="label text-mauve-deep mb-2">Role</p>
                 <p className="t-body text-ink !max-w-none">{project.role}</p>
               </div>
               <div>
-                <p className="label text-mauve mb-2">Team</p>
+                <p className="label text-mauve-deep mb-2">Team</p>
                 <p className="t-body text-ink !max-w-none">{project.meta.team}</p>
               </div>
               <div>
-                <p className="label text-mauve mb-2">Research methods</p>
+                <p className="label text-mauve-deep mb-2">Research methods</p>
                 <p className="t-body text-ink !max-w-none">
                   {project.meta.researchMethods.join(", ")}
                 </p>
               </div>
               <div>
-                <p className="label text-mauve mb-2">Platform</p>
+                <p className="label text-mauve-deep mb-2">Platform</p>
                 <p className="t-body text-ink !max-w-none">{project.meta.platform}</p>
               </div>
               <div>
-                <p className="label text-mauve mb-2">Duration</p>
+                <p className="label text-mauve-deep mb-2">Duration</p>
                 <p className="t-body text-ink !max-w-none">{project.meta.duration}</p>
               </div>
             </section>
@@ -127,8 +127,8 @@ export default async function CaseStudyPage({
                   style={{ paddingTop: HALF_GAP, paddingBottom: HALF_GAP }}
                 >
                   <div className="flex items-baseline gap-4 mb-8">
-                    <span className="t-caption text-mauve">{section.number}</span>
-                    <p className="label text-mauve">{section.heading}</p>
+                    <span className="t-caption text-mauve-deep">{section.number}</span>
+                    <p className="label text-mauve-deep">{section.heading}</p>
                   </div>
 
                   {section.empty ? (
@@ -136,7 +136,7 @@ export default async function CaseStudyPage({
                       className="border border-dashed border-ink/20 px-8 py-12"
                       style={{ maxWidth: COL_TEXT, borderRadius: "var(--radius-card, 4px)" }}
                     >
-                      <p className="t-body text-mauve !max-w-none">
+                      <p className="t-body text-mauve-deep !max-w-none">
                         Coming soon — this section hasn&apos;t been written yet.
                       </p>
                     </div>
@@ -150,7 +150,7 @@ export default async function CaseStudyPage({
             {/* Next project */}
             {nextProject && (
               <section style={{ paddingTop: SECTION_GAP, paddingBottom: SECTION_GAP }}>
-                <p className="label text-mauve mb-8">Next project</p>
+                <p className="label text-mauve-deep mb-8">Next project</p>
                 <Link
                   href={`/work/${nextProject.slug}`}
                   className="group flex flex-col sm:flex-row sm:items-end justify-between gap-6"

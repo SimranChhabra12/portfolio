@@ -2,7 +2,7 @@ import Link from "next/link";
 import Wordmark from "@/components/ui/Wordmark";
 import Nav from "@/components/ui/Nav";
 import caseStudies from "@/data/caseStudies";
-import { CaseStudyShell, Prose, SECTION_GAP } from "./_components/columns";
+import { Prose, SECTION_GAP } from "./_components/columns";
 
 export const metadata = {
   title: "Work — Simran Chhabra",
@@ -15,12 +15,12 @@ export default function WorkPage() {
     <main className="min-h-screen bg-cream pt-[66px]">
       <Nav />
 
-      <CaseStudyShell className="pt-40">
-        <p className="label text-mauve mb-6">Selected Work</p>
+      <div className="max-w-[var(--page-max,1280px)] mx-auto px-[var(--page-gutter,32px)] pt-40">
+        <p className="label text-mauve-deep mb-6">Selected Work</p>
         <h1 className="t-display text-ink">Case Studies</h1>
-      </CaseStudyShell>
+      </div>
 
-      <CaseStudyShell>
+      <div className="max-w-[var(--page-max,1280px)] mx-auto px-[var(--page-gutter,32px)]">
         <div
           className="divide-y divide-ink/10 border-t border-ink/10"
           style={{ marginTop: HALF_GAP, marginBottom: SECTION_GAP }}
@@ -33,7 +33,7 @@ export default function WorkPage() {
               style={{ paddingTop: HALF_GAP, paddingBottom: HALF_GAP }}
             >
               <div className="flex items-start gap-8 lg:gap-12 flex-1 min-w-0">
-                <span className="t-caption text-mauve mt-2 min-w-[1.5rem]">
+                <span className="t-caption text-mauve-deep mt-2 min-w-[1.5rem]">
                   0{i + 1}
                 </span>
                 <div className="flex-1 min-w-0">
@@ -43,7 +43,7 @@ export default function WorkPage() {
                       className="w-2 h-2 rounded-full shrink-0"
                       style={{ backgroundColor: project.color }}
                     />
-                    <p className="label text-mauve">
+                    <p className="label text-mauve-deep">
                       {project.year}
                       {project.status && ` · ${project.status}`}
                     </p>
@@ -60,7 +60,7 @@ export default function WorkPage() {
                 {project.disciplines.map((d) => (
                   <span
                     key={d}
-                    className="t-caption text-mauve border border-mauve/40 rounded-full px-4 py-2"
+                    className="t-caption text-mauve-deep border border-mauve/40 rounded-full px-4 py-2"
                   >
                     {d}
                   </span>
@@ -69,10 +69,10 @@ export default function WorkPage() {
             </Link>
           ))}
         </div>
-      </CaseStudyShell>
+      </div>
 
-      <footer className="bg-dark-bg py-8 px-8 lg:px-16">
-        <div className="max-w-6xl mx-auto flex justify-between items-center">
+      <footer className="bg-dark-bg py-8">
+        <div className="max-w-[var(--page-max,1280px)] mx-auto px-[var(--page-gutter,32px)] flex justify-between items-center">
           <Wordmark size="16px" className="text-surface/70" />
           <div className="flex gap-6">
             <a

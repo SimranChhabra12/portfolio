@@ -24,7 +24,7 @@ export default function PlaygroundIndexPage() {
         <div className="max-w-[var(--page-max,1280px)] mx-auto px-[var(--page-gutter,32px)]">
           <Link
             href="/"
-            className="t-caption text-mauve hover:text-accent transition-colors focus-visible:outline-2 focus-visible:outline-accent focus-visible:outline-offset-4"
+            className="t-caption text-mauve-deep hover:text-accent transition-colors focus-visible:outline-2 focus-visible:outline-accent focus-visible:outline-offset-4"
           >
             ← Home
           </Link>

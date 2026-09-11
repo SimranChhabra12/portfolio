@@ -59,12 +59,12 @@ export default async function PlaygroundEntryPage({
         <div className="max-w-[var(--page-max,1280px)] mx-auto px-[var(--page-gutter,32px)]">
           <Link
             href="/playground"
-            className="t-caption text-mauve hover:text-accent transition-colors focus-visible:outline-2 focus-visible:outline-accent focus-visible:outline-offset-4"
+            className="t-caption text-mauve-deep hover:text-accent transition-colors focus-visible:outline-2 focus-visible:outline-accent focus-visible:outline-offset-4"
           >
             ← Playground
           </Link>
 
-          <p className="t-caption uppercase tracking-[0.08em] text-mauve mt-6">{entry.tags}</p>
+          <p className="t-caption uppercase tracking-[0.08em] text-mauve-deep mt-6">{entry.tags}</p>
           <h1 className="t-display text-ink !max-w-none mt-2">{entry.title}</h1>
           <p className="t-body text-ink !max-w-[var(--col-text,640px)] mt-6">{entry.teaser}</p>
           {entry.body?.map((para, i) => (

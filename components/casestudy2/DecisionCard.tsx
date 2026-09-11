@@ -119,7 +119,7 @@ export default function DecisionCard({
   const challenges = voice?.stance === "challenges";
 
   const LABEL = {
-    fontSize: "0.8125rem",
+    fontSize: "var(--t-caption)",
     textTransform: "uppercase" as const,
     letterSpacing: "0.1em",
     color: P.label,
@@ -129,7 +129,7 @@ export default function DecisionCard({
 
   const BODY = {
     fontFamily: "var(--font-body)",
-    fontSize: "0.9375rem",
+    fontSize: "var(--t-body)",
     color: P.text,
     lineHeight: 1.65,
   };
@@ -147,13 +147,13 @@ export default function DecisionCard({
           <p style={{ fontFamily: "var(--font-display)", fontWeight: 600, fontSize: T.type.sub, color: T.ink, lineHeight: 1.25 }}>
             {choice}
           </p>
-          <p style={{ fontFamily: "var(--font-body)", fontSize: "0.9375rem", color: T.inkMuted, lineHeight: 1.6 }}>
+          <p style={{ fontFamily: "var(--font-body)", fontSize: "var(--t-body)", color: T.inkMuted, lineHeight: 1.6 }}>
             Not <span style={{ textDecoration: "line-through", textDecorationColor: P.accent }}>{insteadOf.charAt(0).toLowerCase() + insteadOf.slice(1)}</span>
           </p>
-          <p style={{ fontFamily: "var(--font-body)", fontSize: "1rem", color: T.ink, lineHeight: 1.7 }}>{because}</p>
+          <p style={{ fontFamily: "var(--font-body)", fontSize: "var(--t-body)", color: T.ink, lineHeight: 1.7 }}>{because}</p>
           {research && (
-            <p style={{ fontFamily: "var(--font-body)", fontSize: "0.875rem", color: T.inkMuted, lineHeight: 1.6 }}>
-              <span style={{ textTransform: "uppercase", letterSpacing: "0.08em", fontSize: "0.75rem", marginRight: "0.5rem" }}>
+            <p style={{ fontFamily: "var(--font-body)", fontSize: "var(--t-caption)", color: T.inkMuted, lineHeight: 1.6 }}>
+              <span style={{ textTransform: "uppercase", letterSpacing: "0.08em", fontSize: "var(--t-caption)", marginRight: "0.5rem" }}>
                 Research
               </span>
               {research}

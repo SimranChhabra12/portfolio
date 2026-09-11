@@ -38,7 +38,7 @@ export default function TwoSidedFlow({
         style={{
           fontFamily: "var(--font-display)",
           fontWeight: 600,
-          fontSize: "1.25rem",
+          fontSize: "var(--t-sub)",
           color: T.ink,
           lineHeight: 1.3,
           borderBottom: `1px solid ${T.inkFaint}`,
@@ -56,7 +56,7 @@ export default function TwoSidedFlow({
             <span
               style={{
                 fontFamily: "var(--font-display)",
-                fontSize: "1rem",
+                fontSize: "var(--t-body)",
                 color: RUST,
                 lineHeight: 1.5,
               }}
@@ -65,7 +65,7 @@ export default function TwoSidedFlow({
             </span>
             <span className="flex flex-col gap-1 min-w-0">
               <span
-                style={{ fontFamily: "var(--font-body)", fontSize: "1rem", color: T.ink, lineHeight: 1.5 }}
+                style={{ fontFamily: "var(--font-body)", fontSize: "var(--t-body)", color: T.ink, lineHeight: 1.5 }}
               >
                 {s.step}
               </span>
@@ -73,7 +73,7 @@ export default function TwoSidedFlow({
                 <span
                   style={{
                     fontFamily: "var(--font-body)",
-                    fontSize: "0.875rem",
+                    fontSize: "var(--t-caption)",
                     color: T.inkMuted,
                     lineHeight: 1.5,
                   }}
@@ -127,7 +127,7 @@ export default function TwoSidedFlow({
             style={{
               backgroundColor: T.cream,
               fontFamily: "var(--font-body)",
-              fontSize: "0.875rem",
+              fontSize: "var(--t-caption)",
               lineHeight: 1.45,
               color: broken ? RUST : T.ink,
               maxWidth: "9rem",

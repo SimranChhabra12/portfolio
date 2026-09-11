@@ -7,6 +7,9 @@
   --ink: #3A2A38;
   --accent: #7A3F5D;
   --mauve: #C99BA9;
+  /* Mauve for TEXT on cream/surface: 5.1:1 and 4.6:1, both pass WCAG AA. The pale
+     --mauve above is 2.3:1 on cream, so it's for rules, borders and the dark footers only. */
+  --mauve-deep: #A24F68;
   --blush: #E7C9C6;
 
   /* Dark-section tokens — warm darks, never pure black */
@@ -80,6 +83,7 @@
   --color-ink: var(--ink);
   --color-accent: var(--accent);
   --color-mauve: var(--mauve);
+  --color-mauve-deep: var(--mauve-deep);
   --color-blush: var(--blush);
   --color-dark-bg: var(--dark-bg);
   --color-dark-surface: var(--dark-surface);

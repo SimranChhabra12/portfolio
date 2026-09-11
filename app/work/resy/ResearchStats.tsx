@@ -52,7 +52,7 @@ export default function ResearchStats({
             <span
               style={{
                 fontFamily: "var(--font-body)",
-                fontSize: "0.9375rem",
+                fontSize: "var(--t-body)",
                 color: T.ink,
                 lineHeight: 1.5,
               }}

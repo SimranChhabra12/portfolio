@@ -65,7 +65,7 @@ export default function PlaygroundCard({
 
       <div className="max-w-[var(--col-text,640px)]">
         {/* 2 — eyebrow */}
-        <p className="t-caption uppercase tracking-[0.08em] text-mauve mt-6">{entry.tags}</p>
+        <p className="t-caption uppercase tracking-[0.08em] text-mauve-deep mt-6">{entry.tags}</p>
 
         {/* 3 — title and what it was, one line, one size (matches the work cards) */}
         <h3 className="t-section text-ink !max-w-none mt-2 transition-colors [@media(hover:hover)]:group-hover:text-accent">

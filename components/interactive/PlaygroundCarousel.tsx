@@ -113,7 +113,7 @@ export default function PlaygroundCarousel({
           >
             <span aria-hidden>→</span>
           </button>
-          <p className="t-caption text-mauve" aria-live="polite">
+          <p className="t-caption text-mauve-deep" aria-live="polite">
             {index + 1} / {images.length}
           </p>
         </div>

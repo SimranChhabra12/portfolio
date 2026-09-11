@@ -42,7 +42,7 @@ function CaseStudyBlock({ block, color }: { block: Block; color: string }) {
         <div className="flex flex-col gap-6">
           {block.items.map((f, i) => (
             <div key={i}>
-              <p className="label text-mauve mb-2">{f.label}</p>
+              <p className="label text-mauve-deep mb-2">{f.label}</p>
               <p className="t-body text-ink !max-w-none">{f.value}</p>
             </div>
           ))}
@@ -58,7 +58,7 @@ function CaseStudyBlock({ block, color }: { block: Block; color: string }) {
           {block.items.map((s, i) => (
             <div key={i} className="bg-surface/60 p-8 flex flex-col gap-2">
               <span className="t-section text-ink">{s.value}</span>
-              <span className="label text-mauve">{s.label}</span>
+              <span className="label text-mauve-deep">{s.label}</span>
             </div>
           ))}
         </div>
@@ -123,7 +123,7 @@ function CaseStudyBlock({ block, color }: { block: Block; color: string }) {
             &ldquo;{block.text}&rdquo;
           </p>
           {block.attribution && (
-            <cite className="t-caption text-mauve not-italic">{block.attribution}</cite>
+            <cite className="t-caption text-mauve-deep not-italic">{block.attribution}</cite>
           )}
         </blockquote>
       );
@@ -134,7 +134,7 @@ function CaseStudyBlock({ block, color }: { block: Block; color: string }) {
           className="border border-dashed border-ink/20 px-8 py-10 flex items-center text-left"
           style={{ borderRadius: RADIUS }}
         >
-          <p className="t-caption text-mauve">Needs asset — {block.label}</p>
+          <p className="t-caption text-mauve-deep">Needs asset — {block.label}</p>
         </div>
       );
 
@@ -162,7 +162,7 @@ function CaseStudyBlock({ block, color }: { block: Block; color: string }) {
                 />
               </div>
               {screen.caption && (
-                <figcaption className="t-caption text-mauve">{screen.caption}</figcaption>
+                <figcaption className="t-caption text-mauve-deep">{screen.caption}</figcaption>
               )}
             </figure>
           ))}
@@ -188,7 +188,7 @@ function CaseStudyBlock({ block, color }: { block: Block; color: string }) {
             href={block.url}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 label text-mauve hover:text-accent transition-colors mt-4"
+            className="inline-flex items-center gap-2 label text-mauve-deep hover:text-accent transition-colors mt-4"
           >
             Open full prototype ↗
           </a>

@@ -171,7 +171,7 @@ export default function ScatteredStrands() {
           <div key={s.label}>
             <dd
               style={{
-                fontSize: "1.75rem",
+                fontSize: "var(--t-project)",
                 lineHeight: 1.1,
                 color: s.hot ? A.coral : A.textLight,
                 transition: "color 300ms",
@@ -179,7 +179,7 @@ export default function ScatteredStrands() {
             >
               {s.value}
             </dd>
-            <dt style={{ fontSize: "0.8125rem", color: A.textMuted }}>{s.label}</dt>
+            <dt style={{ fontSize: "var(--t-caption)", color: A.textMuted }}>{s.label}</dt>
           </div>
         ))}
       </dl>
@@ -288,10 +288,10 @@ export default function ScatteredStrands() {
                 const v = s.values[day];
                 return (
                   <div key={s.key} className="rounded-xl px-3 py-2" style={{ backgroundColor: A.surface }}>
-                    <div style={{ fontSize: "0.75rem", color: A.textMuted }}>
+                    <div style={{ fontSize: "var(--t-caption)", color: A.textMuted }}>
                       {s.label} · {s.app}
                     </div>
-                    <div style={{ fontSize: "0.9375rem", color: v === null ? A.coral : A.textLight }}>
+                    <div style={{ fontSize: "var(--t-body)", color: v === null ? A.coral : A.textLight }}>
                       {v === null ? "Not logged" : s.fmt(v)}
                     </div>
                   </div>

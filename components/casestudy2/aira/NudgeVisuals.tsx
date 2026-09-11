@@ -125,7 +125,7 @@ export default function NudgeVisuals({ pairWidth, headline, caption }: { pairWid
       {(headline || caption) && (
         <div className="flex flex-col gap-1.5">
           {headline && <h4 style={{ fontFamily: "var(--font-display)", fontWeight: 600, fontSize: T.type.sub, color: T.ink, lineHeight: 1.3 }}>{headline}</h4>}
-          {caption && <p style={{ fontFamily: "var(--font-body)", fontSize: "0.9375rem", color: T.inkMuted, lineHeight: 1.5, maxWidth: "60ch" }}>{caption}</p>}
+          {caption && <p style={{ fontFamily: "var(--font-body)", fontSize: "var(--t-body)", color: T.inkMuted, lineHeight: 1.5, maxWidth: "60ch" }}>{caption}</p>}
         </div>
       )}
       <div className="flex flex-wrap gap-8 items-start w-full">

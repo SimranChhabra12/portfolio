@@ -30,9 +30,9 @@ const SECTIONS = [
   { id: "insight", number: "03", label: "The Insight" },
   { id: "decisions", number: "04", label: "Design Decisions" },
   { id: "product", number: "05", label: "The Product" },
-  { id: "landed", number: "06", label: "Where It Landed" },
-  { id: "next", number: "07", label: "What I'd Do Next" },
-  { id: "takeaway", number: "08", label: "What I Took Away" },
+  { id: "landed", number: "06", label: "Where it landed" },
+  { id: "next", number: "07", label: "What I'd do next" },
+  { id: "takeaway", number: "08", label: "What I took away" },
 ];
 
 export default function ResyPage() {
@@ -83,7 +83,7 @@ export default function ResyPage() {
             className="inline-flex items-center gap-2 mt-10 px-5 py-3 rounded-full"
             style={{
               fontFamily: "var(--font-body)",
-              fontSize: "0.9375rem",
+              fontSize: "var(--t-body)",
               fontWeight: 500,
               color: T.cream,
               backgroundColor: T.ink,
@@ -306,7 +306,7 @@ export default function ResyPage() {
                       style={{
                         fontFamily: "var(--font-display)",
                         fontWeight: 600,
-                        fontSize: "1.25rem",
+                        fontSize: "var(--t-sub)",
                         color: RUST,
                         lineHeight: 1.3,
                       }}
@@ -316,7 +316,7 @@ export default function ResyPage() {
                     <p
                       style={{
                         fontFamily: "var(--font-body)",
-                        fontSize: "1rem",
+                        fontSize: "var(--t-body)",
                         lineHeight: 1.65,
                         color: T.ink,
                       }}
@@ -451,7 +451,7 @@ export default function ResyPage() {
           </Section>
 
           {/* 10 — list treatment */}
-          <Section id="landed" number="06" heading="Where It Landed">
+          <Section id="landed" number="06" heading="Where it landed">
             <P>
               The scope of this project was needfinding and proposing a solution, so that&apos;s what
               the course asked for and what we delivered: research across 15 users and 6
@@ -472,7 +472,7 @@ export default function ResyPage() {
           </Section>
 
           {/* 11 — prose treatment */}
-          <Section id="next" number="07" heading="What I'd Do Next">
+          <Section id="next" number="07" heading="What I'd do next">
             <P>
               <strong>Put it in front of people.</strong>{" "}Everything in this prototype is built on
               interviews, but nobody has used it yet. I&apos;d run short sessions with 3-5 people
@@ -493,7 +493,7 @@ export default function ResyPage() {
           </Section>
 
           {/* 12 — closing quote treatment */}
-          <Section id="takeaway" number="08" heading="What I Took Away">
+          <Section id="takeaway" number="08" heading="What I took away">
             <QuoteCallout
               large
               accent={RUST}

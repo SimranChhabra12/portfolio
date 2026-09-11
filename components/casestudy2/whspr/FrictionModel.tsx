@@ -18,7 +18,7 @@ const TAGS = ["First time", "Friday night", "Solo", "Getting home"];
 
 const label = {
   fontFamily: "var(--font-body)",
-  fontSize: "0.75rem",
+  fontSize: "var(--t-caption)",
   textTransform: "uppercase" as const,
   letterSpacing: "0.1em",
 };
@@ -35,10 +35,10 @@ export default function FrictionModel() {
         padding: "clamp(2rem, 1.5rem + 2.5vw, 3.5rem)",
       }}
     >
-      <p style={{ ...label, fontSize: "0.8125rem", color: W.amber, marginBottom: "0.5rem" }}>
+      <p style={{ ...label, fontSize: "var(--t-caption)", color: W.amber, marginBottom: "0.5rem" }}>
         The contribution friction model
       </p>
-      <p style={{ fontFamily: "var(--font-body)", fontSize: "0.9375rem", color: W.dusk400, lineHeight: 1.6, marginBottom: "2.5rem" }}>
+      <p style={{ fontFamily: "var(--font-body)", fontSize: "var(--t-body)", color: W.dusk400, lineHeight: 1.6, marginBottom: "2.5rem" }}>
         5 prompts before you post, and what they turn into.
       </p>
 
@@ -48,10 +48,10 @@ export default function FrictionModel() {
           <ol className="list-none m-0 p-0">
             {PROMPTS.map((q, i) => (
               <li key={q} className="flex gap-4 items-baseline py-3.5" style={{ borderBottom: hairline }}>
-                <span style={{ fontFamily: "var(--font-display)", fontSize: "0.9375rem", color: W.amber, minWidth: "1.25rem" }}>
+                <span style={{ fontFamily: "var(--font-display)", fontSize: "var(--t-body)", color: W.amber, minWidth: "1.25rem" }}>
                   {i + 1}
                 </span>
-                <span style={{ fontFamily: "var(--font-body)", fontSize: "0.9375rem", color: W.textLight, lineHeight: 1.5 }}>{q}</span>
+                <span style={{ fontFamily: "var(--font-body)", fontSize: "var(--t-body)", color: W.textLight, lineHeight: 1.5 }}>{q}</span>
               </li>
             ))}
           </ol>
@@ -62,7 +62,7 @@ export default function FrictionModel() {
             What the next woman reads
           </p>
           <figure className="m-0 p-6 flex flex-col gap-4" style={{ backgroundColor: W.surface1, borderRadius: 14 }}>
-            <p style={{ fontFamily: "var(--font-body)", fontSize: "0.875rem", fontWeight: 500, color: W.textLight }}>
+            <p style={{ fontFamily: "var(--font-body)", fontSize: "var(--t-caption)", fontWeight: 500, color: W.textLight }}>
               Schmuck, East Village
             </p>
             <div className="flex flex-wrap gap-2">
@@ -72,7 +72,7 @@ export default function FrictionModel() {
                   className="rounded-full"
                   style={{
                     fontFamily: "var(--font-body)",
-                    fontSize: "0.75rem",
+                    fontSize: "var(--t-caption)",
                     padding: "3px 10px",
                     color: i === TAGS.length - 1 ? W.amber : W.dusk400,
                     backgroundColor: i === TAGS.length - 1 ? "#F7E6D4" : W.midnight,
@@ -84,12 +84,12 @@ export default function FrictionModel() {
             </div>
             <blockquote
               className="m-0"
-              style={{ fontFamily: "var(--font-body)", fontSize: "1rem", color: W.textLight, lineHeight: 1.55 }}
+              style={{ fontFamily: "var(--font-body)", fontSize: "var(--t-body)", color: W.textLight, lineHeight: 1.55 }}
             >
               &ldquo;Gets loud after 10pm, but it&apos;s easy to get a cab after midnight.&rdquo;
             </blockquote>
           </figure>
-          <p style={{ fontFamily: "var(--font-body)", fontSize: "0.875rem", color: W.dusk400, lineHeight: 1.6, marginTop: "1.25rem" }}>
+          <p style={{ fontFamily: "var(--font-body)", fontSize: "var(--t-caption)", color: W.dusk400, lineHeight: 1.6, marginTop: "1.25rem" }}>
             A star rating would have said 4.2. This says who went, when, and what it was about.
           </p>
         </div>

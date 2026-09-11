@@ -338,7 +338,7 @@ export default function FlowerTile() {
           )}
         </div>
       </div>
-      <figcaption className="t-caption text-mauve mt-3" aria-live="polite">
+      <figcaption className="t-caption text-mauve-deep mt-3" aria-live="polite">
         {hint} From GestureSketch, my hand-tracking drawing tool.
       </figcaption>
     </figure>

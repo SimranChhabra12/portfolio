@@ -46,7 +46,7 @@ export default function GapDiagram() {
               "Alert you to incidents that aren't nearby",
               "Make the city feel scarier",
             ].map((t, i) => (
-              <li key={i} style={{ fontFamily: "var(--font-body)", fontSize: "0.9375rem", color: W.dusk500, lineHeight: 1.6 }}>
+              <li key={i} style={{ fontFamily: "var(--font-body)", fontSize: "var(--t-body)", color: W.dusk500, lineHeight: 1.6 }}>
                 {t}
               </li>
             ))}
@@ -71,7 +71,7 @@ export default function GapDiagram() {
               "First-hand context, not a threat feed",
               "A quiet resource, not an alarm",
             ].map((t, i) => (
-              <li key={i} style={{ fontFamily: "var(--font-body)", fontSize: "0.9375rem", color: W.textLight, lineHeight: 1.6 }}>
+              <li key={i} style={{ fontFamily: "var(--font-body)", fontSize: "var(--t-body)", color: W.textLight, lineHeight: 1.6 }}>
                 {t}
               </li>
             ))}

@@ -38,7 +38,7 @@ export default function SayHiToKaiser({ className = "mt-8" }: { className?: stri
       >
         Come say hi to my baby boy, Kaiser!
       </button>
-      {fallback && <p className="t-caption text-mauve">{MESSAGE}</p>}
+      {fallback && <p className="t-caption text-mauve-deep">{MESSAGE}</p>}
       <span className="sr-only" aria-live="polite">{announce}</span>
     </div>
   );

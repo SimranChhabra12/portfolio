@@ -53,7 +53,7 @@ export default function ThreeIdeas() {
             <p
               style={{
                 fontFamily: "var(--font-body)",
-                fontSize: "0.8125rem",
+                fontSize: "var(--t-caption)",
                 textTransform: "uppercase",
                 letterSpacing: "0.08em",
                 color: T.inkMuted,
@@ -88,7 +88,7 @@ export default function ThreeIdeas() {
               style={{
                 borderTop: `1px solid ${T.inkFaint}`,
                 fontFamily: "var(--font-body)",
-                fontSize: "0.8125rem",
+                fontSize: "var(--t-caption)",
                 textTransform: "uppercase",
                 letterSpacing: "0.08em",
                 color: tone.status,

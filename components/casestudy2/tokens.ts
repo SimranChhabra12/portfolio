@@ -56,12 +56,14 @@ export const T = {
   },
 
   type: {
-    hero: "clamp(3.5rem, 2.6rem + 3.6vw, 4.5rem)", // 56–72px
-    section: "clamp(2.25rem, 1.9rem + 1.5vw, 2.75rem)", // 36–44px
-    sub: "clamp(1.375rem, 1.25rem + 0.5vw, 1.625rem)", // 22–26px
-    body: "1.125rem", // 18px
-    bodyLarge: "1.25rem", // 20px
-    caption: "0.9375rem", // 15px
+    // One type scale for the whole site: these now point at the globals.css tokens
+    // (.t-display / .t-heading / .t-sub / .t-body / .t-caption) instead of a second set.
+    hero: "var(--t-display)", // 40–84px
+    section: "var(--t-page)", // 32–50px
+    sub: "var(--t-sub)", // 20px
+    body: "var(--t-body)", // 17px
+    bodyLarge: "var(--t-sub)", // 20px
+    caption: "var(--t-caption)", // 13px
   },
 
   space: {

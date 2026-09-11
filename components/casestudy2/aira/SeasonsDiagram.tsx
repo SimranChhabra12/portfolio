@@ -46,14 +46,14 @@ export default function SeasonsDiagram() {
               }}
             />
             <div>
-              <p style={{ fontFamily: "var(--font-display)", fontWeight: 600, fontSize: "1.25rem", color: A.textLight, lineHeight: 1.2 }}>
+              <p style={{ fontFamily: "var(--font-display)", fontWeight: 600, fontSize: "var(--t-sub)", color: A.textLight, lineHeight: 1.2 }}>
                 {p.season}
               </p>
-              <p style={{ fontFamily: "var(--font-body)", fontSize: "0.8125rem", color: A.textMuted, marginTop: 2 }}>
+              <p style={{ fontFamily: "var(--font-body)", fontSize: "var(--t-caption)", color: A.textMuted, marginTop: 2 }}>
                 {p.phase}
               </p>
             </div>
-            <p style={{ fontFamily: "var(--font-body)", fontSize: "0.875rem", color: A.textLight, lineHeight: 1.5, opacity: 0.85 }}>
+            <p style={{ fontFamily: "var(--font-body)", fontSize: "var(--t-caption)", color: A.textLight, lineHeight: 1.5, opacity: 0.85 }}>
               {p.feel}
             </p>
           </div>

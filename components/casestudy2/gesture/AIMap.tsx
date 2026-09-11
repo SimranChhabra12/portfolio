@@ -35,7 +35,7 @@ function AxisLabel({
     <span
       style={{
         fontFamily: "var(--font-body)",
-        fontSize: "0.8125rem",
+        fontSize: "var(--t-caption)",
         textTransform: "uppercase",
         letterSpacing: "0.08em",
         color: T.inkMuted,
@@ -122,7 +122,7 @@ export default function AIMap() {
             <span
               style={{
                 fontFamily: "var(--font-body)",
-                fontSize: "0.875rem",
+                fontSize: "var(--t-caption)",
                 color: T.ink,
                 lineHeight: 1.3,
               }}

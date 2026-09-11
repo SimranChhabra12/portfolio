@@ -97,7 +97,7 @@ const ROWS: Row[] = [
 const microLabel = {
   fontFamily: "var(--font-body), sans-serif",
   fontWeight: 400,
-  fontSize: "0.6875rem",
+  fontSize: "var(--t-caption)",
   letterSpacing: "0.12em",
   textTransform: "uppercase" as const,
   color: W.dusk500,
@@ -163,7 +163,7 @@ function Item({ entry }: { entry: Entry }) {
             style={{
               fontFamily: "var(--font-body), sans-serif",
               fontWeight: 500,
-              fontSize: "0.78rem",
+              fontSize: "var(--t-caption)",
               lineHeight: 1.25,
               color: W.textLight,
             }}
@@ -184,7 +184,7 @@ function Item({ entry }: { entry: Entry }) {
             className="truncate hidden sm:block"
             style={{
               fontFamily: "var(--font-body), sans-serif",
-              fontSize: "0.66rem",
+              fontSize: "var(--t-caption)",
               lineHeight: 1.35,
               color: W.dusk500,
             }}
@@ -216,7 +216,7 @@ function Tile({ entries, col }: { entries: Entry[] | null; col: string }) {
     >
       {/* the column headers do not survive the phone layout, so each tile
           carries its own */}
-      <span className="sm:hidden mb-2 block" style={{ ...microLabel, fontSize: "0.625rem" }}>
+      <span className="sm:hidden mb-2 block" style={{ ...microLabel, fontSize: "var(--t-caption)" }}>
         {col}
       </span>
       <ul className="flex flex-col gap-2 list-none m-0 p-0">
@@ -248,7 +248,7 @@ export default function WhereKnowledgeLives() {
         <p
           style={{
             fontFamily: "var(--font-body), sans-serif",
-            fontSize: "0.9375rem",
+            fontSize: "var(--t-body)",
             lineHeight: 1.6,
             color: T.inkMuted,
             maxWidth: "62ch",
@@ -316,7 +316,7 @@ export default function WhereKnowledgeLives() {
           style={{
             borderTop: "1px solid rgba(42,31,40,.08)",
             fontFamily: "var(--font-body), sans-serif",
-            fontSize: "0.75rem",
+            fontSize: "var(--t-caption)",
             color: W.dusk400,
           }}
         >

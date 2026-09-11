@@ -205,7 +205,7 @@ export default function AboutPage() {
           ].map((para, i) => (
             <Reveal key={para.mark} delay={i * 80}>
               <div className="md:flex md:gap-10">
-                <p className="t-caption text-mauve md:w-[160px] md:shrink-0 md:pt-1">
+                <p className="t-caption text-mauve-deep md:w-[160px] md:shrink-0 md:pt-1">
                   {para.mark}
                 </p>
                 <p className="t-body text-ink mt-3 md:mt-0">{para.body}</p>
@@ -224,13 +224,13 @@ export default function AboutPage() {
           {TIMELINE.map((item, i) => (
             <Reveal key={`${item.org}-${item.years}`} delay={i * 60}>
               <li className="flex flex-col gap-4 border-t border-mauve/30 py-8 sm:flex-row sm:gap-8">
-                <p className="t-caption label text-mauve sm:w-[140px] sm:shrink-0 sm:pt-1">
+                <p className="t-caption label text-mauve-deep sm:w-[140px] sm:shrink-0 sm:pt-1">
                   {item.years}
                 </p>
 
                 <div className="min-w-0 sm:flex-1">
                   <h3 className="t-sub text-ink">
-                    {item.role} <span className="text-mauve">·</span> {item.org}
+                    {item.role} <span className="text-mauve-deep">·</span> {item.org}
                   </h3>
                   <p className="t-body text-ink/75 mt-2">{item.blurb}</p>
                 </div>
@@ -263,7 +263,7 @@ export default function AboutPage() {
                     <p className="t-caption text-ink/75 mt-4">{card.issuer}</p>
                     {card.detail && <p className="t-caption text-ink mt-3">{card.detail}</p>}
                   </div>
-                  <p className="t-caption label text-mauve mt-4">{card.year}</p>
+                  <p className="t-caption label text-mauve-deep mt-4">{card.year}</p>
                 </article>
               </Reveal>
             ))}

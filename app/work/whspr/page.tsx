@@ -42,9 +42,9 @@ const SECTIONS = [
   { id: "insight", number: "03", label: "The Insight" },
   { id: "decisions", number: "04", label: "Design Decisions" },
   { id: "product", number: "05", label: "The Product" },
-  { id: "landed", number: "06", label: "Where It Landed" },
-  { id: "next", number: "07", label: "What I'd Do Next" },
-  { id: "takeaway", number: "08", label: "What I Took Away" },
+  { id: "landed", number: "06", label: "Where it landed" },
+  { id: "next", number: "07", label: "What I'd do next" },
+  { id: "takeaway", number: "08", label: "What I took away" },
 ];
 
 export default function WhsprPage() {
@@ -93,7 +93,7 @@ export default function WhsprPage() {
             className="inline-flex items-center gap-2 mt-10 px-5 py-3 rounded-full"
             style={{
               fontFamily: "var(--font-body)",
-              fontSize: "0.9375rem",
+              fontSize: "var(--t-body)",
               fontWeight: 500,
               color: T.cream,
               backgroundColor: T.ink,
@@ -286,7 +286,7 @@ export default function WhsprPage() {
             </Prose>
           </Section>
 
-          <Section id="landed" number="06" heading="Where It Landed">
+          <Section id="landed" number="06" heading="Where it landed">
             <FeatureVisual
               kind="plain"
               plainMaxWidth={1000}
@@ -337,7 +337,7 @@ export default function WhsprPage() {
             </Prose>
           </Section>
 
-          <Section id="next" number="07" heading="What I'd Do Next">
+          <Section id="next" number="07" heading="What I'd do next">
             <Prose>
               <P><strong>From places to routes.</strong> Nobody was asked what else Whspr should do. Getting home came up anyway, from more people than any feature I actually designed. For one woman, the trip home mattered more than anything about the venue. A Whspr layer over the map, where women could leave and read feedback along a route, is the most-requested thing I didn&apos;t build.</P>
             </Prose>
@@ -350,7 +350,7 @@ export default function WhsprPage() {
             </Prose>
           </Section>
 
-          <Section id="takeaway" number="08" heading="What I Took Away">
+          <Section id="takeaway" number="08" heading="What I took away">
             <Prose>
               <P>
                 Women already know this stuff. The apps around them just don&apos;t treat it as real.

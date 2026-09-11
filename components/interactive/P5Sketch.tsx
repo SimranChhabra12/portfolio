@@ -107,7 +107,7 @@ export default function P5Sketch({
           }`}
         />
       </div>
-      {caption && <figcaption className="t-caption text-mauve mt-3">{caption}</figcaption>}
+      {caption && <figcaption className="t-caption text-mauve-deep mt-3">{caption}</figcaption>}
     </figure>
   );
 }

@@ -61,7 +61,7 @@ export default function FindingsBoard() {
       <div className="flex flex-col gap-2 mb-8">
         <p
           style={{
-            fontSize: "0.8125rem",
+            fontSize: "var(--t-caption)",
             textTransform: "uppercase",
             letterSpacing: "0.1em",
             color: W.amber,
@@ -70,7 +70,7 @@ export default function FindingsBoard() {
         >
           What came back
         </p>
-        <p style={{ fontFamily: "var(--font-body)", fontSize: "0.9375rem", color: W.dusk400, lineHeight: 1.6 }}>
+        <p style={{ fontFamily: "var(--font-body)", fontSize: "var(--t-body)", color: W.dusk400, lineHeight: 1.6 }}>
           Ten women across seven street conversations, plus two long-form interviews.
         </p>
       </div>
@@ -92,21 +92,21 @@ export default function FindingsBoard() {
                 style={{
                   fontFamily: "var(--font-display)",
                   fontWeight: 600,
-                  fontSize: "2rem",
+                  fontSize: "var(--t-project)",
                   lineHeight: 1,
                   color: counter ? W.amber : W.textLight,
                 }}
               >
                 {f.count}
               </p>
-              <p style={{ fontFamily: "var(--font-body)", fontSize: "0.9375rem", color: W.textLight, lineHeight: 1.55 }}>
+              <p style={{ fontFamily: "var(--font-body)", fontSize: "var(--t-body)", color: W.textLight, lineHeight: 1.55 }}>
                 {f.claim}
               </p>
               {f.quote && (
                 <p
                   style={{
                     fontFamily: "var(--font-body)",
-                    fontSize: "0.875rem",
+                    fontSize: "var(--t-caption)",
                     color: W.dusk400,
                     lineHeight: 1.55,
                   }}
@@ -121,7 +121,7 @@ export default function FindingsBoard() {
 
       <p
         className="mt-6"
-        style={{ fontFamily: "var(--font-body)", fontSize: "0.875rem", color: W.dusk500, lineHeight: 1.6 }}
+        style={{ fontFamily: "var(--font-body)", fontSize: "var(--t-caption)", color: W.dusk500, lineHeight: 1.6 }}
       >
         Outlined cards are the findings that argued against the concept.
       </p>
