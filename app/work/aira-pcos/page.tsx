@@ -360,7 +360,7 @@ export default function AiraPage() {
                 irregular cycles, where one averaged view isn&apos;t accurate.
               </P>
               <P>
-                <strong>Improving the nutrition screen</strong> so it&apos;s more personal to each
+                <strong>Improving the nutrition screen</strong>{" "}so it&apos;s more personal to each
                 phase and each person.
               </P>
             </Prose>
