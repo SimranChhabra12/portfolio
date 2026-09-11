@@ -1,7 +1,8 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
+import { KAISER_SUMMON } from "./KaiserCursor";
 
 // The /about photo pile. Split out of HeroPhoto so the homepage hero (one still photo)
 // can't be affected by anything here.
@@ -12,7 +13,7 @@ import Image from "next/image";
 //     into 3:4 or rotated into another orientation.
 //  2. Proportional. Every photo fits the same stage box, so they read as one set rather
 //     than jumping between tiny and huge.
-//  3. Fast and automatic. A new photo every ~0.9s, no pause on hover. The old HeroPhoto
+//  3. Fast and automatic. A new photo every ~2.5s, no pause on hover. The old HeroPhoto
 //     cycled every 4s and paused whenever the cursor sat over it, which read as "not
 //     switching at all". At this speed a flip animation can't finish between photos, so
 //     the swap is a straight cut.
@@ -27,16 +28,72 @@ const photos = [
   { src: "/images/about/hero-6.jpg", alt: "Simran at an observation deck above Manhattan", width: 2000, height: 2667 },
 ];
 
-const INTERVAL_MS = 900;
+// Kaiser's turn. "Come say hi to my baby boy, Kaiser!" fires KAISER_SUMMON; the pile
+// listens for the same event (whether or not the cursor dog is on screen to answer it,
+// so this works on phones too), plays his own photos quickly, then goes back to
+// Simran's. The photo of the two of them stays in Simran's regular rotation instead.
+// Kept in the same pile rather than a pop-up so the page doesn't grow a second thing
+// to dismiss.
+const kaiserPhotos = [
+  { src: "/images/about/Kaiser/Kaiser-1.png", alt: "Kaiser, a German Shepherd, looking up at the camera with his tongue out", width: 1022, height: 1304 },
+  { src: "/images/about/Kaiser/Kaiser-2.jpeg", alt: "Kaiser sitting outdoors in front of a stone wall", width: 1500, height: 2000 },
+  { src: "/images/about/Kaiser/Kaiser-3.jpg", alt: "Kaiser sitting in an open suitcase with his head tilted", width: 1500, height: 2000 },
+  { src: "/images/about/Kaiser/Kaiser-4.jpg", alt: "Kaiser lying down wearing a pair of glasses", width: 1500, height: 2000 },
+];
+
+const INTERVAL_MS = 2500;
+/** Kaiser's photos go by faster than Simran's: a quick flick through, not a second slideshow. */
+const KAISER_INTERVAL_MS = 1300;
+
+type Deck = "simran" | "kaiser";
 
 export default function AboutPhotoPile() {
+  const [deck, setDeck] = useState<Deck>("simran");
   const [index, setIndex] = useState(0);
+  // Where Simran's photos were when Kaiser's turn started, so they pick up there after.
+  const [resumeAt, setResumeAt] = useState(0);
 
+  // Current deck and position, readable from the event listener without making it
+  // re-subscribe (or doing state updates inside another state update's updater).
+  const deckRef = useRef<Deck>(deck);
+  const indexRef = useRef(index);
+  deckRef.current = deck;
+  indexRef.current = index;
+
+  // Any click on the link starts Kaiser's turn from his first photo.
+  // Clicking again mid-turn restarts it, but keeps the original place in Simran's.
   useEffect(() => {
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-    const id = setInterval(() => setIndex((i) => (i + 1) % photos.length), INTERVAL_MS);
-    return () => clearInterval(id);
+    const onSummon = () => {
+      if (deckRef.current === "simran") setResumeAt(indexRef.current);
+      setDeck("kaiser");
+      setIndex(0);
+    };
+    window.addEventListener(KAISER_SUMMON, onSummon);
+    return () => window.removeEventListener(KAISER_SUMMON, onSummon);
   }, []);
+
+  // One timer per deck and position, restarted on every change, so the first Kaiser
+  // photo gets a full interval instead of whatever was left on Simran's clock.
+  useEffect(() => {
+    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    // Under reduced motion Simran's photos stay still; Kaiser's turn still steps
+    // through, because someone asked for it by clicking.
+    if (reduced && deck === "simran") return;
+    const id = setTimeout(() => {
+      if (deck === "kaiser") {
+        if (index + 1 < kaiserPhotos.length) setIndex(index + 1);
+        else { setDeck("simran"); setIndex((resumeAt + 1) % photos.length); }
+      } else {
+        setIndex((index + 1) % photos.length);
+      }
+    }, deck === "kaiser" ? KAISER_INTERVAL_MS : INTERVAL_MS);
+    return () => clearTimeout(id);
+  }, [deck, index, resumeAt]);
+
+  const shown = deck === "kaiser" ? kaiserPhotos[index] : photos[index];
+  // Every photo is mounted once and loads up front, so switching decks is never
+  // waiting on a download.
+  const all = [...photos, ...kaiserPhotos];
 
   return (
     // Fixed stage. Photos are contained inside it, never cover-cropped.
@@ -44,12 +101,12 @@ export default function AboutPhotoPile() {
       <div aria-hidden className="absolute inset-[6%] rotate-[-4deg] rounded-[var(--radius-card)] bg-surface" />
       <div aria-hidden className="absolute inset-[6%] rotate-[3deg] rounded-[var(--radius-card)] bg-blush/40" />
 
-      {photos.map((p, i) => (
+      {all.map((p) => (
         <div
           key={p.src}
           className="absolute inset-0 flex items-center justify-center"
-          style={{ visibility: i === index ? "visible" : "hidden" }}
-          aria-hidden={i !== index}
+          style={{ visibility: p === shown ? "visible" : "hidden" }}
+          aria-hidden={p !== shown}
         >
           <Image
             src={p.src}

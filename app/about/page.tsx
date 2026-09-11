@@ -3,6 +3,7 @@ import Link from "next/link";
 import Nav from "@/components/ui/Nav";
 import Reveal from "@/components/ui/Reveal";
 import AboutPhotoPile from "@/components/interactive/AboutPhotoPile";
+import SayHiToKaiser from "@/components/interactive/SayHiToKaiser";
 
 export const metadata: Metadata = {
   title: "About — Simran Chhabra",
@@ -140,10 +141,12 @@ export default function AboutPage() {
           The stack is two offset plates behind the existing hero frame — the frame's own
           flip is the site's one signature motion (DESIGN_DOC §7), nothing new added. */}
       <section className={SHELL}>
-        <p className="t-sub text-ink !max-w-none mb-12 max-w-[28ch] text-balance">
+        <p className="t-sub text-ink !max-w-none mb-5 mx-auto text-center text-balance">
           I&apos;m a product designer in New York. Before this I studied fashion, ran a small
           clothing label, and worked in community and events.
         </p>
+
+        <SayHiToKaiser className="mb-24" />
 
         <div className="flex justify-center">
           <div className="w-full max-w-[420px]">

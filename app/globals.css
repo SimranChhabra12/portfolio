@@ -389,6 +389,21 @@ body {
   transform: translateY(0);
 }
 
+/* Longer messages (the /about "say hi" summon) wrap to a comfortable measure
+   instead of running out as one line. The greeting keeps the nowrap default. */
+.k-root .k-bubble[data-wrap="true"] {
+  white-space: normal;
+  width: max-content;
+  max-width: 240px;
+}
+
+/* When he's sitting to the right of what summoned him, the bubble opens to his
+   left so it stays over the page rather than off its right edge. */
+.k-root[data-bubble-side="left"] .k-bubble {
+  left: auto;
+  right: 50px;
+}
+
 /* ─── Section rhythm ─────────────────────────────────────────────────────────
    DESIGN_DOC §4 — Beverly's pattern: one variable, halved onto each side, so
    neighbouring sections share the gap. Scoped to @layer base on purpose: it sets
