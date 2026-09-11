@@ -229,11 +229,10 @@ const playgroundEntries: PlaygroundEntry[] = [
     title: "Verve Magazine",
     tags: "Styling · Editorial",
     oneLiner: "Assistant stylist on an editorial story and two supplement covers",
-    coverPosition: "center 20%",
     kind: "light",
     teaser:
       "I was a styling intern at Verve India while I was still in undergrad, and worked on three shoots: an editorial story for the January 2018 issue, and two supplement shoots, one with Tamannah Bhatia and one with Shriya Saran. I was there for each one from the first moodboard to the last return, putting looks together, sourcing, and assisting on set.",
-    cover: { src: "/playground/Styling Assistant - Verve/Shriya Saran - Assisting/Shriya Cover.jpg", alt: "Styling assistant on set with Shriya Saran, for Verve Magazine", width: 916, height: 1200 },
+    cover: { src: "/playground/Verve Magazine - Editorial Shoot (Jan 2018) 2/g.jpg", alt: "Verve Magazine editorial, January 2018: a model in a mustard jacket reaching up in a grass field by the sea", width: 1200, height: 798 },
     pageGalleries: [
       {
         title: "Welcome Spring with These Cascading Silhouettes",
