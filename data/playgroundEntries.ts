@@ -103,12 +103,11 @@ const playgroundEntries: PlaygroundEntry[] = [
     oneLiner: "Sixteen artists, one car, and the lost music of Kutchh on film",
     kind: "full",
     teaser:
-      "The Roadtrip Experience was a project with Mahindra & Mahindra that brought 16 artists from around the world to Gujarat, to explore and celebrate the region's indigenous art forms. I was the Experience & Operations Manager.",
+      "Gujarat is home, so when friends I'd made at an art festival needed someone to take 16 artists around it, I said yes. It became The Roadtrip Experience, a project with Mahindra & Mahindra exploring the state's indigenous art forms.",
     body: [
-      "The idea was to give artists and thinkers from very different backgrounds a real-world place to create together. We travelled across Gujarat, and the artists spent that time with the local art traditions and the people who still practise them.",
-      "My job was running the experience and operations: getting the group from place to place, and making sure the time on the road turned into real collaboration and new work.",
-      "The biggest thing to come out of it was a video documentary on the lost music of Kutchh, a musical tradition that's slowly disappearing and rarely recorded.",
-      "The project also gave back to the local creative scene. We gave local artists resources, direction and mentorship, and brought them into conversation with the international artists.",
+      "I met them at the Kochi-Muziris Biennale in Kerala, India's biggest contemporary art festival, where they were just fellow community builders I got talking to. I had no idea they ran experiences like this.",
+      "I ran the experience and operations, which meant showing artists from around the world the places I grew up with, and watching them see it for the first time.",
+      "Along the way we made a documentary on the lost music of Kutchh, a tradition that's slowly disappearing, and gave local artists resources and mentorship to work alongside the visiting ones.",
     ],
     cover: { src: "/playground/rtx/RTX-.png", alt: "The Road Trip Experience", width: 918, height: 996 },
     coverFrames: [

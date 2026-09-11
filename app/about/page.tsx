@@ -103,16 +103,16 @@ const TIMELINE: {
 // shelf line. Add `art` to a card when Simran supplies an image.
 const SHELF: { title: string; issuer: string; year: string; detail?: string }[] = [
   {
-    title: "AI / Migration / Futures",
-    issuer: "Workshop at the London School of Economics",
+    title: "AI Rationale",
+    issuer: "LSE-NYU Research Seed Fund",
     year: "2026",
-    detail: "Research I contributed to at NYU was shared at this workshop.",
+    detail: "How technologists, policy makers and lawyers imagine artificial intelligence for migration in London and New York City. I contributed to the research at NYU, and it was shared at the AI / Migration / Futures workshop at LSE.",
   },
   {
-    title: "Southeast Asian Studies Graduate Conference",
-    issuer: "Harvard-Yale",
+    title: "Infrastructuring Public-Infrastructuring Private",
+    issuer: "Keynote by Professor Margaret Jack, Harvard-Yale Southeast Asian Studies Graduate Conference",
     year: "2026",
-    detail: "As a research assistant at NYU Tandon, I ran and coded interviews with immigrant food delivery workers in NYC. That research was presented here and is going into an upcoming book.",
+    detail: "Technology-Mediated Work and the Crisis of Space. As a research assistant at NYU Tandon, I ran and coded the interviews with immigrant food delivery workers in NYC that the talk draws on. The research is also going into an upcoming book.",
   },
   {
     title: "MS, Integrated Design and Media",

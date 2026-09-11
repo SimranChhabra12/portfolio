@@ -20,7 +20,8 @@ export const metadata = {
 };
 
 const GREEN = T.gesture.green;
-const LIVE = "https://simranchhabra12.github.io/gesturedrawing";
+// The revised build, served as static files from public/prototypes/gesturesketch-v2.
+const LIVE = "/prototypes/gesturesketch-v2/index.html";
 
 // Keep in step with the <Section> ids, numbers and headings below.
 const SECTIONS = [

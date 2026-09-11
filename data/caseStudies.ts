@@ -199,6 +199,44 @@ const allCaseStudies: CaseStudy[] = [
     sections: [],
   },
 
+  // ── AIRA ─────────────────────────────────────────────────────────────────
+  {
+    slug: "aira-pcos",
+    title: "AIRA",
+    cardDescription:
+      "I know what it's like to open four different apps just to understand why today feels harder than yesterday.",
+    homeOneLiner: "Turning PCOS tracking from guilt into permission",
+    homeTags: ["Research", "Product Design"],
+    coverImage: "/images/covers/aira.jpg",
+    realCover: "/projects/aira-pcos/AIRAScreens/Energy PAge 4.png",
+    cardScreens: [
+      { src: "/projects/aira-pcos/AIRAScreens/HOme tab_.png", alt: "AIRA home tab" },
+      { src: "/projects/aira-pcos/AIRAScreens/Energy PAge 4.png", alt: "AIRA energy wave and readiness score" },
+      { src: "/projects/aira-pcos/AIRAScreens/Menstrual Phase.png", alt: "AIRA cycle, phases view" },
+      { src: "/projects/aira-pcos/AIRAScreens/Wind down landing tab.png", alt: "AIRA wind down" },
+      { src: "/projects/aira-pcos/AIRAScreens/Learn tab - Global NAV.png", alt: "AIRA learn tab" },
+    ],
+    subtitle: "A circadian rhythm app for PCOS management",
+    role: "Product Designer & Researcher",
+    year: "2024",
+    disciplines: ["UX Research", "Product Design", "Interaction Design"],
+    color: "#2D2D2D",
+    cardTint: "#E2D7F4", // phase-ring purple, 533 px across 5 screens
+    meta: {
+      team: "4-person team (shared build)",
+      researchMethods: [
+        "User Interviews",
+        "Survey",
+        "Behavioral Science Review",
+        "Expert Consultation",
+      ],
+      platform: "Mobile App",
+      duration: "12 weeks",
+    },
+    // Body content lives in app/work/aira-pcos/page.tsx. Nothing here renders it.
+    sections: [],
+  },
+
   // ── Resy ─────────────────────────────────────────────────────────────────
   {
     slug: "resy",
@@ -242,44 +280,6 @@ const allCaseStudies: CaseStudy[] = [
       duration: "8 weeks",
     },
     // Body content lives in app/work/resy/page.tsx. Nothing here renders it.
-    sections: [],
-  },
-
-  // ── AIRA ─────────────────────────────────────────────────────────────────
-  {
-    slug: "aira-pcos",
-    title: "AIRA",
-    cardDescription:
-      "I know what it's like to open four different apps just to understand why today feels harder than yesterday.",
-    homeOneLiner: "Turning PCOS tracking from guilt into permission",
-    homeTags: ["Research", "Product Design"],
-    coverImage: "/images/covers/aira.jpg",
-    realCover: "/projects/aira-pcos/AIRAScreens/Energy PAge 4.png",
-    cardScreens: [
-      { src: "/projects/aira-pcos/AIRAScreens/HOme tab_.png", alt: "AIRA home tab" },
-      { src: "/projects/aira-pcos/AIRAScreens/Energy PAge 4.png", alt: "AIRA energy wave and readiness score" },
-      { src: "/projects/aira-pcos/AIRAScreens/Menstrual Phase.png", alt: "AIRA cycle, phases view" },
-      { src: "/projects/aira-pcos/AIRAScreens/Wind down landing tab.png", alt: "AIRA wind down" },
-      { src: "/projects/aira-pcos/AIRAScreens/Learn tab - Global NAV.png", alt: "AIRA learn tab" },
-    ],
-    subtitle: "A circadian rhythm app for PCOS management",
-    role: "Product Designer & Researcher",
-    year: "2024",
-    disciplines: ["UX Research", "Product Design", "Interaction Design"],
-    color: "#2D2D2D",
-    cardTint: "#E2D7F4", // phase-ring purple, 533 px across 5 screens
-    meta: {
-      team: "4-person team (shared build)",
-      researchMethods: [
-        "User Interviews",
-        "Survey",
-        "Behavioral Science Review",
-        "Expert Consultation",
-      ],
-      platform: "Mobile App",
-      duration: "12 weeks",
-    },
-    // Body content lives in app/work/aira-pcos/page.tsx. Nothing here renders it.
     sections: [],
   },
 
