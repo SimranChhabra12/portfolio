@@ -9,6 +9,7 @@ import type { SketchFactory } from "./types";
  */
 const sketches: Record<string, () => Promise<SketchFactory>> = {
   "flow-field": () => import("./flowField").then((m) => m.default),
+  turtles: () => import("./turtles").then((m) => m.default),
 };
 
 export default sketches;

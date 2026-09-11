@@ -3,6 +3,7 @@ import Wordmark from "@/components/ui/Wordmark";
 import Link from "next/link";
 import Nav from "@/components/ui/Nav";
 import Playground from "@/components/interactive/Playground";
+import FlowerTile from "@/components/interactive/FlowerTile";
 
 export const metadata: Metadata = {
   title: "Playground — Simran Chhabra",
@@ -36,6 +37,11 @@ export default function PlaygroundIndexPage() {
             poetry movement, music festivals, a fashion label, a roadtrip across my home state.
             None of it was planned. Someone asked, and I said yes.
           </p>
+
+          {/* The flower tile opens the page: something to play with before the grid. */}
+          <div className="mt-12 max-w-[var(--col-media,1000px)]">
+            <FlowerTile />
+          </div>
 
           <div className="mt-16">
             <Playground preloadCount={3} />
