@@ -21,7 +21,7 @@ import Image from "next/image";
 const photos = [
   { src: "/images/about/hero-1.jpg", alt: "Simran in NYU graduation robes and an orange dress in Washington Square Park", width: 1200, height: 1600 },
   { src: "/images/about/hero-2.jpg", alt: "Simran sitting on a lawn with Kaiser, her German Shepherd", width: 1440, height: 1640 },
-  { src: "/images/about/hero-3.png", alt: "Simran coloring a car at sunset during the Road Trip Experience project", width: 916, height: 982 },
+  { src: "/images/about/hero-3.png", alt: "Simran coloring a car at sunset during the Roadtrip Experience project", width: 916, height: 982 },
   { src: "/images/about/hero-4.jpg", alt: "Simran in Central Park with the Midtown skyline behind her", width: 1500, height: 2000 },
   { src: "/images/about/hero-5.jpg", alt: "Simran holding puppies at an animal shelter, surrounded by dogs", width: 1440, height: 1595 },
   { src: "/images/about/hero-6.jpg", alt: "Simran at an observation deck above Manhattan", width: 2000, height: 2667 },
