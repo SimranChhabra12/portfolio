@@ -87,7 +87,7 @@ export default function WhsprPage() {
           </div>
 
           <a
-            href="https://tubular-marigold-4011ba.netlify.app/"
+            href="https://whsprforwomen.netlify.app/"
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 mt-10 px-5 py-3 rounded-full"
@@ -268,7 +268,7 @@ export default function WhsprPage() {
               </P>
             </Prose>
             <LivePrototype
-              src="https://tubular-marigold-4011ba.netlify.app/"
+              src="https://whsprforwomen.netlify.app/"
               title="Whspr interactive prototype"
             />
             <Prose>
