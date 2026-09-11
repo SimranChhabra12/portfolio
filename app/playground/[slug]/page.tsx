@@ -90,6 +90,7 @@ export default async function PlaygroundEntryPage({
                 <li key={i} className="overflow-hidden rounded-[var(--radius-card)] bg-dark-bg">
                   <video
                     src={v.src}
+                    poster={v.poster}
                     controls
                     playsInline
                     preload="metadata"
