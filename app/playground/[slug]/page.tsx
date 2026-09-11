@@ -68,6 +68,11 @@ export default async function PlaygroundEntryPage({
           <h1 className="t-display text-ink !max-w-none mt-2">{entry.title}</h1>
           <p className="t-sub text-ink/75 !max-w-none mt-3">{entry.oneLiner}</p>
           <p className="t-body text-ink !max-w-[var(--col-text,640px)] mt-6">{entry.teaser}</p>
+          {entry.body?.map((para, i) => (
+            <p key={i} className="t-body text-ink/85 !max-w-[var(--col-text,640px)] mt-4">
+              {para}
+            </p>
+          ))}
 
           {entry.sketch && entry.cover && (
             <div className="mt-12">
@@ -79,12 +84,7 @@ export default async function PlaygroundEntryPage({
             </div>
           )}
 
-          {gallery.length > 0 && (
-            <div className="mt-12">
-              <PlaygroundCarousel images={gallery} label={`${entry.title} gallery`} />
-            </div>
-          )}
-
+          {/* Films lead: they carry the piece better than any single still. */}
           {entry.videos && entry.videos.length > 0 && (
             <ul className="list-none p-0 m-0 mt-12 flex flex-col gap-8 max-w-[var(--col-media,1000px)]">
               {entry.videos.map((v, i) => (
@@ -100,6 +100,12 @@ export default async function PlaygroundEntryPage({
                 </li>
               ))}
             </ul>
+          )}
+
+          {gallery.length > 0 && (
+            <div className="mt-12">
+              <PlaygroundCarousel images={gallery} label={`${entry.title} gallery`} />
+            </div>
           )}
         </div>
       </section>

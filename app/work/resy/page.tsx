@@ -170,8 +170,7 @@ export default function ResyPage() {
               ]}
             />
             <Caption>
-              The email hand-off isn&apos;t a slow step in the flow. It is the flow. Everything that
-              matters to either side happens outside the product.
+              Email isn&apos;t just one slow step here. Almost everything that matters to either side happens there, outside the product.
             </Caption>
           </Section>
 
@@ -217,8 +216,7 @@ export default function ResyPage() {
               more interesting.
             </P>
             <P>
-              The managers weren&apos;t refusing large bookings. They were doing work Resy had no
-              infrastructure for. Event type, seating, dietary needs, minimum spend, prix fixe. None
+              The managers were open to large bookings, but they were doing a lot of work Resy had no infrastructure for. Event type, seating, dietary needs, minimum spend, prix fixe. None
               of it fits a standard reservation. So they took the conversation to email, because
               email was the only place it could happen.
             </P>
@@ -292,11 +290,11 @@ export default function ResyPage() {
                 {[
                   {
                     who: "The guest risks",
-                    text: "Committing a group of 12 to a place they can't picture, at a price they can't see, through a channel that gives them no confirmation. The frustration that came up most wasn't cost. It was not knowing whether anything was actually booked.",
+                    text: "Committing a group of 12 to a place they can't picture, at a price they can't see, through a channel that gives them no confirmation. The frustration that came up most was less about cost and more about not knowing whether anything was actually booked.",
                   },
                   {
                     who: "The restaurant risks",
-                    text: "Holding a room, staffing it, and prepping a set menu for a party that may not arrive. The managers described this directly: minimum spends, kitchen strain, staffing, no-show risk. Gating 8+ behind email isn't obstruction. It's the only screening tool they have.",
+                    text: "Holding a room, staffing it, and prepping a set menu for a party that may not arrive. The managers described this directly: minimum spends, kitchen strain, staffing, no-show risk. Keeping bookings of 8+ on email is one of the few ways they have to screen them.",
                   },
                 ].map((side, i) => (
                   <div

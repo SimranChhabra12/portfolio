@@ -16,7 +16,7 @@ import { CaseStudyShell, Prose, Media } from "../_components/columns";
 export const metadata = {
   title: "GestureSketch — Simran Chhabra",
   description:
-    "An AI art therapist concept — research, a framework for where AI belongs, and one working prototype.",
+    "An AI art therapist concept: research, a framework for where AI belongs, and one working prototype.",
 };
 
 const GREEN = T.gesture.green;
@@ -45,19 +45,19 @@ const FIELDS = [
 const DECISIONS = [
   {
     title: "Nothing you do is permanent",
-    body: "The whole tool is built around this. Undo is a gesture, not a buried button. Clear is one tap. Every stroke keeps its own colour and size, so nothing you draw later can overwrite what's already there. You can't wreck it, which is the point — that's the fear the research kept turning up, and taking it away is the whole design.",
+    body: "The whole tool is built around this. Undo is a gesture, and clear is one tap. Every stroke keeps its own colour and size, so nothing you draw later can overwrite what's already there. People in the research kept saying they were afraid of ruining what they'd made, so the tool is built so that can't happen.",
   },
   {
     title: "A dead-zone on every gesture",
-    body: "Small buffers around each pinch, so a shaky hand doesn't jitter into a mark you didn't mean. Hand tracking is noisy by default, and noise reads as your own mistake unless you absorb it.",
+    body: "Small buffers around each pinch, so a shaky hand doesn't jitter into a mark you didn't mean. Hand tracking is noisy by default, and without a buffer, that noise looks like your own mistake.",
   },
   {
     title: "Undo and clear exist as real buttons too",
-    body: "Not only as gestures. Having a visible way out is what builds the confidence to make a mess in the first place — a gesture you can't see isn't reassurance, it's another thing to remember.",
+    body: "Not only as gestures. A visible way out makes it easier to experiment, and a gesture you can't see is one more thing to remember.",
   },
   {
     title: "A welcome screen with exactly one job",
-    body: "Concept testing turned up the same freeze at the very start: people weren't sure which gesture actually draws. So the opening screen shows the three gestures and nothing else. No settings, no options, nothing to read past what you need to make your first mark. The camera never turns on cold.",
+    body: "Concept testing turned up the same freeze at the very start: people weren't sure which gesture actually draws. So the opening screen shows the three gestures and nothing else. No settings, no options, nothing to read past what you need to make your first mark. That way the camera doesn't come on before you know what to do.",
   },
 ];
 
@@ -95,15 +95,11 @@ export default function GestureSketchPage() {
             className="t-display"
             style={{ color: T.ink, margin: "1.5rem 0" }}
           >
-            Art therapy works. Starting is the hard part.
+            GestureSketch: making it easier to start drawing
           </h1>
           <Prose>
             <P large>
-              Most people don&apos;t freeze because they have nothing to say. They freeze because on
-              paper, one wrong line feels permanent, so it&apos;s easier not to begin. I wanted to see
-              if AI could take the pressure off the mechanics without taking over the meaning. I
-              mapped where AI should help and where it shouldn&apos;t, landed on three ideas, and
-              built one.
+              A lot of people find it hard to start drawing, often because on paper one wrong line feels permanent. I wanted to see if AI could help with the mechanics of drawing without taking over the meaning. I mapped where AI should help and where it shouldn&apos;t, came up with three ideas, and built one.
             </P>
           </Prose>
 
@@ -164,8 +160,7 @@ export default function GestureSketchPage() {
                 could help them, and almost no one actually did it.
               </P>
               <P>
-                So I ran 7 interviews and a short survey to find out where the gap was. The answers
-                were consistent. People didn&apos;t know how to start — they&apos;d sit down to do
+                So I ran 7 interviews and a short survey to find out where the gap was. Most people said the same thing: they didn&apos;t know how to start. They&apos;d sit down to do
                 something creative and feel stuck before they&apos;d made a single mark. A lot of them
                 were anxious about being bad at it, worried the thing they made would be judged, or
                 would just prove they couldn&apos;t draw. And the younger people I spoke to
@@ -182,14 +177,11 @@ export default function GestureSketchPage() {
             <Prose>
               <P>
                 People wanted support, but the moment AI did too much, the drawing stopped being
-                theirs. Smooth every line, fix every shape, and it&apos;s the AI&apos;s art, not
-                yours. The whole point of art therapy is that the thing you made came from you.
+                theirs. If the AI smooths every line and fixes every shape, the drawing stops really being yours, and the point of art therapy is that what you make comes from you.
               </P>
               <P>
                 So I mapped it before designing anything. One axis: how much a moment should lean on
-                AI. The other: whether it&apos;s mechanical or personal. The split was clear. Hand off
-                the friction — getting started, loosening up, the tools. Protect the meaning — the
-                choices, the reflection, what the piece is about. A few things sit in between, where
+                AI. The other: whether it&apos;s mechanical or personal. Getting started, loosening up and the tools were things AI could help with. The choices, the reflection and what the piece is about needed to stay with the person. A few things sit in between, where
                 AI helps but you stay in control.
               </P>
             </Prose>
@@ -214,8 +206,7 @@ export default function GestureSketchPage() {
             </Media>
             <Prose>
               <P>
-                I built the first one. Starting was the problem almost everyone named, so that&apos;s
-                where a real prototype beat a mockup.
+                I built the first one. Starting was the problem almost everyone named, so that&apos;s where I thought a working prototype would be most useful.
               </P>
               <P>
                 I did try the prompt assistant, then cut it. The therapists kept saying people need to
@@ -228,7 +219,7 @@ export default function GestureSketchPage() {
           <Section id="layouts" number="04" heading="Five Layouts, Six People">
             <Prose>
               <P>
-                The concept was decided. The interface wasn&apos;t. So I sketched five layouts, each
+                With the concept decided, I sketched five layouts, each
                 with the tools and the AI in a different place, and showed them to 6 people one at a
                 time.
               </P>
@@ -241,9 +232,9 @@ export default function GestureSketchPage() {
                 I was looking for where they agreed, and they agreed on a lot. Colour and stroke size
                 belong together, not on opposite sides of the screen. Save and clear belong together
                 too, and away from everything else, so you don&apos;t hit one when you meant the
-                other. The prompt had to stay on the same screen — people said they&apos;d forget it
+                other. The prompt had to stay on the same screen, because people said they&apos;d forget it
                 if it opened another page. The camera window should be the biggest thing. And undo
-                came up a lot; some people wanted it as a gesture, not a button to hunt for.
+                came up a lot, and some people wanted it as a gesture rather than a button to hunt for.
               </P>
               <P>
                 Most people preferred Layout 5, so I built from it and added the fixes they named.
@@ -255,8 +246,7 @@ export default function GestureSketchPage() {
             <Prose>
               <P>
                 A webcam turns your hand into a brush. Pinch thumb and index to draw, tap thumb and
-                ring to change colour, tap thumb and pinky to undo. No stylus, no menus to learn, no
-                blank sheet waiting to be ruined. You move, and a line follows.
+                ring to change colour, tap thumb and pinky to undo. There&apos;s no stylus and no menus to learn.
               </P>
             </Prose>
             <Media>
@@ -266,7 +256,7 @@ export default function GestureSketchPage() {
                 images={[
                   {
                     src: "/images/gesture-sketch/canvas.jpg",
-                    alt: "The GestureSketch canvas mid-drawing — a green hand-drawn line and one red mark, with brush size, undo, clear and save above it",
+                    alt: "The GestureSketch canvas mid-drawing, with a green hand-drawn line and one red mark, with brush size, undo, clear and save above it",
                     pixelWidth: 2000,
                     pixelHeight: 1200,
                   },
@@ -304,10 +294,7 @@ export default function GestureSketchPage() {
             <Prose>
               <P>
                 GestureSketch is a working prototype, not a finished product, and it&apos;s the one
-                piece of the larger concept I actually built. It does the thing it set out to do,
-                which is make starting feel safe enough to begin. But it&apos;s early, and I
-                haven&apos;t tested it where it would actually live — in a real session with a real
-                client.
+                piece of the larger concept I actually built. It&apos;s meant to make starting feel less intimidating. But it&apos;s early, and I haven&apos;t tested it in a real therapy session with a client yet.
               </P>
               <P>
                 The closest I got was showing it to Tanak Bajaj, an art therapist in London, who saw
@@ -319,8 +306,7 @@ export default function GestureSketchPage() {
                 accent={GREEN}
               />
               <P>
-                That&apos;s one therapist&apos;s reaction, not a study, so whether it holds up in
-                actual therapy is still the open question — and it&apos;s the one that matters most.
+                That&apos;s one therapist&apos;s reaction, not a study, so whether it holds up in actual therapy is still an open question.
               </P>
             </Prose>
           </Section>
@@ -329,9 +315,7 @@ export default function GestureSketchPage() {
             <Prose>
               <P>
                 I&apos;d try prompts again, but built the opposite way from the ones I cut. The
-                version I removed interrupted you mid-drawing. A better one would wait until you asked
-                for it — on-demand, right beside the canvas, there when you&apos;re stuck and
-                invisible when you&apos;re not.
+                version I removed interrupted you mid-drawing. A better one would wait until you asked for it, next to the canvas, so it&apos;s there when you&apos;re stuck and out of the way when you&apos;re not.
               </P>
               <P>
                 I&apos;d add gesture-triggered shapes, so a pinch could pull in a simple circle or
@@ -344,13 +328,11 @@ export default function GestureSketchPage() {
 
           <Section id="takeaway" number="09" heading="What I Took Away">
             <Prose>
-              <H3>The prompts weren&apos;t the problem. The interruption was.</H3>
+              <H3>What cutting the prompts taught me</H3>
               <P>
                 The thing I keep coming back to is the feature I removed. I built an AI prompt
                 assistant that pushed suggestions on you while you were drawing, and it fought the
-                quiet the drawing was supposed to create, so I took it out. What I learned
-                wasn&apos;t that AI doesn&apos;t belong here. It was that it can&apos;t be the one
-                deciding when to speak.
+                quiet the drawing was supposed to create, so I took it out. It showed me that AI can have a place here, as long as the person decides when it speaks.
               </P>
             </Prose>
           </Section>

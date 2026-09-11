@@ -54,7 +54,7 @@ export default function DreamOfPage() {
         <div style={{ paddingBottom: T.space.section }}>
           <CaseStudyHeadline
             id="dream-of-headline"
-            headline="DreamOf: Haircare Solutions formulated for Indian hair types"
+            headline="Dream Of: Haircare Solutions formulated for Indian hair types"
             meta={[
               { label: "Role", value: "Product Design Intern · User Research · Storefront Design" },
               { label: "Platform", value: "Web, desktop + mobile" },
@@ -167,7 +167,7 @@ export default function DreamOfPage() {
                 index={2}
                 choice="Let people shop by what their hair is doing"
                 insteadOf="Only a grid of the 4 products"
-                because="The women I talked to described their hair, a flaky scalp or frizz the minute they step outside. Not a product. So Shop The Range has 3 tabs, Wash Extenders, Frizz Tamers and Dry Scalp & Hair Rescuers, and each one has a woman with that hair saying what worked for her."
+                because="The women I talked to described their hair, like a flaky scalp or frizz the minute they step outside, rather than a product. So Shop The Range has 3 tabs, Wash Extenders, Frizz Tamers and Dry Scalp & Hair Rescuers, and each one has a woman with that hair saying what worked for her."
               />
             </Media>
             <Media>

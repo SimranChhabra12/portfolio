@@ -11,7 +11,7 @@ const G = T.gesture;
 const MOMENTS = [
   { x: 9, y: 18, label: "Getting started", band: "ai" },
   { x: 26, y: 30, label: "Loosening up", band: "ai" },
-  { x: 13, y: 40, label: "The tools — colour, size, undo", band: "ai" },
+  { x: 13, y: 40, label: "The tools: colour, size, undo", band: "ai" },
   { x: 47, y: 52, label: "Prompts, if you ask for them", band: "mid" },
   { x: 74, y: 72, label: "What you choose to draw", band: "human" },
   { x: 89, y: 83, label: "What the piece is about", band: "human" },
@@ -143,7 +143,7 @@ export default function AIMap() {
         style={{ fontFamily: "var(--font-body)", fontSize: T.type.caption, color: T.inkMuted, lineHeight: 1.6 }}
       >
         The top-right quadrant is empty on purpose. A personal moment that leans on AI is the one
-        place this can&apos;t go — that&apos;s where the drawing stops being yours.
+        place this can&apos;t go, because that&apos;s where the drawing would stop being yours.
       </figcaption>
     </figure>
   );

@@ -29,6 +29,8 @@ export interface PlaygroundEntry {
    */
   kind: PlaygroundKind;
   teaser: string;
+  /** Paragraphs of page body copy, rendered under the teaser. */
+  body?: string[];
   /**
    * `object-position` for the cover inside the uniform 5:3 card slot. Portrait covers
    * lose their subject to a centred crop, so those name their own focal point.
@@ -101,7 +103,13 @@ const playgroundEntries: PlaygroundEntry[] = [
     oneLiner: "Sixteen artists, one car, and the lost music of Kutchh on film",
     kind: "full",
     teaser:
-      "Sixteen artists, one car, across Gujarat. I ran the experience and operations, and we ended up preserving the lost music of Kutchh on film.",
+      "The Roadtrip Experience was a project with Mahindra & Mahindra that brought 16 artists from around the world to Gujarat, to explore and celebrate the region's indigenous art forms. I was the Experience & Operations Manager.",
+    body: [
+      "The idea was to give artists and thinkers from very different backgrounds a real-world place to create together. We travelled across Gujarat, and the artists spent that time with the local art traditions and the people who still practise them.",
+      "My job was running the experience and operations: getting the group from place to place, and making sure the time on the road turned into real collaboration and new work.",
+      "The biggest thing to come out of it was a video documentary on the lost music of Kutchh, a musical tradition that's slowly disappearing and rarely recorded.",
+      "The project also gave back to the local creative scene. We gave local artists resources, direction and mentorship, and brought them into conversation with the international artists.",
+    ],
     cover: { src: "/playground/rtx/RTX-.png", alt: "The Road Trip Experience", width: 918, height: 996 },
     coverFrames: [
       { src: "/playground/rtx/RTX-.png", alt: "The Road Trip Experience", width: 918, height: 996 },
@@ -111,7 +119,6 @@ const playgroundEntries: PlaygroundEntry[] = [
     ],
     images: [],
     pageImages: [
-    { src: `/playground/rtx/IMG-20200118-WA0029.jpg`, alt: "RTX — folk-art painting on site", width: 698, height: 1200 },
     { src: `/playground/rtx/IMG-20200118-WA0028.jpg`, alt: "RTX — folk-art painting on site", width: 1280, height: 1185 },
     { src: `/playground/rtx/IMG-20190921-WA0019.jpg`, alt: "RTX — folk-art painting on site", width: 1280, height: 960 },
     { src: `/playground/rtx/IMG-20200118-WA0003.jpg`, alt: "RTX — folk-art painting on site", width: 720, height: 1280 },
@@ -126,7 +133,6 @@ const playgroundEntries: PlaygroundEntry[] = [
     { src: `/playground/rtx/Screenshot_20200117-101143.jpg`, alt: "RTX — folk-art painting on site", width: 1200, height: 568 },
     { src: `/playground/rtx/IMG_20200117_081632.jpg`, alt: "RTX — folk-art painting on site", width: 1200, height: 900 },
     { src: `/playground/rtx/IMG_20200119_165741.jpg`, alt: "RTX — folk-art painting on site", width: 1200, height: 900 },
-    { src: `/playground/rtx/IMG_20200118_124702.jpg`, alt: "RTX — folk-art painting on site", width: 1200, height: 900 },
     { src: `/playground/rtx/IMG_20200118_185523.jpg`, alt: "RTX — folk-art painting on site", width: 1200, height: 900 },
     { src: `/playground/rtx/IMG_20200117_135911.jpg`, alt: "RTX — folk-art painting on site", width: 1200, height: 900 },
     { src: `/playground/rtx/IMG_20190922_150325.jpg`, alt: "RTX — folk-art painting on site", width: 1200, height: 900 },
@@ -135,8 +141,6 @@ const playgroundEntries: PlaygroundEntry[] = [
     { src: `/playground/poetry-festivals/IMG-20200121-WA0003.jpg`, alt: "An artist taking a break beside the hand-painted car, paintbrush still in hand", width: 1200, height: 799 },
     ],
     videos: [
-      { src: "/playground/rtx/VID_38910113_014527_132.mp4", alt: "The Road Trip Experience — video from site" },
-      { src: "/playground/rtx/VID_40031012_123331_087.mp4", alt: "The Road Trip Experience — video from site" },
       { src: "/playground/rtx/VID-20200120-WA0015.mp4", alt: "The Road Trip Experience — video from site" },
     ],
     href: "/playground/road-trip-experience",
@@ -149,8 +153,22 @@ const playgroundEntries: PlaygroundEntry[] = [
     kind: "full",
     teaser:
       "A surreal VR dreamscape, built by three of us. I made the tea party, where a little horror stays fun as long as you keep it whimsical.",
-    cover: null,
+    body: [
+      "A three-level VR experience for a class project, built in Unreal with hand tracking. You move through a dream that gets stranger with each level: a mysterious room where you wake up, a tea party in a forest, then a maze that shifts around you. Ana Eremina built Level One, Sarah Sun led the technical build and Level Three, and I did art direction and Level Two, the tea party.",
+      "The hard part was tone. The idea started dark and dystopian, and I steered my level toward whimsical instead: unsettling, but still fun to be in. Pink and green light, giant floating teacups and an animated cat at the head of the table make it inviting at first. Then you notice the skull teapots and the half-buried closets.",
+      "There's no dialogue, so light, scale and sound tell the story. Playtesting showed people needed stronger cues to find their way, and small lighting and audio changes made the biggest difference.",
+    ],
+    cover: { src: "/playground/neverland/tea-party-cropped.jpg", alt: "The tea party forest lit pink and green, giant teacups floating above the table", width: 2000, height: 969 },
     images: [],
+    pageImages: [
+      { src: "/playground/neverland/tea-party-cropped.jpg", alt: "The tea party forest lit pink and green, giant teacups floating above the table", width: 2000, height: 969 },
+      { src: "/playground/neverland/blueprint-1.jpg", alt: "Unreal blueprint: Event Tick driving the teacup rotation", width: 1084, height: 1231 },
+      { src: "/playground/neverland/blueprint-2.jpg", alt: "Unreal blueprint for the teacup rotation", width: 1114, height: 1231 },
+    ],
+    videos: [
+      { src: "/playground/neverland/promo-film.mp4", alt: "Nightmare in Neverland promotional film" },
+      { src: "/playground/neverland/tea-party-walkthrough.mp4", alt: "Walkthrough of Level Two, the tea party in the forest" },
+    ],
     href: "/playground/nightmare-in-neverland",
   },
 

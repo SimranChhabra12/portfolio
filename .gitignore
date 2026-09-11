@@ -72,3 +72,12 @@ Interviews_and_Transcripts_GuerrillaResearch_Whspr/
 WSQGuerrilla_ResearchPictures_Whspr/
 *.m4a
 *.HEIC
+
+# Raw Dream Of Figma exports (client files, ~400MB, some 30-47MB each). Kept on disk
+# only; the page uses the JPGs in public/projects/dream-of/screens/. Root-level PNGs
+# only: `*` doesn't cross `/`, so screens/ and the committed JPGs are unaffected.
+public/projects/dream-of/*.png
+
+# Uncropped original of the homepage hero (7.9MB). The site uses the cropped copy in
+# public/images/hero/; this stays on disk only.
+/NewHeroImage_HomePage.jpeg

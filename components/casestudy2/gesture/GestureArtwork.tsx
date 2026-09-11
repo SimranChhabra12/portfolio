@@ -59,7 +59,7 @@ export default function GestureArtwork({
       className={className}
       preserveAspectRatio="xMidYMid slice"
       role="img"
-      aria-label="A single green stroke, with the tracked skeleton of a pinching hand at the end of the line — the hand is the brush."
+      aria-label="A single green stroke, with the tracked skeleton of a pinching hand at the end of the line, where the hand acts as the brush."
     >
       <defs>
         <radialGradient id="gs-wash" cx="58%" cy="34%" r="70%">
