@@ -13,11 +13,20 @@ import { K } from "../screens/kit";
 
 export const F = "var(--font-body), system-ui, -apple-system, sans-serif";
 
+// Neutrals read from CSS variables so the prototype can switch to a light theme
+// (.aira-light on the device screen, defined in GLOBAL_CSS). Each falls back to
+// its dark value, so anything rendered without a theme class — the case study's
+// static screens included — stays dark. Accent and phase hues stay literal hex:
+// they're shared by both themes, and some call sites append alpha to them.
 export const C = {
   ...K,
-  card: "#16161A",
-  cardHi: "#1F1F24",
-  line: "rgba(245, 243, 241, 0.07)",
+  ground: "var(--aira-ground, #0A0A0C)",
+  text: "var(--aira-text, #F5F3F1)",
+  muted: "var(--aira-muted, rgba(245, 243, 241, 0.62))",
+  faint: "var(--aira-faint, rgba(245, 243, 241, 0.40))",
+  card: "var(--aira-card, #16161A)",
+  cardHi: "var(--aira-card-hi, #1F1F24)",
+  line: "var(--aira-line, rgba(245, 243, 241, 0.07))",
   lavender: "#9D90D9", // menstrual hue, lifted so it reads as a fill on the dark ground
   lavenderWash: "rgba(157, 144, 217, 0.16)",
   green: "#5DB88E",
@@ -396,7 +405,7 @@ export function MonthGrid({
 export const DEVICE_W = 390;
 export const DEVICE_H = 844;
 
-export function Device({ children }: { children: React.ReactNode }) {
+export function Device({ children, theme = "dark" }: { children: React.ReactNode; theme?: "dark" | "light" }) {
   const ref = useRef<HTMLDivElement>(null);
   const [scale, setScale] = useState(1);
   const BEZEL = 12;
@@ -419,10 +428,10 @@ export function Device({ children }: { children: React.ReactNode }) {
           background: "#141416", borderRadius: 62, padding: BEZEL, boxSizing: "border-box",
           boxShadow: "0 0 0 1.5px #2A2A2E, 0 30px 60px -20px rgba(42,31,40,0.45)",
         }}>
-          <div style={{ position: "relative", width: DEVICE_W, height: DEVICE_H, borderRadius: 50, overflow: "hidden", background: C.ground, isolation: "isolate" }}>
+          <div className={theme === "light" ? "aira-light" : undefined} style={{ position: "relative", width: DEVICE_W, height: DEVICE_H, borderRadius: 50, overflow: "hidden", background: C.ground, isolation: "isolate" }}>
             {children}
             <div aria-hidden style={{ position: "absolute", top: 11, left: "50%", transform: "translateX(-50%)", width: 122, height: 34, borderRadius: 20, background: "#000", zIndex: 50 }} />
-            <div aria-hidden style={{ position: "absolute", bottom: 8, left: "50%", transform: "translateX(-50%)", width: 134, height: 5, borderRadius: 3, background: "rgba(245,243,241,0.6)", zIndex: 50, pointerEvents: "none" }} />
+            <div aria-hidden style={{ position: "absolute", bottom: 8, left: "50%", transform: "translateX(-50%)", width: 134, height: 5, borderRadius: 3, background: "var(--aira-indicator, rgba(245,243,241,0.6))", zIndex: 50, pointerEvents: "none" }} />
           </div>
         </div>
       </div>
@@ -444,4 +453,6 @@ export const GLOBAL_CSS = `
 .aira-input{width:100%;height:50px;border-radius:12px;border:1.5px solid transparent;background:${C.card};color:${C.text};padding:0 14px;font:400 15px ${F};outline:none;box-sizing:border-box}
 .aira-input:focus{border-color:${C.coral}}
 .aira-input::placeholder{color:${C.faint}}
+.aira-light{--aira-ground:#F6F3EF;--aira-text:#211C20;--aira-muted:rgba(33,28,32,0.64);--aira-faint:rgba(33,28,32,0.42);--aira-card:#FFFFFF;--aira-card-hi:#ECE7E1;--aira-line:rgba(33,28,32,0.09);--aira-tabbar:#FFFFFF;--aira-indicator:rgba(33,28,32,0.35)}
+.aira-dark{--aira-ground:#0A0A0C;--aira-text:#F5F3F1;--aira-muted:rgba(245,243,241,0.62);--aira-faint:rgba(245,243,241,0.40);--aira-card:#16161A;--aira-card-hi:#1F1F24;--aira-line:rgba(245,243,241,0.07);--aira-tabbar:#0E0E11;--aira-indicator:rgba(245,243,241,0.6)}
 `;

@@ -72,6 +72,7 @@ function Screen({
   bg = C.ground,
   pad = true,
   footer,
+  dark = false,
 }: {
   children: React.ReactNode;
   tab?: Tab;
@@ -79,9 +80,11 @@ function Screen({
   bg?: string;
   pad?: boolean;
   footer?: React.ReactNode;
+  /** Keep this screen dark in the light theme (the immersive, full-bleed screens). */
+  dark?: boolean;
 }) {
   return (
-    <div className="aira-screen" style={{ position: "absolute", inset: 0, display: "flex", flexDirection: "column", background: bg }}>
+    <div className={dark ? "aira-screen aira-dark" : "aira-screen"} style={{ position: "absolute", inset: 0, display: "flex", flexDirection: "column", background: bg }}>
       <StatusBar />
       <div className="aira-scroll" style={{ flex: 1, overflowY: "auto", overflowX: "hidden", padding: pad ? "0 20px" : 0, paddingBottom: tab ? 110 : footer ? 16 : 40 }}>
         {children}
@@ -101,7 +104,7 @@ function TabBar({ active, nav }: { active: Tab; nav: Nav }) {
   return (
     <div style={{
       position: "absolute", left: 0, right: 0, bottom: 0, height: 88, paddingBottom: 26, display: "flex",
-      background: "#0E0E11", borderTop: `1px solid ${C.line}`, zIndex: 20,
+      background: "var(--aira-tabbar, #0E0E11)", borderTop: `1px solid ${C.line}`, zIndex: 20,
     }}>
       {tabs.map((t) => {
         const on = t.id === active;
@@ -885,7 +888,7 @@ function Activity({ nav }: { nav: Nav }) {
     <Screen tab="track" nav={nav} pad={false}>
       <Header title="Activity" onBack={nav.back} />
       <div style={{ padding: "4px 20px 0" }}>
-        <Card style={{ padding: 20, background: "linear-gradient(160deg, rgba(239,160,122,0.22), rgba(22,22,26,1) 70%)" }}>
+        <Card style={{ padding: 20, background: `linear-gradient(160deg, rgba(239,160,122,0.22), ${C.card} 70%)` }}>
           <Chip>Autumn · Luteal</Chip>
           <Txt v="title" style={{ marginTop: 14 }}>Move gently this week</Txt>
           <Txt v="sub" style={{ marginTop: 6 }}>Your energy is settling. Steady movement helps with cravings and mood more than hard sessions do.</Txt>
@@ -1168,7 +1171,7 @@ function Energy({ nav }: { nav: Nav }) {
 function Zen({ nav }: { nav: Nav }) {
   const lens = [2, 5, 10];
   return (
-    <Screen pad={false} bg="radial-gradient(120% 70% at 50% 35%, #2A2340 0%, #0A0A0C 70%)">
+    <Screen dark pad={false} bg="radial-gradient(120% 70% at 50% 35%, #2A2340 0%, #0A0A0C 70%)">
       <Header onBack={nav.back} />
       <div style={{ height: 330, display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", textAlign: "center", padding: "0 32px" }}>
         <Txt v="caption" style={{ color: C.muted, display: "flex", gap: 6, alignItems: "center" }}><Icon name="bell" size={14} color={C.muted} /> Notifications paused while you relax</Txt>
@@ -1205,7 +1208,7 @@ function Breathe({ nav }: { nav: Nav }) {
   }, [left, paused]);
   const inhale = Math.floor((total - left) / 4) % 2 === 0;
   return (
-    <Screen pad={false} bg="radial-gradient(120% 70% at 50% 45%, #2A2340 0%, #0A0A0C 72%)"
+    <Screen dark pad={false} bg="radial-gradient(120% 70% at 50% 45%, #2A2340 0%, #0A0A0C 72%)"
       footer={
         <div style={{ display: "flex", gap: 10 }}>
           <Primary tone="quiet" onClick={() => setPaused(!paused)} icon={<Icon name={paused ? "play" : "pause"} size={16} color={C.text} fill={paused} />}>{paused ? "Resume" : "Pause"}</Primary>
@@ -1238,7 +1241,7 @@ function OneThing({ nav }: { nav: Nav }) {
     { t: "Meditate for a bit", to: "zen", i: "mind" },
   ];
   return (
-    <Screen pad={false} bg="radial-gradient(120% 60% at 50% 30%, #3A2A24 0%, #0A0A0C 70%)">
+    <Screen dark pad={false} bg="radial-gradient(120% 60% at 50% 30%, #3A2A24 0%, #0A0A0C 70%)">
       <Header onBack={nav.back} />
       <div style={{ padding: "40px 24px 0", textAlign: "center" }}>
         <Mascot size={96} mood="calm" />
@@ -1265,7 +1268,7 @@ function Talk({ nav }: { nav: Nav }) {
   const [listening, setListening] = useState(false);
   const [text, setText] = useState("");
   return (
-    <Screen pad={false} bg="radial-gradient(120% 60% at 50% 40%, #2B2530 0%, #0A0A0C 72%)"
+    <Screen dark pad={false} bg="radial-gradient(120% 60% at 50% 40%, #2B2530 0%, #0A0A0C 72%)"
       footer={
         listening ? (
           <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 28 }}>
@@ -1416,6 +1419,7 @@ export default function AiraPrototype() {
   const [stack, setStack] = useState<string[]>(["splash"]);
   const [s, setS] = useState<AppState>(INITIAL);
   const [toastMsg, setToast] = useState<string | null>(null);
+  const [theme, setTheme] = useState<"dark" | "light">("dark");
 
   // Deep links: ?s=track,cycle,phase opens straight onto that stack, so the case
   // study can link to a specific flow.
@@ -1447,7 +1451,7 @@ export default function AiraPrototype() {
   return (
     <div className="flex flex-col lg:flex-row gap-10 lg:gap-16 items-center lg:items-start justify-center">
       <style>{GLOBAL_CSS}</style>
-      <Device>
+      <Device theme={theme}>
         <Current key={stack.join("/")} nav={nav} />
         {toastMsg && (
           <div role="status" style={{
@@ -1459,6 +1463,25 @@ export default function AiraPrototype() {
       </Device>
 
       <nav aria-label="Jump to a flow" className="w-full lg:w-64 lg:pt-6">
+        <p style={{ fontFamily: "var(--font-body)", fontSize: 12, fontWeight: 600, letterSpacing: "0.08em", textTransform: "uppercase", color: "rgba(42,31,40,0.55)", marginBottom: 12 }}>
+          Appearance
+        </p>
+        <div role="group" aria-label="Appearance" className="flex gap-1 mb-8">
+          {(["dark", "light"] as const).map((t) => (
+            <button
+              key={t}
+              onClick={() => setTheme(t)}
+              aria-pressed={theme === t}
+              className="rounded-lg px-3 py-2 transition-colors hover:bg-black/5"
+              style={{
+                fontFamily: "var(--font-body)", fontSize: 15, color: "#2A1F28",
+                fontWeight: theme === t ? 600 : 400, background: theme === t ? "rgba(232,132,92,0.14)" : undefined,
+              }}
+            >
+              {t === "dark" ? "Dark" : "Light"}
+            </button>
+          ))}
+        </div>
         <p style={{ fontFamily: "var(--font-body)", fontSize: 12, fontWeight: 600, letterSpacing: "0.08em", textTransform: "uppercase", color: "rgba(42,31,40,0.55)", marginBottom: 12 }}>
           Jump to a flow
         </p>

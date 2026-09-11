@@ -1,9 +1,21 @@
 import { T } from "../tokens";
 import { Mascot } from "./prototype/ui";
 
+// The prototype's dark neutrals, spelled out here rather than imported: ui.tsx is
+// a client module, and plain values imported from one into this server component
+// arrive empty (only components cross that boundary), which silently dropped
+// every colour that referenced them.
+const C = {
+  text: "#F5F3F1",
+  muted: "rgba(245, 243, 241, 0.62)",
+  faint: "rgba(245, 243, 241, 0.40)",
+  card: "#16161A",
+};
+
 // The Nudges figure: a lock-screen notification and a home-screen widget, both
 // drawn in code on one shared device frame and wallpaper, so the pair reads as
-// one phone on one day.
+// one phone on one day. Both use the prototype's dark palette and chassis, so
+// they match every other AIRA screen on the page.
 //
 // The widget used to be a Figma export reading "Calories Left 630Kcal" — a
 // countdown number, which is exactly what Decision 03 argues against. It shows
@@ -20,14 +32,14 @@ const OUTER_H = 2664 / 3;
 const BEZEL = 14;
 const SCREEN_W = OUTER_W - BEZEL * 2;
 const SCREEN_H = OUTER_H - BEZEL * 2;
-const INK = "#1C1C1F";
+const INK = C.text;
 const FONT = "var(--font-body), system-ui, sans-serif";
 
 const WALLPAPER =
-  "linear-gradient(160deg, #F7C6C0 0%, #F2A08F 32%, #B9A7B8 55%, #2E7C9A 78%, #0E3550 100%)";
+  "radial-gradient(120% 70% at 30% 18%, #3A2A24 0%, #1A1416 45%, #0A0A0C 78%)";
 
 function Blank({ size = 62 }: { size?: number }) {
-  return <div style={{ width: size, height: size, borderRadius: 15, background: "rgba(255,255,255,0.32)" }} />;
+  return <div style={{ width: size, height: size, borderRadius: 15, background: "rgba(245,243,241,0.08)" }} />;
 }
 
 /** One chassis, wallpaper and Dynamic Island for both phones, scaled from the width prop. */
@@ -38,8 +50,8 @@ function DeviceFrame({ width, label, children }: { width: number; label: string;
       <div
         style={{
           width: OUTER_W, height: OUTER_H, transform: `scale(${scale})`, transformOrigin: "top left",
-          background: "#111", borderRadius: 66, padding: BEZEL, boxSizing: "border-box",
-          boxShadow: "0 0 0 5px #D4D4D8, 0 0 0 6px #B8B8BE",
+          background: "#141416", borderRadius: 66, padding: BEZEL, boxSizing: "border-box",
+          boxShadow: "0 0 0 1.5px #2A2A2E, 0 30px 60px -20px rgba(42,31,40,0.45)",
         }}
       >
         <div style={{ position: "relative", width: SCREEN_W, height: SCREEN_H, borderRadius: 52, overflow: "hidden", background: WALLPAPER, fontFamily: FONT }}>
@@ -57,13 +69,13 @@ function DeviceFrame({ width, label, children }: { width: number; label: string;
  */
 function Notification({ time, text }: { time: string; text: string }) {
   return (
-    <div style={{ background: "rgba(255,255,255,0.66)", borderRadius: 22, padding: "12px 14px 13px" }}>
+    <div style={{ background: "rgba(31,31,36,0.9)", borderRadius: 22, padding: "12px 14px 13px" }}>
       <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 6 }}>
-        <span style={{ width: 26, height: 26, borderRadius: 7, background: "#fff", display: "flex", alignItems: "center", justifyContent: "center", overflow: "hidden" }}>
+        <span style={{ width: 26, height: 26, borderRadius: 7, background: C.card, display: "flex", alignItems: "center", justifyContent: "center", overflow: "hidden" }}>
           <Mascot size={22} mood="happy" />
         </span>
-        <span style={{ flex: 1, fontSize: 13, fontWeight: 600, letterSpacing: "0.02em", color: "rgba(28,28,31,0.7)" }}>AIRA</span>
-        <span style={{ fontSize: 12, color: "rgba(28,28,31,0.5)" }}>{time}</span>
+        <span style={{ flex: 1, fontSize: 13, fontWeight: 600, letterSpacing: "0.02em", color: C.muted }}>AIRA</span>
+        <span style={{ fontSize: 12, color: C.faint }}>{time}</span>
       </div>
       <p style={{ margin: 0, fontSize: 15, fontWeight: 500, lineHeight: 1.3, color: INK }}>{text}</p>
     </div>
@@ -87,8 +99,8 @@ function LockPhone({ width }: { width: number }) {
         <Notification time="2h ago" text="Nice work getting some movement. Your hormones love steady routines." />
       </div>
       {/* Flashlight and camera slots, blank like the widget's icons */}
-      <div aria-hidden style={{ position: "absolute", bottom: 34, left: 40, width: 50, height: 50, borderRadius: 999, background: "rgba(0,0,0,0.28)" }} />
-      <div aria-hidden style={{ position: "absolute", bottom: 34, right: 40, width: 50, height: 50, borderRadius: 999, background: "rgba(0,0,0,0.28)" }} />
+      <div aria-hidden style={{ position: "absolute", bottom: 34, left: 40, width: 50, height: 50, borderRadius: 999, background: "rgba(245,243,241,0.12)" }} />
+      <div aria-hidden style={{ position: "absolute", bottom: 34, right: 40, width: 50, height: 50, borderRadius: 999, background: "rgba(245,243,241,0.12)" }} />
     </DeviceFrame>
   );
 }
@@ -99,7 +111,7 @@ function WidgetPhone({ width }: { width: number }) {
       <p style={{ position: "absolute", top: 22, left: 40, margin: 0, fontSize: 16, fontWeight: 600, color: "#fff" }}>9:41</p>
 
       {/* The AIRA widget */}
-      <div style={{ position: "absolute", top: 92, left: 26, width: 172, height: 172, borderRadius: 26, background: "#fff", padding: "14px 16px", boxSizing: "border-box", display: "flex", flexDirection: "column" }}>
+      <div style={{ position: "absolute", top: 92, left: 26, width: 172, height: 172, borderRadius: 26, background: C.card, padding: "14px 16px", boxSizing: "border-box", display: "flex", flexDirection: "column" }}>
         <div style={{ marginLeft: -6 }}><Mascot size={72} mood="calm" /></div>
         <p style={{ margin: "auto 0 2px", fontSize: 13, fontWeight: 600, color: T.aira.coral }}>Autumn · Day 18</p>
         <p style={{ margin: 0, fontSize: 15, fontWeight: 600, lineHeight: 1.25, color: INK }}>Slowing down, turning inward.</p>
@@ -107,11 +119,11 @@ function WidgetPhone({ width }: { width: number }) {
       <p style={{ position: "absolute", top: 272, left: 26, width: 172, margin: 0, textAlign: "center", fontSize: 12, color: "#fff" }}>AIRA</p>
 
       {/* Neutral filler: a second widget slot and icon rows */}
-      <div style={{ position: "absolute", top: 92, right: 26, width: 172, height: 172, borderRadius: 26, background: "rgba(255,255,255,0.32)" }} />
+      <div style={{ position: "absolute", top: 92, right: 26, width: 172, height: 172, borderRadius: 26, background: "rgba(245,243,241,0.08)" }} />
       <div style={{ position: "absolute", top: 318, left: 34, right: 34, display: "grid", gridTemplateColumns: "repeat(4, 62px)", justifyContent: "space-between", rowGap: 30 }}>
         {Array.from({ length: 8 }, (_, i) => <Blank key={i} />)}
       </div>
-      <div style={{ position: "absolute", bottom: 18, left: 14, right: 14, height: 88, borderRadius: 34, background: "rgba(255,255,255,0.22)", display: "flex", alignItems: "center", justifyContent: "space-around" }}>
+      <div style={{ position: "absolute", bottom: 18, left: 14, right: 14, height: 88, borderRadius: 34, background: "rgba(245,243,241,0.06)", display: "flex", alignItems: "center", justifyContent: "space-around" }}>
         {Array.from({ length: 4 }, (_, i) => <Blank key={i} />)}
       </div>
     </DeviceFrame>
