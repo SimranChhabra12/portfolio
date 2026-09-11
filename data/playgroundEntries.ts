@@ -59,6 +59,11 @@ export interface PlaygroundEntry {
   href?: string;
   /** Overrides `images` as the page gallery where the two sets differ. */
   pageImages?: PlaygroundImage[];
+  /**
+   * Separate, titled carousels on the entry's page, in order. Overrides `pageImages` and
+   * `images` there; the homepage mosaic still samples `images`.
+   */
+  pageGalleries?: { title: string; details?: string[]; images: PlaygroundImage[] }[];
 }
 
 const playgroundEntries: PlaygroundEntry[] = [
@@ -227,8 +232,55 @@ const playgroundEntries: PlaygroundEntry[] = [
     coverPosition: "center 20%",
     kind: "light",
     teaser:
-      "I was a styling intern at Verve India while I was still in undergrad, and did everything a styling intern does across a feature shoot and a supplement shoot: moodboards, putting looks together, sourcing, returns and assisting on set. The shoots were with Shriya Saran and Tamannah Bhatia.",
+      "I was a styling intern at Verve India while I was still in undergrad, and worked on three shoots: an editorial story for the January 2018 issue, and two supplement shoots, one with Tamannah Bhatia and one with Shriya Saran. I was there for each one from the first moodboard to the last return, putting looks together, sourcing, and assisting on set.",
     cover: { src: "/playground/Styling Assistant - Verve/Shriya Saran - Assisting/Shriya Cover.jpg", alt: "Styling assistant on set with Shriya Saran, for Verve Magazine", width: 916, height: 1200 },
+    pageGalleries: [
+      {
+        title: "Welcome Spring with These Cascading Silhouettes",
+        details: ["Assistant stylist · Editorial story, Verve Magazine, January 2018 issue", "Styled by Nikhil D"],
+        images: [
+          { src: `/playground/Verve Magazine - Editorial Shoot (Jan 2018) 2/a.jpg`, alt: "Verve Magazine editorial shoot, January 2018", width: 800, height: 1200 },
+          { src: `/playground/Verve Magazine - Editorial Shoot (Jan 2018) 2/b.jpg`, alt: "Verve Magazine editorial shoot, January 2018", width: 805, height: 1200 },
+          { src: `/playground/Verve Magazine - Editorial Shoot (Jan 2018) 2/c.jpg`, alt: "Verve Magazine editorial shoot, January 2018", width: 1200, height: 755 },
+          { src: `/playground/Verve Magazine - Editorial Shoot (Jan 2018) 2/d.jpg`, alt: "Verve Magazine editorial shoot, January 2018", width: 956, height: 1200 },
+          { src: `/playground/Verve Magazine - Editorial Shoot (Jan 2018) 2/e.jpg`, alt: "Verve Magazine editorial shoot, January 2018", width: 800, height: 1200 },
+          { src: `/playground/Verve Magazine - Editorial Shoot (Jan 2018) 2/f.jpg`, alt: "Verve Magazine editorial shoot, January 2018", width: 797, height: 1200 },
+          { src: `/playground/Verve Magazine - Editorial Shoot (Jan 2018) 2/g.jpg`, alt: "Verve Magazine editorial shoot, January 2018", width: 1200, height: 798 },
+          { src: `/playground/Verve Magazine - Editorial Shoot (Jan 2018) 2/h.jpg`, alt: "Verve Magazine editorial shoot, January 2018", width: 960, height: 1200 },
+          { src: `/playground/Verve Magazine - Editorial Shoot (Jan 2018) 2/i.jpg`, alt: "Verve Magazine editorial shoot, January 2018", width: 973, height: 1200 },
+          { src: `/playground/Verve Magazine - Editorial Shoot (Jan 2018) 2/j.jpg`, alt: "Verve Magazine editorial shoot, January 2018", width: 973, height: 1200 },
+          { src: `/playground/Verve Magazine - Editorial Shoot (Jan 2018) 2/k.jpg`, alt: "Verve Magazine editorial shoot, January 2018", width: 797, height: 1200 },
+          { src: `/playground/Verve Magazine - Editorial Shoot (Jan 2018) 2/l.jpg`, alt: "Verve Magazine editorial shoot, January 2018", width: 808, height: 1200 },
+          { src: `/playground/Verve Magazine - Editorial Shoot (Jan 2018) 2/m.jpg`, alt: "Verve Magazine editorial shoot, January 2018", width: 1200, height: 1194 },
+          { src: `/playground/Verve Magazine - Editorial Shoot (Jan 2018) 2/n.jpg`, alt: "Verve Magazine editorial shoot, January 2018", width: 956, height: 1200 },
+          { src: `/playground/Verve Magazine - Editorial Shoot (Jan 2018) 2/o.jpg`, alt: "Verve Magazine editorial shoot, January 2018", width: 800, height: 1200 },
+          { src: `/playground/Verve Magazine - Editorial Shoot (Jan 2018) 2/p.jpg`, alt: "Verve Magazine editorial shoot, January 2018", width: 956, height: 1200 },
+          { src: `/playground/Verve Magazine - Editorial Shoot (Jan 2018) 2/q.jpg`, alt: "Verve Magazine editorial shoot, January 2018", width: 1200, height: 784 },
+          { src: `/playground/Verve Magazine - Editorial Shoot (Jan 2018) 2/r.jpg`, alt: "Verve Magazine editorial shoot, January 2018", width: 782, height: 1200 },
+        ],
+      },
+      {
+        title: "Tamannah Bhatia",
+        details: ["Assistant stylist · Verve Magazine supplement shoot"],
+        images: [
+          { src: `/playground/Styling Assistant - Verve/Tamannah Bhatia - Assisting/Tamannah Cover 2.jpg`, alt: "Styling assistant on set with Tamannah Bhatia, for Verve Magazine", width: 916, height: 1200 },
+          { src: `/playground/Styling Assistant - Verve/Tamannah Bhatia - Assisting/Tamannah 1 2.jpg`, alt: "Styling assistant on set with Tamannah Bhatia, for Verve Magazine", width: 1200, height: 785 },
+          { src: `/playground/Styling Assistant - Verve/Tamannah Bhatia - Assisting/Tamannah 2 2.jpg`, alt: "Styling assistant on set with Tamannah Bhatia, for Verve Magazine", width: 1200, height: 785 },
+          { src: `/playground/Styling Assistant - Verve/Tamannah Bhatia - Assisting/Tamannah 3 2.jpg`, alt: "Styling assistant on set with Tamannah Bhatia, for Verve Magazine", width: 1200, height: 785 },
+        ],
+      },
+      {
+        title: "Shriya Saran",
+        details: ["Assistant stylist · Verve Magazine supplement shoot"],
+        images: [
+          { src: `/playground/Styling Assistant - Verve/Shriya Saran - Assisting/Shriya Cover.jpg`, alt: "Styling assistant on set with Shriya Saran, for Verve Magazine", width: 916, height: 1200 },
+          { src: `/playground/Styling Assistant - Verve/Shriya Saran - Assisting/Shriya 1 2.jpg`, alt: "Styling assistant on set with Shriya Saran, for Verve Magazine", width: 1200, height: 785 },
+          { src: `/playground/Styling Assistant - Verve/Shriya Saran - Assisting/Shriya 2 2.jpg`, alt: "Styling assistant on set with Shriya Saran, for Verve Magazine", width: 1200, height: 785 },
+          { src: `/playground/Styling Assistant - Verve/Shriya Saran - Assisting/Shriya 3 2.jpg`, alt: "Styling assistant on set with Shriya Saran, for Verve Magazine", width: 1200, height: 785 },
+          { src: `/playground/Styling Assistant - Verve/Shriya Saran - Assisting/Shriya 4 2.jpg`, alt: "Styling assistant on set with Shriya Saran, for Verve Magazine", width: 1200, height: 785 },
+        ],
+      },
+    ],
     images: [
     { src: `/playground/Styling Assistant - Verve/Shriya Saran - Assisting/Shriya Cover.jpg`, alt: "Styling assistant on set with Shriya Saran, for Verve Magazine", width: 916, height: 1200 },
     { src: `/playground/Styling Assistant - Verve/Shriya Saran - Assisting/Shriya 1 2.jpg`, alt: "Styling assistant on set with Shriya Saran, for Verve Magazine", width: 1200, height: 785 },

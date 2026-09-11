@@ -101,11 +101,27 @@ export default async function PlaygroundEntryPage({
             </ul>
           )}
 
-          {gallery.length > 0 && (
-            <div className="mt-12">
-              <PlaygroundCarousel images={gallery} label={`${entry.title} gallery`} />
-            </div>
-          )}
+          {/* Entries made of distinct shoots get one titled carousel per shoot; the rest
+              keep a single gallery. */}
+          {entry.pageGalleries
+            ? entry.pageGalleries.map((g) => (
+                <section key={g.title} className="mt-16">
+                  <h2 className="t-section text-ink !max-w-[var(--col-text,640px)]">{g.title}</h2>
+                  {g.details?.map((d, i) => (
+                    <p key={d} className={`t-caption text-ink/70 ${i === 0 ? "mt-3" : "mt-1"}`}>
+                      {d}
+                    </p>
+                  ))}
+                  <div className="mt-6">
+                    <PlaygroundCarousel images={g.images} label={g.title} />
+                  </div>
+                </section>
+              ))
+            : gallery.length > 0 && (
+                <div className="mt-12">
+                  <PlaygroundCarousel images={gallery} label={`${entry.title} gallery`} />
+                </div>
+              )}
         </div>
       </section>
 
