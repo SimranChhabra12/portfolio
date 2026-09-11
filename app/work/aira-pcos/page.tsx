@@ -13,7 +13,7 @@ import HeroCover from "@/components/casestudy2/aira/HeroCover";
 import SeasonWheelBlock from "@/components/casestudy2/aira/SeasonWheelBlock";
 import CaseStudyHeadline from "@/components/casestudy2/CaseStudyHeadline";
 import ContextAndRole from "@/components/casestudy2/ContextAndRole";
-import DecisionCard from "@/components/casestudy2/DecisionCard";
+import { AiraDecisions } from "@/components/casestudy2/aira/DecisionVisuals";
 import SectionIndex from "@/components/casestudy2/SectionIndex";
 import { CaseStudyShell, Prose, Media } from "../_components/columns";
 
@@ -241,34 +241,7 @@ export default function AiraPage() {
               </P>
             </Prose>
             <Media>
-              <DecisionCard
-                project="aira"
-                index={1}
-                choice="One toggle between Seasons and Phases, on the same data"
-                insteadOf="Picking one framing and making everyone use it"
-                because="Some people naturally described their cycle with metaphors like seasons, weeks or weather. Others wanted the clinical terms, luteal and follicular. The cycle data is the same either way, only the words change. Phases makes sense to anyone who already tracks. Seasons is easier for people who don't."
-                research="CHI research on menstrual data: people want the signals framed the way that's relevant to them, not a single default"
-              />
-            </Media>
-            <Media>
-              <DecisionCard
-                project="aira"
-                index={2}
-                choice="Build the interface around how a phase feels instead of a countdown"
-                insteadOf="The 28-day predicted-date model most trackers use"
-                because="Irregular cycles are one of the most common PMOS symptoms. When someone's cycle doesn't fit the model, a countdown app stops working, and it can make her feel like her body is the problem. Going by how the phase feels works whether the cycle is regular or not."
-                research="Survey: nearly everyone said their symptoms “vary too much to tell”"
-              />
-            </Media>
-            <Media>
-              <DecisionCard
-                project="aira"
-                index={3}
-                choice="Nudges timed to low-energy moments and written to encourage"
-                insteadOf="Reminders on a fixed schedule, or streaks and missed-day counters"
-                because="People dropped habits on the days they had no energy, and with PMOS that's a lot of days. A 9am reminder that shows up no matter what feels like judgment on those days. That's also why logging ends with an encouraging message instead of a number."
-                research="Fogg and COM-B. Survey respondents chose gentle, well-timed prompts over rigid reminders"
-              />
+              <AiraDecisions />
             </Media>
           </Section>
 
