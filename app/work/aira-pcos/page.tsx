@@ -344,7 +344,7 @@ export default function AiraPage() {
           <Section id="next" number="06" heading="What I'd Do Next">
             <Prose>
               <P>
-                <strong>Test it with the women we interviewed.</strong> We designed AIRA from research
+                <strong>Test it with the women we interviewed.</strong>{" "}We designed AIRA from research
                 but never tested it with users. One interview pointed me toward the seasons framing,
                 and I built the app around it, so I&apos;d want to know if it works for other people
                 too.
