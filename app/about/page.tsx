@@ -143,7 +143,7 @@ export default function AboutPage() {
       <section className={SHELL}>
         <p className="t-sub text-ink !max-w-none mb-5 mx-auto text-center text-balance">
           I&apos;m a product designer in New York. Before this I studied fashion, ran a small
-          clothing label, and worked in community and events.
+          clothing label, and worked in marketing, community building and events.
         </p>
 
         <SayHiToKaiser className="mb-24" />
@@ -251,7 +251,7 @@ export default function AboutPage() {
 
       {/* Recognition — the reference's shelf, rendered as flat cards sitting on one rule. */}
       <section className={SHELL}>
-        <SectionHeading lead="Education" rest="and research" />
+        <SectionHeading lead="Education" rest="and Research" />
 
         <div className="mt-10">
           <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">

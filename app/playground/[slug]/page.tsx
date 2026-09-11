@@ -55,8 +55,8 @@ export default async function PlaygroundEntryPage({
     <main className="min-h-screen bg-cream pt-[66px]">
       <Nav />
 
-      <section className="px-[var(--page-gutter,32px)] pt-40">
-        <div className="max-w-[var(--page-max,1280px)] mx-auto">
+      <section className="pt-40">
+        <div className="max-w-[var(--page-max,1280px)] mx-auto px-[var(--page-gutter,32px)]">
           <Link
             href="/playground"
             className="t-caption text-mauve hover:text-accent transition-colors focus-visible:outline-2 focus-visible:outline-accent focus-visible:outline-offset-4"
@@ -125,8 +125,8 @@ export default async function PlaygroundEntryPage({
         </div>
       </section>
 
-      <footer className="bg-dark-bg border-t border-white/5 py-8 px-[var(--page-gutter,32px)] mt-24">
-        <div className="max-w-[var(--page-max,1280px)] mx-auto flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+      <footer className="bg-dark-bg border-t border-white/5 py-8 mt-24">
+        <div className="max-w-[var(--page-max,1280px)] mx-auto px-[var(--page-gutter,32px)] flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
           <Link
             href="/playground"
             className="t-caption text-mauve hover:text-surface transition-colors focus-visible:outline-2 focus-visible:outline-accent focus-visible:outline-offset-4"
