@@ -200,9 +200,7 @@ export default function WorkChapters() {
                 <span className="block t-section text-ink transition-colors [@media(hover:hover)]:group-hover:text-accent">
                   {project.title}
                 </span>
-                {/* `.t-body` rather than `.t-sub` (2026-09-10): at the larger grade the
-                    one-liner competed with the name, matching the case study headlines. */}
-                <span className="block t-body text-ink/75 mt-1">{project.homeOneLiner}</span>
+                <span className="block t-sub text-ink/75 mt-1">{project.homeOneLiner}</span>
               </h3>
 
               {/* Role/discipline. Was `text-mauve`, which measures 2.27:1 on cream and
