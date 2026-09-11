@@ -7,7 +7,8 @@ import { T } from "@/components/casestudy2/tokens";
 // a filled-in "instead of / because" card. Every visual shows the same data
 // twice: once the way other trackers frame it, once the way AIRA does.
 //
-// Copy marked PLACEHOLDER still needs to come from the prototype.
+// Cycle lengths in Decision 02 are an illustrative example, labelled as such
+// on the figure; the survey recorded symptoms, not cycle lengths.
 
 const A = T.aira;
 const SEASON_COLORS = [A.purple, A.blue, A.green, A.coralPhase];
@@ -127,7 +128,7 @@ function VocabToggle() {
 
 /* ---------- 02: countdown vs phase bands ---------- */
 
-const CYCLE = 41; // PLACEHOLDER example cycle length
+const CYCLE = 41; // illustrative, not from research data
 const PREDICTED = 28;
 // Season lines are the prototype's own (prototype/ui.tsx PHASES.seasonLine).
 // Winter and summer bands are too narrow to hold them, so every line sits
@@ -144,7 +145,7 @@ function CountdownVsPhases() {
   let x = 0;
   return (
     <svg viewBox="0 0 620 226" className="w-full" role="img" aria-label="A 41-day cycle shown as a failing 28-day countdown, and as AIRA phase bands">
-      <text x={0} y={14} fontSize={12} fill={T.inkMuted}>Typical tracker</text>
+      <text x={0} y={14} fontSize={12} fill={T.inkMuted}>A countdown app, on an example irregular cycle ({CYCLE} days)</text>
       {Array.from({ length: CYCLE }, (_, i) => (
         <rect key={i} x={i * cell} y={28} width={cell - 2} height={30} rx={2} fill={i >= PREDICTED ? "#F09595" : "rgba(0,0,0,0.12)"} />
       ))}
@@ -223,7 +224,7 @@ export function AiraDecisions() {
         title="How the phase feels, not a countdown"
         rejected="the 28-day predicted-date model"
         because="Irregular cycles are one of the most common PMOS symptoms, and when a cycle doesn’t fit the model, a countdown can make her feel like her body is the problem. Going by how the phase feels works whether the cycle is regular or not."
-        caption="Survey: nearly everyone said their symptoms “vary too much to tell.”"
+        caption="8 of 13 survey respondents with PMOS named irregular periods as a top-three symptom."
       >
         <CountdownVsPhases />
       </Decision>
@@ -232,7 +233,7 @@ export function AiraDecisions() {
         title="Nudges that wait for energy"
         rejected="9am reminders and streak counters"
         because="With PMOS, low-energy days are common, and a 9am reminder that shows up no matter what feels like judgment on those days. That’s also why logging ends with an encouraging message instead of a number."
-        caption="Fogg Behavior Model and COM-B. Survey respondents chose gentle, well-timed prompts over rigid reminders."
+        caption="Asked when their symptoms feel worst, 11 of 13 respondents with PMOS said it “varies too much to tell.” Framework: Fogg Behavior Model and COM-B."
       >
         <EnergyNudges />
       </Decision>
