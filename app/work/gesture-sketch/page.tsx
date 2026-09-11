@@ -20,9 +20,8 @@ export const metadata = {
 };
 
 const GREEN = T.gesture.green;
-const LIVE = "https://simranchhabra12.github.io/gesturedrawing";
 // The revised build, served as static files from public/prototypes/gesturesketch-v2.
-const LIVE_V2 = "/prototypes/gesturesketch-v2/index.html";
+const LIVE = "/prototypes/gesturesketch-v2/index.html";
 
 // Keep in step with the <Section> ids, numbers and headings below.
 const SECTIONS = [
@@ -105,30 +104,22 @@ export default function GestureSketchPage() {
             </P>
           </Prose>
 
-          <div className="flex flex-wrap gap-x-8 gap-y-3 mt-8">
-            {[
-              { href: LIVE_V2, label: "Try the revised prototype" },
-              { href: LIVE, label: "Try the first version" },
-            ].map((l) => (
-              <a
-                key={l.href}
-                href={l.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 pb-1"
-                style={{
-                  fontFamily: "var(--font-body)",
-                  fontSize: T.type.caption,
-                  textTransform: "uppercase",
-                  letterSpacing: "0.08em",
-                  color: GREEN,
-                  borderBottom: `1px solid ${GREEN}66`,
-                }}
-              >
-                {l.label} <span aria-hidden>↗</span>
-              </a>
-            ))}
-          </div>
+          <a
+            href={LIVE}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 mt-8 pb-1"
+            style={{
+              fontFamily: "var(--font-body)",
+              fontSize: T.type.caption,
+              textTransform: "uppercase",
+              letterSpacing: "0.08em",
+              color: GREEN,
+              borderBottom: `1px solid ${GREEN}66`,
+            }}
+          >
+            Try the live prototype <span aria-hidden>↗</span>
+          </a>
 
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-8 mt-16">
             {FIELDS.map((f) => (
