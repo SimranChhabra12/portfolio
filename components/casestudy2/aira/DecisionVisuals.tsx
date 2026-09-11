@@ -191,9 +191,8 @@ function EnergyNudges() {
         <text x={280} y={44} fontSize={11} fill="#993C1D">“A little reflection can go a long way. Want to check in?”</text>
         <text x={620} y={198} textAnchor="end" fontSize={11} fill={T.inkMuted}>red: fixed daily reminder · coral: AIRA nudge</text>
       </svg>
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-5">
+      <div className="grid grid-cols-1 gap-4 mt-5 max-w-[480px]">
         {[
-          { who: "Other trackers", msg: "3-day streak lost. Log now to restart.", accent: false },
           { who: "AIRA, end of log", msg: "Nice work showing up for yourself. Small, steady movement helps your body regulate energy and symptoms over time.", accent: true },
         ].map((n) => (
           <div key={n.who} style={{ background: "#fff", border: `1px solid ${n.accent ? A.coral : "rgba(0,0,0,0.1)"}`, borderRadius: 12, padding: "14px 16px", fontSize: "0.875rem", lineHeight: 1.6, color: T.ink }}>
@@ -231,7 +230,7 @@ export function AiraDecisions() {
       <Decision
         index={3}
         title="Nudges that wait for energy"
-        rejected="9am reminders and streak counters"
+        rejected="fixed 9am reminders"
         because="With PMOS, low-energy days are common, and a 9am reminder that shows up no matter what feels like judgment on those days. That’s also why logging ends with an encouraging message instead of a number."
         caption="Asked when their symptoms feel worst, 11 of 13 respondents with PMOS said it “varies too much to tell.” Framework: Fogg Behavior Model and COM-B."
       >
