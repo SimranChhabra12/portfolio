@@ -9,10 +9,9 @@ export interface HeadlineMeta {
  * The headline unit shared by every case study: one block, the claim on the left
  * and the credits stacked on the right.
  *
- * The rule this encodes — from Whspr, which set the format — is that the top of a
- * case study states what the product does for someone, not what it is called. A
- * page that opens on "AIRA" or "Resy Celebrations" has spent its largest type on
- * a word the reader can't do anything with.
+ * The top of a case study still states what the product does for someone, not just
+ * what it is called: "Name: claim". The name takes display size and the claim sits
+ * under it at a quieter grade (2026-09-10). Both at display size was overwhelming.
  *
  * `id` is load-bearing: SectionIndex aligns its first entry to this block and
  * reveals itself when the block arrives, so every page must pass one.
@@ -26,6 +25,13 @@ export default function CaseStudyHeadline({
   headline: string;
   meta: HeadlineMeta[];
 }) {
+  // "Name: what it does" is split so the name holds display size and the claim drops to
+  // a quieter second line. One string at display size read as a wall of type. Both halves
+  // stay inside the one <h1>, so the full line is still the page heading.
+  const colon = headline.indexOf(": ");
+  const name = colon === -1 ? headline : headline.slice(0, colon);
+  const claim = colon === -1 ? null : headline.slice(colon + 2);
+
   return (
     <div
       id={id}
@@ -43,7 +49,22 @@ export default function CaseStudyHeadline({
           margin: 0,
         }}
       >
-        {headline}
+        <span className="block">{name}</span>
+        {/* Keeps the heading's text "Name: claim" for screen readers and search. */}
+        {claim && <span className="sr-only">: </span>}
+        {claim && (
+          <span
+            className="block"
+            style={{
+              fontSize: "clamp(1.25rem, 1rem + 1vw, 1.75rem)",
+              lineHeight: 1.35,
+              opacity: 0.75,
+              marginTop: "0.75rem",
+            }}
+          >
+            {claim}
+          </span>
+        )}
       </h1>
 
       {/* Right — credits, stacked so they read as one column against the title */}

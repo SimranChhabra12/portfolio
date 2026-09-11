@@ -12,7 +12,7 @@ import {
 // Every screen is built from ./ui so the whole app shares one visual system.
 
 type Tab = "home" | "track" | "learn";
-type Nav = {
+export type Nav = {
   go: (id: string) => void;
   back: () => void;
   tab: (t: Tab) => void;
@@ -20,7 +20,7 @@ type Nav = {
   s: AppState;
   set: (p: Partial<AppState>) => void;
 };
-type AppState = {
+export type AppState = {
   name: string;
   goals: string[];
   perms: Record<string, boolean>;
@@ -38,7 +38,7 @@ type AppState = {
   zenLen: number;
 };
 
-const INITIAL: AppState = {
+export const INITIAL: AppState = {
   name: "",
   goals: [],
   perms: { motion: true, sleep: true, cycle: true, notify: false },
@@ -1389,7 +1389,7 @@ function Article({ nav }: { nav: Nav }) {
 }
 
 // ═══ Router ═════════════════════════════════════════════════════════════════
-const SCREENS: Record<string, (p: { nav: Nav }) => React.ReactElement> = {
+export const SCREENS: Record<string, (p: { nav: Nav }) => React.ReactElement> = {
   splash: Splash, intro: Intro, auth: Auth, signup: (p) => <SignUp {...p} />, signin: (p) => <SignUp {...p} mode="signin" />,
   goals: Goals, perms: Perms, cycleSetup: CycleSetup, sleepSetup: SleepSetup, ready: Ready,
   home: Home, track: Track, learn: Learn,

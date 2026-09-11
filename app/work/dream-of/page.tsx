@@ -54,7 +54,7 @@ export default function DreamOfPage() {
         <div style={{ paddingBottom: T.space.section }}>
           <CaseStudyHeadline
             id="dream-of-headline"
-            headline="Dream Of: Haircare Solutions formulated for Indian hair types"
+            headline="Dream Of: Haircare solutions formulated for Indian hair types"
             meta={[
               { label: "Role", value: "Product Design Intern · User Research · Storefront Design" },
               { label: "Platform", value: "Web, desktop + mobile" },

@@ -3,8 +3,8 @@ import { StatusBar, Label, Body, Card, TabBar, FONT } from "./primitives";
 
 // Home — one readiness score over seven pillars, then the signals that produced it.
 //
-// Fixed from the export: the ground is no longer pure black, the streak marker is a
-// coral wash instead of a competing purple fill, the gauge's own colour is the only
+// Fixed from the export: the ground is no longer pure black, the streak marker is
+// gone, the gauge's own colour is the only
 // non-coral hue on the screen, and the three signal cards share one padding and one
 // title/body rhythm.
 const SCORE = 92;
@@ -56,8 +56,8 @@ export default function HomeScreen() {
     <div style={{ width: SCREEN_W, height: "100%", background: K.ground, position: "relative" }}>
       <StatusBar />
 
-      {/* Header: title and cycle position on the left, streak on the right —
-          the streak is a value marker, so it takes the coral wash, not a fill. */}
+      {/* Header: title and cycle position. No streak marker: AIRA doesn't count
+          consecutive days (see Decision 03 in the case study). */}
       <div
         style={{
           display: "flex",
@@ -82,19 +82,6 @@ export default function HomeScreen() {
           </p>
           <Body style={{ fontSize: K.type.caption.size }}>Luteal phase · Day 18</Body>
         </div>
-        <span
-          style={{
-            fontFamily: FONT,
-            fontSize: K.type.caption.size,
-            fontWeight: 600,
-            color: K.coral,
-            background: K.coralWash,
-            borderRadius: K.radius.pill,
-            padding: "5px 11px",
-          }}
-        >
-          7-day streak
-        </span>
       </div>
 
       {/* Readiness. The metric is the largest thing on the screen; its label sits
