@@ -301,11 +301,12 @@ export default function AiraPage() {
             <Prose>
               <H3>Nutrition</H3>
               <P>
-                The nutrition screen is for logging food. It tracks macros and gives a friendly nudge
-                when something&apos;s off, like &ldquo;low on protein today, try a Greek yogurt
-                snack.&rdquo; You can type your meal or just say it out loud. This is the most
-                standard part of the app, and it&apos;s the one I&apos;d want to change most, so the
-                suggestions adjust to your current phase.
+                The nutrition screen started out like every other food tracker: a calorie budget and
+                macro rings to stay inside. I took the budget out. A number to stay under reads like
+                a grade, and on a low-energy day that&apos;s the last thing you need. Now the top of the
+                screen says what your phase asks for instead. In the luteal week that&apos;s steady
+                meals, some protein and slow carbs, plus one easy add, like Greek yogurt or a handful
+                of nuts for the afternoon dip. You can still type your meal or just say it out loud.
               </P>
             </Prose>
             <ProtoScreens
