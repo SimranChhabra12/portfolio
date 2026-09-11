@@ -106,7 +106,7 @@ const playgroundEntries: PlaygroundEntry[] = [
       "Gujarat is home, so when friends I'd made at an art festival needed someone to take 16 artists around it, I said yes. It became The Roadtrip Experience, a project with Mahindra & Mahindra exploring the state's indigenous art forms.",
     body: [
       "I met them at the Kochi-Muziris Biennale in Kerala, India's biggest contemporary art festival, where they were just fellow community builders I got talking to. I had no idea they ran experiences like this.",
-      "I ran the experience and operations, which meant showing artists from around the world the places I grew up with, and watching them see it for the first time. That was the fun part.",
+      "I ran the experience and operations, which meant showing artists from around the world the places I grew up with, and watching them see it for the first time.",
       "Along the way we made a documentary on the lost music of Kutchh, a tradition that's slowly disappearing, and gave local artists resources and mentorship to work alongside the visiting ones.",
     ],
     cover: { src: "/playground/rtx/RTX-.png", alt: "The Road Trip Experience", width: 918, height: 996 },
