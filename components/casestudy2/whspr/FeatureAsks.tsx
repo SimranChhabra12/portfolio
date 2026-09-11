@@ -41,7 +41,7 @@ export default function FeatureAsks() {
       <div className="flex flex-col gap-2 mb-8">
         <p
           style={{
-            fontSize: "0.8125rem",
+            fontSize: "var(--t-caption)",
             textTransform: "uppercase",
             letterSpacing: "0.1em",
             color: W.amber,
@@ -53,7 +53,7 @@ export default function FeatureAsks() {
         <p
           style={{
             fontFamily: "var(--font-body)",
-            fontSize: "0.9375rem",
+            fontSize: "var(--t-body)",
             color: W.dusk400,
             lineHeight: 1.6,
             maxWidth: "52ch",
@@ -68,11 +68,11 @@ export default function FeatureAsks() {
         {ASKS.map((a) => (
           <li key={a.label} className="grid grid-cols-1 sm:grid-cols-[minmax(0,1fr)_180px] gap-2 sm:gap-6 items-center">
             <div className="flex flex-col gap-1 min-w-0">
-              <p style={{ fontFamily: "var(--font-body)", fontSize: "0.9375rem", color: W.textLight, lineHeight: 1.45 }}>
+              <p style={{ fontFamily: "var(--font-body)", fontSize: "var(--t-body)", color: W.textLight, lineHeight: 1.45 }}>
                 {a.label}
               </p>
               {a.note && (
-                <p style={{ fontFamily: "var(--font-body)", fontSize: "0.8125rem", color: W.dusk500, lineHeight: 1.5 }}>
+                <p style={{ fontFamily: "var(--font-body)", fontSize: "var(--t-caption)", color: W.dusk500, lineHeight: 1.5 }}>
                   {a.note}
                 </p>
               )}
@@ -97,7 +97,7 @@ export default function FeatureAsks() {
                 style={{
                   fontFamily: "var(--font-display)",
                   fontWeight: 600,
-                  fontSize: "1rem",
+                  fontSize: "var(--t-body)",
                   color: W.textLight,
                   lineHeight: 1,
                   minWidth: "3.5rem",
@@ -112,7 +112,7 @@ export default function FeatureAsks() {
 
       <p
         className="mt-8"
-        style={{ fontFamily: "var(--font-body)", fontSize: "0.875rem", color: W.dusk500, lineHeight: 1.6, maxWidth: "60ch" }}
+        style={{ fontFamily: "var(--font-body)", fontSize: "var(--t-caption)", color: W.dusk500, lineHeight: 1.6, maxWidth: "60ch" }}
       >
         These are small numbers, and the chart doesn&apos;t pretend otherwise. The point is that
         more people brought up getting home than any feature I actually designed.

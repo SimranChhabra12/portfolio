@@ -9,7 +9,7 @@ const W = T.whsprLight;
 
 const label = {
   fontFamily: "var(--font-body)",
-  fontSize: "0.75rem",
+  fontSize: "var(--t-caption)",
   textTransform: "uppercase" as const,
   letterSpacing: "0.1em",
 };
@@ -74,7 +74,7 @@ const rule = {
   borderRadius: 14,
 };
 
-const ruleText = { fontFamily: "var(--font-body)", fontSize: "0.875rem", color: W.dusk400, lineHeight: 1.6 };
+const ruleText = { fontFamily: "var(--font-body)", fontSize: "var(--t-caption)", color: W.dusk400, lineHeight: 1.6 };
 
 export default function SystemLoop() {
   return (
@@ -86,8 +86,8 @@ export default function SystemLoop() {
         padding: "clamp(2rem, 1.5rem + 2.5vw, 3.5rem)",
       }}
     >
-      <p style={{ ...label, fontSize: "0.8125rem", color: W.amber, marginBottom: "0.5rem" }}>How it fits together</p>
-      <p style={{ fontFamily: "var(--font-body)", fontSize: "0.9375rem", color: W.dusk400, lineHeight: 1.6, marginBottom: "2.5rem" }}>
+      <p style={{ ...label, fontSize: "var(--t-caption)", color: W.amber, marginBottom: "0.5rem" }}>How it fits together</p>
+      <p style={{ fontFamily: "var(--font-body)", fontSize: "var(--t-body)", color: W.dusk400, lineHeight: 1.6, marginBottom: "2.5rem" }}>
         What one woman posts reaches the next one who searches.
       </p>
 
@@ -116,7 +116,7 @@ export default function SystemLoop() {
             ].map(({ t, o }) => (
               <div key={t} className="flex-1 flex flex-col gap-2" style={{ opacity: o }}>
                 <div style={{ height: 36, borderRadius: 6, backgroundColor: W.midnight }} />
-                <span style={{ fontFamily: "var(--font-body)", fontSize: "0.75rem", color: W.textLight }}>{t}</span>
+                <span style={{ fontFamily: "var(--font-body)", fontSize: "var(--t-caption)", color: W.textLight }}>{t}</span>
               </div>
             ))}
           </div>
@@ -128,10 +128,10 @@ export default function SystemLoop() {
 
         <div className="p-6 flex flex-col gap-5" style={rule}>
           <div className="flex items-center justify-between gap-3" aria-hidden="true" style={{ minHeight: 60 }}>
-            <span style={{ fontFamily: "var(--font-body)", fontSize: "0.875rem", color: W.textLight }}>Laser Wolf</span>
+            <span style={{ fontFamily: "var(--font-body)", fontSize: "var(--t-caption)", color: W.textLight }}>Laser Wolf</span>
             <span
               className="rounded-full"
-              style={{ fontFamily: "var(--font-body)", fontSize: "0.75rem", padding: "3px 10px", color: W.amber, border: `1px dashed ${W.amber}` }}
+              style={{ fontFamily: "var(--font-body)", fontSize: "var(--t-caption)", padding: "3px 10px", color: W.amber, border: `1px dashed ${W.amber}` }}
             >
               Early data · 2 accounts
             </span>

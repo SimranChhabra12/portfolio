@@ -103,7 +103,7 @@ const WOMEN: Woman[] = [
 ];
 
 const label = {
-  fontSize: "0.8125rem",
+  fontSize: "var(--t-caption)",
   textTransform: "uppercase" as const,
   letterSpacing: "0.1em",
   fontFamily: "var(--font-body)",
@@ -121,7 +121,7 @@ export default function ThreeWomen() {
     >
       <div className="flex flex-col gap-2 mb-8">
         <p style={{ ...label, color: W.amber }}>Before she goes out</p>
-        <p style={{ fontFamily: "var(--font-body)", fontSize: "0.9375rem", color: W.dusk400, lineHeight: 1.6 }}>
+        <p style={{ fontFamily: "var(--font-body)", fontSize: "var(--t-body)", color: W.dusk400, lineHeight: 1.6 }}>
           Three patterns from the interviews, and the research behind each.
         </p>
       </div>
@@ -140,7 +140,7 @@ export default function ThreeWomen() {
                   borderRadius: 20,
                   border: "1.5px solid rgba(42,31,40,0.14)",
                   fontFamily: "var(--font-body)",
-                  fontSize: "0.8125rem",
+                  fontSize: "var(--t-caption)",
                   color: W.textLight,
                   lineHeight: 1.5,
                 }}
@@ -163,11 +163,11 @@ export default function ThreeWomen() {
             </svg>
             <p
               className="mb-3"
-              style={{ fontFamily: "var(--font-body)", fontSize: "1rem", fontWeight: 500, color: W.textLight, lineHeight: 1.45 }}
+              style={{ fontFamily: "var(--font-body)", fontSize: "var(--t-body)", fontWeight: 500, color: W.textLight, lineHeight: 1.45 }}
             >
               {w.problem}
             </p>
-            <figcaption className="mt-auto" style={{ fontFamily: "var(--font-body)", fontSize: "0.8125rem", color: W.dusk500 }}>
+            <figcaption className="mt-auto" style={{ fontFamily: "var(--font-body)", fontSize: "var(--t-caption)", color: W.dusk500 }}>
               {w.source}
             </figcaption>
           </figure>

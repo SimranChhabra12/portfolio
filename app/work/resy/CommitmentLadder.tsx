@@ -81,7 +81,7 @@ function Weight({ value, filled }: { value: number; filled: string }) {
 
 const LABEL = {
   fontFamily: "var(--font-body)",
-  fontSize: "0.75rem",
+  fontSize: "var(--t-caption)",
   textTransform: "uppercase" as const,
   letterSpacing: "0.09em",
   color: T.inkMuted,
@@ -126,7 +126,7 @@ export default function CommitmentLadder() {
                 style={{
                   fontFamily: "var(--font-display)",
                   fontWeight: 600,
-                  fontSize: "1.125rem",
+                  fontSize: "var(--t-sub)",
                   color: s.hold ? RUST : T.ink,
                   lineHeight: 1.3,
                 }}
@@ -138,7 +138,7 @@ export default function CommitmentLadder() {
             <div className="flex flex-col gap-2">
               <p style={LABEL}>Guest</p>
               <Weight value={s.guestWeight} filled={RUST} />
-              <p style={{ fontFamily: "var(--font-body)", fontSize: "0.9375rem", color: T.ink, lineHeight: 1.5 }}>
+              <p style={{ fontFamily: "var(--font-body)", fontSize: "var(--t-body)", color: T.ink, lineHeight: 1.5 }}>
                 {s.guest}
               </p>
             </div>
@@ -146,7 +146,7 @@ export default function CommitmentLadder() {
             <div className="flex flex-col gap-2">
               <p style={LABEL}>Restaurant</p>
               <Weight value={s.restaurantWeight} filled={T.ink} />
-              <p style={{ fontFamily: "var(--font-body)", fontSize: "0.9375rem", color: T.ink, lineHeight: 1.5 }}>
+              <p style={{ fontFamily: "var(--font-body)", fontSize: "var(--t-body)", color: T.ink, lineHeight: 1.5 }}>
                 {s.restaurant}
               </p>
             </div>

@@ -95,7 +95,7 @@ export default function PlaygroundMosaic() {
                   third of the column and the full card line ran to four lines under it,
                   which put more text on screen than image. The one-liner still carries
                   the piece on /playground, where the cards are full width. */}
-              <p className="t-caption uppercase tracking-[0.08em] text-mauve mt-2 transition-colors [@media(hover:hover)]:group-hover:text-accent">
+              <p className="t-caption uppercase tracking-[0.08em] text-mauve-deep mt-2 transition-colors [@media(hover:hover)]:group-hover:text-accent">
                 {entry.title}
               </p>
             </Link>

@@ -24,7 +24,7 @@ const RANGE: Row[] = [
 
 const COL_LABEL = {
   fontFamily: "var(--font-body)",
-  fontSize: "0.75rem",
+  fontSize: "var(--t-caption)",
   textTransform: "uppercase" as const,
   letterSpacing: "0.09em",
 };
@@ -61,7 +61,7 @@ export default function CatalogueShift() {
             <p
               style={{
                 fontFamily: "var(--font-body)",
-                fontSize: "0.875rem",
+                fontSize: "var(--t-caption)",
                 color: T.inkMuted,
                 lineHeight: 1.5,
                 marginTop: "0.5rem",
@@ -84,7 +84,7 @@ export default function CatalogueShift() {
             <p
               style={{
                 fontFamily: "var(--font-body)",
-                fontSize: "0.875rem",
+                fontSize: "var(--t-caption)",
                 color: T.inkMuted,
                 lineHeight: 1.5,
                 marginTop: "0.5rem",
@@ -103,7 +103,7 @@ export default function CatalogueShift() {
                 style={{
                   fontFamily: "var(--font-display)",
                   fontStyle: "italic",
-                  fontSize: "1rem",
+                  fontSize: "var(--t-body)",
                   color: T.ink,
                   lineHeight: 1.4,
                 }}

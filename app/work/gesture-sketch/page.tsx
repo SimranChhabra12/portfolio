@@ -25,16 +25,16 @@ const LIVE = "/prototypes/gesturesketch-v2/index.html";
 
 // Keep in step with the <Section> ids, numbers and headings below.
 const SECTIONS = [
-  { id: "start", number: "01", label: "Where This Started" },
-  { id: "insight", number: "02", label: "Where AI Belongs" },
-  { id: "ideas", number: "03", label: "Three Ideas, One Built" },
-  { id: "layouts", number: "04", label: "Five Layouts, Six People" },
+  { id: "start", number: "01", label: "Where this started" },
+  { id: "insight", number: "02", label: "Where AI belongs" },
+  { id: "ideas", number: "03", label: "Three ideas, one built" },
+  { id: "layouts", number: "04", label: "Five layouts, six people" },
   { id: "product", number: "05", label: "GestureSketch" },
   { id: "v2", number: "06", label: "From v1 to v2" },
   { id: "decisions", number: "07", label: "Design Decisions" },
-  { id: "outcomes", number: "08", label: "What It Does and Doesn't" },
-  { id: "next", number: "09", label: "What I'd Do Next" },
-  { id: "takeaway", number: "10", label: "What I Took Away" },
+  { id: "outcomes", number: "08", label: "What it does and doesn't" },
+  { id: "next", number: "09", label: "What I'd do next" },
+  { id: "takeaway", number: "10", label: "What I took away" },
 ];
 
 const FIELDS = [
@@ -155,7 +155,7 @@ export default function GestureSketchPage() {
 
       <CaseStudyShell>
         <div className="flex flex-col min-w-0">
-          <Section id="start" number="01" heading="Where This Started" first>
+          <Section id="start" number="01" heading="Where this started" first>
             <Prose>
               <P>
                 I kept coming back to one thing about art therapy: everyone I talked to believed it
@@ -175,7 +175,7 @@ export default function GestureSketchPage() {
             </Media>
           </Section>
 
-          <Section id="insight" number="02" heading="Where AI Belongs">
+          <Section id="insight" number="02" heading="Where AI belongs">
             <Prose>
               <P>
                 People wanted support, but the moment AI did too much, the drawing stopped being
@@ -199,7 +199,7 @@ export default function GestureSketchPage() {
             </Prose>
           </Section>
 
-          <Section id="ideas" number="03" heading="Three Ideas, One Built">
+          <Section id="ideas" number="03" heading="Three ideas, one built">
             <Prose>
               <P>The map pointed to three ideas, each for a different moment in a session.</P>
             </Prose>
@@ -218,7 +218,7 @@ export default function GestureSketchPage() {
             </Prose>
           </Section>
 
-          <Section id="layouts" number="04" heading="Five Layouts, Six People">
+          <Section id="layouts" number="04" heading="Five layouts, six people">
             <Prose>
               <P>
                 With the concept decided, I sketched five layouts, each
@@ -330,7 +330,7 @@ export default function GestureSketchPage() {
             ))}
           </Section>
 
-          <Section id="outcomes" number="08" heading="What It Does and Doesn't">
+          <Section id="outcomes" number="08" heading="What it does and doesn't">
             <Prose>
               <P>
                 GestureSketch is a working prototype, not a finished product, and it&apos;s the one
@@ -351,7 +351,7 @@ export default function GestureSketchPage() {
             </Prose>
           </Section>
 
-          <Section id="next" number="09" heading="What I'd Do Next">
+          <Section id="next" number="09" heading="What I'd do next">
             <Prose>
               <P>
                 I&apos;d try prompts again, but built the opposite way from the ones I cut. The
@@ -366,7 +366,7 @@ export default function GestureSketchPage() {
             </Prose>
           </Section>
 
-          <Section id="takeaway" number="10" heading="What I Took Away">
+          <Section id="takeaway" number="10" heading="What I took away">
             <Prose>
               <H3>What cutting the prompts taught me</H3>
               <P>

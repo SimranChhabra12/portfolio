@@ -114,7 +114,7 @@ export default function LayoutStudy() {
             <p
               style={{
                 fontFamily: "var(--font-body)",
-                fontSize: "0.8125rem",
+                fontSize: "var(--t-caption)",
                 textTransform: "uppercase",
                 letterSpacing: "0.08em",
                 color: l.won ? G.green : T.inkMuted,
@@ -147,7 +147,7 @@ export default function LayoutStudy() {
                 }}
               />
               <span
-                style={{ fontFamily: "var(--font-body)", fontSize: "0.8125rem", color: T.inkMuted }}
+                style={{ fontFamily: "var(--font-body)", fontSize: "var(--t-caption)", color: T.inkMuted }}
               >
                 {label}
               </span>

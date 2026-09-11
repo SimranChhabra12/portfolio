@@ -14,10 +14,10 @@ export const CHROME_LINKS = [
 export function CaseStudyFooter() {
   return (
     <footer
-      className="px-8 lg:px-16 py-10"
+      className="py-10"
       style={{ borderTop: `1px solid ${T.inkFaint}` }}
     >
-      <div className="max-w-6xl mx-auto flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+      <div className="max-w-[var(--page-max,1280px)] mx-auto px-[var(--page-gutter,32px)] flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
         {/* The footer repeats the nav rather than offering a lone "← All Work": at the end
             of a long case study the three destinations are more use than one back link. */}
         <div className="flex items-center gap-6 sm:gap-8">

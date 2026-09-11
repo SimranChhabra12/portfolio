@@ -118,7 +118,7 @@ export default function Nav({ coverId }: { coverId?: string } = {}) {
 
   return (
     <nav
-      className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between gap-6 px-8 lg:px-16 py-5"
+      className="fixed top-0 left-0 right-0 z-50 py-5"
       style={{
         backgroundColor: overCover ? "transparent" : "rgba(250, 248, 245, 0.85)",
         backdropFilter: overCover ? "none" : "blur(4px)",
@@ -127,6 +127,8 @@ export default function Nav({ coverId }: { coverId?: string } = {}) {
         color: fg,
       }}
     >
+      {/* Same shell as every page, so the wordmark sits on the content's left edge. */}
+      <div className="max-w-[var(--page-max,1280px)] mx-auto px-[var(--page-gutter,32px)] flex items-center justify-between gap-6">
       {/* Wordmark in Gurmukhi. `lang="pa"` so a screen reader switches voice instead of
           reading Punjabi glyphs with an English one, and `aria-label` keeps the accessible
           name as the roman spelling — the link is the route home and the name a visitor
@@ -166,6 +168,7 @@ export default function Nav({ coverId }: { coverId?: string } = {}) {
             </Link>
           );
         })}
+      </div>
       </div>
     </nav>
   );

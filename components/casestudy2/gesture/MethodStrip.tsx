@@ -90,7 +90,7 @@ export default function MethodStrip() {
               style={{
                 fontFamily: "var(--font-display)",
                 fontWeight: 600,
-                fontSize: "1.1875rem",
+                fontSize: "var(--t-sub)",
                 lineHeight: 1.3,
                 color: T.ink,
               }}

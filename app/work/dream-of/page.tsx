@@ -31,9 +31,9 @@ const SECTIONS = [
   { id: "research", number: "02", label: "Research" },
   { id: "decisions", number: "03", label: "Design Decisions" },
   { id: "product", number: "04", label: "The Product" },
-  { id: "landed", number: "05", label: "Where It Landed" },
-  { id: "next", number: "06", label: "What I'd Do Next" },
-  { id: "takeaway", number: "07", label: "What I Took Away" },
+  { id: "landed", number: "05", label: "Where it landed" },
+  { id: "next", number: "06", label: "What I'd do next" },
+  { id: "takeaway", number: "07", label: "What I took away" },
 ];
 
 // Every screen lives in public/projects/dream-of/screens/, with its size in DIMS.
@@ -284,7 +284,7 @@ export default function DreamOfPage() {
             </Media>
           </Section>
 
-          <Section id="landed" number="05" heading="Where It Landed">
+          <Section id="landed" number="05" heading="Where it landed">
             <Prose>
               <P>
                 The site that&apos;s live at dreamof.in now was rebuilt by someone else after my
@@ -304,7 +304,7 @@ export default function DreamOfPage() {
             </Prose>
           </Section>
 
-          <Section id="next" number="06" heading="What I'd Do Next">
+          <Section id="next" number="06" heading="What I'd do next">
             <Prose>
               <P>
                 <strong>Design for returning customers.</strong>{" "}My version was built for someone
@@ -323,7 +323,7 @@ export default function DreamOfPage() {
             </Prose>
           </Section>
 
-          <Section id="takeaway" number="07" heading="What I Took Away">
+          <Section id="takeaway" number="07" heading="What I took away">
             <Prose>
               <P>
                 I thought my job was to explain 4 products clearly. After talking to 30 women, I

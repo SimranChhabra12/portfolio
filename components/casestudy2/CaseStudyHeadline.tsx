@@ -42,7 +42,7 @@ export default function CaseStudyHeadline({
         style={{
           fontFamily: "var(--font-display), serif",
           fontWeight: 400,
-          fontSize: "clamp(2.25rem, 1.5rem + 3vw, 3.5rem)",
+          fontSize: "var(--t-page)",
           lineHeight: 1.15,
           color: T.ink,
           textWrap: "balance",
@@ -56,7 +56,7 @@ export default function CaseStudyHeadline({
           <span
             className="block"
             style={{
-              fontSize: "clamp(1.25rem, 1rem + 1vw, 1.75rem)",
+              fontSize: "var(--t-sub)",
               lineHeight: 1.35,
               opacity: 0.75,
               marginTop: "0.75rem",
@@ -86,7 +86,7 @@ export default function CaseStudyHeadline({
             <dd
               style={{
                 fontFamily: "var(--font-body), sans-serif",
-                fontSize: "0.9375rem",
+                fontSize: "var(--t-body)",
                 color: T.ink,
                 lineHeight: 1.6,
                 margin: 0,

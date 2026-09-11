@@ -31,20 +31,20 @@ function Decision({
 }) {
   return (
     <div className="w-full my-2 px-6 lg:px-8 pt-7 pb-6" style={{ backgroundColor: T.cream, borderRadius: 12 }}>
-      <p style={{ fontSize: "0.8125rem", color: T.inkMuted, marginBottom: "0.75rem" }}>
+      <p style={{ fontSize: "var(--t-caption)", color: T.inkMuted, marginBottom: "0.75rem" }}>
         Decision {String(index).padStart(2, "0")}
       </p>
       <p style={{ fontFamily: "var(--font-display)", fontWeight: 600, fontSize: T.type.sub, color: T.ink, lineHeight: 1.35, marginBottom: "0.5rem" }}>
         {title}
       </p>
-      <p style={{ fontSize: "0.9375rem", color: T.inkMuted, lineHeight: 1.6, marginBottom: "1.75rem" }}>
+      <p style={{ fontSize: "var(--t-body)", color: T.inkMuted, lineHeight: 1.6, marginBottom: "1.75rem" }}>
         Not <s style={{ textDecorationColor: A.coral }}>{rejected}</s>
       </p>
-      <p style={{ fontSize: "1rem", color: T.ink, lineHeight: 1.7, maxWidth: "60ch", marginTop: "-0.75rem", marginBottom: "1.75rem" }}>
+      <p style={{ fontSize: "var(--t-body)", color: T.ink, lineHeight: 1.7, maxWidth: "60ch", marginTop: "-0.75rem", marginBottom: "1.75rem" }}>
         {because}
       </p>
       {children}
-      <p style={{ fontSize: "0.8125rem", color: T.inkMuted, lineHeight: 1.6, marginTop: "1.5rem" }}>{caption}</p>
+      <p style={{ fontSize: "var(--t-caption)", color: T.inkMuted, lineHeight: 1.6, marginTop: "1.5rem" }}>{caption}</p>
     </div>
   );
 }
@@ -97,7 +97,7 @@ function VocabToggle() {
             style={{
               borderRadius: 999,
               padding: "5px 16px",
-              fontSize: "0.8125rem",
+              fontSize: "var(--t-caption)",
               background: mode === k ? A.coral : "transparent",
               color: mode === k ? "#fff" : T.inkMuted,
               cursor: "pointer",
@@ -119,7 +119,7 @@ function VocabToggle() {
         <text x={CX} y={126} textAnchor="middle" fontSize={15} fontWeight={600} fill={T.ink}>{v.current}</text>
         <text x={CX} y={146} textAnchor="middle" fontSize={12} fill={T.inkMuted}>day 18</text>
       </svg>
-      <p style={{ fontFamily: "var(--font-display)", fontSize: "1rem", lineHeight: 1.7, color: T.ink, textAlign: "center", maxWidth: "40ch", marginTop: 12 }}>
+      <p style={{ fontFamily: "var(--font-display)", fontSize: "var(--t-body)", lineHeight: 1.7, color: T.ink, textAlign: "center", maxWidth: "40ch", marginTop: 12 }}>
         {v.note}
       </p>
     </div>
@@ -195,7 +195,7 @@ function EnergyNudges() {
         {[
           { who: "AIRA, end of log", msg: "Nice work showing up for yourself. Small, steady movement helps your body regulate energy and symptoms over time.", accent: true },
         ].map((n) => (
-          <div key={n.who} style={{ background: "#fff", border: `1px solid ${n.accent ? A.coral : "rgba(0,0,0,0.1)"}`, borderRadius: 12, padding: "14px 16px", fontSize: "0.875rem", lineHeight: 1.6, color: T.ink }}>
+          <div key={n.who} style={{ background: "#fff", border: `1px solid ${n.accent ? A.coral : "rgba(0,0,0,0.1)"}`, borderRadius: 12, padding: "14px 16px", fontSize: "var(--t-caption)", lineHeight: 1.6, color: T.ink }}>
             <span style={{ color: n.accent ? A.coral : T.inkMuted }}>{n.who}</span>
             <br />
             {n.msg}

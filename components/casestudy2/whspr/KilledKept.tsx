@@ -25,7 +25,7 @@ export default function KilledKept() {
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-6 mb-4">
         <p
           style={{
-            fontSize: "0.8125rem",
+            fontSize: "var(--t-caption)",
             textTransform: "uppercase",
             letterSpacing: "0.1em",
             color: W.dusk500,
@@ -37,7 +37,7 @@ export default function KilledKept() {
         <p
           className="hidden sm:block"
           style={{
-            fontSize: "0.8125rem",
+            fontSize: "var(--t-caption)",
             textTransform: "uppercase",
             letterSpacing: "0.1em",
             color: W.amber,
@@ -58,7 +58,7 @@ export default function KilledKept() {
             <p
               style={{
                 fontFamily: "var(--font-body)",
-                fontSize: "0.9375rem",
+                fontSize: "var(--t-body)",
                 color: W.dusk500,
                 lineHeight: 1.6,
                 textDecoration: "line-through",
@@ -71,7 +71,7 @@ export default function KilledKept() {
               className="pl-4 sm:pl-0"
               style={{
                 fontFamily: "var(--font-body)",
-                fontSize: "0.9375rem",
+                fontSize: "var(--t-body)",
                 color: W.textLight,
                 lineHeight: 1.6,
               }}
@@ -89,7 +89,7 @@ export default function KilledKept() {
       >
         <p
           style={{
-            fontSize: "0.8125rem",
+            fontSize: "var(--t-caption)",
             textTransform: "uppercase",
             letterSpacing: "0.1em",
             color: W.amber,
@@ -109,7 +109,7 @@ export default function KilledKept() {
         >
           &ldquo;Not just being present in a space, but start outwardly doing things towards me.&rdquo;
         </p>
-        <p style={{ fontFamily: "var(--font-body)", fontSize: "0.9375rem", color: W.dusk400, lineHeight: 1.65 }}>
+        <p style={{ fontFamily: "var(--font-body)", fontSize: "var(--t-body)", color: W.dusk400, lineHeight: 1.65 }}>
           Threat is behavior directed at you — not who happens to be nearby. All three cut features
           scored places by proximity and appearance instead, which is the reading she was arguing
           against.

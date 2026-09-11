@@ -1,5 +1,15 @@
 export type PlaygroundKind = "full" | "light";
 
+/** Which section of /playground an entry sits in. */
+export type PlaygroundCategory = "creative-tech" | "fashion" | "community";
+
+/** Section order and headings on /playground. Entries keep their array order within each. */
+export const PLAYGROUND_CATEGORIES: { id: PlaygroundCategory; label: string }[] = [
+  { id: "creative-tech", label: "Creative Tech" },
+  { id: "fashion", label: "Fashion & Styling" },
+  { id: "community", label: "Community & Events" },
+];
+
 export interface PlaygroundImage {
   src: string;
   alt: string;
@@ -16,6 +26,8 @@ export interface PlaygroundEntry {
   slug: string;
   title: string;
   tags: string;
+  /** The /playground section this entry is listed under. */
+  category: PlaygroundCategory;
   /**
    * The half of the card title that says what the piece actually was. Rendered on the
    * same line as `title` at the same size — "Zebein: Creative direction for ...".
@@ -75,6 +87,7 @@ const playgroundEntries: PlaygroundEntry[] = [
   // throw away the research behind it, so nothing about that page changes.
   {
     slug: "si-ch",
+    category: "fashion",
     title: "Si.Ch",
     tags: "Fashion · Brand",
     oneLiner: "My gender-neutral clothing label",
@@ -98,6 +111,7 @@ const playgroundEntries: PlaygroundEntry[] = [
   },
   {
     slug: "gesture-sketch",
+    category: "creative-tech",
     title: "GestureSketch",
     tags: "Creative Coding · AI",
     oneLiner: "Drawing in the air with your hands, as a way into art therapy",
@@ -115,6 +129,7 @@ const playgroundEntries: PlaygroundEntry[] = [
   },
   {
     slug: "road-trip-experience",
+    category: "community",
     title: "The Roadtrip Experience",
     tags: "Art · Documentary",
     oneLiner: "Sixteen artists, one car, and the lost music of Kutchh on film",
@@ -164,6 +179,7 @@ const playgroundEntries: PlaygroundEntry[] = [
   },
   {
     slug: "nightmare-in-neverland",
+    category: "creative-tech",
     title: "Nightmare in Neverland",
     tags: "VR · Art Direction",
     oneLiner: "Keeping a VR nightmare fun by keeping it whimsical",
@@ -175,7 +191,7 @@ const playgroundEntries: PlaygroundEntry[] = [
       "The hard part was tone. The idea started dark and dystopian, and I steered my level toward whimsical instead: unsettling, but still fun to be in. Pink and green light, giant floating teacups and an animated cat at the head of the table make it inviting at first. Then you notice the skull teapots and the half-buried closets.",
       "There's no dialogue, so light, scale and sound tell the story. Playtesting showed people needed stronger cues to find their way, and small lighting and audio changes made the biggest difference.",
     ],
-    cover: { src: "/playground/neverland/tea-party-cropped.jpg", alt: "The tea party forest lit pink and green, giant teacups floating above the table", width: 2000, height: 969 },
+    cover: { src: "/playground/neverland/tea-party-promo-still.jpg", alt: "The tea party table set on a patch of grass in the dark forest, from the promo film", width: 1920, height: 1080 },
     images: [],
     pageImages: [
       { src: "/playground/neverland/tea-party-cropped.jpg", alt: "The tea party forest lit pink and green, giant teacups floating above the table", width: 2000, height: 969 },
@@ -190,7 +206,24 @@ const playgroundEntries: PlaygroundEntry[] = [
   },
 
   {
+    slug: "turtles",
+    category: "creative-tech",
+    title: "Turtles",
+    tags: "Creative Coding · p5.js",
+    oneLiner: "An underwater p5.js sketch you can feed",
+    kind: "full",
+    teaser:
+      "A p5.js sketch that started as a midterm draft in 2024 and that I came back to and polished: sea turtles swimming at different depths through kelp and light from the surface. Move your cursor to leave a trail of bubbles, and click to drop food for the turtles to swim over to.",
+    sketch: "turtles",
+    cover: { src: "/playground/turtles/turtles-poster.jpg", alt: "Sea turtles swimming through kelp and light shafts in a p5.js underwater scene", width: 640, height: 384 },
+    images: [
+      { src: "/playground/turtles/turtles-poster.jpg", alt: "Sea turtles swimming through kelp and light shafts in a p5.js underwater scene", width: 640, height: 384 },
+    ],
+    href: "/playground/turtles",
+  },
+  {
     slug: "humans-were-made-to-love",
+    category: "fashion",
     title: "Humans Were Made to Love",
     tags: "Styling · Art Direction",
     oneLiner: "A gender-fluid fashion spread I directed in design school",
@@ -226,6 +259,7 @@ const playgroundEntries: PlaygroundEntry[] = [
   },
   {
     slug: "verve-magazine",
+    category: "fashion",
     title: "Verve Magazine",
     tags: "Styling · Editorial",
     oneLiner: "Assistant stylist on an editorial story and two supplement covers",
@@ -312,6 +346,7 @@ const playgroundEntries: PlaygroundEntry[] = [
   },
   {
     slug: "niluk",
+    category: "fashion",
     title: "Niluk: Safar Collection",
     tags: "Styling · Art Direction",
     oneLiner: "Indian embroidery on Western silhouettes",
@@ -333,6 +368,7 @@ const playgroundEntries: PlaygroundEntry[] = [
   },
   {
     slug: "zebein",
+    category: "fashion",
     title: "Zebein",
     tags: "Styling · Art Direction",
     oneLiner: "Creative direction for an Indian label's debut campaign",
@@ -357,6 +393,7 @@ const playgroundEntries: PlaygroundEntry[] = [
   },
   {
     slug: "spoken-word",
+    category: "community",
     title: "Spoken Word Ahmedabad",
     tags: "Poetry · Performance",
     oneLiner: "Twenty open mics that gave Ahmedabad a stage of its own",
@@ -375,6 +412,7 @@ const playgroundEntries: PlaygroundEntry[] = [
   },
   {
     slug: "big-squat-festival",
+    category: "community",
     title: "Big Squat Festival",
     tags: "Events · Artist Relations",
     oneLiner: "Artist relations for an eight-week indie arts festival",

@@ -60,7 +60,7 @@ export default function FeatureVisual({
             <p
               style={{
                 fontFamily: "var(--font-body)",
-                fontSize: "0.9375rem",
+                fontSize: "var(--t-body)",
                 color: T.inkMuted,
                 lineHeight: 1.5,
                 maxWidth: "60ch",

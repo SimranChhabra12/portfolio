@@ -118,8 +118,8 @@ export default function Home() {
           <h2 className="t-section text-ink !max-w-none">Playground</h2>
 
           <p className="t-body text-ink/75 mt-3 max-w-[var(--col-text,640px)]">
-            Styling, art direction, photography and the events I put on — everything that
-            isn&apos;t product design.
+            The creative work I do beyond product design, from styling and art direction to
+            photography and the events I put on.
           </p>
 
           {/* Every entry, tiled. See PlaygroundMosaic for why this is columns, not grid. */}

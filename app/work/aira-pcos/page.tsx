@@ -38,8 +38,8 @@ const SECTIONS = [
   { id: "insight", number: "03", label: "The Insight" },
   { id: "decisions", number: "04", label: "Design Decisions" },
   { id: "product", number: "05", label: "The Product" },
-  { id: "next", number: "06", label: "What I'd Do Next" },
-  { id: "takeaway", number: "07", label: "What I Took Away" },
+  { id: "next", number: "06", label: "What I'd do next" },
+  { id: "takeaway", number: "07", label: "What I took away" },
 ];
 
 export default function AiraPage() {
@@ -341,7 +341,7 @@ export default function AiraPage() {
             />
           </Section>
 
-          <Section id="next" number="06" heading="What I'd Do Next">
+          <Section id="next" number="06" heading="What I'd do next">
             <Prose>
               <P>
                 <strong>Test it with the women we interviewed.</strong>{" "}We designed AIRA from research
@@ -366,7 +366,7 @@ export default function AiraPage() {
             </Prose>
           </Section>
 
-          <Section id="takeaway" number="07" heading="What I Took Away">
+          <Section id="takeaway" number="07" heading="What I took away">
             <Prose>
               <P>
                 One participant mentioned in passing that she&apos;d started thinking of her cycle as
