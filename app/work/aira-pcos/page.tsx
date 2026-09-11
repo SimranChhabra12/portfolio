@@ -163,7 +163,7 @@ export default function AiraPage() {
               <List
                 accent={CORAL}
                 items={[
-                  "Nearly everyone said their symptoms “vary too much to tell.” PMOS doesn't run on a predictable schedule",
+                  "Asked when their symptoms feel worst, 11 of 13 said it “varies too much to tell.” PMOS doesn't run on a predictable schedule",
                   "“I start strong but can't stay consistent” was the most common reason habits fell apart",
                   "Most-requested support: gentle nudges during low-energy moments, and cycle-phase guidance",
                 ]}
