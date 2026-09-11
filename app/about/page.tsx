@@ -106,7 +106,7 @@ const SHELF: { title: string; issuer: string; year: string; detail?: string }[] 
     title: "AI Rationale",
     issuer: "LSE-NYU Research Seed Fund",
     year: "2026",
-    detail: "How technologists, policy makers and lawyers imagine artificial intelligence for migration in London and New York City. I contributed to the research at NYU, and it was shared at the AI / Migration / Futures workshop at LSE.",
+    detail: "How technologists, policy makers and lawyers imagine artificial intelligence for migration in London and New York City. As part of the NYU team, I did the literature review, found and recruited people to interview, helped run the interviews, and coded and synthesised them. That synthesis is what was presented at the AI / Migration / Futures workshop at LSE.",
   },
   {
     title: "Infrastructuring Public-Infrastructuring Private",
