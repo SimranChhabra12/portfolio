@@ -227,7 +227,7 @@ const playgroundEntries: PlaygroundEntry[] = [
     coverPosition: "center 20%",
     kind: "light",
     teaser:
-      "Assistant stylist on an editorial story and two supplement covers, with Shriya Saran and Tamannah Bhatia.",
+      "I was a styling intern at Verve India while I was still in undergrad, and did everything a styling intern does across a feature shoot and a supplement shoot: moodboards, putting looks together, sourcing, returns and assisting on set. The shoots were with Shriya Saran and Tamannah Bhatia.",
     cover: { src: "/playground/Styling Assistant - Verve/Shriya Saran - Assisting/Shriya Cover.jpg", alt: "Styling assistant on set with Shriya Saran, for Verve Magazine", width: 916, height: 1200 },
     images: [
     { src: `/playground/Styling Assistant - Verve/Shriya Saran - Assisting/Shriya Cover.jpg`, alt: "Styling assistant on set with Shriya Saran, for Verve Magazine", width: 916, height: 1200 },
@@ -267,7 +267,7 @@ const playgroundEntries: PlaygroundEntry[] = [
     coverPosition: "center 65%",
     kind: "light",
     teaser:
-      "Creative direction and styling for the 'Safar' collection, Indian embroidery on Western silhouettes.",
+      "Nilima Mehta's photographer, a senior from my fashion school, got in touch. Nilima had designed pieces around different moods, and I helped her reframe them into one story: Safar, Indian embroidery on Western silhouettes. I did the creative direction, styling and sourcing.",
     cover: { src: "/playground/Niluk/DSC08043.jpg", alt: "Niluk portrait session, profile with styled makeup", width: 800, height: 1200 },
     images: [
     { src: `/playground/Niluk/DSC08819.jpg`, alt: "Niluk portrait session", width: 800, height: 1200 },
@@ -288,7 +288,7 @@ const playgroundEntries: PlaygroundEntry[] = [
     coverPosition: "center 20%",
     kind: "light",
     teaser:
-      "Creative direction and styling for the debut campaign of an Indian contemporary label.",
+      "Zebein was a new label bringing out stylish linen dresses, with pockets. We split the collection into three themes by colour, and I planned the shoot around them: locations with the photographer, then the styling and sourcing for every look, plus the jewellery, make-up and poses. It was a big campaign for two people, the photographer and me, with 7 models over 2 weeks.",
     cover: { src: "/playground/Resized Zebein/IMG_1523.jpg", alt: "Zebein portrait session, golden hour outdoors", width: 800, height: 1200 },
     images: [
     { src: `/playground/Resized Zebein/IMG_3043.jpg`, alt: "Zebein portrait session", width: 800, height: 1200 },
@@ -329,10 +329,10 @@ const playgroundEntries: PlaygroundEntry[] = [
     oneLiner: "Artist relations for an eight-week indie arts festival",
     kind: "light",
     teaser:
-      "Organizing committee, artist relations, for Fangirl Live's eight-week indie arts festival.",
-    cover: { src: "/playground/poetry-festivals/27163986_1765914430120340_6600117073842964069_o.jpg", alt: "Performing at Big Squat, an indie arts festival", width: 1200, height: 638 },
+      "After my Verve internship I came back to Ahmedabad, and since I was already organising festivals, I found a group of people doing the same thing who also happened to be my friends. Together we put on Big Squat, Fangirl Live's eight-week indie arts festival. I found artists and booked them, hosted on stage, and did a little of everything else. It was a labour of love from a few kids who loved indie music and comedy and wanted to bring that culture to their home city.",
+    cover: { src: "/playground/poetry-festivals/27163986_1765914430120340_6600117073842964069_o.jpg", alt: "Hosting on stage at Big Squat, an indie arts festival", width: 1200, height: 638 },
     images: [
-    { src: `/playground/poetry-festivals/27163986_1765914430120340_6600117073842964069_o.jpg`, alt: "Performing at an indie arts festival", width: 1200, height: 638 },
+    { src: `/playground/poetry-festivals/27163986_1765914430120340_6600117073842964069_o.jpg`, alt: "Hosting on stage at an indie arts festival", width: 1200, height: 638 },
     ],
   },
 ];
