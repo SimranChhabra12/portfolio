@@ -2,13 +2,12 @@ import { T } from "@/components/casestudy2/tokens";
 import { CaseStudyFooter } from "@/components/casestudy2/CaseStudyChrome";
 import Nav from "@/components/ui/Nav";
 import Section, { H3, P, List, Caption } from "@/components/casestudy2/Section";
-import ScreensRow from "@/components/casestudy2/ScreensRow";
-import PhoneMockup from "@/components/casestudy2/PhoneMockup";
 import QuoteCallout from "@/components/casestudy2/QuoteCallout";
 import { StatRow } from "@/components/casestudy2/StatCallout";
 import SeasonsDiagram from "@/components/casestudy2/aira/SeasonsDiagram";
 import ScatteredStrands from "@/components/casestudy2/aira/ScatteredStrands";
 import FeatureVisual from "@/components/casestudy2/FeatureVisual";
+import ProtoScreens from "@/components/casestudy2/aira/prototype/StaticScreen";
 import HeroCover from "@/components/casestudy2/aira/HeroCover";
 import SeasonWheelBlock from "@/components/casestudy2/aira/SeasonWheelBlock";
 import CaseStudyHeadline from "@/components/casestudy2/CaseStudyHeadline";
@@ -264,27 +263,24 @@ export default function AiraPage() {
                 ovulatory, luteal). The data behind it stays the same.
               </P>
             </Prose>
-            <FeatureVisual
-              kind="phone"
-              ownHomeIndicator
-              pairWidth={PHONE_PAIR}
-              images={[
-                { src: "/projects/aira-pcos/aira/aira 3x/Winter (M).png", alt: "Winter, Seasons view", pixelWidth: 1320, pixelHeight: 2868, label: "Seasons view" },
-                { src: "/projects/aira-pcos/aira/aira 3x/Menstrual Phase.png", alt: "Menstrual, Phases view", pixelWidth: 1320, pixelHeight: 2868, label: "Phases view" },
-              ]}
+            <ProtoScreens
+              width={PHONE_PAIR}
               headline="Seasons or Phases"
               caption="One toggle switches the same cycle between seasons and clinical phases."
+              shots={[
+                { screen: "phase", state: { phaseIdx: 0, seasons: true }, alt: "Winter, Seasons view", caption: "Seasons view" },
+                { screen: "phase", state: { phaseIdx: 0, seasons: false }, alt: "Menstrual, Phases view", caption: "Phases view" },
+              ]}
             />
-            <ScreensRow
-              ownHomeIndicator
+            <ProtoScreens
               width={PHONE_ROW_3UP}
-              screens={[
-                { src: "/projects/aira-pcos/aira/aira 3x/Spring (F).png", alt: "Spring, Seasons view", caption: "Spring, Seasons view", pixelWidth: 1320, pixelHeight: 2868 },
-                { src: "/projects/aira-pcos/aira/aira 3x/Follicular Phase.png", alt: "Follicular, Phases view", caption: "Follicular, Phases view", pixelWidth: 1320, pixelHeight: 2868 },
-                { src: "/projects/aira-pcos/aira/aira 3x/Summer (O).png", alt: "Summer, Seasons view", caption: "Summer, Seasons view", pixelWidth: 1320, pixelHeight: 2868 },
-                { src: "/projects/aira-pcos/aira/aira 3x/Ovulation.png", alt: "Ovulation, Phases view", caption: "Ovulation, Phases view", pixelWidth: 1320, pixelHeight: 2868 },
-                { src: "/projects/aira-pcos/aira/aira 3x/Luteal.png", alt: "Autumn, Seasons view", caption: "Autumn, Seasons view", pixelWidth: 1320, pixelHeight: 2868 },
-                { src: "/projects/aira-pcos/aira/aira 3x/Luteal-1.png", alt: "Luteal, Phases view", caption: "Luteal, Phases view", pixelWidth: 1320, pixelHeight: 2868 },
+              shots={[
+                { screen: "phase", state: { phaseIdx: 1, seasons: true }, alt: "Spring, Seasons view", caption: "Spring, Seasons view" },
+                { screen: "phase", state: { phaseIdx: 1, seasons: false }, alt: "Follicular, Phases view", caption: "Follicular, Phases view" },
+                { screen: "phase", state: { phaseIdx: 2, seasons: true }, alt: "Summer, Seasons view", caption: "Summer, Seasons view" },
+                { screen: "phase", state: { phaseIdx: 2, seasons: false }, alt: "Ovulation, Phases view", caption: "Ovulation, Phases view" },
+                { screen: "phase", state: { phaseIdx: 3, seasons: true }, alt: "Autumn, Seasons view", caption: "Autumn, Seasons view" },
+                { screen: "phase", state: { phaseIdx: 3, seasons: false }, alt: "Luteal, Phases view", caption: "Luteal, Phases view" },
               ]}
             />
 
@@ -297,13 +293,9 @@ export default function AiraPage() {
                 people a place to learn more if they want to.
               </P>
             </Prose>
-            <PhoneMockup
-              src="/projects/aira-pcos/aira/aira 3x/Learn tab - Global NAV.png"
-              alt="Learn tab, Daily Pulse"
-              caption="Learn tab: Daily Pulse"
+            <ProtoScreens
               width={PHONE_FEATURE}
-              pixelWidth={1320}
-              pixelHeight={2868}
+              shots={[{ screen: "learn", alt: "Learn tab, Daily Pulse", caption: "Learn tab: Daily Pulse" }]}
             />
 
             <Prose>
@@ -316,13 +308,9 @@ export default function AiraPage() {
                 suggestions adjust to your current phase.
               </P>
             </Prose>
-            <PhoneMockup
-              src="/projects/aira-pcos/aira/aira 3x/meal tracking.png"
-              alt="Meal tracking"
-              caption="Meal tracking"
+            <ProtoScreens
               width={PHONE_FEATURE}
-              pixelWidth={1320}
-              pixelHeight={2868}
+              shots={[{ screen: "meals", alt: "Meal tracking", caption: "Meal tracking" }]}
             />
 
             <Prose>
@@ -334,14 +322,9 @@ export default function AiraPage() {
                 helps during your current phase.
               </P>
             </Prose>
-            <PhoneMockup
-              src="/projects/aira-pcos/aira/aira 3x/Workout - Cycle Insight.png"
-              alt="Activity insight"
-              caption="Activity insight"
-              ownHomeIndicator
+            <ProtoScreens
               width={PHONE_FEATURE}
-              pixelWidth={1320}
-              pixelHeight={2868}
+              shots={[{ screen: "activityDone", alt: "Activity insight", caption: "Activity insight" }]}
             />
             <Prose>
               <H3>Nudges</H3>

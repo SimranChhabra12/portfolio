@@ -1,7 +1,6 @@
 import { T } from "../tokens";
-import PhoneShell from "./screens/PhoneShell";
-import HomeScreen from "./screens/HomeScreen";
-import PhaseScreen from "./screens/PhaseScreen";
+import { StaticScreen } from "./prototype/StaticScreen";
+import { GLOBAL_CSS } from "./prototype/ui";
 import { K } from "./screens/kit";
 
 const A = T.aira;
@@ -174,6 +173,7 @@ export default function HeroCover() {
         paddingTop: "clamp(6rem, 4.5rem + 4vw, 8.5rem)",
       }}
     >
+      <style>{GLOBAL_CSS + ".aira-screen{animation:none}"}</style>
       <SeasonField />
       <Grain />
 
@@ -191,14 +191,10 @@ export default function HeroCover() {
 
         <div className="flex items-start" style={{ gap: 28 }}>
           <div className="hidden sm:block" style={{ width: PHONE_W, flex: "0 0 auto" }}>
-            <PhoneShell label="AIRA cycle phase screen" width={PHONE_W}>
-              <PhaseScreen />
-            </PhoneShell>
+            <StaticScreen width={PHONE_W} shot={{ screen: "phase", state: { phaseIdx: 3, seasons: false }, alt: "AIRA phase screen, Luteal phase" }} />
           </div>
           <div style={{ width: PHONE_W, flex: "0 0 auto" }}>
-            <PhoneShell label="AIRA home, one daily readiness score" width={PHONE_W}>
-              <HomeScreen />
-            </PhoneShell>
+            <StaticScreen width={PHONE_W} shot={{ screen: "home", alt: "AIRA Today screen: Luteal, day 18, readiness 92" }} />
           </div>
         </div>
 
