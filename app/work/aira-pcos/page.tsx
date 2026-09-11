@@ -164,7 +164,7 @@ export default function AiraPage() {
                 accent={CORAL}
                 items={[
                   "Asked when their symptoms feel worst, 11 of 13 said it “varies too much to tell.” PMOS doesn't run on a predictable schedule",
-                  "“I start strong but can't stay consistent” was the most common reason habits fell apart",
+                  "The two most common reasons habits fell apart, tied at 9 of 13: “I start strong but can't stay consistent” and “life gets too busy”",
                   "Most-requested support: gentle nudges during low-energy moments, and cycle-phase guidance",
                 ]}
               />
