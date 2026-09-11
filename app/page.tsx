@@ -119,7 +119,7 @@ export default function Home() {
 
           <p className="t-body text-ink/75 mt-3 max-w-[var(--col-text,640px)]">
             The creative work I do beyond product design, from styling and art direction to
-            photography and the events I put on.
+            photography and the events I helped put on.
           </p>
 
           {/* Every entry, tiled. See PlaygroundMosaic for why this is columns, not grid. */}
