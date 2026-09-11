@@ -187,7 +187,7 @@ function EnergyNudges() {
         <line x1={382} y1={178} x2={382} y2={156} stroke={LATE} strokeDasharray="2 3" />
         <text x={214} y={170} fontSize={11} fill={LATE}>“You missed yesterday”</text>
         {[[45, 45], [270, 55], [540, 42]].map(([cx, cy]) => <circle key={cx} cx={cx} cy={cy} r={7} fill={A.coral} />)}
-        <text x={280} y={44} fontSize={11} fill="#993C1D">Two a day at most. Never on rest days.</text>
+        <text x={280} y={44} fontSize={11} fill="#993C1D">“A little reflection can go a long way. Want to check in?”</text>
         <text x={620} y={198} textAnchor="end" fontSize={11} fill={T.inkMuted}>red: fixed daily reminder · coral: AIRA nudge</text>
       </svg>
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-5">

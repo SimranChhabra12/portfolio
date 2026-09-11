@@ -31,7 +31,7 @@ export type AppState = {
   flow: string;
   symptoms: string[];
   energy: string;
-  meals: { name: string; kcal: number }[];
+  meals: { name: string }[];
   workout: string;
   phaseIdx: number;
   seasons: boolean;
@@ -50,9 +50,9 @@ export const INITIAL: AppState = {
   symptoms: ["Abdominal cramps", "Headaches"],
   energy: "Medium energy",
   meals: [
-    { name: "Overnight oats, berries", kcal: 380 },
-    { name: "Chicken grain bowl", kcal: 640 },
-    { name: "Apple and almond butter", kcal: 220 },
+    { name: "Overnight oats, berries" },
+    { name: "Chicken grain bowl" },
+    { name: "Apple and almond butter" },
   ],
   workout: "Pilates",
   phaseIdx: 3,
@@ -511,7 +511,7 @@ function Home({ nav }: { nav: Nav }) {
   const pillars = [
     { t: "Sleep", v: "8h 46m", d: "+1h vs avg", icon: "moon", c: C.lavender, to: "sleep" },
     { t: "Move", v: "9,466", d: "steps", icon: "walk", c: C.green, to: "steps" },
-    { t: "Fuel", v: `${2000 - nav.s.meals.reduce((a, m) => a + m.kcal, 0)}`, d: "kcal left", icon: "bowl", c: C.peach, to: "meals" },
+    { t: "Fuel", v: `${nav.s.meals.length}`, d: "meals logged", icon: "bowl", c: C.peach, to: "meals" },
     { t: "Mind", v: "Calm", d: "check in", icon: "mind", c: C.blue, to: "energy" },
   ];
   return (
@@ -813,32 +813,14 @@ function PhaseScreen({ nav }: { nav: Nav }) {
 }
 
 // ═══ MEALS ══════════════════════════════════════════════════════════════════
-function Ring({ v, max, color, label }: { v: number; max: number; color: string; label: string }) {
-  const r = 26, c = 2 * Math.PI * r;
-  return (
-    <div style={{ textAlign: "center" }}>
-      <div style={{ position: "relative", width: 64, height: 64, margin: "0 auto" }}>
-        <svg width="64" height="64" viewBox="0 0 64 64" aria-hidden style={{ transform: "rotate(-90deg)" }}>
-          <circle cx="32" cy="32" r={r} stroke={C.cardHi} strokeWidth="6" fill="none" />
-          <circle cx="32" cy="32" r={r} stroke={color} strokeWidth="6" fill="none" strokeLinecap="round" strokeDasharray={`${(v / max) * c} ${c}`} />
-        </svg>
-        <span style={{ position: "absolute", inset: 0, display: "flex", alignItems: "center", justifyContent: "center", fontFamily: F, fontSize: 13, fontWeight: 600, color: C.text }}>{v}g</span>
-      </div>
-      <Txt v="caption" style={{ color: C.text, marginTop: 8 }}>{label}</Txt>
-      <Txt v="caption" style={{ color: C.faint, fontWeight: 400 }}>of {max}g</Txt>
-    </div>
-  );
-}
-
 function Meals({ nav }: { nav: Nav }) {
   const [day, setDay] = useState(3);
   const [draft, setDraft] = useState("");
-  const eaten = nav.s.meals.reduce((a, m) => a + m.kcal, 0);
   const add = () => {
     if (!draft.trim()) return;
-    nav.set({ meals: [...nav.s.meals, { name: draft.trim(), kcal: 310 }] });
+    nav.set({ meals: [...nav.s.meals, { name: draft.trim() }] });
     setDraft("");
-    nav.toast("Meal added · ~310 kcal estimated");
+    nav.toast("Meal added");
   };
   return (
     <Screen tab="track" nav={nav} pad={false}>
@@ -855,33 +837,19 @@ function Meals({ nav }: { nav: Nav }) {
             </button>
           ))}
         </div>
+        {/* No calorie budget: a number to stay under reads as judgment on low days
+            (see Decision 03). The card says what helps this phase instead. */}
         <Card style={{ padding: 20 }}>
-          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-end" }}>
-            <div>
-              <Txt v="caption">Calories left</Txt>
-              <Txt style={{ fontSize: 34, fontWeight: 700, letterSpacing: "-0.02em", marginTop: 4, fontVariantNumeric: "tabular-nums" }}>
-                {2000 - eaten}<span style={{ fontSize: 15, fontWeight: 500, color: C.muted }}> kcal</span>
-              </Txt>
-            </div>
-            <div style={{ textAlign: "right" }}>
-              <Txt v="caption" style={{ color: C.faint }}>Goal 2,000</Txt>
-              <Txt v="caption" style={{ color: C.coral, marginTop: 4 }}>{eaten.toLocaleString()} eaten</Txt>
-            </div>
-          </div>
-          <div style={{ height: 8, borderRadius: 4, background: C.cardHi, margin: "16px 0 20px", overflow: "hidden" }}>
-            <i style={{ display: "block", height: "100%", width: `${Math.min(100, (eaten / 2000) * 100)}%`, background: C.coral, borderRadius: 4, transition: "width 400ms" }} />
-          </div>
-          <div style={{ display: "flex", justifyContent: "space-around" }}>
-            <Ring v={85} max={140} color={C.peach} label="Protein" />
-            <Ring v={120} max={200} color={C.green} label="Carbs" />
-            <Ring v={45} max={70} color={C.blue} label="Fats" />
-          </div>
+          <Txt v="caption" style={{ color: C.peach }}>Luteal · Autumn</Txt>
+          <Txt v="headline" style={{ fontSize: 20, marginTop: 6 }}>Steady, grounding meals</Txt>
+          <Txt v="sub" style={{ marginTop: 6 }}>Energy naturally tapers here. Regular meals with some protein and slow carbs help keep it even.</Txt>
+          <Txt v="caption" style={{ color: C.muted, marginTop: 16 }}>{nav.s.meals.length} meals logged today</Txt>
         </Card>
         <Card style={{ marginTop: 10, display: "flex", gap: 12, alignItems: "center" }}>
           <Icon name="bulb" size={22} color={C.peach} />
           <div>
-            <Txt v="headline" style={{ fontSize: 15 }}>Low on protein today</Txt>
-            <Txt v="sub" style={{ marginTop: 2 }}>Greek yogurt as a snack closes most of the gap.</Txt>
+            <Txt v="headline" style={{ fontSize: 15 }}>An easy add this week</Txt>
+            <Txt v="sub" style={{ marginTop: 2 }}>Greek yogurt or a handful of nuts as a snack helps with afternoon dips.</Txt>
           </div>
         </Card>
         <Label style={{ margin: "28px 0 12px" }}>Log a meal</Label>
@@ -898,7 +866,7 @@ function Meals({ nav }: { nav: Nav }) {
         <Label style={{ margin: "28px 0 12px" }}>Today</Label>
         <Group>
           {nav.s.meals.map((m, k) => (
-            <Row key={k} label={m.name} detail={["Breakfast", "Lunch", "Snack", "Dinner"][k] ?? "Snack"} right={<Txt v="sub" style={{ fontVariantNumeric: "tabular-nums" }}>{m.kcal} kcal</Txt>} />
+            <Row key={k} label={m.name} detail={["Breakfast", "Lunch", "Snack", "Dinner"][k] ?? "Snack"} />
           ))}
         </Group>
       </div>
