@@ -66,7 +66,8 @@ export default function Home() {
               className="t-sub text-ink/[0.78] mt-7 max-w-[46ch]"
               style={{ fontSize: "clamp(1.125rem, 0.93rem + 0.8vw, 1.625rem)", lineHeight: 1.45 }}
             >
-              Endlessly curious about people, and drawn to the messy middle of things.
+              Endlessly curious about people, and drawn to the messy middle of things. I&apos;ll
+              always stop to say hi to dogs and cats!
             </p>
           </div>
           {/* Portrait frame, matching the cropped source (880x1517) exactly, so the photo

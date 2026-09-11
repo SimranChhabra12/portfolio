@@ -66,7 +66,6 @@ export default async function PlaygroundEntryPage({
 
           <p className="t-caption uppercase tracking-[0.08em] text-mauve mt-6">{entry.tags}</p>
           <h1 className="t-display text-ink !max-w-none mt-2">{entry.title}</h1>
-          <p className="t-sub text-ink/75 !max-w-none mt-3">{entry.oneLiner}</p>
           <p className="t-body text-ink !max-w-[var(--col-text,640px)] mt-6">{entry.teaser}</p>
           {entry.body?.map((para, i) => (
             <p key={i} className="t-body text-ink/85 !max-w-[var(--col-text,640px)] mt-4">
