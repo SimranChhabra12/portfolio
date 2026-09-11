@@ -289,9 +289,9 @@ export default function GestureSketchPage() {
               <P>
                 In v1 the same pinch distance started and stopped a line, so if your fingers
                 drifted a little mid-stroke the line could drop out. Now a pinch has to be tight to
-                start a line (45px between thumb and index) but only loosely closed to keep going
-                (up to 72px). Your hand can relax once you&apos;re drawing. I also stopped recording
-                points that sit almost on top of each other, which was making curves overshoot.
+                start a line but only loosely closed to keep going. Your hand can relax once
+                you&apos;re drawing. I also stopped recording points that sit almost on top of each
+                other, which was making curves overshoot.
               </P>
               <P>
                 The second thing was that you couldn&apos;t tell what the camera thought you were
