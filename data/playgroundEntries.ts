@@ -103,7 +103,7 @@ const playgroundEntries: PlaygroundEntry[] = [
     oneLiner: "Sixteen artists, one car, and the lost music of Kutchh on film",
     kind: "full",
     teaser:
-      "Gujarat is home, so when a friend I'd made at an art festival needed someone to take 16 artists around it, I said yes. It became The Roadtrip Experience, a project with Mahindra & Mahindra exploring the state's indigenous art forms.",
+      "Gujarat is home, so when friends I'd made at an art festival needed someone to take 16 artists around it, I said yes. It became The Roadtrip Experience, a project with Mahindra & Mahindra exploring the state's indigenous art forms.",
     body: [
       "I met them at the Kochi-Muziris Biennale in Kerala, India's biggest contemporary art festival, where they were just fellow community builders I got talking to. I had no idea they ran experiences like this.",
       "I ran the experience and operations, which meant showing artists from around the world the places I grew up with, and watching them see it for the first time. That was the fun part.",
