@@ -191,7 +191,7 @@ const playgroundEntries: PlaygroundEntry[] = [
       "The hard part was tone. The idea started dark and dystopian, and I steered my level toward whimsical instead: unsettling, but still fun to be in. Pink and green light, giant floating teacups and an animated cat at the head of the table make it inviting at first. Then you notice the skull teapots and the half-buried closets.",
       "There's no dialogue, so light, scale and sound tell the story. Playtesting showed people needed stronger cues to find their way, and small lighting and audio changes made the biggest difference.",
     ],
-    cover: { src: "/playground/neverland/tea-party-promo-still.jpg", alt: "The tea party table set on a patch of grass in the dark forest, from the promo film", width: 1920, height: 1080 },
+    cover: { src: "/playground/neverland/doors-promo-still.jpg", alt: "Two pink doors swinging open onto darkness, from the promo film", width: 1920, height: 1080 },
     images: [],
     pageImages: [
       { src: "/playground/neverland/tea-party-cropped.jpg", alt: "The tea party forest lit pink and green, giant teacups floating above the table", width: 2000, height: 969 },
