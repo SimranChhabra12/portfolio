@@ -33,6 +33,8 @@ export type AppState = {
   energy: string;
   meals: { name: string }[];
   workout: string;
+  workoutMins: number;
+  workoutIntensity: number; // 0 easy, 1 moderate, 2 hard
   phaseIdx: number;
   seasons: boolean;
   zenLen: number;
@@ -55,6 +57,8 @@ export const INITIAL: AppState = {
     { name: "Apple and almond butter" },
   ],
   workout: "Pilates",
+  workoutMins: 30,
+  workoutIntensity: 1,
   phaseIdx: 3,
   seasons: false,
   zenLen: 2,
@@ -97,7 +101,7 @@ function TabBar({ active, nav }: { active: Tab; nav: Nav }) {
   return (
     <div style={{
       position: "absolute", left: 0, right: 0, bottom: 0, height: 88, paddingBottom: 26, display: "flex",
-      background: "rgba(14,14,17,0.92)", backdropFilter: "blur(16px)", borderTop: `1px solid ${C.line}`, zIndex: 20,
+      background: "#0E0E11", borderTop: `1px solid ${C.line}`, zIndex: 20,
     }}>
       {tabs.map((t) => {
         const on = t.id === active;
@@ -903,8 +907,8 @@ function Activity({ nav }: { nav: Nav }) {
 
 function LogActivity({ nav }: { nav: Nav }) {
   const kinds = ["Walking", "Pilates", "Strength", "Yoga", "Cycling", "Running"];
-  const [intensity, setIntensity] = useState(1);
-  const [mins, setMins] = useState(30);
+  const intensity = nav.s.workoutIntensity;
+  const mins = nav.s.workoutMins;
   return (
     <Screen pad={false} footer={<Primary onClick={() => nav.go("activityDone")}>Save activity</Primary>}>
       <Header title="Log activity" onBack={nav.back} />
@@ -927,14 +931,14 @@ function LogActivity({ nav }: { nav: Nav }) {
           <Row label="Start time" right={<Txt v="sub">10:07 AM</Txt>} />
           <Row label="Duration" right={
             <span style={{ display: "flex", alignItems: "center", gap: 10 }}>
-              <button onClick={() => setMins(Math.max(5, mins - 5))} style={{ ...iconBtn, width: 30, height: 30, background: C.cardHi, color: C.text, fontSize: 16 }}>−</button>
+              <button onClick={() => nav.set({ workoutMins: Math.max(5, mins - 5) })} style={{ ...iconBtn, width: 30, height: 30, background: C.cardHi, color: C.text, fontSize: 16 }}>−</button>
               <Txt v="body" style={{ width: 54, textAlign: "center", fontVariantNumeric: "tabular-nums" }}>{mins} min</Txt>
-              <button onClick={() => setMins(mins + 5)} style={{ ...iconBtn, width: 30, height: 30, background: C.cardHi, color: C.text, fontSize: 16 }}>+</button>
+              <button onClick={() => nav.set({ workoutMins: mins + 5 })} style={{ ...iconBtn, width: 30, height: 30, background: C.cardHi, color: C.text, fontSize: 16 }}>+</button>
             </span>
           } />
         </Group>
         <Label style={{ margin: "28px 0 12px" }}>Intensity</Label>
-        <Segmented options={["Easy", "Moderate", "Hard"]} value={intensity} onChange={setIntensity} />
+        <Segmented options={["Easy", "Moderate", "Hard"]} value={intensity} onChange={(v) => nav.set({ workoutIntensity: v })} />
         <Txt v="caption" style={{ color: C.faint, fontWeight: 400, marginTop: 10 }}>
           {["Light effort — you could hold a conversation.", "Breathing harder, but steady.", "Vigorous. Best saved for your follicular week."][intensity]}
         </Txt>
@@ -944,18 +948,47 @@ function LogActivity({ nav }: { nav: Nav }) {
 }
 
 function ActivityDone({ nav }: { nav: Nav }) {
+  const p = PHASES[nav.s.phaseIdx];
+  const level = ["Easy", "Moderate", "Hard"][nav.s.workoutIntensity];
+  // Hard sessions in the low-energy phases get a gentle steer rather than praise,
+  // matching the log screen's own "Best saved for your follicular week".
+  const heavy = nav.s.workoutIntensity === 2 && (p.key === "menstrual" || p.key === "luteal");
+  const stats = [
+    { k: "Type", v: nav.s.workout },
+    { k: "Duration", v: `${nav.s.workoutMins} min` },
+    { k: "Intensity", v: level },
+  ];
   return (
     <Screen footer={<><Primary onClick={() => nav.tab("home")}>Back to Today</Primary><div style={{ textAlign: "center", marginTop: 8 }}><TextBtn color={C.muted} onClick={() => nav.go("steps")}>View activity history</TextBtn></div></>}>
-      <div style={{ height: 560, display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", textAlign: "center", position: "relative" }}>
-        <i aria-hidden style={{ position: "absolute", width: 300, height: 300, borderRadius: 999, background: "radial-gradient(circle, rgba(93,184,142,0.25), transparent 65%)" }} />
-        <span style={{ width: 76, height: 76, borderRadius: 999, background: C.green, display: "flex", alignItems: "center", justifyContent: "center", position: "relative" }}>
-          <Icon name="check" size={36} color={C.ground} w={2.75} />
+      <div style={{ display: "flex", flexDirection: "column", alignItems: "center", textAlign: "center", position: "relative", padding: "48px 0 28px" }}>
+        <i aria-hidden style={{ position: "absolute", top: 0, width: 260, height: 260, borderRadius: 999, background: "radial-gradient(circle, rgba(93,184,142,0.22), transparent 65%)" }} />
+        <span style={{ width: 68, height: 68, borderRadius: 999, background: C.green, display: "flex", alignItems: "center", justifyContent: "center", position: "relative" }}>
+          <Icon name="check" size={32} color={C.ground} w={2.75} />
         </span>
-        <Txt v="title" style={{ marginTop: 28, position: "relative" }}>{nav.s.workout} logged</Txt>
-        <Txt v="sub" style={{ marginTop: 10, maxWidth: 280, fontSize: 15, position: "relative" }}>
+        <Txt v="title" style={{ marginTop: 22, position: "relative" }}>{nav.s.workout} logged</Txt>
+        <Txt v="sub" style={{ marginTop: 10, maxWidth: 290, fontSize: 15, position: "relative" }}>
           Nice work showing up for yourself. Small, steady movement helps your body regulate energy and symptoms over time.
         </Txt>
       </div>
+
+      <Card style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", padding: "16px 0" }}>
+        {stats.map((x, i) => (
+          <div key={x.k} style={{ textAlign: "center", borderLeft: i ? `1px solid ${C.line}` : "none", padding: "0 8px" }}>
+            <Txt v="headline" style={{ fontVariantNumeric: "tabular-nums" }}>{x.v}</Txt>
+            <Label style={{ marginTop: 6 }}>{x.k}</Label>
+          </div>
+        ))}
+      </Card>
+
+      <Card style={{ marginTop: 10, padding: 18 }}>
+        <Chip color={p.color} wash={`${p.color}29`}>{p.season} · {p.phase}</Chip>
+        <Txt v="headline" style={{ marginTop: 12 }}>{heavy ? "A heavier session than this week usually wants" : "A good fit for this phase"}</Txt>
+        <Txt v="sub" style={{ marginTop: 6 }}>
+          {heavy
+            ? "Energy tends to dip now, so tomorrow might feel better as a walk or a stretch."
+            : `${p.energy} right now. Movement at this level helps with energy and mood more than pushing hard.`}
+        </Txt>
+      </Card>
     </Screen>
   );
 }
