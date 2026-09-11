@@ -29,6 +29,13 @@ export default function PlaygroundIndexPage() {
           </Link>
 
           <h1 className="t-heading text-ink !max-w-none mt-6">Playground</h1>
+          <p className="t-body text-ink !max-w-[var(--col-text,640px)] mt-6">
+            Most of what&apos;s on this page started with me saying yes. I&apos;m curious about
+            people, I go to things I know nothing about, and I talk to strangers who somehow
+            become friends. Wherever I end up, I end up building a community around it. A slam
+            poetry movement, music festivals, a fashion label, a roadtrip across my home state.
+            None of it was planned. Someone asked, and I said yes.
+          </p>
 
           <div className="mt-16">
             <Playground preloadCount={3} />
