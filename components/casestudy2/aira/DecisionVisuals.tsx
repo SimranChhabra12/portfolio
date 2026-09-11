@@ -17,12 +17,14 @@ function Decision({
   index,
   title,
   rejected,
+  because,
   caption,
   children,
 }: {
   index: number;
   title: string;
   rejected: string;
+  because: string;
   caption: string;
   children: React.ReactNode;
 }) {
@@ -36,6 +38,9 @@ function Decision({
       </p>
       <p style={{ fontSize: "0.9375rem", color: T.inkMuted, lineHeight: 1.6, marginBottom: "1.75rem" }}>
         Not <s style={{ textDecorationColor: A.coral }}>{rejected}</s>
+      </p>
+      <p style={{ fontSize: "1rem", color: T.ink, lineHeight: 1.7, maxWidth: "60ch", marginTop: "-0.75rem", marginBottom: "1.75rem" }}>
+        {because}
       </p>
       {children}
       <p style={{ fontSize: "0.8125rem", color: T.inkMuted, lineHeight: 1.6, marginTop: "1.5rem" }}>{caption}</p>
@@ -208,6 +213,7 @@ export function AiraDecisions() {
         index={1}
         title="One toggle, two vocabularies, same cycle"
         rejected="picking one framing for everyone"
+        because="Some people described their cycle with metaphors like seasons or weather, and others wanted the clinical terms. The cycle data is the same either way, so only the words change."
         caption="The ring doesn’t move when you switch. Only the words change. Source: CHI research on menstrual data framing."
       >
         <VocabToggle />
@@ -216,6 +222,7 @@ export function AiraDecisions() {
         index={2}
         title="How the phase feels, not a countdown"
         rejected="the 28-day predicted-date model"
+        because="Irregular cycles are one of the most common PMOS symptoms, and when a cycle doesn’t fit the model, a countdown can make her feel like her body is the problem. Going by how the phase feels works whether the cycle is regular or not."
         caption="Survey: nearly everyone said their symptoms “vary too much to tell.”"
       >
         <CountdownVsPhases />
@@ -224,6 +231,7 @@ export function AiraDecisions() {
         index={3}
         title="Nudges that wait for energy"
         rejected="9am reminders and streak counters"
+        because="With PMOS, low-energy days are common, and a 9am reminder that shows up no matter what feels like judgment on those days. That’s also why logging ends with an encouraging message instead of a number."
         caption="Fogg Behavior Model and COM-B. Survey respondents chose gentle, well-timed prompts over rigid reminders."
       >
         <EnergyNudges />
