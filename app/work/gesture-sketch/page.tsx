@@ -30,10 +30,11 @@ const SECTIONS = [
   { id: "ideas", number: "03", label: "Three Ideas, One Built" },
   { id: "layouts", number: "04", label: "Five Layouts, Six People" },
   { id: "product", number: "05", label: "GestureSketch" },
-  { id: "decisions", number: "06", label: "Design Decisions" },
-  { id: "outcomes", number: "07", label: "What It Does and Doesn't" },
-  { id: "next", number: "08", label: "What I'd Do Next" },
-  { id: "takeaway", number: "09", label: "What I Took Away" },
+  { id: "v2", number: "06", label: "From v1 to v2" },
+  { id: "decisions", number: "07", label: "Design Decisions" },
+  { id: "outcomes", number: "08", label: "What It Does and Doesn't" },
+  { id: "next", number: "09", label: "What I'd Do Next" },
+  { id: "takeaway", number: "10", label: "What I Took Away" },
 ];
 
 const FIELDS = [
@@ -277,7 +278,45 @@ export default function GestureSketchPage() {
             </Media>
           </Section>
 
-          <Section id="decisions" number="06" heading="Design Decisions">
+          <Section id="v2" number="06" heading="From v1 to v2">
+            <Prose>
+              <P>
+                When I handed in the first version it was still a work in progress. It had
+                latency issues, and the drawing didn&apos;t always keep up with your hand. I knew
+                that going in. It was a bug I had in mind the whole time, so after the class ended I
+                went back to fix it.
+              </P>
+              <P>
+                In v1 the same pinch distance started and stopped a line, so if your fingers
+                drifted a little mid-stroke the line could drop out. Now a pinch has to be tight to
+                start a line (45px between thumb and index) but only loosely closed to keep going
+                (up to 72px). Your hand can relax once you&apos;re drawing. I also stopped recording
+                points that sit almost on top of each other, which was making curves overshoot.
+              </P>
+              <P>
+                The second thing was that you couldn&apos;t tell what the camera thought you were
+                doing. v1 gave you nothing until a line appeared, or didn&apos;t. Now there&apos;s a
+                small badge at the top that says drawing, colour or undo as it happens, so when
+                something goes wrong you know whether it was your hand or the tracking.
+              </P>
+              <P>
+                The tools moved too. Colour, brush size, undo, clear and save sit in one bar along
+                the bottom, and the colours are swatches you can see instead of one dot you had to
+                cycle through blind.
+              </P>
+              <P>
+                And I added flowers, just for fun. Make a fist and they burst up from your hand.
+                Wave and they rain down the canvas. They don&apos;t do anything useful. I&apos;d
+                wanted them since the start of the project, and I like adding a bit of fun to
+                everything I make.
+              </P>
+              <P>
+                The welcome screen stayed, it just shows all five gestures now.
+              </P>
+            </Prose>
+          </Section>
+
+          <Section id="decisions" number="07" heading="Design Decisions">
             <Prose>
               <P>
                 Four decisions, each traceable to something the research or the concept tests turned
@@ -291,7 +330,7 @@ export default function GestureSketchPage() {
             ))}
           </Section>
 
-          <Section id="outcomes" number="07" heading="What It Does and Doesn't">
+          <Section id="outcomes" number="08" heading="What It Does and Doesn't">
             <Prose>
               <P>
                 GestureSketch is a working prototype, not a finished product, and it&apos;s the one
@@ -312,7 +351,7 @@ export default function GestureSketchPage() {
             </Prose>
           </Section>
 
-          <Section id="next" number="08" heading="What I'd Do Next">
+          <Section id="next" number="09" heading="What I'd Do Next">
             <Prose>
               <P>
                 I&apos;d try prompts again, but built the opposite way from the ones I cut. The
@@ -327,7 +366,7 @@ export default function GestureSketchPage() {
             </Prose>
           </Section>
 
-          <Section id="takeaway" number="09" heading="What I Took Away">
+          <Section id="takeaway" number="10" heading="What I Took Away">
             <Prose>
               <H3>What cutting the prompts taught me</H3>
               <P>
