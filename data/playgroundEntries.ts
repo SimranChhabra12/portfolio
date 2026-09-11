@@ -20,6 +20,8 @@ export interface PlaygroundImage {
 export interface PlaygroundVideo {
   src: string;
   alt: string;
+  /** Still shown before playback, for films whose first frame is dark or empty. */
+  poster?: string;
 }
 
 export interface PlaygroundEntry {
@@ -199,7 +201,7 @@ const playgroundEntries: PlaygroundEntry[] = [
       { src: "/playground/neverland/blueprint-2.jpg", alt: "Unreal blueprint for the teacup rotation", width: 1114, height: 1231 },
     ],
     videos: [
-      { src: "/playground/neverland/promo-film.mp4", alt: "Nightmare in Neverland promotional film" },
+      { src: "/playground/neverland/promo-film.mp4", alt: "Nightmare in Neverland promotional film", poster: "/playground/neverland/doors-promo-still.jpg" },
       { src: "/playground/neverland/tea-party-walkthrough.mp4", alt: "Walkthrough of Level Two, the tea party in the forest" },
     ],
     href: "/playground/nightmare-in-neverland",
