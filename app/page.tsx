@@ -180,7 +180,14 @@ export default function Home() {
                 Resume
               </a>
               {" · "}
-              <span className="text-cream/40">Instagram</span>
+              <a
+                href="https://www.instagram.com/simranchhabra/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-surface underline underline-offset-4 decoration-cream/30 transition-colors [@media(hover:hover)]:hover:text-mauve focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-mauve"
+              >
+                Instagram
+              </a>
             </p>
           </div>
         </div>
