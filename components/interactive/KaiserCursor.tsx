@@ -93,6 +93,14 @@ const GREET_TOTAL_MS = GREET_BUBBLE_AT_MS + GREET_HOLD_MS + GREET_BUBBLE_OUT_MS;
 
 const SESSION_KEY = "kaiser-greeted";
 
+/** Summoned: he runs in faster than the pounce, sits beside the button, and
+    holds the bubble long enough to read a full sentence. */
+const SUMMON_SPEED = POUNCE_SPEED * 1.6;
+const SUMMON_BUBBLE_IN_MS = 250;
+const SUMMON_HOLD_MS = 3400;
+const SUMMON_GAP = 10;
+const SPRITE_H = 42;
+
 /**
  * Where he's allowed to be.
  *
@@ -111,12 +119,27 @@ const isOffLimits = (pathname: string) =>
   /^\/work\/[^/]+/.test(pathname);
 
 type Phase = "trotting" | "idle" | "sitting" | "holding";
-type Mode = "greet" | "follow";
+type Mode = "greet" | "follow" | "summon";
+
+/** Fired by the "say hi to Kaiser" button on /about. The listener marks
+    `handled`, so the button knows whether anyone came (he doesn't render on
+    touch screens or under reduced motion) and can fall back to text. */
+export const KAISER_SUMMON = "kaiser:summon";
+export type SummonDetail = {
+  x: number; y: number; w: number; h: number;
+  message: string;
+  handled: boolean;
+};
 
 export default function KaiserCursor() {
   const [enabled, setEnabled] = useState(false);
   const [phase, setPhase] = useState<Phase>("trotting");
   const [bubble, setBubble] = useState(false);
+  const [bubbleText, setBubbleText] = useState("Hi, I\u2019m Kaiser.");
+  // Summoned to a link that sits under a line of text, the bubble opens below
+  // him, into the gap, so it never covers what's above. Set inline rather than
+  // by a stylesheet rule so it's one piece of state, next to the text it moves.
+  const [bubbleBelow, setBubbleBelow] = useState(false);
   const [hidden, setHidden] = useState(true);
   // Separate from `hidden`: the bone stays off screen through the greeting,
   // which plays before the pointer has told us where it is.
@@ -183,6 +206,9 @@ export default function KaiserCursor() {
     let pointerSeen = false;
     /** True while the bone is in his mouth rather than on the pointer. */
     let held = false;
+    /** Summon: the spot beside the button, which way to face once there, and
+        when he arrived (0 while still running). */
+    const summon = { x: 0, y: 0, face: 1, arrivedAt: 0 };
 
     const write = () => {
       root.style.transform = `translate3d(${pos.x}px, ${pos.y}px, 0)`;
@@ -242,6 +268,43 @@ export default function KaiserCursor() {
         if (elapsed >= GREET_TOTAL_MS) {
           finishGreeting();
           return;
+        }
+      } else if (mode === "summon") {
+        const dt = Math.min(now - (last || now), MAX_FRAME_MS);
+        last = now;
+        if (summon.arrivedAt === 0) {
+          const dx = summon.x - pos.x;
+          const dy = summon.y - pos.y;
+          const dist = Math.hypot(dx, dy);
+          const step = (SUMMON_SPEED * dt) / 1000;
+          if (dist <= step) {
+            pos.x = summon.x;
+            pos.y = summon.y;
+            write();
+            face(summon.face);
+            summon.arrivedAt = now;
+            root.dataset.run = "false";
+            wasPouncing = false;
+            setPhase("sitting");
+          } else {
+            face(dx >= 0 ? 1 : -1);
+            pos.x += (dx / dist) * step;
+            pos.y += (dy / dist) * step;
+            write();
+            setPhase("trotting");
+          }
+        } else {
+          // Clocked off rAF like the greeting, so a backgrounded tab resumes
+          // mid-sentence rather than skipping it.
+          const since = now - summon.arrivedAt;
+          setBubble(since >= SUMMON_BUBBLE_IN_MS && since < SUMMON_BUBBLE_IN_MS + SUMMON_HOLD_MS);
+          if (since >= SUMMON_BUBBLE_IN_MS + SUMMON_HOLD_MS + GREET_BUBBLE_OUT_MS) {
+            mode = "follow";
+            root.dataset.bubbleSide = "right";
+            setBubbleBelow(false);
+            setBubble(false);
+            setPhase("trotting");
+          }
         }
       } else {
         const dt = Math.min(now - (last || now), MAX_FRAME_MS);
@@ -395,11 +458,50 @@ export default function KaiserCursor() {
       write();
     }
 
+    // ── Summoned ("say hi to Kaiser" on /about) ──────────────────────────────
+    const onSummon = (e: Event) => {
+      const d = (e as CustomEvent<SummonDetail>).detail;
+      if (!d) return;
+      d.handled = true;
+      if (mode === "greet") {
+        cleanupSkip?.();
+        cleanupSkip = null;
+        sessionStorage.setItem(SESSION_KEY, "1");
+      }
+      const vw = document.documentElement.clientWidth || window.innerWidth;
+      // Sit beside the button on its baseline: to its left if there's room,
+      // facing it, otherwise to its right facing back.
+      const leftX = d.x - SPRITE_W - SUMMON_GAP;
+      const fromLeft = leftX > 8;
+      summon.x = fromLeft ? leftX : Math.min(vw - SPRITE_W - 8, d.x + d.w + SUMMON_GAP);
+      summon.y = d.y + d.h - SPRITE_H;
+      summon.face = fromLeft ? 1 : -1;
+      summon.arrivedAt = 0;
+      // Never been on screen yet: run in from the nearer edge, not the corner.
+      if (pos.x < -SPRITE_W / 2) {
+        pos.x = fromLeft ? -SPRITE_W : vw;
+        pos.y = summon.y;
+        write();
+      }
+      root.dataset.bubbleSide = fromLeft ? "right" : "left";
+      setBubbleBelow(true);
+      mode = "summon";
+      setBubbleText(d.message);
+      setBubble(false);
+      isHidden.current = false;
+      setHidden(false);
+      root.dataset.run = "true";
+      wasPouncing = true;
+      start();
+    };
+
+    window.addEventListener(KAISER_SUMMON, onSummon);
     window.addEventListener("pointermove", onPointerMove, { passive: true });
     document.addEventListener("pointerleave", onPointerLeave);
     document.addEventListener("visibilitychange", onVisibility);
 
     return () => {
+      window.removeEventListener(KAISER_SUMMON, onSummon);
       window.removeEventListener("pointermove", onPointerMove);
       document.removeEventListener("pointerleave", onPointerLeave);
       document.removeEventListener("visibilitychange", onVisibility);
@@ -427,13 +529,19 @@ export default function KaiserCursor() {
         data-state={phase}
         data-run="false"
         data-hidden={hidden ? "true" : "false"}
+        data-bubble-side="right"
         aria-hidden="true"
       >
         <div ref={flipRef} className="k-flip">
           <KaiserSprite />
         </div>
-        <div className="k-bubble" data-show={bubble ? "true" : "false"}>
-          Hi, I&rsquo;m Kaiser.
+        <div
+          className="k-bubble"
+          data-show={bubble ? "true" : "false"}
+          data-wrap={bubbleText.length > 24 ? "true" : "false"}
+          style={bubbleBelow ? { top: 46, bottom: "auto" } : undefined}
+        >
+          {bubbleText}
         </div>
       </div>
     </>
