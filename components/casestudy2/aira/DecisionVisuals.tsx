@@ -180,7 +180,7 @@ function EnergyNudges() {
   const fixed = [30, 118, 206, 294, 382, 470, 558];
   return (
     <>
-      <svg viewBox="0 0 620 200" className="w-full" role="img" aria-label="Energy across a week: fixed daily reminders land on low days, AIRA nudges land on higher ones">
+      <svg viewBox="0 0 620 220" className="w-full" role="img" aria-label="Energy across a week: fixed daily reminders land on low days, AIRA nudges land on higher ones">
         <path d={CURVE} fill="none" stroke={T.inkMuted} strokeWidth={2} />
         <text x={0} y={20} fontSize={11} fill={T.inkMuted}>energy</text>
         {fixed.map((cx) => <circle key={cx} cx={cx} cy={185} r={5} fill={LATE} />)}
@@ -188,8 +188,8 @@ function EnergyNudges() {
         <line x1={382} y1={178} x2={382} y2={156} stroke={LATE} strokeDasharray="2 3" />
         <text x={214} y={170} fontSize={11} fill={LATE}>“You missed yesterday”</text>
         {[[45, 45], [270, 55], [540, 42]].map(([cx, cy]) => <circle key={cx} cx={cx} cy={cy} r={7} fill={A.coral} />)}
-        <text x={280} y={44} fontSize={11} fill="#993C1D">“A little reflection can go a long way. Want to check in?”</text>
-        <text x={620} y={198} textAnchor="end" fontSize={11} fill={T.inkMuted}>red: fixed daily reminder · coral: AIRA nudge</text>
+        <text x={282} y={26} fontSize={11} fill="#993C1D">“A little reflection can go a long way. Want to check in?”</text>
+        <text x={620} y={214} textAnchor="end" fontSize={11} fill={T.inkMuted}>red: fixed daily reminder · coral: AIRA nudge</text>
       </svg>
       <div className="grid grid-cols-1 gap-4 mt-5 max-w-[480px]">
         {[
