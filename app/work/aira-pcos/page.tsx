@@ -336,7 +336,7 @@ export default function AiraPage() {
             </Prose>
             <NudgeVisuals
               pairWidth={PHONE_PAIR}
-              headline="Nudges"
+              headline="Warm, not clinical"
               caption="Nudges show up during low-energy moments and are written to encourage."
             />
           </Section>
