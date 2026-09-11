@@ -8,7 +8,7 @@ import FlowerTile from "@/components/interactive/FlowerTile";
 export const metadata: Metadata = {
   title: "Playground — Simran Chhabra",
   description:
-    "The creative work Simran Chhabra does beyond product design, from styling and art direction to photography and events.",
+    "The creative work Simran Chhabra does beyond product design, from styling and art direction to photography and the events Simran helped put on.",
 };
 
 export default function PlaygroundIndexPage() {
