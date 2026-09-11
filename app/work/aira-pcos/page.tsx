@@ -6,13 +6,13 @@ import QuoteCallout from "@/components/casestudy2/QuoteCallout";
 import { StatRow } from "@/components/casestudy2/StatCallout";
 import SeasonsDiagram from "@/components/casestudy2/aira/SeasonsDiagram";
 import ScatteredStrands from "@/components/casestudy2/aira/ScatteredStrands";
-import FeatureVisual from "@/components/casestudy2/FeatureVisual";
 import ProtoScreens from "@/components/casestudy2/aira/prototype/StaticScreen";
 import HeroCover from "@/components/casestudy2/aira/HeroCover";
 import SeasonWheelBlock from "@/components/casestudy2/aira/SeasonWheelBlock";
 import CaseStudyHeadline from "@/components/casestudy2/CaseStudyHeadline";
 import ContextAndRole from "@/components/casestudy2/ContextAndRole";
 import { AiraDecisions } from "@/components/casestudy2/aira/DecisionVisuals";
+import NudgeVisuals from "@/components/casestudy2/aira/NudgeVisuals";
 import SectionIndex from "@/components/casestudy2/SectionIndex";
 import { CaseStudyShell, Prose, Media } from "../_components/columns";
 
@@ -333,13 +333,8 @@ export default function AiraPage() {
                 widget. Both are timed for when your energy is usually low, not a fixed hour.
               </P>
             </Prose>
-            <FeatureVisual
-              kind="device"
+            <NudgeVisuals
               pairWidth={PHONE_PAIR}
-              images={[
-                { src: "/projects/aira-pcos/aira/aira 3x/Notification.png", alt: "Lock-screen nudge", pixelWidth: 1308, pixelHeight: 2664, label: "Lock-screen nudge" },
-                { src: "/projects/aira-pcos/aira/aira 3x/Widget.png", alt: "Home-screen widget", pixelWidth: 1308, pixelHeight: 2664, label: "Home-screen widget" },
-              ]}
               headline="Nudges"
               caption="Nudges show up during low-energy moments and are written to encourage."
             />
